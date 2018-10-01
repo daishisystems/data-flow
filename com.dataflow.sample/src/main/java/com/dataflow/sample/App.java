@@ -33,14 +33,23 @@ import org.apache.beam.sdk.options.Description;
 import org.apache.beam.sdk.options.PipelineOptions;
 import org.apache.beam.sdk.options.PipelineOptionsFactory;
 import org.apache.beam.sdk.transforms.Combine;
+import org.apache.beam.sdk.transforms.Count;
 import org.apache.beam.sdk.transforms.DoFn;
 import org.apache.beam.sdk.transforms.ParDo;
+import org.apache.beam.sdk.transforms.Sample;
 import org.apache.beam.sdk.transforms.Sum;
+import org.apache.beam.sdk.transforms.Top;
 import org.apache.beam.sdk.transforms.Combine.CombineFn;
 import org.apache.beam.sdk.transforms.DoFn.ProcessElement;
+import org.apache.beam.sdk.transforms.join.CoGbkResult;
+import org.apache.beam.sdk.transforms.join.CoGroupByKey;
+import org.apache.beam.sdk.transforms.join.KeyedPCollectionTuple;
 import org.apache.beam.sdk.transforms.GroupByKey;
+import org.apache.beam.sdk.transforms.PTransform;
 import org.apache.beam.sdk.values.KV;
 import org.apache.beam.sdk.values.PCollection;
+import org.apache.beam.sdk.values.PCollectionView;
+import org.apache.beam.sdk.values.TupleTag;
 import org.apache.beam.sdk.transforms.windowing.AfterPane;
 import org.apache.beam.sdk.transforms.windowing.AfterProcessingTime;
 import org.apache.beam.sdk.transforms.windowing.AfterWatermark;
@@ -94,7 +103,7 @@ public class App {
         LOG.info("PIPELINE CREATED.");
 
         PCollection<String> pubSubOutput = p.apply("ReadPubSub", PubsubIO.readStrings()
-                .fromTopic("projects/eshop-bigdata/topics/orders-beam-input").withTimestampAttribute("EventTimestamp"));
+                .fromTopic("projects/eshop-bigdata/topics/apache_beam_input_2").withTimestampAttribute("EventTimestamp"));
         LOG.info("RECEIVING DATA ...");
 
         PCollection<KV<String, Order>> keyvalues = pubSubOutput.apply("To Key-valuePairs",
@@ -110,17 +119,22 @@ public class App {
         // Window.<KV<String,
         // Order>>into(Sessions.withGapDuration(Duration.standardSeconds(25))).withAllowedLateness(Duration.standardMinutes(10)));
         // todo: Replace with above
-        PCollection<KV<String, Order>> window = keyvalues.apply("To Session window",
+        PCollection<KV<String, Order>> orders = keyvalues.apply("To Session window",
                 Window.<KV<String, Order>>into(Sessions.withGapDuration(Duration.standardSeconds(20))));
 
-        LOG.info("Session window loaded ...");
+        PCollection<KV<String, Iterable<Order>>> groupedOrders = orders.apply("Group Orders", GroupByKey.create());
 
-        PCollection<KV<String, Integer>> orderStatus = window.apply("Get Order Status",
-                ParDo.of(new ExtractOrderStatus()));
+        PCollection<Order> flattenedOrders = groupedOrders.apply("Flatten Orders", ParDo.of(new FlattenOrders()));
 
-        PCollection<KV<String, Integer>> totals = orderStatus.apply(Combine.perKey(Sum.ofIntegers()));
+        PCollection<String> serialisedOrders = flattenedOrders.apply("Serialise Orders",
+                ParDo.of(new SerialiseOrderSimple()));
 
-        PCollection<String> serialised = totals.apply("Serialise Order Status", ParDo.of(new SerialiseOrderStatus()));
+        // PCollection<KV<String, Integer>> orderStatus = orders.apply("Get Order
+        // Status",
+        // ParDo.of(new ExtractOrderStatus()));
+
+        // PCollection<KV<String, Integer>> totals =
+        // orderStatus.apply(Combine.perKey(Sum.ofIntegers()));
 
         // PCollection<String> orders = window.apply("Serialise Order", ParDo.of(new
         // SerialiseOrder()));
@@ -129,7 +143,7 @@ public class App {
         // Order>create()).apply("Get Order Status",
         // ParDo.of(new FlattenOrdersSimple()));
 
-        serialised.apply(PubsubIO.writeStrings().to("projects/eshop-bigdata/topics/dataflow-test-out"));
+        serialisedOrders.apply(PubsubIO.writeStrings().to("projects/eshop-bigdata/topics/dataflow-test-out"));
 
         // window.apply(GroupByKey.<String, Order>create()).apply("Get Order Status",
         // ParDo.of(new FlattenOrders()))
@@ -159,34 +173,32 @@ public class App {
         }
     }
 
-    static class FlattenOrders extends DoFn<KV<String, Iterable<Order>>, OrderStatus> {
+    static class FlattenOrders extends DoFn<KV<String, Iterable<Order>>, Order> {
         private static final long serialVersionUID = -180397528519989000L;
         String COMPLETE_EVENT_NAME = "COMPLETE";
 
         @ProcessElement
         public void processElement(ProcessContext c) {
-            LOG.info("Flattening Order ...");
-            String correlationId = c.element().getKey();
             Iterable<Order> orders = c.element().getValue();
-            boolean complete = false;
-            boolean recurringVarsSet = false;
-            OrderStatus orderStatus = new OrderStatus();
-            orderStatus.correlationId = correlationId;
 
-            do {
-                Order order = orders.iterator().next();
-                if (!recurringVarsSet) {
-                    orderStatus.setNumber(order.getNumber());
-                    orderStatus.setTimestamp(order.getTimestamp());
-                    recurringVarsSet = true;
+            boolean sampleSet = false;
+            Order sample = null;
+
+            boolean complete = false;
+            for (Order order : orders) {
+                if (!sampleSet) {
+                    sample = order;
+                    sampleSet = true;
                 }
                 if (order.getEventName().equals(COMPLETE_EVENT_NAME)) {
                     complete = true;
-                    orderStatus.setComplete(complete);
+                    order.setComplete(complete);
+                    c.output(order);
                 }
-            } while (complete == false && orders.iterator().hasNext());
-            c.output(orderStatus);
-            LOG.info("Order complete: " + complete);
+            }
+            if (!complete && sampleSet) {
+                c.output(sample);
+            }
         }
     }
 
@@ -266,6 +278,18 @@ public class App {
         public void processElement(ProcessContext c) throws JsonParseException, JsonMappingException, IOException {
             ObjectMapper mapper = new ObjectMapper(); // todo: to Singleton
             Order order = c.element().getValue();
+            c.output(mapper.writeValueAsString(order));
+        }
+    }
+
+    static class SerialiseOrderSimple extends DoFn<Order, String> {
+
+        private static final long serialVersionUID = 1L;
+
+        @ProcessElement
+        public void processElement(ProcessContext c) throws JsonParseException, JsonMappingException, IOException {
+            ObjectMapper mapper = new ObjectMapper(); // todo: to Singleton
+            Order order = c.element();
             c.output(mapper.writeValueAsString(order));
         }
     }
