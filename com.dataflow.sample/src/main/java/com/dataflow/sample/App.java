@@ -25,6 +25,7 @@ import javax.lang.model.util.ElementScanner6;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 import org.apache.beam.repackaged.beam_sdks_java_core.net.bytebuddy.implementation.bind.annotation.Default;
 import org.apache.beam.runners.dataflow.options.DataflowPipelineOptions;
 import org.apache.beam.sdk.Pipeline;
@@ -35,17 +36,11 @@ import org.apache.beam.sdk.transforms.Combine;
 import org.apache.beam.sdk.transforms.DoFn;
 import org.apache.beam.sdk.transforms.ParDo;
 import org.apache.beam.sdk.transforms.Sum;
-import org.apache.beam.sdk.transforms.View;
 import org.apache.beam.sdk.transforms.Combine.CombineFn;
 import org.apache.beam.sdk.transforms.DoFn.ProcessElement;
-import org.apache.beam.sdk.transforms.join.CoGbkResult;
-import org.apache.beam.sdk.transforms.join.CoGroupByKey;
-import org.apache.beam.sdk.transforms.join.KeyedPCollectionTuple;
 import org.apache.beam.sdk.transforms.GroupByKey;
 import org.apache.beam.sdk.values.KV;
 import org.apache.beam.sdk.values.PCollection;
-import org.apache.beam.sdk.values.PCollectionView;
-import org.apache.beam.sdk.values.TupleTag;
 import org.apache.beam.sdk.transforms.windowing.AfterPane;
 import org.apache.beam.sdk.transforms.windowing.AfterProcessingTime;
 import org.apache.beam.sdk.transforms.windowing.AfterWatermark;
@@ -114,64 +109,18 @@ public class App {
         // PCollection<KV<String, Order>> window = keyvalues.apply("To Session window",
         // Window.<KV<String,
         // Order>>into(Sessions.withGapDuration(Duration.standardSeconds(25))).withAllowedLateness(Duration.standardMinutes(10)));
-        // Note: This won't work because the triggers that fire each collection differ
-        // (GroupBy vs. gapDuration)
-        PCollection<KV<String, Order>> orderWindow = keyvalues.apply("To Order Session window",
+        // todo: Replace with above
+        PCollection<KV<String, Order>> window = keyvalues.apply("To Session window",
                 Window.<KV<String, Order>>into(Sessions.withGapDuration(Duration.standardSeconds(20))));
-        // todo: Don't split collections - likely less performant
-        PCollectionView<Integer> orderStatusWindow = orderWindow
-                .apply("Get Order Status", ParDo.of(new ExtractOrderStatusRaw()))
-                .apply(Sum.integersGlobally().withoutDefaults()).apply(View.<Integer>asSingleton());
 
-        // PCollection<KV<String, Integer>> orderStatus = window.apply("Get Order
-        // Status",
-        // ParDo.of(new ExtractOrderStatus()));
+        LOG.info("Session window loaded ...");
 
-        PCollection<Order> mergedOrders = orderWindow.apply("Merge Orders",
-                ParDo.of(new DoFn<KV<String, Order>, Order>() {
-                    private static final long serialVersionUID = 1L;
+        PCollection<KV<String, Integer>> orderStatus = window.apply("Get Order Status",
+                ParDo.of(new ExtractOrderStatus()));
 
-                    @ProcessElement
-                    public void ProcessElement(ProcessContext c) {
-                        Order order = c.element().getValue();
-                        Integer complete = c.sideInput(orderStatusWindow);
-                        if (complete >= 1) {
-                            order.complete = true;
-                        } else {
-                            order.complete = false;
-                        }
-                        c.output(order);
-                    }
-                }).withSideInputs(orderStatusWindow));
+        PCollection<KV<String, Integer>> totals = orderStatus.apply(Combine.perKey(Sum.ofIntegers()));
 
-        // final TupleTag<Order> ordersTag = new TupleTag<>();
-        // final TupleTag<Integer> orderStatusTag = new TupleTag<>();
-
-        // PCollection<KV<String, CoGbkResult>> mergedOrders =
-        // KeyedPCollectionTuple.of(ordersTag, orderWindow)
-        // .and(orderStatusTag, orderStatusWindow).apply(CoGroupByKey.<String>create());
-
-        // PCollection<Order> finalResultCollection = mergedOrders
-        // .apply(ParDo.of(new DoFn<KV<String, CoGbkResult>, Order>() {
-        // private static final long serialVersionUID = 1L;
-
-        // @ProcessElement
-        // public void processElement(ProcessContext c) {
-        // KV<String, CoGbkResult> e = c.element();
-        // Order orderVals = e.getValue().getOnly(ordersTag);
-        // Integer orderStatusVals = e.getValue().getOnly(orderStatusTag);
-
-        // if (orderStatusVals > 1) {
-        // orderVals.complete = true;
-        // } else {
-        // orderVals.complete = false;
-        // }
-
-        // c.output(orderVals);
-        // }
-        // }));
-
-        PCollection<String> serialised = mergedOrders.apply("Serialise Order", ParDo.of(new SerialiseOrderFlat()));
+        PCollection<String> serialised = totals.apply("Serialise Order Status", ParDo.of(new SerialiseOrderStatus()));
 
         // PCollection<String> orders = window.apply("Serialise Order", ParDo.of(new
         // SerialiseOrder()));
@@ -207,23 +156,6 @@ public class App {
                 orderStatus = 1;
             }
             c.output(KV.of(order.getCorrelationId(), orderStatus));
-        }
-    }
-
-    static class ExtractOrderStatusRaw extends DoFn<KV<String, Order>, Integer> {
-        private static final long serialVersionUID = 1L;
-        String COMPLETE_EVENT_NAME = "COMPLETE";
-
-        @ProcessElement
-        public void processElement(ProcessContext c) {
-            LOG.info("Extracting Order-status ...");
-
-            Order order = c.element().getValue();
-            Integer orderStatus = 0;
-            if (order.getEventName().equals(COMPLETE_EVENT_NAME)) {
-                orderStatus = 1;
-            }
-            c.output(orderStatus);
         }
     }
 
@@ -334,18 +266,6 @@ public class App {
         public void processElement(ProcessContext c) throws JsonParseException, JsonMappingException, IOException {
             ObjectMapper mapper = new ObjectMapper(); // todo: to Singleton
             Order order = c.element().getValue();
-            c.output(mapper.writeValueAsString(order));
-        }
-    }
-
-    static class SerialiseOrderFlat extends DoFn<Order, String> {
-
-        private static final long serialVersionUID = 1L;
-
-        @ProcessElement
-        public void processElement(ProcessContext c) throws JsonParseException, JsonMappingException, IOException {
-            ObjectMapper mapper = new ObjectMapper();
-            Order order = c.element();
             c.output(mapper.writeValueAsString(order));
         }
     }

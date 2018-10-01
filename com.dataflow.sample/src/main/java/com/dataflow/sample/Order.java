@@ -23,8 +23,6 @@ public class Order implements Serializable {
     String correlationId;
     @Expose
     long timestamp;
-    @Expose
-    boolean complete;
 
     public Order() {
 
@@ -76,14 +74,6 @@ public class Order implements Serializable {
 
     public void setTimestamp(Long timestamp) {
         this.timestamp = timestamp;
-    }
-
-    public boolean getComplete() {
-        return this.complete;
-    }
-
-    public void setComplete(Boolean complete) {
-        this.complete = complete;
     }
 
     @Override
