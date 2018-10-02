@@ -20,6 +20,7 @@ package com.dataflow.sample;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.io.IOException;
+import java.util.Iterator;
 
 import javax.lang.model.util.ElementScanner6;
 
@@ -81,6 +82,7 @@ import org.apache.beam.sdk.io.gcp.pubsub.PubsubIO;
  * <p>
  * Concepts:
  *
+ * 
  * <pre>
  *   1. Reading data from text files
  *   2. Specifying 'inline' transforms
@@ -102,8 +104,9 @@ public class App {
         Pipeline p = Pipeline.create(options);
         LOG.info("PIPELINE CREATED.");
 
-        PCollection<String> pubSubOutput = p.apply("ReadPubSub", PubsubIO.readStrings()
-                .fromTopic("projects/eshop-bigdata/topics/apache_beam_input_2").withTimestampAttribute("EventTimestamp"));
+        PCollection<String> pubSubOutput = p.apply("ReadPubSub",
+                PubsubIO.readStrings().fromTopic("projects/eshop-bigdata/topics/apache_beam_input_2")
+                        .withTimestampAttribute("EventTimestamp"));
         LOG.info("RECEIVING DATA ...");
 
         PCollection<KV<String, Order>> keyvalues = pubSubOutput.apply("To Key-valuePairs",
@@ -124,7 +127,7 @@ public class App {
 
         PCollection<KV<String, Iterable<Order>>> groupedOrders = orders.apply("Group Orders", GroupByKey.create());
 
-        PCollection<Order> flattenedOrders = groupedOrders.apply("Flatten Orders", ParDo.of(new FlattenOrders()));
+        PCollection<Order> flattenedOrders = groupedOrders.apply("Flatten Orders", ParDo.of(new FlattenOrdersSimple()));
 
         PCollection<String> serialisedOrders = flattenedOrders.apply("Serialise Orders",
                 ParDo.of(new SerialiseOrderSimple()));
@@ -202,40 +205,29 @@ public class App {
         }
     }
 
-    static class FlattenOrdersSimple extends DoFn<KV<String, Iterable<Order>>, String> {
+    static class FlattenOrdersSimple extends DoFn<KV<String, Iterable<Order>>, Order> {
         private static final long serialVersionUID = -180397528519989000L;
+        String START_EVENT_NAME = "START";
         String COMPLETE_EVENT_NAME = "COMPLETE";
 
         @ProcessElement
         public void processElement(ProcessContext c) {
-            LOG.info("Flattening Order ...");
-            String correlationId = c.element().getKey();
+            Order currentOrder = null;
+            Order outputOrder = null;
+
             Iterable<Order> orders = c.element().getValue();
-            boolean complete = false;
-            boolean recurringVarsSet = false;
-            OrderStatus orderStatus = new OrderStatus();
-            orderStatus.correlationId = correlationId;
+            Iterator<Order> iterator = orders.iterator();
 
             do {
-                Order order = orders.iterator().next();
-                if (!recurringVarsSet) {
-                    orderStatus.setNumber(order.getNumber());
-                    orderStatus.setTimestamp(order.getTimestamp());
-                    recurringVarsSet = true;
+                currentOrder = iterator.next(); // todo: Inner, outer try-catch
+                if (currentOrder.getEventName().equals(COMPLETE_EVENT_NAME)) {
+                    currentOrder.complete = true;
+                    outputOrder = currentOrder;
+                } else if (currentOrder.getEventName().equals(START_EVENT_NAME)) {
+                    outputOrder = currentOrder;
                 }
-                if (order.getEventName().equals(COMPLETE_EVENT_NAME)) {
-                    complete = true;
-                    orderStatus.setComplete(complete);
-                }
-            } while (complete == false && orders.iterator().hasNext());
-
-            if (complete) {
-                c.output("Complete");
-            } else {
-                c.output("NOT complete");
-            }
-
-            LOG.info("Order complete: " + complete);
+            } while (!currentOrder.complete && iterator.hasNext());
+            c.output(outputOrder);
         }
     }
 
