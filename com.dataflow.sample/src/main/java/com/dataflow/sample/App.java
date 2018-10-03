@@ -20,12 +20,19 @@ package com.dataflow.sample;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
+import java.util.List;
 
 import javax.lang.model.util.ElementScanner6;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.api.services.bigquery.model.TableFieldSchema;
+import com.google.api.services.bigquery.model.TableRow;
+import com.google.api.services.bigquery.model.TableSchema;
 
 import org.apache.beam.repackaged.beam_sdks_java_core.net.bytebuddy.implementation.bind.annotation.Default;
 import org.apache.beam.runners.dataflow.options.DataflowPipelineOptions;
@@ -63,6 +70,9 @@ import org.joda.time.Duration;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.apache.beam.sdk.io.gcp.bigquery.BigQueryIO;
+import org.apache.beam.sdk.io.gcp.bigquery.BigQueryIO.Write.CreateDisposition;
+import org.apache.beam.sdk.io.gcp.bigquery.BigQueryIO.Write.WriteDisposition;
 import org.apache.beam.sdk.io.gcp.pubsub.PubsubIO;
 
 /**
@@ -102,12 +112,10 @@ public class App {
     public static void main(String[] args) {
         PipelineOptions options = PipelineOptionsFactory.fromArgs(args).withValidation().create();
         Pipeline p = Pipeline.create(options);
-        LOG.info("PIPELINE CREATED.");
 
         PCollection<String> pubSubOutput = p.apply("ReadPubSub",
                 PubsubIO.readStrings().fromTopic("projects/eshop-bigdata/topics/apache_beam_input_2")
                         .withTimestampAttribute("EventTimestamp"));
-        LOG.info("RECEIVING DATA ...");
 
         PCollection<KV<String, Order>> keyvalues = pubSubOutput.apply("To Key-valuePairs",
                 ParDo.of(new ParseOrderToKVFn()));
@@ -145,6 +153,20 @@ public class App {
         // PCollection<String> orderStatuses = window.apply(GroupByKey.<String,
         // Order>create()).apply("Get Order Status",
         // ParDo.of(new FlattenOrdersSimple()));
+
+        List<TableFieldSchema> fields = new ArrayList<>();
+        fields.add(new TableFieldSchema().setName("Number").setType("STRING"));
+        fields.add(new TableFieldSchema().setName("BrandCode").setType("STRING"));
+        fields.add(new TableFieldSchema().setName("EventName").setType("STRING"));
+        fields.add(new TableFieldSchema().setName("CorrelationId").setType("STRING"));
+        fields.add(new TableFieldSchema().setName("Created").setType("TIMESTAMP"));
+        fields.add(new TableFieldSchema().setName("Complete").setType("BOOLEAN"));
+        TableSchema schema = new TableSchema().setFields(fields);
+
+        flattenedOrders.apply(new OrdersToTableRows())
+                .apply(BigQueryIO.writeTableRows().to("eshop-bigdata:datalake.windowed_orders_1").withSchema(schema)
+                        .withCreateDisposition(BigQueryIO.Write.CreateDisposition.CREATE_IF_NEEDED)
+                        .withWriteDisposition(BigQueryIO.Write.WriteDisposition.WRITE_APPEND));
 
         serialisedOrders.apply(PubsubIO.writeStrings().to("projects/eshop-bigdata/topics/dataflow-test-out"));
 
@@ -223,10 +245,20 @@ public class App {
                 if (currentOrder.getEventName().equals(COMPLETE_EVENT_NAME)) {
                     currentOrder.complete = true;
                     outputOrder = currentOrder;
-                } else if (currentOrder.getEventName().equals(START_EVENT_NAME)) {
+                } else if (currentOrder.getEventName().equals(START_EVENT_NAME)) { // todo: Handle missing/invalid
+                                                                                   // event-names
                     outputOrder = currentOrder;
-                }
+                } // todo: Handle corner-cases where neither event-name is present
             } while (!currentOrder.complete && iterator.hasNext());
+
+            // todo: Convert the following to a PTransform ...
+
+            Date date = new java.util.Date(outputOrder.getCreated() * 1000L);
+            LOG.info("Created: " + outputOrder.getCreated());
+            SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss z");
+            String formattedDate = sdf.format(date);
+            LOG.info("BQ Date: " + formattedDate);
+            outputOrder.setBQTimestamp(formattedDate);
             c.output(outputOrder);
         }
     }
@@ -335,6 +367,37 @@ public class App {
             } catch (JSONException ex1) {
                 throw new JSONException(ex1);
             }
+        }
+    }
+
+    static class FormatAsTableRowFn extends DoFn<Order, TableRow> {
+        private static final long serialVersionUID = 1L;
+
+        @ProcessElement
+        public void processElement(ProcessContext c) {
+            TableRow tableRow = new TableRow();
+
+            tableRow.set("Number", c.element().getNumber());
+            tableRow.set("BrandCode", c.element().getBrandCode());
+            tableRow.set("EventName", c.element().getEventName());
+            tableRow.set("CorrelationId", c.element().getCorrelationId());
+            tableRow.set("Created", c.element().getCreated());
+            tableRow.set("Complete", c.element().getComplete());
+
+            LOG.info("Timestamp: " + c.element().getBQTimestamp());
+
+            c.output(tableRow);
+        }
+    }
+
+    static class OrdersToTableRows extends PTransform<PCollection<Order>, PCollection<TableRow>> {
+
+        private static final long serialVersionUID = 1L;
+
+        @Override
+        public PCollection<TableRow> expand(PCollection<Order> input) {
+            PCollection<TableRow> tableRows = input.apply(ParDo.of(new FormatAsTableRowFn()));
+            return tableRows;
         }
     }
 }

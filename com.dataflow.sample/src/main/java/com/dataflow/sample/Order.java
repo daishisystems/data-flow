@@ -22,9 +22,11 @@ public class Order implements Serializable {
     @Expose
     String correlationId;
     @Expose
-    long timestamp;
+    long created;
     @Expose
     boolean complete;
+    @Expose
+    String BQTimestamp;
 
     public Order() {
 
@@ -70,12 +72,12 @@ public class Order implements Serializable {
         this.correlationId = correlationId;
     }
 
-    public long getTimestamp() {
-        return this.timestamp;
+    public long getCreated() {
+        return this.created;
     }
 
-    public void setTimestamp(Long timestamp) {
-        this.timestamp = timestamp;
+    public void setCreated(Long created) {
+        this.created = created;
     }
 
     public boolean getComplete() {
@@ -84,6 +86,14 @@ public class Order implements Serializable {
 
     public void setComplete(Boolean complete) {
         this.complete = complete;
+    }
+
+    public String getBQTimestamp() {
+        return this.BQTimestamp;
+    }
+
+    public void setBQTimestamp(String bqTimeStamp) {
+        this.BQTimestamp = bqTimeStamp;
     }
 
     @Override
