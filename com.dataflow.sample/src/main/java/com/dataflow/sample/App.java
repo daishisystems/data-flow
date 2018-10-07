@@ -33,7 +33,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.api.services.bigquery.model.TableFieldSchema;
 import com.google.api.services.bigquery.model.TableRow;
 import com.google.api.services.bigquery.model.TableSchema;
-
 import org.apache.beam.repackaged.beam_sdks_java_core.net.bytebuddy.implementation.bind.annotation.Default;
 import org.apache.beam.runners.dataflow.options.DataflowPipelineOptions;
 import org.apache.beam.sdk.Pipeline;
@@ -67,9 +66,6 @@ import org.apache.beam.sdk.transforms.windowing.Window;
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.joda.time.Duration;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.apache.beam.sdk.io.gcp.bigquery.BigQueryIO;
 import org.apache.beam.sdk.io.gcp.bigquery.BigQueryIO.Write.CreateDisposition;
 import org.apache.beam.sdk.io.gcp.bigquery.BigQueryIO.Write.WriteDisposition;
@@ -259,6 +255,8 @@ public class App {
             String formattedDate = sdf.format(date);
             LOG.info("BQ Date: " + formattedDate);
             outputOrder.setBQTimestamp(formattedDate);
+
+            DeIdentification.deIdentifyWithMask(outputOrder.getEmailAddress(), null, '#', 0, "eshop-bigdata");
             c.output(outputOrder);
         }
     }
@@ -271,26 +269,6 @@ public class App {
             ObjectMapper mapper = new ObjectMapper(); // todo: to Singleton
             OrderStatus orderStatus = c.element();
             c.output(mapper.writeValueAsString(orderStatus));
-        }
-    }
-
-    static class ParseOrderFn extends DoFn<String, Order> {
-        private static final long serialVersionUID = 3474615155967967054L;
-
-        @ProcessElement
-        public void processElement(ProcessContext c) throws JsonParseException, JsonMappingException, IOException {
-            ObjectMapper mapper = new ObjectMapper(); // todo: to Singleton
-            String json = c.element();
-            Order order = null;
-
-            if (isArray(json)) {
-                Order[] orders = mapper.readValue(json, Order[].class);
-                order = orders[0];
-            } else {
-                order = mapper.readValue(json, Order.class);
-            }
-
-            c.output(order);
         }
     }
 
@@ -342,30 +320,12 @@ public class App {
 
                 LOG.info("Splitting order to key-value pair ...");
 
-                if (isArray(json)) {
-                    Order[] orders = mapper.readValue(json, Order[].class);
-                    order = orders[0];
-                } else {
-                    order = mapper.readValue(json, Order.class);
-                }
+                order = mapper.readValue(json, Order.class);
+
                 LOG.info("Order " + order.getNumber() + " key-valued.");
                 c.output(KV.of(order.correlationId, order));
             } catch (Exception e) {
                 LOG.error(e.getMessage());
-            }
-        }
-    }
-
-    static boolean isArray(String Json) {
-        try {
-            new JSONObject(Json);
-            return false;
-        } catch (JSONException ex) {
-            try {
-                new JSONArray(Json);
-                return true;
-            } catch (JSONException ex1) {
-                throw new JSONException(ex1);
             }
         }
     }
@@ -383,6 +343,7 @@ public class App {
             tableRow.set("CorrelationId", c.element().getCorrelationId());
             tableRow.set("Created", c.element().getCreated());
             tableRow.set("Complete", c.element().getComplete());
+            tableRow.set("EmailAddress", c.element().getEmailAddress());
 
             LOG.info("Timestamp: " + c.element().getBQTimestamp());
 

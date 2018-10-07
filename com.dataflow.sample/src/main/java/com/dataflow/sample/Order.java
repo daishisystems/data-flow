@@ -27,6 +27,8 @@ public class Order implements Serializable {
     boolean complete;
     @Expose
     String BQTimestamp;
+    @Expose
+    String emailAddress;
 
     public Order() {
 
@@ -94,6 +96,14 @@ public class Order implements Serializable {
 
     public void setBQTimestamp(String bqTimeStamp) {
         this.BQTimestamp = bqTimeStamp;
+    }
+
+    public String getEmailAddress() {
+        return emailAddress;
+    }
+
+    public void setEmailAddress(String emailAddress) {
+        this.emailAddress = emailAddress;
     }
 
     @Override

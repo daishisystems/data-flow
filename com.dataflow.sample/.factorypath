@@ -1,7 +1,7 @@
 <factorypath>
     <factorypathentry kind="VARJAR" id="M2_REPO/org/slf4j/slf4j-api/1.7.25/slf4j-api-1.7.25.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/org/slf4j/slf4j-jdk14/1.7.25/slf4j-jdk14-1.7.25.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="VARJAR" id="M2_REPO/org/apache/beam/beam-sdks-java-core/2.6.0/beam-sdks-java-core-2.6.0.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/org/apache/beam/beam-sdks-java-core/2.7.0/beam-sdks-java-core-2.7.0.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/com/fasterxml/jackson/core/jackson-core/2.9.5/jackson-core-2.9.5.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/com/fasterxml/jackson/core/jackson-annotations/2.9.5/jackson-annotations-2.9.5.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/org/apache/avro/avro/1.8.2/avro-1.8.2.jar" enabled="true" runInBatchMode="false"/>
@@ -11,7 +11,7 @@
     <factorypathentry kind="VARJAR" id="M2_REPO/org/apache/commons/commons-compress/1.8.1/commons-compress-1.8.1.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/org/xerial/snappy/snappy-java/1.1.4/snappy-java-1.1.4.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/joda-time/joda-time/2.4/joda-time-2.4.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="VARJAR" id="M2_REPO/org/tukaani/xz/1.5/xz-1.5.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/org/tukaani/xz/1.8/xz-1.8.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/org/apache/beam/beam-sdks-java-io-google-cloud-platform/2.6.0/beam-sdks-java-io-google-cloud-platform-2.6.0.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/org/apache/beam/beam-sdks-java-extensions-google-cloud-platform-core/2.6.0/beam-sdks-java-extensions-google-cloud-platform-core-2.6.0.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/com/google/cloud/bigdataoss/gcsio/1.4.5/gcsio-1.4.5.jar" enabled="true" runInBatchMode="false"/>
