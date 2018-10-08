@@ -26,9 +26,11 @@ public class Order implements Serializable {
     @Expose
     boolean complete;
     @Expose
-    String BQTimestamp;
-    @Expose
     String emailAddress;
+    @Expose
+    String userAgent;
+    @Expose
+    String queryString;
 
     public Order() {
 
@@ -90,20 +92,28 @@ public class Order implements Serializable {
         this.complete = complete;
     }
 
-    public String getBQTimestamp() {
-        return this.BQTimestamp;
-    }
-
-    public void setBQTimestamp(String bqTimeStamp) {
-        this.BQTimestamp = bqTimeStamp;
-    }
-
     public String getEmailAddress() {
         return emailAddress;
     }
 
     public void setEmailAddress(String emailAddress) {
         this.emailAddress = emailAddress;
+    }
+
+    public String getUserAgent() {
+        return this.userAgent;
+    }
+
+    public void setUserAgent(String userAgent) {
+        this.userAgent = userAgent;
+    }
+
+    public String getQueryString() {
+        return this.queryString;
+    }
+
+    public void setQueryString(String queryString) {
+        this.queryString = queryString;
     }
 
     @Override

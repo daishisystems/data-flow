@@ -22,6 +22,7 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -33,6 +34,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.api.services.bigquery.model.TableFieldSchema;
 import com.google.api.services.bigquery.model.TableRow;
 import com.google.api.services.bigquery.model.TableSchema;
+import com.google.privacy.dlp.v2.InfoType;
+
 import org.apache.beam.repackaged.beam_sdks_java_core.net.bytebuddy.implementation.bind.annotation.Default;
 import org.apache.beam.runners.dataflow.options.DataflowPipelineOptions;
 import org.apache.beam.sdk.Pipeline;
@@ -157,10 +160,13 @@ public class App {
         fields.add(new TableFieldSchema().setName("CorrelationId").setType("STRING"));
         fields.add(new TableFieldSchema().setName("Created").setType("TIMESTAMP"));
         fields.add(new TableFieldSchema().setName("Complete").setType("BOOLEAN"));
+        fields.add(new TableFieldSchema().setName("emailAddress").setType("STRING"));
+        fields.add(new TableFieldSchema().setName("userAgent").setType("STRING"));
+        fields.add(new TableFieldSchema().setName("queryString").setType("STRING"));
         TableSchema schema = new TableSchema().setFields(fields);
 
         flattenedOrders.apply(new OrdersToTableRows())
-                .apply(BigQueryIO.writeTableRows().to("eshop-bigdata:datalake.windowed_orders_1").withSchema(schema)
+                .apply(BigQueryIO.writeTableRows().to("eshop-bigdata:datalake.windowed_orders_2").withSchema(schema)
                         .withCreateDisposition(BigQueryIO.Write.CreateDisposition.CREATE_IF_NEEDED)
                         .withWriteDisposition(BigQueryIO.Write.WriteDisposition.WRITE_APPEND));
 
@@ -183,8 +189,6 @@ public class App {
 
         @ProcessElement
         public void processElement(ProcessContext c) {
-            LOG.info("Extracting Order-status ...");
-
             Order order = c.element().getValue();
             Integer orderStatus = 0;
             if (order.getEventName().equals(COMPLETE_EVENT_NAME)) {
@@ -229,7 +233,7 @@ public class App {
         String COMPLETE_EVENT_NAME = "COMPLETE";
 
         @ProcessElement
-        public void processElement(ProcessContext c) {
+        public void processElement(ProcessContext c) throws Exception {
             Order currentOrder = null;
             Order outputOrder = null;
 
@@ -247,16 +251,16 @@ public class App {
                 } // todo: Handle corner-cases where neither event-name is present
             } while (!currentOrder.complete && iterator.hasNext());
 
-            // todo: Convert the following to a PTransform ...
-
-            Date date = new java.util.Date(outputOrder.getCreated() * 1000L);
-            LOG.info("Created: " + outputOrder.getCreated());
-            SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss z");
-            String formattedDate = sdf.format(date);
-            LOG.info("BQ Date: " + formattedDate);
-            outputOrder.setBQTimestamp(formattedDate);
-
-            DeIdentification.deIdentifyWithMask(outputOrder.getEmailAddress(), null, '#', 0, "eshop-bigdata");
+            LOG.info("Email address: " + outputOrder.getEmailAddress());
+            List<InfoType> infoTypesList = Collections.emptyList();
+            try {
+                String maskedEmailAddress = DeIdentification.deIdentifyWithMask(outputOrder.getEmailAddress(),
+                        infoTypesList, '#', 0, "eshop-bigdata");
+                LOG.info(maskedEmailAddress);
+                outputOrder.setEmailAddress(maskedEmailAddress);
+            } catch (Exception e) {
+                LOG.error(e.getMessage());
+            }
             c.output(outputOrder);
         }
     }
@@ -301,7 +305,6 @@ public class App {
 
         @ProcessElement
         public void processElement(ProcessContext c) throws JsonParseException, JsonMappingException, IOException {
-            LOG.info("Serialising ...");
             ObjectMapper mapper = new ObjectMapper();
             KV<String, Integer> orderStatus = c.element();
             c.output(mapper.writeValueAsString(orderStatus));
@@ -316,13 +319,7 @@ public class App {
             try {
                 ObjectMapper mapper = new ObjectMapper();
                 String json = c.element();
-                Order order = null;
-
-                LOG.info("Splitting order to key-value pair ...");
-
-                order = mapper.readValue(json, Order.class);
-
-                LOG.info("Order " + order.getNumber() + " key-valued.");
+                Order order = mapper.readValue(json, Order.class);
                 c.output(KV.of(order.correlationId, order));
             } catch (Exception e) {
                 LOG.error(e.getMessage());
@@ -344,8 +341,8 @@ public class App {
             tableRow.set("Created", c.element().getCreated());
             tableRow.set("Complete", c.element().getComplete());
             tableRow.set("EmailAddress", c.element().getEmailAddress());
-
-            LOG.info("Timestamp: " + c.element().getBQTimestamp());
+            tableRow.set("UserAgent", c.element().getUserAgent());
+            tableRow.set("QueryString", c.element().getQueryString());
 
             c.output(tableRow);
         }

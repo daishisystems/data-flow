@@ -28,9 +28,10 @@ public class DeIdentification {
      *                         sensitive data to mask. Omitting this value or
      *                         setting it to 0 masks all sensitive chars.
      * @param projectId        ID of Google Cloud project to run the API under.
+     * @throws Exception
      */
-    public static void deIdentifyWithMask(String string, List<InfoType> infoTypes, Character maskingCharacter,
-            int numberToMask, String projectId) {
+    public static String deIdentifyWithMask(String string, List<InfoType> infoTypes, Character maskingCharacter,
+            int numberToMask, String projectId) throws Exception {
 
         // instantiate a client
         try (DlpServiceClient dlpServiceClient = DlpServiceClient.create()) {
@@ -65,10 +66,9 @@ public class DeIdentification {
 
             // Print the character-masked input value
             // e.g. "My SSN is 123456789" --> "My SSN is *********"
-            String result = response.getItem().getValue();
-            System.out.println(result);
+            return response.getItem().getValue();
         } catch (Exception e) {
-            System.out.println("Error in deidentifyWithMask: " + e.getMessage());
+            throw e;
         }
     }
 }
