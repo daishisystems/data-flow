@@ -2,6 +2,8 @@
 package com.dataflow.sample;
 
 import java.io.Serializable;
+import java.util.Collections;
+import java.util.List;
 import java.util.Objects;
 
 import com.google.gson.annotations.Expose;
@@ -131,5 +133,9 @@ public class Order implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(number);
+    }
+
+    public static void SortOrders(List<Order> orders) {
+        Collections.sort(orders, (o1, o2) -> new Long(o1.getCreated()).compareTo(new Long((o2.getCreated()))));
     }
 }

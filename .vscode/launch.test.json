@@ -1,0 +1,30 @@
+{
+    "run": {
+        "default": "",
+        "items": [
+            {
+                "name": "com.dataflow.sample",
+                "projectName": "com.dataflow.sample",
+                "workingDirectory": "c:\\Users\\pmooney\\java\\data-flow\\com.dataflow.sample",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            }
+        ]
+    },
+    "debug": {
+        "default": "",
+        "items": [
+            {
+                "name": "com.dataflow.sample",
+                "projectName": "com.dataflow.sample",
+                "workingDirectory": "c:\\Users\\pmooney\\java\\data-flow\\com.dataflow.sample",
+                "args": [],
+                "vmargs": [],
+                "env": {},
+                "preLaunchTask": ""
+            }
+        ]
+    }
+}
