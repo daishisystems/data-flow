@@ -64,12 +64,54 @@ public class OrderTest {
         assertTrue(maxDiff == 0);
     }
 
+    @Test
+    public void orderStageIsDetermined() {
+
+        final String finalStage = "COMPLETE";
+
+        Order order1 = new Order();
+        order1.setEventName("START");
+        Order order2 = new Order();
+        order1.setEventName("PROCESSING");
+        Order order3 = new Order();
+        order3.setEventName(finalStage);
+
+        List<Order> orders = new ArrayList<>();
+        orders.add(order1);
+        orders.add(order2);
+        orders.add(order3);
+
+        String orderStage = orderStage(orders);
+        assertTrue(orderStage == finalStage);
+    }
+
+    @Test
+    public void orderIsComplete() {
+
+        final String orderCompleteIdentifier = "COMPLETE";
+
+        Order order1 = new Order();
+        order1.setEventName("START");
+        Order order2 = new Order();
+        order1.setEventName(orderCompleteIdentifier);
+        Order order3 = new Order();
+        order3.setEventName("ADDITIONAL");
+
+        List<Order> orders = new ArrayList<>();
+        orders.add(order1);
+        orders.add(order2);
+        orders.add(order3);
+
+        Boolean orderIsComplete = orderIsComplete(orders, orderCompleteIdentifier);
+        assertTrue(orderIsComplete);
+    }
+
     /**
      * Returns the maximum difference between any pair of adjacent orders in a
      * collection.
      * 
      * @param orders collection of orders to traverse
-     * @return maximum difference between any pair of adjacent ordersS
+     * @return maximum difference between any pair of adjacent orders
      */
     long maxDiff(List<Order> orders) {
         Iterator<Order> iterator = orders.iterator();
@@ -92,12 +134,56 @@ public class OrderTest {
         return diff;
     }
 
-    List<Order> sortOrders(Iterator orders) {
+    /**
+     * Sorts an iterable collection of orders by created-date.
+     * 
+     * @param orders orders to sort
+     * @return collection of sorted orders
+     */
+    List<Order> sortOrders(Iterator<Order> orders) {
         List<Order> sortedOrders = new ArrayList<>();
         while (orders.hasNext()) {
             sortedOrders.add((Order) orders.next());
         }
         Collections.sort(sortedOrders, (o1, o2) -> new Long(o1.getCreated()).compareTo(new Long((o2.getCreated()))));
         return sortedOrders;
+    }
+
+    /**
+     * Returns the name of the last event-name in a collection of orders.
+     * 
+     * @param orders collection of orders to traverse
+     * @return name of the last event-name in a collection of orders
+     */
+    String orderStage(List<Order> orders) {
+        if (orders.isEmpty()) {
+            return "";
+        }
+        return orders.get(orders.size() - 1).getEventName();
+    }
+
+    /**
+     * Determines whether or not an order is complete, based on a collection of
+     * orders that represent multiple stages of the same order. The function
+     * traverses the order collection until an order-complete stage is found, or the
+     * entire collection is traversed.
+     * 
+     * @param orders                  the orders to traverse
+     * @param orderCompleteIdentifier value that represents the name of an
+     *                                order-complete event
+     * @return true if any order stage is complete
+     */
+    boolean orderIsComplete(List<Order> ordersStages, String orderCompleteIdentifier) {
+        if (ordersStages.isEmpty()) {
+            return false;
+        }
+        int index = 0;
+        boolean complete = false;
+        do {
+            if (ordersStages.get(index++).getEventName() == orderCompleteIdentifier) {
+                complete = true;
+            }
+        } while (!complete || index < ordersStages.size());
+        return complete;
     }
 }
