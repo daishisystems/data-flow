@@ -3,9 +3,12 @@ package com.dataflow.sample;
 import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.LongSummaryStatistics;
+import java.util.OptionalDouble;
 
 import org.junit.Test;
 
@@ -51,6 +54,41 @@ public class OrderTest {
 
         long maxDiff = maxDiff(orders);
         assertTrue(maxDiff == 29);
+    }
+
+    @Test
+    public void differenceBetweenOrderCreatedIsCalculated() {
+
+        final String order1EventName = "ORDER1";
+        final String order2EventName = "ORDER2";
+        final String order3EventName = "ORDER3";
+        final String orderCompleteIdentifier = "ORDER2";
+
+        Order order1 = new Order();
+        order1.setCreated((long) 1539093918);
+        order1.setEventName(order1EventName);
+        Order order2 = new Order();
+        order2.setCreated((long) 1539093930);
+        order2.setEventName(order2EventName);
+        Order order3 = new Order();
+        order3.setCreated((long) 1539093959);
+        order3.setEventName(order3EventName);
+
+        List<Order> orders = new ArrayList<>();
+        orders.add(order1);
+        orders.add(order2);
+        orders.add(order3);
+
+        Difference difference = diff(orders, orderCompleteIdentifier);
+        assertTrue(difference.getMin() == 12);
+        assertTrue(difference.getAvg() == 20);
+        assertTrue(difference.getMax() == 29);
+        assertTrue(difference.getMaxfirstEventName() == order2EventName);
+        assertTrue(difference.getMaxSecondEventName() == order3EventName);
+        assertTrue(difference.getMinFirstEventName() == order1EventName);
+        assertTrue(difference.getMinSecondEventName() == order2EventName);
+        assertTrue(difference.getLastEventName() == order3EventName);
+        assertTrue(difference.getComplete());
     }
 
     @Test
@@ -107,8 +145,8 @@ public class OrderTest {
     }
 
     /**
-     * Returns the maximum difference between any pair of adjacent orders in a
-     * collection.
+     * Returns the maximum difference in time between any pair of adjacent orders in
+     * a collection.
      * 
      * @param orders collection of orders to traverse
      * @return maximum difference between any pair of adjacent orders
@@ -132,6 +170,47 @@ public class OrderTest {
             previous = current;
         } while (iterator.hasNext());
         return diff;
+    }
+
+    Difference diff(List<Order> orders, String orderCompleteIdentifier) {
+        Iterator<Order> iterator = orders.iterator();
+        Difference difference = new Difference();
+        if (!iterator.hasNext()) {
+            return difference;
+        }
+        Order previous = iterator.next();
+        if (!iterator.hasNext()) {
+            return difference;
+        }
+        Order current;
+        List<Long> allDiffs = new ArrayList<>();
+        do {
+            current = iterator.next();
+            long currentDiff = current.getCreated() - previous.getCreated();
+            allDiffs.add(currentDiff);
+            if (currentDiff > difference.getMax()) {
+                difference.setMax(currentDiff);
+                difference.setMaxFirstEventName(previous.getEventName());
+                difference.setMaxSecondEventName(current.getEventName());
+            }
+            if (currentDiff < difference.getMin()) {
+                difference.setMin(currentDiff);
+                difference.setMinFirstEventName(previous.getEventName());
+                difference.setMinSecondEventName(current.getEventName());
+            } else if (difference.getMin() == 0) {
+                difference.setMin(currentDiff);
+                difference.setMinFirstEventName(previous.getEventName());
+                difference.setMinSecondEventName(current.getEventName());
+            }
+            if (current.getEventName().toUpperCase() == orderCompleteIdentifier) {
+                difference.setComplete(true);
+            }
+            previous = current;
+        } while (iterator.hasNext());
+        double average = allDiffs.stream().mapToLong(Long::longValue).average().orElse(0);
+        difference.setAvg((long) average);
+        difference.setLastEventName(current.getEventName());
+        return difference;
     }
 
     /**
