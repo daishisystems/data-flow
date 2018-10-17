@@ -112,76 +112,50 @@ public class App {
         PipelineOptions options = PipelineOptionsFactory.fromArgs(args).withValidation().create();
         Pipeline p = Pipeline.create(options);
 
-        PCollection<String> pubSubOutput = p.apply("ReadPubSub",
+        PCollection<String> pubSubOutput = p.apply("Pulling from Pub/Sub",
                 PubsubIO.readStrings().fromTopic("projects/eshop-bigdata/topics/apache_beam_input_2")
                         .withTimestampAttribute("EventTimestamp"));
 
-        PCollection<KV<String, Order>> keyvalues = pubSubOutput.apply("To Key-valuePairs",
+        PCollection<KV<String, Order>> keyvalues = pubSubOutput.apply("Parsing to KV pairs",
                 ParDo.of(new ParseOrderToKVFn()));
 
-        // PCollection<KV<String, Order>> window = keyvalues.apply("To Session window",
-        // Window.<KV<String,
-        // Order>>into(Sessions.withGapDuration(Duration.standardSeconds(20)))
-        // .triggering(Repeatedly.forever(AfterProcessingTime.pastFirstElementInPane()))
-        // .withAllowedLateness(Duration.ZERO).discardingFiredPanes());
-
-        // PCollection<KV<String, Order>> window = keyvalues.apply("To Session window",
-        // Window.<KV<String,
-        // Order>>into(Sessions.withGapDuration(Duration.standardSeconds(25))).withAllowedLateness(Duration.standardMinutes(10)));
-        // todo: Replace with above
-        PCollection<KV<String, Order>> orders = keyvalues.apply("To Session window",
+        PCollection<KV<String, Order>> orders = keyvalues.apply("Creating session window",
                 Window.<KV<String, Order>>into(Sessions.withGapDuration(Duration.standardSeconds(20))));
 
-        PCollection<KV<String, Iterable<Order>>> groupedOrders = orders.apply("Group Orders", GroupByKey.create());
+        PCollection<KV<String, Iterable<Order>>> groupedOrders = orders.apply("Grouping orders", GroupByKey.create());
 
-        PCollection<Order> flattenedOrders = groupedOrders.apply("Flatten Orders", ParDo.of(new FlattenOrdersSimple()));
+        PCollection<OrderSummary> orderSummaries = groupedOrders.apply("Creating order summaries",
+                ParDo.of(new OrderSummaryFn()));
 
-        PCollection<String> serialisedOrders = flattenedOrders.apply("Serialise Orders",
-                ParDo.of(new SerialiseOrderSimple()));
+        PCollection<String> serialisedOrders = orderSummaries.apply("Serialising order summaries",
+                ParDo.of(new SerialiseOrderSummaryFn()));
 
-        // PCollection<KV<String, Integer>> orderStatus = orders.apply("Get Order
-        // Status",
-        // ParDo.of(new ExtractOrderStatus()));
-
-        // PCollection<KV<String, Integer>> totals =
-        // orderStatus.apply(Combine.perKey(Sum.ofIntegers()));
-
-        // PCollection<String> orders = window.apply("Serialise Order", ParDo.of(new
-        // SerialiseOrder()));
-
-        // PCollection<String> orderStatuses = window.apply(GroupByKey.<String,
-        // Order>create()).apply("Get Order Status",
-        // ParDo.of(new FlattenOrdersSimple()));
+        serialisedOrders.apply("Sending order summaries to Pub/Sub",
+                PubsubIO.writeStrings().to("projects/eshop-bigdata/topics/dataflow-test-out"));
 
         List<TableFieldSchema> fields = new ArrayList<>();
-        fields.add(new TableFieldSchema().setName("Number").setType("STRING"));
-        fields.add(new TableFieldSchema().setName("BrandCode").setType("STRING"));
-        fields.add(new TableFieldSchema().setName("EventName").setType("STRING"));
-        fields.add(new TableFieldSchema().setName("CorrelationId").setType("STRING"));
-        fields.add(new TableFieldSchema().setName("Created").setType("TIMESTAMP"));
+        fields.add(new TableFieldSchema().setName("Min").setType("INT64"));
+        fields.add(new TableFieldSchema().setName("Avg").setType("INT64"));
+        fields.add(new TableFieldSchema().setName("Max").setType("INT64"));
+        fields.add(new TableFieldSchema().setName("MinFirstEventName").setType("STRING"));
+        fields.add(new TableFieldSchema().setName("MaxFirstEventName").setType("STRING"));
+        fields.add(new TableFieldSchema().setName("MinSecondEventName").setType("STRING"));
+        fields.add(new TableFieldSchema().setName("MaxSecondEventName").setType("STRING"));
+        fields.add(new TableFieldSchema().setName("LastEventName").setType("STRING"));
         fields.add(new TableFieldSchema().setName("Complete").setType("BOOLEAN"));
-        fields.add(new TableFieldSchema().setName("emailAddress").setType("STRING"));
-        fields.add(new TableFieldSchema().setName("userAgent").setType("STRING"));
-        fields.add(new TableFieldSchema().setName("queryString").setType("STRING"));
         TableSchema schema = new TableSchema().setFields(fields);
 
-        flattenedOrders.apply(new OrdersToTableRows())
-                .apply(BigQueryIO.writeTableRows().to("eshop-bigdata:datalake.windowed_orders_2").withSchema(schema)
+        orderSummaries.apply("Writing order summaries to BigQuery", new OrderSummariesToTableRows())
+                .apply(BigQueryIO.writeTableRows().to("eshop-bigdata:datalake.order_summary_3").withSchema(schema)
                         .withCreateDisposition(BigQueryIO.Write.CreateDisposition.CREATE_IF_NEEDED)
                         .withWriteDisposition(BigQueryIO.Write.WriteDisposition.WRITE_APPEND));
 
-        serialisedOrders.apply(PubsubIO.writeStrings().to("projects/eshop-bigdata/topics/dataflow-test-out"));
-
-        // window.apply(GroupByKey.<String, Order>create()).apply("Get Order Status",
-        // ParDo.of(new FlattenOrders()))
-        // .apply("Serialise Order Status", ParDo.of(new
-        // OrderStatusToString())).apply("Send to Pub/Sub",
-        // PubsubIO.writeStrings().to("projects/eshop-bigdata/topics/dataflow-test-out"));
-
-        // pubSubOutput.apply(PubsubIO.writeStrings().to("projects/eshop-bigdata/topics/dataflow-test-out"));
-
         p.run().waitUntilFinish();
     }
+
+    // todo: 1. Handle single order events
+    // todo: 2. Fix MaxSecondEventName NULL
+    // todo: 3. Fix complete calc
 
     static class ExtractOrderStatus extends DoFn<KV<String, Order>, KV<String, Integer>> {
         private static final long serialVersionUID = 1L;
@@ -265,6 +239,30 @@ public class App {
         }
     }
 
+    static class OrderSummaryFn extends DoFn<KV<String, Iterable<Order>>, OrderSummary> {
+        private static final long serialVersionUID = -3067528732035106582L;
+        final String COMPLETE_EVENT_NAME = "COMPLETE";
+
+        @ProcessElement
+        public void processElement(ProcessContext c) throws Exception {
+            Iterable<Order> orders = c.element().getValue();
+            List<Order> sortedOrders = OrderSummary.sortOrders(orders.iterator());
+            OrderSummary orderSummary = OrderSummary.orderSummary(sortedOrders, COMPLETE_EVENT_NAME);
+            c.output(orderSummary);
+        }
+    }
+
+    static class SerialiseOrderSummaryFn extends DoFn<OrderSummary, String> {
+        private static final long serialVersionUID = 6888807405086595997L;
+
+        @ProcessElement
+        public void processElement(ProcessContext c) throws JsonParseException, JsonMappingException, IOException {
+            ObjectMapper mapper = new ObjectMapper();
+            OrderSummary orderSummary = c.element();
+            c.output(mapper.writeValueAsString(orderSummary));
+        }
+    }
+
     static class OrderStatusToString extends DoFn<OrderStatus, String> {
         private static final long serialVersionUID = 1L;
 
@@ -320,7 +318,7 @@ public class App {
                 ObjectMapper mapper = new ObjectMapper();
                 String json = c.element();
                 Order order = mapper.readValue(json, Order.class);
-                c.output(KV.of(order.correlationId, order));
+                c.output(KV.of(order.getCorrelationId(), order));
             } catch (Exception e) {
                 LOG.error(e.getMessage());
             }
@@ -345,6 +343,38 @@ public class App {
             tableRow.set("QueryString", c.element().getQueryString());
 
             c.output(tableRow);
+        }
+    }
+
+    static class FormatOrderSummaryAsTableRowFn extends DoFn<OrderSummary, TableRow> {
+        private static final long serialVersionUID = 435139917692986619L;
+
+        @ProcessElement
+        public void processElement(ProcessContext c) {
+            TableRow tableRow = new TableRow();
+            OrderSummary orderSummary = c.element();
+
+            tableRow.set("Min", orderSummary.getMin());
+            tableRow.set("Avg", orderSummary.getAvg());
+            tableRow.set("Max", orderSummary.getMax());
+            tableRow.set("MinFirstEventName", orderSummary.getMinFirstEventName());
+            tableRow.set("MinSecondEventName", orderSummary.getMinSecondEventName());
+            tableRow.set("MaxFirstEventName", orderSummary.getMaxfirstEventName());
+            tableRow.set("MaxSecondEventName", orderSummary.getMaxSecondEventName());
+            tableRow.set("LastEventName", orderSummary.getLastEventName());
+            tableRow.set("Complete", orderSummary.getComplete());
+            c.output(tableRow);
+        }
+    }
+
+    static class OrderSummariesToTableRows extends PTransform<PCollection<OrderSummary>, PCollection<TableRow>> {
+
+        private static final long serialVersionUID = 1L;
+
+        @Override
+        public PCollection<TableRow> expand(PCollection<OrderSummary> input) {
+            PCollection<TableRow> tableRows = input.apply(ParDo.of(new FormatOrderSummaryAsTableRowFn()));
+            return tableRows;
         }
     }
 
