@@ -134,6 +134,8 @@ public class App {
                 PubsubIO.writeStrings().to("projects/eshop-bigdata/topics/dataflow-test-out"));
 
         List<TableFieldSchema> fields = new ArrayList<>();
+        fields.add(new TableFieldSchema().setName("OrderNumber").setType("STRING"));
+        fields.add(new TableFieldSchema().setName("CorrelationId").setType("STRING"));
         fields.add(new TableFieldSchema().setName("MinTimeDelay").setType("INT64"));
         fields.add(new TableFieldSchema().setName("AvgTimeDelay").setType("INT64"));
         fields.add(new TableFieldSchema().setName("MaxTimeDelay").setType("INT64"));
@@ -146,7 +148,7 @@ public class App {
         TableSchema schema = new TableSchema().setFields(fields);
 
         orderSummaries.apply("Writing order summaries to BigQuery", new OrderSummariesToTableRows())
-                .apply(BigQueryIO.writeTableRows().to("eshop-bigdata:datalake.order_summary_4").withSchema(schema)
+                .apply(BigQueryIO.writeTableRows().to("eshop-bigdata:datalake.order_summary_5").withSchema(schema)
                         .withCreateDisposition(BigQueryIO.Write.CreateDisposition.CREATE_IF_NEEDED)
                         .withWriteDisposition(BigQueryIO.Write.WriteDisposition.WRITE_APPEND));
 
@@ -354,6 +356,8 @@ public class App {
             TableRow tableRow = new TableRow();
             OrderSummary orderSummary = c.element();
 
+            tableRow.set("OrderNumber", orderSummary.getNumber());
+            tableRow.set("CorrelationId", orderSummary.getCorrelationid());
             tableRow.set("MinTimeDelay", orderSummary.getMinTimeDelay());
             tableRow.set("AvgTimeDelay", orderSummary.getAvgTimedelay());
             tableRow.set("MaxTimeDelay", orderSummary.getMaxTimeDelay());

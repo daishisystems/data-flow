@@ -32,6 +32,26 @@ public class OrderSummary implements Serializable {
     String lastEventName;
     @Expose
     boolean complete;
+    @Expose
+    String number;
+    @Expose
+    String correlationId;
+
+    public String getNumber() {
+        return this.number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
+    }
+
+    public String getCorrelationid() {
+        return this.correlationId;
+    }
+
+    public void setCorrelationid(String correlationId) {
+        this.correlationId = correlationId;
+    }
 
     public boolean getComplete() {
         return this.complete;
@@ -158,6 +178,8 @@ public class OrderSummary implements Serializable {
         double average = allDiffs.stream().mapToLong(Long::longValue).average().orElse(0);
         orderSummary.setAvgTimeDelay((long) average);
         orderSummary.setLastEventName(current.getEventName());
+        orderSummary.setNumber(current.getNumber());
+        orderSummary.setCorrelationid(current.getCorrelationId());
         return orderSummary;
     }
 }
