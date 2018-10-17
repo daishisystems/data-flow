@@ -134,9 +134,9 @@ public class App {
                 PubsubIO.writeStrings().to("projects/eshop-bigdata/topics/dataflow-test-out"));
 
         List<TableFieldSchema> fields = new ArrayList<>();
-        fields.add(new TableFieldSchema().setName("Min").setType("INT64"));
-        fields.add(new TableFieldSchema().setName("Avg").setType("INT64"));
-        fields.add(new TableFieldSchema().setName("Max").setType("INT64"));
+        fields.add(new TableFieldSchema().setName("MinTimeDelay").setType("INT64"));
+        fields.add(new TableFieldSchema().setName("AvgTimeDelay").setType("INT64"));
+        fields.add(new TableFieldSchema().setName("MaxTimeDelay").setType("INT64"));
         fields.add(new TableFieldSchema().setName("MinFirstEventName").setType("STRING"));
         fields.add(new TableFieldSchema().setName("MaxFirstEventName").setType("STRING"));
         fields.add(new TableFieldSchema().setName("MinSecondEventName").setType("STRING"));
@@ -146,7 +146,7 @@ public class App {
         TableSchema schema = new TableSchema().setFields(fields);
 
         orderSummaries.apply("Writing order summaries to BigQuery", new OrderSummariesToTableRows())
-                .apply(BigQueryIO.writeTableRows().to("eshop-bigdata:datalake.order_summary_3").withSchema(schema)
+                .apply(BigQueryIO.writeTableRows().to("eshop-bigdata:datalake.order_summary_4").withSchema(schema)
                         .withCreateDisposition(BigQueryIO.Write.CreateDisposition.CREATE_IF_NEEDED)
                         .withWriteDisposition(BigQueryIO.Write.WriteDisposition.WRITE_APPEND));
 
@@ -354,9 +354,9 @@ public class App {
             TableRow tableRow = new TableRow();
             OrderSummary orderSummary = c.element();
 
-            tableRow.set("Min", orderSummary.getMin());
-            tableRow.set("Avg", orderSummary.getAvg());
-            tableRow.set("Max", orderSummary.getMax());
+            tableRow.set("MinTimeDelay", orderSummary.getMinTimeDelay());
+            tableRow.set("AvgTimeDelay", orderSummary.getAvgTimedelay());
+            tableRow.set("MaxTimeDelay", orderSummary.getMaxTimeDelay());
             tableRow.set("MinFirstEventName", orderSummary.getMinFirstEventName());
             tableRow.set("MinSecondEventName", orderSummary.getMinSecondEventName());
             tableRow.set("MaxFirstEventName", orderSummary.getMaxfirstEventName());

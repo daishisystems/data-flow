@@ -15,11 +15,11 @@ import org.apache.beam.sdk.coders.SerializableCoder;
 public class OrderSummary implements Serializable {
     private static final long serialVersionUID = 4849897804088452767L;
     @Expose
-    long min;
+    long minTimeDelay;
     @Expose
-    long avg;
+    long avgTimeDelay;
     @Expose
-    long max;
+    long maxTimeDelay;
     @Expose
     String minFirstEventName;
     @Expose
@@ -81,28 +81,28 @@ public class OrderSummary implements Serializable {
         this.maxSecondEventName = maxSecondEventName;
     }
 
-    public long getMin() {
-        return this.min;
+    public long getMinTimeDelay() {
+        return this.minTimeDelay;
     }
 
-    public void setMin(long min) {
-        this.min = min;
+    public void setMinTimeDelay(long minTimeDelay) {
+        this.minTimeDelay = minTimeDelay;
     }
 
-    public long getAvg() {
-        return this.avg;
+    public long getAvgTimedelay() {
+        return this.avgTimeDelay;
     }
 
-    public void setAvg(long avg) {
-        this.avg = avg;
+    public void setAvgTimeDelay(long avgTimeDelay) {
+        this.avgTimeDelay = avgTimeDelay;
     }
 
-    public long getMax() {
-        return this.max;
+    public long getMaxTimeDelay() {
+        return this.maxTimeDelay;
     }
 
-    public void setMax(long max) {
-        this.max = max;
+    public void setMaxTimeDelay(long maxTimeDelay) {
+        this.maxTimeDelay = maxTimeDelay;
     }
 
     /**
@@ -135,18 +135,18 @@ public class OrderSummary implements Serializable {
         do {
             current = iterator.next();
             long currentDiff = current.getCreated() - previous.getCreated();
-            if (orderSummary.getMin() == 0) {
-                orderSummary.setMin(currentDiff);
+            if (orderSummary.getMinTimeDelay() == 0) {
+                orderSummary.setMinTimeDelay(currentDiff);
                 orderSummary.setMinFirstEventName(previous.getEventName());
                 orderSummary.setMinSecondEventName(current.getEventName());
             }
             allDiffs.add(currentDiff);
-            if (currentDiff > orderSummary.getMax()) {
-                orderSummary.setMax(currentDiff);
+            if (currentDiff > orderSummary.getMaxTimeDelay()) {
+                orderSummary.setMaxTimeDelay(currentDiff);
                 orderSummary.setMaxFirstEventName(previous.getEventName());
                 orderSummary.setMaxSecondEventName(current.getEventName());
-            } else if (currentDiff < orderSummary.getMin()) {
-                orderSummary.setMin(currentDiff);
+            } else if (currentDiff < orderSummary.getMinTimeDelay()) {
+                orderSummary.setMinTimeDelay(currentDiff);
                 orderSummary.setMinFirstEventName(previous.getEventName());
                 orderSummary.setMinSecondEventName(current.getEventName());
             }
@@ -156,7 +156,7 @@ public class OrderSummary implements Serializable {
             previous = current;
         } while (iterator.hasNext());
         double average = allDiffs.stream().mapToLong(Long::longValue).average().orElse(0);
-        orderSummary.setAvg((long) average);
+        orderSummary.setAvgTimeDelay((long) average);
         orderSummary.setLastEventName(current.getEventName());
         return orderSummary;
     }

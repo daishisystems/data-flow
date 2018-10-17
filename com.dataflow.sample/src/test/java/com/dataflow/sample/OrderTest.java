@@ -55,9 +55,9 @@ public class OrderTest {
         orders.add(order3);
 
         OrderSummary orderSummary = OrderSummary.orderSummary(orders, orderCompleteIdentifier);
-        assertTrue(orderSummary.getMin() == 12);
-        assertTrue(orderSummary.getAvg() == 20);
-        assertTrue(orderSummary.getMax() == 29);
+        assertTrue(orderSummary.getMinTimeDelay() == 12);
+        assertTrue(orderSummary.getAvgTimedelay() == 20);
+        assertTrue(orderSummary.getMaxTimeDelay() == 29);
         assertTrue(orderSummary.getMaxfirstEventName() == order2EventName);
         assertTrue(orderSummary.getMaxSecondEventName() == order3EventName);
         assertTrue(orderSummary.getMinFirstEventName() == order1EventName);
