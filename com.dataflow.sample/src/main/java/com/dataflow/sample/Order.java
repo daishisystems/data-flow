@@ -133,5 +133,5 @@ public class Order implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(number);
-    }    
+    }
 }

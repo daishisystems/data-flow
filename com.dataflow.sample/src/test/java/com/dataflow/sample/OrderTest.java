@@ -1,5 +1,6 @@
 package com.dataflow.sample;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import java.util.ArrayList;
 import java.util.List;
@@ -64,5 +65,6 @@ public class OrderTest {
         assertTrue(orderSummary.getMinSecondEventName() == order2EventName);
         assertTrue(orderSummary.getLastEventName() == order3EventName);
         assertTrue(orderSummary.getComplete());
+        assertEquals(41, orderSummary.getTotalTime());
     }
 }

@@ -143,12 +143,17 @@ public class App {
         fields.add(new TableFieldSchema().setName("MaxFirstEventName").setType("STRING"));
         fields.add(new TableFieldSchema().setName("MinSecondEventName").setType("STRING"));
         fields.add(new TableFieldSchema().setName("MaxSecondEventName").setType("STRING"));
+        fields.add(new TableFieldSchema().setName("TotalTime").setType("INT64"));
         fields.add(new TableFieldSchema().setName("LastEventName").setType("STRING"));
         fields.add(new TableFieldSchema().setName("Complete").setType("BOOLEAN"));
+        fields.add(new TableFieldSchema().setName("StartDate").setType("TIMESTAMP"));
+        fields.add(new TableFieldSchema().setName("EndDate").setType("TIMESTAMP"));
+        fields.add(new TableFieldSchema().setName("OrderValue").setType("NUMERIC"));
+        fields.add(new TableFieldSchema().setName("UserAgent").setType("STRING"));
         TableSchema schema = new TableSchema().setFields(fields);
 
         orderSummaries.apply("Writing order summaries to BigQuery", new OrderSummariesToTableRows())
-                .apply(BigQueryIO.writeTableRows().to("eshop-bigdata:datalake.order_summary_5").withSchema(schema)
+                .apply(BigQueryIO.writeTableRows().to("eshop-bigdata:datalake.order_summary_10").withSchema(schema)
                         .withCreateDisposition(BigQueryIO.Write.CreateDisposition.CREATE_IF_NEEDED)
                         .withWriteDisposition(BigQueryIO.Write.WriteDisposition.WRITE_APPEND));
 
@@ -365,8 +370,13 @@ public class App {
             tableRow.set("MinSecondEventName", orderSummary.getMinSecondEventName());
             tableRow.set("MaxFirstEventName", orderSummary.getMaxfirstEventName());
             tableRow.set("MaxSecondEventName", orderSummary.getMaxSecondEventName());
+            tableRow.set("TotalTime", orderSummary.getTotalTime());
             tableRow.set("LastEventName", orderSummary.getLastEventName());
             tableRow.set("Complete", orderSummary.getComplete());
+            tableRow.set("StartDate", orderSummary.getStartdate());
+            tableRow.set("EndDate", orderSummary.getEnddate());
+            tableRow.set("OrderValue", orderSummary.getOrderValue());
+            tableRow.set("UserAgent", orderSummary.getUserAgent());
             c.output(tableRow);
         }
     }

@@ -36,6 +36,56 @@ public class OrderSummary implements Serializable {
     String number;
     @Expose
     String correlationId;
+    @Expose
+    long startdate;
+    @Expose
+    long enddate;
+    @Expose
+    float orderValue;
+    @Expose
+    String userAgent;
+    @Expose
+    long totalTime;
+
+    public long getTotalTime() {
+        return this.totalTime;
+    }
+
+    public void setTotalTime(long totalTime) {
+        this.totalTime = totalTime;
+    }
+
+    public String getUserAgent() {
+        return this.userAgent;
+    }
+
+    public void setUserAgent(String userAgent) {
+        this.userAgent = userAgent;
+    }
+
+    public float getOrderValue() {
+        return this.orderValue;
+    }
+
+    public void setOrderValue(float orderValue) {
+        this.orderValue = orderValue;
+    }
+
+    public long getEnddate() {
+        return this.enddate;
+    }
+
+    public void setEnddate(long enddate) {
+        this.enddate = enddate;
+    }
+
+    public long getStartdate() {
+        return this.startdate;
+    }
+
+    public void setStartdate(long startDate) {
+        this.startdate = startDate;
+    }
 
     public String getNumber() {
         return this.number;
@@ -147,8 +197,10 @@ public class OrderSummary implements Serializable {
             return orderSummary;
         }
         Order previous = iterator.next();
+        long startTime = previous.getCreated();
+        orderSummary.setStartdate(previous.getCreated());
         if (!iterator.hasNext()) {
-            return orderSummary;
+            return orderSummary; // todo - process exists here if only 1 entry!!! Return this order ...
         }
         Order current;
         List<Long> allDiffs = new ArrayList<>();
@@ -180,6 +232,12 @@ public class OrderSummary implements Serializable {
         orderSummary.setLastEventName(current.getEventName());
         orderSummary.setNumber(current.getNumber());
         orderSummary.setCorrelationid(current.getCorrelationId());
+        orderSummary.setEnddate(current.getCreated());
+        orderSummary.setUserAgent(current.getUserAgent());
+        orderSummary.setOrderValue(current.getValue());
+        long endTime = current.getCreated();
+        long totalTime = endTime - startTime;
+        orderSummary.setTotalTime(totalTime);
         return orderSummary;
     }
 }
