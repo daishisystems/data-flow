@@ -150,10 +150,12 @@ public class App {
         fields.add(new TableFieldSchema().setName("EndDate").setType("TIMESTAMP"));
         fields.add(new TableFieldSchema().setName("OrderValue").setType("NUMERIC"));
         fields.add(new TableFieldSchema().setName("UserAgent").setType("STRING"));
+        fields.add(new TableFieldSchema().setName("Country").setType("STRING"));
+        fields.add(new TableFieldSchema().setName("UnitsPerOrder").setType("INT64"));
         TableSchema schema = new TableSchema().setFields(fields);
 
         orderSummaries.apply("Writing order summaries to BigQuery", new OrderSummariesToTableRows())
-                .apply(BigQueryIO.writeTableRows().to("eshop-bigdata:datalake.order_summary_10").withSchema(schema)
+                .apply(BigQueryIO.writeTableRows().to("eshop-bigdata:datalake.order_summary_11").withSchema(schema)
                         .withCreateDisposition(BigQueryIO.Write.CreateDisposition.CREATE_IF_NEEDED)
                         .withWriteDisposition(BigQueryIO.Write.WriteDisposition.WRITE_APPEND));
 
@@ -377,6 +379,8 @@ public class App {
             tableRow.set("EndDate", orderSummary.getEnddate());
             tableRow.set("OrderValue", orderSummary.getOrderValue());
             tableRow.set("UserAgent", orderSummary.getUserAgent());
+            tableRow.set("Country", orderSummary.getCountry());
+            tableRow.set("UnitsPerOrder", orderSummary.getUnitsPerOrder());
             c.output(tableRow);
         }
     }

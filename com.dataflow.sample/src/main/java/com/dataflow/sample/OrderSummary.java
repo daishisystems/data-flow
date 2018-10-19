@@ -46,6 +46,26 @@ public class OrderSummary implements Serializable {
     String userAgent;
     @Expose
     long totalTime;
+    @Expose
+    String country;
+    @Expose
+    int unitsPerOrder;
+
+    public String getCountry() {
+        return this.country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public int getUnitsPerOrder() {
+        return this.unitsPerOrder;
+    }
+
+    public void setUnitsPerOrder(int unitsPerOrder) {
+        this.unitsPerOrder = unitsPerOrder;
+    }
 
     public long getTotalTime() {
         return this.totalTime;
@@ -232,12 +252,14 @@ public class OrderSummary implements Serializable {
         orderSummary.setLastEventName(current.getEventName());
         orderSummary.setNumber(current.getNumber());
         orderSummary.setCorrelationid(current.getCorrelationId());
-        orderSummary.setEnddate(current.getCreated());
+        orderSummary.setEnddate(current.getCreated()); // Order should have a start and endate in DATETIME format
         orderSummary.setUserAgent(current.getUserAgent());
         orderSummary.setOrderValue(current.getValue());
         long endTime = current.getCreated();
         long totalTime = endTime - startTime;
         orderSummary.setTotalTime(totalTime);
+        orderSummary.setCountry(current.getCountry());
+        orderSummary.setUnitsPerOrder(current.getUnitsPerOrder());
         return orderSummary;
     }
 }

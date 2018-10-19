@@ -33,6 +33,26 @@ public class Order implements Serializable {
     String userAgent;
     @Expose
     String queryString;
+    @Expose
+    String country;
+    @Expose
+    int unitsPerOrder;
+
+    public String getCountry() {
+        return this.country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public int getUnitsPerOrder() {
+        return this.unitsPerOrder;
+    }
+
+    public void setUnitsPerOrder(int unitsPerOrder) {
+        this.unitsPerOrder = unitsPerOrder;
+    }
 
     public Order() {
 
