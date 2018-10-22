@@ -155,7 +155,7 @@ public class App {
         TableSchema schema = new TableSchema().setFields(fields);
 
         orderSummaries.apply("Writing order summaries to BigQuery", new OrderSummariesToTableRows())
-                .apply(BigQueryIO.writeTableRows().to("eshop-bigdata:datalake.order_summary_11").withSchema(schema)
+                .apply(BigQueryIO.writeTableRows().to("eshop-bigdata:datalake.order_summary_14").withSchema(schema)
                         .withCreateDisposition(BigQueryIO.Write.CreateDisposition.CREATE_IF_NEEDED)
                         .withWriteDisposition(BigQueryIO.Write.WriteDisposition.WRITE_APPEND));
 
