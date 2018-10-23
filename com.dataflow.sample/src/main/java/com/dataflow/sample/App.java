@@ -117,10 +117,11 @@ public class App {
                         .withTimestampAttribute("EventTimestamp"));
 
         PCollection<KV<String, Order>> keyvalues = pubSubOutput.apply("Parsing to KV pairs",
-                ParDo.of(new ParseOrderToKVFn()));
+                ParDo.of(new ParseOrderToKVFn())); // todo: Use MapElements.via?
 
         PCollection<KV<String, Order>> orders = keyvalues.apply("Creating session window",
-                Window.<KV<String, Order>>into(Sessions.withGapDuration(Duration.standardSeconds(20))));
+                Window.<KV<String, Order>>into(Sessions.withGapDuration(Duration.standardSeconds(20)))
+                        .withAllowedLateness(Duration.standardDays(10)).accumulatingFiredPanes()); // todo: Accumulating or discarding?!?
 
         PCollection<KV<String, Iterable<Order>>> groupedOrders = orders.apply("Grouping orders", GroupByKey.create());
 

@@ -1,8 +1,10 @@
 package com.dataflow.sample;
 
+import java.io.Serializable;
+
 import com.google.gson.annotations.Expose;
 
-public class OrderDifference {
+public class OrderDifference implements Serializable {
     @Expose
     Order firstOrder;
     @Expose
