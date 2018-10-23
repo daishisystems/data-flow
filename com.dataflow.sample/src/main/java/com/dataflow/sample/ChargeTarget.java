@@ -12,53 +12,53 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({ "Option", "IsExpressDelivery" })
-public class DeliveryOption implements Serializable {
+@JsonPropertyOrder({ "Name", "TargetValue" })
+public class ChargeTarget implements Serializable {
 
-    @JsonProperty("Option")
-    private Integer option;
-    @JsonProperty("IsExpressDelivery")
-    private Boolean isExpressDelivery;
+    @JsonProperty("Name")
+    private String name;
+    @JsonProperty("TargetValue")
+    private TargetValue targetValue;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
-    private final static long serialVersionUID = -1523273077646781560L;
+    private final static long serialVersionUID = 2614436583257061409L;
 
     /**
      * No args constructor for use in serialization
      * 
      */
-    public DeliveryOption() {
+    public ChargeTarget() {
     }
 
     /**
      * 
-     * @param isExpressDelivery
-     * @param option
+     * @param targetValue
+     * @param name
      */
-    public DeliveryOption(Integer option, Boolean isExpressDelivery) {
+    public ChargeTarget(String name, TargetValue targetValue) {
         super();
-        this.option = option;
-        this.isExpressDelivery = isExpressDelivery;
+        this.name = name;
+        this.targetValue = targetValue;
     }
 
-    @JsonProperty("Option")
-    public Integer getOption() {
-        return option;
+    @JsonProperty("Name")
+    public String getName() {
+        return name;
     }
 
-    @JsonProperty("Option")
-    public void setOption(Integer option) {
-        this.option = option;
+    @JsonProperty("Name")
+    public void setName(String name) {
+        this.name = name;
     }
 
-    @JsonProperty("IsExpressDelivery")
-    public Boolean getIsExpressDelivery() {
-        return isExpressDelivery;
+    @JsonProperty("TargetValue")
+    public TargetValue getTargetValue() {
+        return targetValue;
     }
 
-    @JsonProperty("IsExpressDelivery")
-    public void setIsExpressDelivery(Boolean isExpressDelivery) {
-        this.isExpressDelivery = isExpressDelivery;
+    @JsonProperty("TargetValue")
+    public void setTargetValue(TargetValue targetValue) {
+        this.targetValue = targetValue;
     }
 
     @JsonAnyGetter

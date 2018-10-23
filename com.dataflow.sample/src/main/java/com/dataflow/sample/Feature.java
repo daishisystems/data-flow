@@ -12,53 +12,53 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({ "Option", "IsExpressDelivery" })
-public class DeliveryOption implements Serializable {
+@JsonPropertyOrder({ "Type", "Active" })
+public class Feature implements Serializable {
 
-    @JsonProperty("Option")
-    private Integer option;
-    @JsonProperty("IsExpressDelivery")
-    private Boolean isExpressDelivery;
+    @JsonProperty("Type")
+    private String type;
+    @JsonProperty("Active")
+    private Boolean active;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
-    private final static long serialVersionUID = -1523273077646781560L;
+    private final static long serialVersionUID = 5340224469099643397L;
 
     /**
      * No args constructor for use in serialization
      * 
      */
-    public DeliveryOption() {
+    public Feature() {
     }
 
     /**
      * 
-     * @param isExpressDelivery
-     * @param option
+     * @param active
+     * @param type
      */
-    public DeliveryOption(Integer option, Boolean isExpressDelivery) {
+    public Feature(String type, Boolean active) {
         super();
-        this.option = option;
-        this.isExpressDelivery = isExpressDelivery;
+        this.type = type;
+        this.active = active;
     }
 
-    @JsonProperty("Option")
-    public Integer getOption() {
-        return option;
+    @JsonProperty("Type")
+    public String getType() {
+        return type;
     }
 
-    @JsonProperty("Option")
-    public void setOption(Integer option) {
-        this.option = option;
+    @JsonProperty("Type")
+    public void setType(String type) {
+        this.type = type;
     }
 
-    @JsonProperty("IsExpressDelivery")
-    public Boolean getIsExpressDelivery() {
-        return isExpressDelivery;
+    @JsonProperty("Active")
+    public Boolean getActive() {
+        return active;
     }
 
-    @JsonProperty("IsExpressDelivery")
-    public void setIsExpressDelivery(Boolean isExpressDelivery) {
-        this.isExpressDelivery = isExpressDelivery;
+    @JsonProperty("Active")
+    public void setActive(Boolean active) {
+        this.active = active;
     }
 
     @JsonAnyGetter

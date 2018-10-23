@@ -1,104 +1,189 @@
+
 package com.dataflow.sample;
 
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
+import com.fasterxml.jackson.annotation.JsonAnyGetter;
+import com.fasterxml.jackson.annotation.JsonAnySetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-import org.apache.beam.sdk.coders.DefaultCoder;
-import org.apache.beam.sdk.coders.SerializableCoder;
-
-@DefaultCoder(SerializableCoder.class)
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonPropertyOrder({ "PaymentId", "PaymentAttemptRef", "PaymentFraudStatusId", "AuthCode", "State",
+        "PaymentGatewayCode", "PaymentMethodCode", "AuthorizationDetails", "PaymentTime", "IsPaymentSuccessful" })
 public class Payment implements Serializable {
-    private String PaymentId;
-    private String PaymentAttemptRef;
-    private String PaymentFraudStatusId = null;
-    private String AuthCode = null;
-    private String State;
-    private String PaymentGatewayCode = null;
-    private String PaymentMethodCode = null;
-    private String AuthorizationDetails = null;
-    private String PaymentTime = null;
-    private boolean IsPaymentSuccessful;
 
-    // Getter Methods
+    @JsonProperty("PaymentId")
+    private String paymentId;
+    @JsonProperty("PaymentAttemptRef")
+    private String paymentAttemptRef;
+    @JsonProperty("PaymentFraudStatusId")
+    private Object paymentFraudStatusId;
+    @JsonProperty("AuthCode")
+    private Object authCode;
+    @JsonProperty("State")
+    private String state;
+    @JsonProperty("PaymentGatewayCode")
+    private Object paymentGatewayCode;
+    @JsonProperty("PaymentMethodCode")
+    private Object paymentMethodCode;
+    @JsonProperty("AuthorizationDetails")
+    private Object authorizationDetails;
+    @JsonProperty("PaymentTime")
+    private Object paymentTime;
+    @JsonProperty("IsPaymentSuccessful")
+    private Boolean isPaymentSuccessful;
+    @JsonIgnore
+    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+    private final static long serialVersionUID = -2148568030482404120L;
 
+    /**
+     * No args constructor for use in serialization
+     * 
+     */
+    public Payment() {
+    }
+
+    /**
+     * 
+     * @param authCode
+     * @param paymentMethodCode
+     * @param paymentId
+     * @param paymentTime
+     * @param state
+     * @param paymentAttemptRef
+     * @param authorizationDetails
+     * @param paymentGatewayCode
+     * @param isPaymentSuccessful
+     * @param paymentFraudStatusId
+     */
+    public Payment(String paymentId, String paymentAttemptRef, Object paymentFraudStatusId, Object authCode,
+            String state, Object paymentGatewayCode, Object paymentMethodCode, Object authorizationDetails,
+            Object paymentTime, Boolean isPaymentSuccessful) {
+        super();
+        this.paymentId = paymentId;
+        this.paymentAttemptRef = paymentAttemptRef;
+        this.paymentFraudStatusId = paymentFraudStatusId;
+        this.authCode = authCode;
+        this.state = state;
+        this.paymentGatewayCode = paymentGatewayCode;
+        this.paymentMethodCode = paymentMethodCode;
+        this.authorizationDetails = authorizationDetails;
+        this.paymentTime = paymentTime;
+        this.isPaymentSuccessful = isPaymentSuccessful;
+    }
+
+    @JsonProperty("PaymentId")
     public String getPaymentId() {
-        return PaymentId;
+        return paymentId;
     }
 
+    @JsonProperty("PaymentId")
+    public void setPaymentId(String paymentId) {
+        this.paymentId = paymentId;
+    }
+
+    @JsonProperty("PaymentAttemptRef")
     public String getPaymentAttemptRef() {
-        return PaymentAttemptRef;
+        return paymentAttemptRef;
     }
 
-    public String getPaymentFraudStatusId() {
-        return PaymentFraudStatusId;
+    @JsonProperty("PaymentAttemptRef")
+    public void setPaymentAttemptRef(String paymentAttemptRef) {
+        this.paymentAttemptRef = paymentAttemptRef;
     }
 
-    public String getAuthCode() {
-        return AuthCode;
+    @JsonProperty("PaymentFraudStatusId")
+    public Object getPaymentFraudStatusId() {
+        return paymentFraudStatusId;
     }
 
+    @JsonProperty("PaymentFraudStatusId")
+    public void setPaymentFraudStatusId(Object paymentFraudStatusId) {
+        this.paymentFraudStatusId = paymentFraudStatusId;
+    }
+
+    @JsonProperty("AuthCode")
+    public Object getAuthCode() {
+        return authCode;
+    }
+
+    @JsonProperty("AuthCode")
+    public void setAuthCode(Object authCode) {
+        this.authCode = authCode;
+    }
+
+    @JsonProperty("State")
     public String getState() {
-        return State;
+        return state;
     }
 
-    public String getPaymentGatewayCode() {
-        return PaymentGatewayCode;
+    @JsonProperty("State")
+    public void setState(String state) {
+        this.state = state;
     }
 
-    public String getPaymentMethodCode() {
-        return PaymentMethodCode;
+    @JsonProperty("PaymentGatewayCode")
+    public Object getPaymentGatewayCode() {
+        return paymentGatewayCode;
     }
 
-    public String getAuthorizationDetails() {
-        return AuthorizationDetails;
+    @JsonProperty("PaymentGatewayCode")
+    public void setPaymentGatewayCode(Object paymentGatewayCode) {
+        this.paymentGatewayCode = paymentGatewayCode;
     }
 
-    public String getPaymentTime() {
-        return PaymentTime;
+    @JsonProperty("PaymentMethodCode")
+    public Object getPaymentMethodCode() {
+        return paymentMethodCode;
     }
 
-    public boolean getIsPaymentSuccessful() {
-        return IsPaymentSuccessful;
+    @JsonProperty("PaymentMethodCode")
+    public void setPaymentMethodCode(Object paymentMethodCode) {
+        this.paymentMethodCode = paymentMethodCode;
     }
 
-    // Setter Methods
-
-    public void setPaymentId(String PaymentId) {
-        this.PaymentId = PaymentId;
+    @JsonProperty("AuthorizationDetails")
+    public Object getAuthorizationDetails() {
+        return authorizationDetails;
     }
 
-    public void setPaymentAttemptRef(String PaymentAttemptRef) {
-        this.PaymentAttemptRef = PaymentAttemptRef;
+    @JsonProperty("AuthorizationDetails")
+    public void setAuthorizationDetails(Object authorizationDetails) {
+        this.authorizationDetails = authorizationDetails;
     }
 
-    public void setPaymentFraudStatusId(String PaymentFraudStatusId) {
-        this.PaymentFraudStatusId = PaymentFraudStatusId;
+    @JsonProperty("PaymentTime")
+    public Object getPaymentTime() {
+        return paymentTime;
     }
 
-    public void setAuthCode(String AuthCode) {
-        this.AuthCode = AuthCode;
+    @JsonProperty("PaymentTime")
+    public void setPaymentTime(Object paymentTime) {
+        this.paymentTime = paymentTime;
     }
 
-    public void setState(String State) {
-        this.State = State;
+    @JsonProperty("IsPaymentSuccessful")
+    public Boolean getIsPaymentSuccessful() {
+        return isPaymentSuccessful;
     }
 
-    public void setPaymentGatewayCode(String PaymentGatewayCode) {
-        this.PaymentGatewayCode = PaymentGatewayCode;
+    @JsonProperty("IsPaymentSuccessful")
+    public void setIsPaymentSuccessful(Boolean isPaymentSuccessful) {
+        this.isPaymentSuccessful = isPaymentSuccessful;
     }
 
-    public void setPaymentMethodCode(String PaymentMethodCode) {
-        this.PaymentMethodCode = PaymentMethodCode;
+    @JsonAnyGetter
+    public Map<String, Object> getAdditionalProperties() {
+        return this.additionalProperties;
     }
 
-    public void setAuthorizationDetails(String AuthorizationDetails) {
-        this.AuthorizationDetails = AuthorizationDetails;
+    @JsonAnySetter
+    public void setAdditionalProperty(String name, Object value) {
+        this.additionalProperties.put(name, value);
     }
 
-    public void setPaymentTime(String PaymentTime) {
-        this.PaymentTime = PaymentTime;
-    }
-
-    public void setIsPaymentSuccessful(boolean IsPaymentSuccessful) {
-        this.IsPaymentSuccessful = IsPaymentSuccessful;
-    }
 }

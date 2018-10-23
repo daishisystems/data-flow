@@ -1,131 +1,236 @@
+
 package com.dataflow.sample;
 
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
+import com.fasterxml.jackson.annotation.JsonAnyGetter;
+import com.fasterxml.jackson.annotation.JsonAnySetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-import org.apache.beam.sdk.coders.DefaultCoder;
-import org.apache.beam.sdk.coders.SerializableCoder;
-
-@DefaultCoder(SerializableCoder.class)
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonPropertyOrder({ "BrandCountryCalculationId", "DutyTaxCalculationModelId", "IsAccurateCalculationRequired",
+        "IsReverseAccurateCalculationRequired", "IsReverseEstimatedCalculationRequired",
+        "IsReverseTaxesCalculationRequired", "IsReverseDutyCalculationRequired", "EstimatedDutyRate",
+        "EstimatedTaxRate", "BrandCountryMarkupId", "MarkupPercentage", "PricingGroupId", "CustomsCalculationType" })
 public class Calculation implements Serializable {
-    private float BrandCountryCalculationId;
-    private float DutyTaxCalculationModelId;
-    private boolean IsAccurateCalculationRequired;
-    private String IsReverseAccurateCalculationRequired = null;
-    private String IsReverseEstimatedCalculationRequired = null;
-    private String IsReverseTaxesCalculationRequired = null;
-    private String IsReverseDutyCalculationRequired = null;
-    private float EstimatedDutyRate;
-    private float EstimatedTaxRate;
-    private float BrandCountryMarkupId;
-    private String MarkupPercentage = null;
-    private float PricingGroupId;
-    private String CustomsCalculationType;
 
-    // Getter Methods
+    @JsonProperty("BrandCountryCalculationId")
+    private Integer brandCountryCalculationId;
+    @JsonProperty("DutyTaxCalculationModelId")
+    private Integer dutyTaxCalculationModelId;
+    @JsonProperty("IsAccurateCalculationRequired")
+    private Boolean isAccurateCalculationRequired;
+    @JsonProperty("IsReverseAccurateCalculationRequired")
+    private Object isReverseAccurateCalculationRequired;
+    @JsonProperty("IsReverseEstimatedCalculationRequired")
+    private Object isReverseEstimatedCalculationRequired;
+    @JsonProperty("IsReverseTaxesCalculationRequired")
+    private Object isReverseTaxesCalculationRequired;
+    @JsonProperty("IsReverseDutyCalculationRequired")
+    private Object isReverseDutyCalculationRequired;
+    @JsonProperty("EstimatedDutyRate")
+    private Double estimatedDutyRate;
+    @JsonProperty("EstimatedTaxRate")
+    private Double estimatedTaxRate;
+    @JsonProperty("BrandCountryMarkupId")
+    private Integer brandCountryMarkupId;
+    @JsonProperty("MarkupPercentage")
+    private Object markupPercentage;
+    @JsonProperty("PricingGroupId")
+    private Integer pricingGroupId;
+    @JsonProperty("CustomsCalculationType")
+    private String customsCalculationType;
+    @JsonIgnore
+    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+    private final static long serialVersionUID = -7006935580647199399L;
 
-    public float getBrandCountryCalculationId() {
-        return BrandCountryCalculationId;
+    /**
+     * No args constructor for use in serialization
+     * 
+     */
+    public Calculation() {
     }
 
-    public float getDutyTaxCalculationModelId() {
-        return DutyTaxCalculationModelId;
+    /**
+     * 
+     * @param isReverseAccurateCalculationRequired
+     * @param estimatedTaxRate
+     * @param isAccurateCalculationRequired
+     * @param isReverseDutyCalculationRequired
+     * @param brandCountryMarkupId
+     * @param brandCountryCalculationId
+     * @param dutyTaxCalculationModelId
+     * @param pricingGroupId
+     * @param isReverseTaxesCalculationRequired
+     * @param customsCalculationType
+     * @param isReverseEstimatedCalculationRequired
+     * @param markupPercentage
+     * @param estimatedDutyRate
+     */
+    public Calculation(Integer brandCountryCalculationId, Integer dutyTaxCalculationModelId,
+            Boolean isAccurateCalculationRequired, Object isReverseAccurateCalculationRequired,
+            Object isReverseEstimatedCalculationRequired, Object isReverseTaxesCalculationRequired,
+            Object isReverseDutyCalculationRequired, Double estimatedDutyRate, Double estimatedTaxRate,
+            Integer brandCountryMarkupId, Object markupPercentage, Integer pricingGroupId,
+            String customsCalculationType) {
+        super();
+        this.brandCountryCalculationId = brandCountryCalculationId;
+        this.dutyTaxCalculationModelId = dutyTaxCalculationModelId;
+        this.isAccurateCalculationRequired = isAccurateCalculationRequired;
+        this.isReverseAccurateCalculationRequired = isReverseAccurateCalculationRequired;
+        this.isReverseEstimatedCalculationRequired = isReverseEstimatedCalculationRequired;
+        this.isReverseTaxesCalculationRequired = isReverseTaxesCalculationRequired;
+        this.isReverseDutyCalculationRequired = isReverseDutyCalculationRequired;
+        this.estimatedDutyRate = estimatedDutyRate;
+        this.estimatedTaxRate = estimatedTaxRate;
+        this.brandCountryMarkupId = brandCountryMarkupId;
+        this.markupPercentage = markupPercentage;
+        this.pricingGroupId = pricingGroupId;
+        this.customsCalculationType = customsCalculationType;
     }
 
-    public boolean getIsAccurateCalculationRequired() {
-        return IsAccurateCalculationRequired;
+    @JsonProperty("BrandCountryCalculationId")
+    public Integer getBrandCountryCalculationId() {
+        return brandCountryCalculationId;
     }
 
-    public String getIsReverseAccurateCalculationRequired() {
-        return IsReverseAccurateCalculationRequired;
+    @JsonProperty("BrandCountryCalculationId")
+    public void setBrandCountryCalculationId(Integer brandCountryCalculationId) {
+        this.brandCountryCalculationId = brandCountryCalculationId;
     }
 
-    public String getIsReverseEstimatedCalculationRequired() {
-        return IsReverseEstimatedCalculationRequired;
+    @JsonProperty("DutyTaxCalculationModelId")
+    public Integer getDutyTaxCalculationModelId() {
+        return dutyTaxCalculationModelId;
     }
 
-    public String getIsReverseTaxesCalculationRequired() {
-        return IsReverseTaxesCalculationRequired;
+    @JsonProperty("DutyTaxCalculationModelId")
+    public void setDutyTaxCalculationModelId(Integer dutyTaxCalculationModelId) {
+        this.dutyTaxCalculationModelId = dutyTaxCalculationModelId;
     }
 
-    public String getIsReverseDutyCalculationRequired() {
-        return IsReverseDutyCalculationRequired;
+    @JsonProperty("IsAccurateCalculationRequired")
+    public Boolean getIsAccurateCalculationRequired() {
+        return isAccurateCalculationRequired;
     }
 
-    public float getEstimatedDutyRate() {
-        return EstimatedDutyRate;
+    @JsonProperty("IsAccurateCalculationRequired")
+    public void setIsAccurateCalculationRequired(Boolean isAccurateCalculationRequired) {
+        this.isAccurateCalculationRequired = isAccurateCalculationRequired;
     }
 
-    public float getEstimatedTaxRate() {
-        return EstimatedTaxRate;
+    @JsonProperty("IsReverseAccurateCalculationRequired")
+    public Object getIsReverseAccurateCalculationRequired() {
+        return isReverseAccurateCalculationRequired;
     }
 
-    public float getBrandCountryMarkupId() {
-        return BrandCountryMarkupId;
+    @JsonProperty("IsReverseAccurateCalculationRequired")
+    public void setIsReverseAccurateCalculationRequired(Object isReverseAccurateCalculationRequired) {
+        this.isReverseAccurateCalculationRequired = isReverseAccurateCalculationRequired;
     }
 
-    public String getMarkupPercentage() {
-        return MarkupPercentage;
+    @JsonProperty("IsReverseEstimatedCalculationRequired")
+    public Object getIsReverseEstimatedCalculationRequired() {
+        return isReverseEstimatedCalculationRequired;
     }
 
-    public float getPricingGroupId() {
-        return PricingGroupId;
+    @JsonProperty("IsReverseEstimatedCalculationRequired")
+    public void setIsReverseEstimatedCalculationRequired(Object isReverseEstimatedCalculationRequired) {
+        this.isReverseEstimatedCalculationRequired = isReverseEstimatedCalculationRequired;
     }
 
+    @JsonProperty("IsReverseTaxesCalculationRequired")
+    public Object getIsReverseTaxesCalculationRequired() {
+        return isReverseTaxesCalculationRequired;
+    }
+
+    @JsonProperty("IsReverseTaxesCalculationRequired")
+    public void setIsReverseTaxesCalculationRequired(Object isReverseTaxesCalculationRequired) {
+        this.isReverseTaxesCalculationRequired = isReverseTaxesCalculationRequired;
+    }
+
+    @JsonProperty("IsReverseDutyCalculationRequired")
+    public Object getIsReverseDutyCalculationRequired() {
+        return isReverseDutyCalculationRequired;
+    }
+
+    @JsonProperty("IsReverseDutyCalculationRequired")
+    public void setIsReverseDutyCalculationRequired(Object isReverseDutyCalculationRequired) {
+        this.isReverseDutyCalculationRequired = isReverseDutyCalculationRequired;
+    }
+
+    @JsonProperty("EstimatedDutyRate")
+    public Double getEstimatedDutyRate() {
+        return estimatedDutyRate;
+    }
+
+    @JsonProperty("EstimatedDutyRate")
+    public void setEstimatedDutyRate(Double estimatedDutyRate) {
+        this.estimatedDutyRate = estimatedDutyRate;
+    }
+
+    @JsonProperty("EstimatedTaxRate")
+    public Double getEstimatedTaxRate() {
+        return estimatedTaxRate;
+    }
+
+    @JsonProperty("EstimatedTaxRate")
+    public void setEstimatedTaxRate(Double estimatedTaxRate) {
+        this.estimatedTaxRate = estimatedTaxRate;
+    }
+
+    @JsonProperty("BrandCountryMarkupId")
+    public Integer getBrandCountryMarkupId() {
+        return brandCountryMarkupId;
+    }
+
+    @JsonProperty("BrandCountryMarkupId")
+    public void setBrandCountryMarkupId(Integer brandCountryMarkupId) {
+        this.brandCountryMarkupId = brandCountryMarkupId;
+    }
+
+    @JsonProperty("MarkupPercentage")
+    public Object getMarkupPercentage() {
+        return markupPercentage;
+    }
+
+    @JsonProperty("MarkupPercentage")
+    public void setMarkupPercentage(Object markupPercentage) {
+        this.markupPercentage = markupPercentage;
+    }
+
+    @JsonProperty("PricingGroupId")
+    public Integer getPricingGroupId() {
+        return pricingGroupId;
+    }
+
+    @JsonProperty("PricingGroupId")
+    public void setPricingGroupId(Integer pricingGroupId) {
+        this.pricingGroupId = pricingGroupId;
+    }
+
+    @JsonProperty("CustomsCalculationType")
     public String getCustomsCalculationType() {
-        return CustomsCalculationType;
+        return customsCalculationType;
     }
 
-    // Setter Methods
-
-    public void setBrandCountryCalculationId(float BrandCountryCalculationId) {
-        this.BrandCountryCalculationId = BrandCountryCalculationId;
+    @JsonProperty("CustomsCalculationType")
+    public void setCustomsCalculationType(String customsCalculationType) {
+        this.customsCalculationType = customsCalculationType;
     }
 
-    public void setDutyTaxCalculationModelId(float DutyTaxCalculationModelId) {
-        this.DutyTaxCalculationModelId = DutyTaxCalculationModelId;
+    @JsonAnyGetter
+    public Map<String, Object> getAdditionalProperties() {
+        return this.additionalProperties;
     }
 
-    public void setIsAccurateCalculationRequired(boolean IsAccurateCalculationRequired) {
-        this.IsAccurateCalculationRequired = IsAccurateCalculationRequired;
+    @JsonAnySetter
+    public void setAdditionalProperty(String name, Object value) {
+        this.additionalProperties.put(name, value);
     }
 
-    public void setIsReverseAccurateCalculationRequired(String IsReverseAccurateCalculationRequired) {
-        this.IsReverseAccurateCalculationRequired = IsReverseAccurateCalculationRequired;
-    }
-
-    public void setIsReverseEstimatedCalculationRequired(String IsReverseEstimatedCalculationRequired) {
-        this.IsReverseEstimatedCalculationRequired = IsReverseEstimatedCalculationRequired;
-    }
-
-    public void setIsReverseTaxesCalculationRequired(String IsReverseTaxesCalculationRequired) {
-        this.IsReverseTaxesCalculationRequired = IsReverseTaxesCalculationRequired;
-    }
-
-    public void setIsReverseDutyCalculationRequired(String IsReverseDutyCalculationRequired) {
-        this.IsReverseDutyCalculationRequired = IsReverseDutyCalculationRequired;
-    }
-
-    public void setEstimatedDutyRate(float EstimatedDutyRate) {
-        this.EstimatedDutyRate = EstimatedDutyRate;
-    }
-
-    public void setEstimatedTaxRate(float EstimatedTaxRate) {
-        this.EstimatedTaxRate = EstimatedTaxRate;
-    }
-
-    public void setBrandCountryMarkupId(float BrandCountryMarkupId) {
-        this.BrandCountryMarkupId = BrandCountryMarkupId;
-    }
-
-    public void setMarkupPercentage(String MarkupPercentage) {
-        this.MarkupPercentage = MarkupPercentage;
-    }
-
-    public void setPricingGroupId(float PricingGroupId) {
-        this.PricingGroupId = PricingGroupId;
-    }
-
-    public void setCustomsCalculationType(String CustomsCalculationType) {
-        this.CustomsCalculationType = CustomsCalculationType;
-    }
 }

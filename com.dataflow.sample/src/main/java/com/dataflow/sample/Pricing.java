@@ -1,68 +1,131 @@
+
 package com.dataflow.sample;
 
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
+import com.fasterxml.jackson.annotation.JsonAnyGetter;
+import com.fasterxml.jackson.annotation.JsonAnySetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-import org.apache.beam.sdk.coders.DefaultCoder;
-import org.apache.beam.sdk.coders.SerializableCoder;
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonPropertyOrder({ "id", "CountryIso", "ProductInput", "DeliveryInput", "Calculation", "Display" })
+public class Pricing implements Serializable {
 
-@DefaultCoder(SerializableCoder.class)
-public class Pricing implements Serializable {        
+    @JsonProperty("id")
     private String id;
-    private String CountryIso;
-    ProductInput ProductInputObject;
-    DeliveryInput DeliveryInputObject;
-    Calculation CalculationObject;
-    Display DisplayObject;
+    @JsonProperty("CountryIso")
+    private String countryIso;
+    @JsonProperty("ProductInput")
+    private ProductInput productInput;
+    @JsonProperty("DeliveryInput")
+    private DeliveryInput deliveryInput;
+    @JsonProperty("Calculation")
+    private Calculation calculation;
+    @JsonProperty("Display")
+    private Display display;
+    @JsonIgnore
+    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+    private final static long serialVersionUID = -2410857603365967642L;
 
-    // Getter Methods
+    /**
+     * No args constructor for use in serialization
+     * 
+     */
+    public Pricing() {
+    }
 
+    /**
+     * 
+     * @param calculation
+     * @param id
+     * @param deliveryInput
+     * @param display
+     * @param countryIso
+     * @param productInput
+     */
+    public Pricing(String id, String countryIso, ProductInput productInput, DeliveryInput deliveryInput,
+            Calculation calculation, Display display) {
+        super();
+        this.id = id;
+        this.countryIso = countryIso;
+        this.productInput = productInput;
+        this.deliveryInput = deliveryInput;
+        this.calculation = calculation;
+        this.display = display;
+    }
+
+    @JsonProperty("id")
     public String getId() {
         return id;
     }
 
-    public String getCountryIso() {
-        return CountryIso;
-    }
-
-    public ProductInput getProductInput() {
-        return ProductInputObject;
-    }
-
-    public DeliveryInput getDeliveryInput() {
-        return DeliveryInputObject;
-    }
-
-    public Calculation getCalculation() {
-        return CalculationObject;
-    }
-
-    public Display getDisplay() {
-        return DisplayObject;
-    }
-
-    // Setter Methods
-
+    @JsonProperty("id")
     public void setId(String id) {
         this.id = id;
     }
 
-    public void setCountryIso(String CountryIso) {
-        this.CountryIso = CountryIso;
+    @JsonProperty("CountryIso")
+    public String getCountryIso() {
+        return countryIso;
     }
 
-    public void setProductInput(ProductInput ProductInputObject) {
-        this.ProductInputObject = ProductInputObject;
+    @JsonProperty("CountryIso")
+    public void setCountryIso(String countryIso) {
+        this.countryIso = countryIso;
     }
 
-    public void setDeliveryInput(DeliveryInput DeliveryInputObject) {
-        this.DeliveryInputObject = DeliveryInputObject;
+    @JsonProperty("ProductInput")
+    public ProductInput getProductInput() {
+        return productInput;
     }
 
-    public void setCalculation(Calculation CalculationObject) {
-        this.CalculationObject = CalculationObject;
+    @JsonProperty("ProductInput")
+    public void setProductInput(ProductInput productInput) {
+        this.productInput = productInput;
     }
 
-    public void setDisplay(Display DisplayObject) {
-        this.DisplayObject = DisplayObject;
+    @JsonProperty("DeliveryInput")
+    public DeliveryInput getDeliveryInput() {
+        return deliveryInput;
     }
+
+    @JsonProperty("DeliveryInput")
+    public void setDeliveryInput(DeliveryInput deliveryInput) {
+        this.deliveryInput = deliveryInput;
+    }
+
+    @JsonProperty("Calculation")
+    public Calculation getCalculation() {
+        return calculation;
+    }
+
+    @JsonProperty("Calculation")
+    public void setCalculation(Calculation calculation) {
+        this.calculation = calculation;
+    }
+
+    @JsonProperty("Display")
+    public Display getDisplay() {
+        return display;
+    }
+
+    @JsonProperty("Display")
+    public void setDisplay(Display display) {
+        this.display = display;
+    }
+
+    @JsonAnyGetter
+    public Map<String, Object> getAdditionalProperties() {
+        return this.additionalProperties;
+    }
+
+    @JsonAnySetter
+    public void setAdditionalProperty(String name, Object value) {
+        this.additionalProperties.put(name, value);
+    }
+
 }

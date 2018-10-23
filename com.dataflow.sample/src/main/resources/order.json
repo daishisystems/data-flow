@@ -1,0 +1,1771 @@
+{
+  "OrderCode": "d81ef9fe-e3dc-477c-a2be-51199035c5a4",
+  "RetailerCartId": "3535345",
+  "OrderItems": [
+    {
+      "OrderArticles": [
+        {
+          "Charges": [
+            {
+              "Name": "InputItem",
+              "ExactValue": {
+                "CurrencyCodeIso": "EUR",
+                "Currency": {
+                  "Iso": "EUR",
+                  "Name": "Euro",
+                  "Exponent": 2,
+                  "Id": 1
+                },
+                "Value": 5977.86
+              }
+            },
+            {
+              "Name": "InputDelivery",
+              "ExactValue": {
+                "CurrencyCodeIso": "EUR",
+                "Currency": {
+                  "Iso": "EUR",
+                  "Name": "Euro",
+                  "Exponent": 2,
+                  "Id": 1
+                },
+                "Value": 42.9
+              }
+            },
+            {
+              "Name": "Items",
+              "ExactValue": {
+                "CurrencyCodeIso": "EUR",
+                "Currency": {
+                  "Iso": "EUR",
+                  "Name": "Euro",
+                  "Exponent": 2,
+                  "Id": 1
+                },
+                "Value": 4782.288
+              }
+            },
+            {
+              "Name": "Delivery",
+              "ExactValue": {
+                "CurrencyCodeIso": "EUR",
+                "Currency": {
+                  "Iso": "EUR",
+                  "Name": "Euro",
+                  "Exponent": 2,
+                  "Id": 1
+                },
+                "Value": 34.32
+              }
+            },
+            {
+              "Name": "ItemTaxes",
+              "ExactValue": {
+                "CurrencyCodeIso": "EUR",
+                "Currency": {
+                  "Iso": "EUR",
+                  "Name": "Euro",
+                  "Exponent": 2,
+                  "Id": 1
+                },
+                "Value": 1195.5725
+              }
+            },
+            {
+              "Name": "DeliveryTaxes",
+              "ExactValue": {
+                "CurrencyCodeIso": "EUR",
+                "Currency": {
+                  "Iso": "EUR",
+                  "Name": "Euro",
+                  "Exponent": 2,
+                  "Id": 1
+                },
+                "Value": 8.58
+              }
+            }
+          ],
+          "Package": {
+            "ChargeTargets": [
+              {
+                "Name": "DeliveryTotal",
+                "TargetValue": {
+                  "CurrencyCodeIso": "EUR",
+                  "Currency": {
+                    "Iso": "EUR",
+                    "Name": "Euro",
+                    "Exponent": 2,
+                    "Id": 1
+                  },
+                  "Value": 100.0
+                }
+              }
+            ]
+          },
+          "ChargeTargets": []
+        }
+      ],
+      "Available": true,
+      "CalculationRates": {
+        "ItemVatRateApplied": 0.25,
+        "DeliveryVatRateApplied": 0.25,
+        "ItemDutyRateApplied": 0.0,
+        "DeliveryDutyRateApplied": 0.0,
+        "ItemFeeRateApplied": 0.0,
+        "DeliveryFeeRateApplied": 0.0,
+        "ItemReverseCalculationRate": 0.25,
+        "DeliveryReverseCalculationRate": 0.25
+      },
+      "VatRate": 0.25,
+      "DutyRate": 0.0,
+      "Weight": 0.1,
+      "WeightUnit": 0,
+      "CountryOfOriginIso": null,
+      "HsCode": "62143000",
+      "EstimatedDeliveryDate": "2019-05-30T10:38:26.35Z",
+      "Quantity": 1,
+      "Product": {
+        "ProductCode": "20108763660193",
+        "Upc": null,
+        "Title": "Black Dress",
+        "Description": "Black Striped Dress",
+        "RetailerCurrencyProductPriceInfo": {
+          "Title": "Shopper price",
+          "Description": "Shopper price info",
+          "Price": {
+            "CurrencyCodeIso": "EUR",
+            "Currency": {
+              "Iso": "EUR",
+              "Name": "Euro",
+              "Exponent": 2,
+              "Id": 1
+            },
+            "Value": 5977.86
+          },
+          "DiscountAmount": {
+            "CurrencyCodeIso": "EUR",
+            "Currency": {
+              "Iso": "EUR",
+              "Name": "Euro",
+              "Exponent": 2,
+              "Id": 1
+            },
+            "Value": 100.56
+          },
+          "BeforeDiscount": {
+            "CurrencyCodeIso": "EUR",
+            "Currency": {
+              "Iso": "EUR",
+              "Name": "Euro",
+              "Exponent": 2,
+              "Id": 1
+            },
+            "Value": 6078.42
+          },
+          "DiscountPercentage": null
+        },
+        "ShopperCurrencyProductPriceInfo": {
+          "Title": "Shopper price",
+          "Description": "Shopper price info",
+          "Price": {
+            "CurrencyCodeIso": "EUR",
+            "Currency": {
+              "Iso": "EUR",
+              "Name": "Euro",
+              "Exponent": 2,
+              "Id": 1
+            },
+            "Value": 5977.86
+          },
+          "DiscountAmount": {
+            "CurrencyCodeIso": "EUR",
+            "Currency": {
+              "Iso": "EUR",
+              "Name": "Euro",
+              "Exponent": 2,
+              "Id": 1
+            },
+            "Value": 100.56
+          },
+          "BeforeDiscount": {
+            "CurrencyCodeIso": "EUR",
+            "Currency": {
+              "Iso": "EUR",
+              "Name": "Euro",
+              "Exponent": 2,
+              "Id": 1
+            },
+            "Value": 6078.42
+          },
+          "DiscountPercentage": null
+        },
+        "ImageUrl": "assets/images/cart/cart-item1.png",
+        "Color": "Black",
+        "Size": "M",
+        "IsRestrictedForCountry": false,
+        "OverridePrice": false,
+        "Dimension5": null,
+        "Dimension6": null,
+        "IsNonStandardCatalogItem": true,
+        "MetadataItems": []
+      },
+      "LineItemId": "1",
+      "CartGrouping": "Group 1",
+      "MetadataItems": [],
+      "IsCountryDefault": false,
+      "ChargeTargets": [
+        {
+          "Name": "ItemTotal",
+          "TargetValue": {
+            "CurrencyCodeIso": "EUR",
+            "Currency": {
+              "Iso": "EUR",
+              "Name": "Euro",
+              "Exponent": 2,
+              "Id": 1
+            },
+            "Value": 5977.86
+          }
+        }
+      ]
+    },
+    {
+      "OrderArticles": [
+        {
+          "Charges": [
+            {
+              "Name": "InputItem",
+              "ExactValue": {
+                "CurrencyCodeIso": "EUR",
+                "Currency": {
+                  "Iso": "EUR",
+                  "Name": "Euro",
+                  "Exponent": 2,
+                  "Id": 1
+                },
+                "Value": 3977.86
+              }
+            },
+            {
+              "Name": "InputDelivery",
+              "ExactValue": {
+                "CurrencyCodeIso": "EUR",
+                "Currency": {
+                  "Iso": "EUR",
+                  "Name": "Euro",
+                  "Exponent": 2,
+                  "Id": 1
+                },
+                "Value": 28.55
+              }
+            },
+            {
+              "Name": "Items",
+              "ExactValue": {
+                "CurrencyCodeIso": "EUR",
+                "Currency": {
+                  "Iso": "EUR",
+                  "Name": "Euro",
+                  "Exponent": 2,
+                  "Id": 1
+                },
+                "Value": 3179.11
+              }
+            },
+            {
+              "Name": "Delivery",
+              "ExactValue": {
+                "CurrencyCodeIso": "EUR",
+                "Currency": {
+                  "Iso": "EUR",
+                  "Name": "Euro",
+                  "Exponent": 2,
+                  "Id": 1
+                },
+                "Value": 22.82
+              }
+            },
+            {
+              "Name": "ItemDuties",
+              "ExactValue": {
+                "CurrencyCodeIso": "EUR",
+                "Currency": {
+                  "Iso": "EUR",
+                  "Name": "Euro",
+                  "Exponent": 2,
+                  "Id": 1
+                },
+                "Value": 3.18
+              }
+            },
+            {
+              "Name": "DeliveryDuties",
+              "ExactValue": {
+                "CurrencyCodeIso": "EUR",
+                "Currency": {
+                  "Iso": "EUR",
+                  "Name": "Euro",
+                  "Exponent": 2,
+                  "Id": 1
+                },
+                "Value": 0.03
+              }
+            },
+            {
+              "Name": "ItemTaxes",
+              "ExactValue": {
+                "CurrencyCodeIso": "EUR",
+                "Currency": {
+                  "Iso": "EUR",
+                  "Name": "Euro",
+                  "Exponent": 2,
+                  "Id": 1
+                },
+                "Value": 794.77
+              }
+            },
+            {
+              "Name": "DeliveryTaxes",
+              "ExactValue": {
+                "CurrencyCodeIso": "EUR",
+                "Currency": {
+                  "Iso": "EUR",
+                  "Name": "Euro",
+                  "Exponent": 2,
+                  "Id": 1
+                },
+                "Value": 5.7
+              }
+            },
+            {
+              "Name": "ItemTaxOnDuties",
+              "ExactValue": {
+                "CurrencyCodeIso": "EUR",
+                "Currency": {
+                  "Iso": "EUR",
+                  "Name": "Euro",
+                  "Exponent": 2,
+                  "Id": 1
+                },
+                "Value": 0.79
+              }
+            },
+            {
+              "Name": "DeliveryTaxOnDuties",
+              "ExactValue": {
+                "CurrencyCodeIso": "EUR",
+                "Currency": {
+                  "Iso": "EUR",
+                  "Name": "Euro",
+                  "Exponent": 2,
+                  "Id": 1
+                },
+                "Value": 0.01
+              }
+            },
+            {
+              "Name": "ItemRounding",
+              "ExactValue": {
+                "CurrencyCodeIso": "EUR",
+                "Currency": {
+                  "Iso": "EUR",
+                  "Name": "Euro",
+                  "Exponent": 2,
+                  "Id": 1
+                },
+                "Value": -0.01
+              }
+            }
+          ],
+          "Package": {
+            "ChargeTargets": [
+              {
+                "Name": "DeliveryTotal",
+                "TargetValue": {
+                  "CurrencyCodeIso": "EUR",
+                  "Currency": {
+                    "Iso": "EUR",
+                    "Name": "Euro",
+                    "Exponent": 2,
+                    "Id": 1
+                  },
+                  "Value": 100.0
+                }
+              }
+            ]
+          },
+          "ChargeTargets": []
+        },
+        {
+          "Charges": [
+            {
+              "Name": "InputItem",
+              "ExactValue": {
+                "CurrencyCodeIso": "EUR",
+                "Currency": {
+                  "Iso": "EUR",
+                  "Name": "Euro",
+                  "Exponent": 2,
+                  "Id": 1
+                },
+                "Value": 3977.86
+              }
+            },
+            {
+              "Name": "InputDelivery",
+              "ExactValue": {
+                "CurrencyCodeIso": "EUR",
+                "Currency": {
+                  "Iso": "EUR",
+                  "Name": "Euro",
+                  "Exponent": 2,
+                  "Id": 1
+                },
+                "Value": 28.55
+              }
+            },
+            {
+              "Name": "Items",
+              "ExactValue": {
+                "CurrencyCodeIso": "EUR",
+                "Currency": {
+                  "Iso": "EUR",
+                  "Name": "Euro",
+                  "Exponent": 2,
+                  "Id": 1
+                },
+                "Value": 3179.1077822177822
+              }
+            },
+            {
+              "Name": "Delivery",
+              "ExactValue": {
+                "CurrencyCodeIso": "EUR",
+                "Currency": {
+                  "Iso": "EUR",
+                  "Name": "Euro",
+                  "Exponent": 2,
+                  "Id": 1
+                },
+                "Value": 22.814365634365636
+              }
+            },
+            {
+              "Name": "ItemDuties",
+              "ExactValue": {
+                "CurrencyCodeIso": "EUR",
+                "Currency": {
+                  "Iso": "EUR",
+                  "Name": "Euro",
+                  "Exponent": 2,
+                  "Id": 1
+                },
+                "Value": 3.18
+              }
+            },
+            {
+              "Name": "DeliveryDuties",
+              "ExactValue": {
+                "CurrencyCodeIso": "EUR",
+                "Currency": {
+                  "Iso": "EUR",
+                  "Name": "Euro",
+                  "Exponent": 2,
+                  "Id": 1
+                },
+                "Value": 0.02
+              }
+            },
+            {
+              "Name": "ItemTaxes",
+              "ExactValue": {
+                "CurrencyCodeIso": "EUR",
+                "Currency": {
+                  "Iso": "EUR",
+                  "Name": "Euro",
+                  "Exponent": 2,
+                  "Id": 1
+                },
+                "Value": 794.775
+              }
+            },
+            {
+              "Name": "DeliveryTaxes",
+              "ExactValue": {
+                "CurrencyCodeIso": "EUR",
+                "Currency": {
+                  "Iso": "EUR",
+                  "Name": "Euro",
+                  "Exponent": 2,
+                  "Id": 1
+                },
+                "Value": 5.7075
+              }
+            },
+            {
+              "Name": "ItemTaxOnDuties",
+              "ExactValue": {
+                "CurrencyCodeIso": "EUR",
+                "Currency": {
+                  "Iso": "EUR",
+                  "Name": "Euro",
+                  "Exponent": 2,
+                  "Id": 1
+                },
+                "Value": 0.799555
+              }
+            },
+            {
+              "Name": "DeliveryTaxOnDuties",
+              "ExactValue": {
+                "CurrencyCodeIso": "EUR",
+                "Currency": {
+                  "Iso": "EUR",
+                  "Name": "Euro",
+                  "Exponent": 2,
+                  "Id": 1
+                },
+                "Value": 0.0014075
+              }
+            },
+            {
+              "Name": "ItemRounding",
+              "ExactValue": {
+                "CurrencyCodeIso": "EUR",
+                "Currency": {
+                  "Iso": "EUR",
+                  "Name": "Euro",
+                  "Exponent": 2,
+                  "Id": 1
+                },
+                "Value": 0.0
+              }
+            }
+          ],
+          "Package": {
+            "ChargeTargets": [
+              {
+                "Name": "DeliveryTotal",
+                "TargetValue": {
+                  "CurrencyCodeIso": "EUR",
+                  "Currency": {
+                    "Iso": "EUR",
+                    "Name": "Euro",
+                    "Exponent": 2,
+                    "Id": 1
+                  },
+                  "Value": 100.0
+                }
+              }
+            ]
+          },
+          "ChargeTargets": []
+        }
+      ],
+      "Available": true,
+      "CalculationRates": {
+        "ItemVatRateApplied": 0.25,
+        "DeliveryVatRateApplied": 0.25,
+        "ItemDutyRateApplied": 0.001,
+        "DeliveryDutyRateApplied": 0.001,
+        "ItemFeeRateApplied": 0.0,
+        "DeliveryFeeRateApplied": 0.0,
+        "ItemReverseCalculationRate": 0.25125,
+        "DeliveryReverseCalculationRate": 0.25125
+      },
+      "VatRate": 0.25,
+      "DutyRate": 0.001,
+      "Weight": 300.0,
+      "WeightUnit": 0,
+      "CountryOfOriginIso": null,
+      "HsCode": "330300",
+      "EstimatedDeliveryDate": "2019-05-28T15:08:09.964Z",
+      "Quantity": 2,
+      "Product": {
+        "ProductCode": "3701018206001",
+        "Upc": null,
+        "Title": "Red Dress",
+        "Description": "Red Striped Dress",
+        "RetailerCurrencyProductPriceInfo": {
+          "Title": "Shopper price",
+          "Description": "Shopper price info",
+          "Price": {
+            "CurrencyCodeIso": "EUR",
+            "Currency": {
+              "Iso": "EUR",
+              "Name": "Euro",
+              "Exponent": 2,
+              "Id": 1
+            },
+            "Value": 3977.86
+          },
+          "DiscountAmount": {
+            "CurrencyCodeIso": "EUR",
+            "Currency": {
+              "Iso": "EUR",
+              "Name": "Euro",
+              "Exponent": 2,
+              "Id": 1
+            },
+            "Value": 50.06
+          },
+          "BeforeDiscount": {
+            "CurrencyCodeIso": "EUR",
+            "Currency": {
+              "Iso": "EUR",
+              "Name": "Euro",
+              "Exponent": 2,
+              "Id": 1
+            },
+            "Value": 4027.92
+          },
+          "DiscountPercentage": null
+        },
+        "ShopperCurrencyProductPriceInfo": {
+          "Title": "Shopper price",
+          "Description": "Shopper price info",
+          "Price": {
+            "CurrencyCodeIso": "EUR",
+            "Currency": {
+              "Iso": "EUR",
+              "Name": "Euro",
+              "Exponent": 2,
+              "Id": 1
+            },
+            "Value": 3977.86
+          },
+          "DiscountAmount": {
+            "CurrencyCodeIso": "EUR",
+            "Currency": {
+              "Iso": "EUR",
+              "Name": "Euro",
+              "Exponent": 2,
+              "Id": 1
+            },
+            "Value": 50.06
+          },
+          "BeforeDiscount": {
+            "CurrencyCodeIso": "EUR",
+            "Currency": {
+              "Iso": "EUR",
+              "Name": "Euro",
+              "Exponent": 2,
+              "Id": 1
+            },
+            "Value": 4027.92
+          },
+          "DiscountPercentage": null
+        },
+        "ImageUrl": "assets/images/cart/cart-item1.png",
+        "Color": "Red",
+        "Size": "38",
+        "IsRestrictedForCountry": false,
+        "OverridePrice": false,
+        "Dimension5": null,
+        "Dimension6": null,
+        "IsNonStandardCatalogItem": true,
+        "MetadataItems": []
+      },
+      "LineItemId": "2",
+      "CartGrouping": "Group 2",
+      "MetadataItems": [],
+      "IsCountryDefault": false,
+      "ChargeTargets": [
+        {
+          "Name": "ItemTotal",
+          "TargetValue": {
+            "CurrencyCodeIso": "EUR",
+            "Currency": {
+              "Iso": "EUR",
+              "Name": "Euro",
+              "Exponent": 2,
+              "Id": 1
+            },
+            "Value": 7955.72
+          }
+        }
+      ]
+    }
+  ],
+  "AvailableOrderItems": [
+    {
+      "OrderArticles": [
+        {
+          "Charges": [
+            {
+              "Name": "InputItem",
+              "ExactValue": {
+                "CurrencyCodeIso": "EUR",
+                "Currency": {
+                  "Iso": "EUR",
+                  "Name": "Euro",
+                  "Exponent": 2,
+                  "Id": 1
+                },
+                "Value": 5977.86
+              }
+            },
+            {
+              "Name": "InputDelivery",
+              "ExactValue": {
+                "CurrencyCodeIso": "EUR",
+                "Currency": {
+                  "Iso": "EUR",
+                  "Name": "Euro",
+                  "Exponent": 2,
+                  "Id": 1
+                },
+                "Value": 42.9
+              }
+            },
+            {
+              "Name": "Items",
+              "ExactValue": {
+                "CurrencyCodeIso": "EUR",
+                "Currency": {
+                  "Iso": "EUR",
+                  "Name": "Euro",
+                  "Exponent": 2,
+                  "Id": 1
+                },
+                "Value": 4782.288
+              }
+            },
+            {
+              "Name": "Delivery",
+              "ExactValue": {
+                "CurrencyCodeIso": "EUR",
+                "Currency": {
+                  "Iso": "EUR",
+                  "Name": "Euro",
+                  "Exponent": 2,
+                  "Id": 1
+                },
+                "Value": 34.32
+              }
+            },
+            {
+              "Name": "ItemTaxes",
+              "ExactValue": {
+                "CurrencyCodeIso": "EUR",
+                "Currency": {
+                  "Iso": "EUR",
+                  "Name": "Euro",
+                  "Exponent": 2,
+                  "Id": 1
+                },
+                "Value": 1195.5725
+              }
+            },
+            {
+              "Name": "DeliveryTaxes",
+              "ExactValue": {
+                "CurrencyCodeIso": "EUR",
+                "Currency": {
+                  "Iso": "EUR",
+                  "Name": "Euro",
+                  "Exponent": 2,
+                  "Id": 1
+                },
+                "Value": 8.58
+              }
+            }
+          ],
+          "Package": {
+            "ChargeTargets": [
+              {
+                "Name": "DeliveryTotal",
+                "TargetValue": {
+                  "CurrencyCodeIso": "EUR",
+                  "Currency": {
+                    "Iso": "EUR",
+                    "Name": "Euro",
+                    "Exponent": 2,
+                    "Id": 1
+                  },
+                  "Value": 100.0
+                }
+              }
+            ]
+          },
+          "ChargeTargets": []
+        }
+      ],
+      "Available": true,
+      "CalculationRates": {
+        "ItemVatRateApplied": 0.25,
+        "DeliveryVatRateApplied": 0.25,
+        "ItemDutyRateApplied": 0.0,
+        "DeliveryDutyRateApplied": 0.0,
+        "ItemFeeRateApplied": 0.0,
+        "DeliveryFeeRateApplied": 0.0,
+        "ItemReverseCalculationRate": 0.25,
+        "DeliveryReverseCalculationRate": 0.25
+      },
+      "VatRate": 0.25,
+      "DutyRate": 0.0,
+      "Weight": 0.1,
+      "WeightUnit": 0,
+      "CountryOfOriginIso": null,
+      "HsCode": "62143000",
+      "EstimatedDeliveryDate": "2019-05-30T10:38:26.35Z",
+      "Quantity": 1,
+      "Product": {
+        "ProductCode": "20108763660193",
+        "Upc": null,
+        "Title": "Black Dress",
+        "Description": "Black Striped Dress",
+        "RetailerCurrencyProductPriceInfo": {
+          "Title": "Shopper price",
+          "Description": "Shopper price info",
+          "Price": {
+            "CurrencyCodeIso": "EUR",
+            "Currency": {
+              "Iso": "EUR",
+              "Name": "Euro",
+              "Exponent": 2,
+              "Id": 1
+            },
+            "Value": 5977.86
+          },
+          "DiscountAmount": {
+            "CurrencyCodeIso": "EUR",
+            "Currency": {
+              "Iso": "EUR",
+              "Name": "Euro",
+              "Exponent": 2,
+              "Id": 1
+            },
+            "Value": 100.56
+          },
+          "BeforeDiscount": {
+            "CurrencyCodeIso": "EUR",
+            "Currency": {
+              "Iso": "EUR",
+              "Name": "Euro",
+              "Exponent": 2,
+              "Id": 1
+            },
+            "Value": 6078.42
+          },
+          "DiscountPercentage": null
+        },
+        "ShopperCurrencyProductPriceInfo": {
+          "Title": "Shopper price",
+          "Description": "Shopper price info",
+          "Price": {
+            "CurrencyCodeIso": "EUR",
+            "Currency": {
+              "Iso": "EUR",
+              "Name": "Euro",
+              "Exponent": 2,
+              "Id": 1
+            },
+            "Value": 5977.86
+          },
+          "DiscountAmount": {
+            "CurrencyCodeIso": "EUR",
+            "Currency": {
+              "Iso": "EUR",
+              "Name": "Euro",
+              "Exponent": 2,
+              "Id": 1
+            },
+            "Value": 100.56
+          },
+          "BeforeDiscount": {
+            "CurrencyCodeIso": "EUR",
+            "Currency": {
+              "Iso": "EUR",
+              "Name": "Euro",
+              "Exponent": 2,
+              "Id": 1
+            },
+            "Value": 6078.42
+          },
+          "DiscountPercentage": null
+        },
+        "ImageUrl": "assets/images/cart/cart-item1.png",
+        "Color": "Black",
+        "Size": "M",
+        "IsRestrictedForCountry": false,
+        "OverridePrice": false,
+        "Dimension5": null,
+        "Dimension6": null,
+        "IsNonStandardCatalogItem": true,
+        "MetadataItems": []
+      },
+      "LineItemId": "1",
+      "CartGrouping": "Group 1",
+      "MetadataItems": [],
+      "IsCountryDefault": false,
+      "ChargeTargets": [
+        {
+          "Name": "ItemTotal",
+          "TargetValue": {
+            "CurrencyCodeIso": "EUR",
+            "Currency": {
+              "Iso": "EUR",
+              "Name": "Euro",
+              "Exponent": 2,
+              "Id": 1
+            },
+            "Value": 5977.86
+          }
+        }
+      ]
+    },
+    {
+      "OrderArticles": [
+        {
+          "Charges": [
+            {
+              "Name": "InputItem",
+              "ExactValue": {
+                "CurrencyCodeIso": "EUR",
+                "Currency": {
+                  "Iso": "EUR",
+                  "Name": "Euro",
+                  "Exponent": 2,
+                  "Id": 1
+                },
+                "Value": 3977.86
+              }
+            },
+            {
+              "Name": "InputDelivery",
+              "ExactValue": {
+                "CurrencyCodeIso": "EUR",
+                "Currency": {
+                  "Iso": "EUR",
+                  "Name": "Euro",
+                  "Exponent": 2,
+                  "Id": 1
+                },
+                "Value": 28.55
+              }
+            },
+            {
+              "Name": "Items",
+              "ExactValue": {
+                "CurrencyCodeIso": "EUR",
+                "Currency": {
+                  "Iso": "EUR",
+                  "Name": "Euro",
+                  "Exponent": 2,
+                  "Id": 1
+                },
+                "Value": 3179.11
+              }
+            },
+            {
+              "Name": "Delivery",
+              "ExactValue": {
+                "CurrencyCodeIso": "EUR",
+                "Currency": {
+                  "Iso": "EUR",
+                  "Name": "Euro",
+                  "Exponent": 2,
+                  "Id": 1
+                },
+                "Value": 22.82
+              }
+            },
+            {
+              "Name": "ItemDuties",
+              "ExactValue": {
+                "CurrencyCodeIso": "EUR",
+                "Currency": {
+                  "Iso": "EUR",
+                  "Name": "Euro",
+                  "Exponent": 2,
+                  "Id": 1
+                },
+                "Value": 3.18
+              }
+            },
+            {
+              "Name": "DeliveryDuties",
+              "ExactValue": {
+                "CurrencyCodeIso": "EUR",
+                "Currency": {
+                  "Iso": "EUR",
+                  "Name": "Euro",
+                  "Exponent": 2,
+                  "Id": 1
+                },
+                "Value": 0.03
+              }
+            },
+            {
+              "Name": "ItemTaxes",
+              "ExactValue": {
+                "CurrencyCodeIso": "EUR",
+                "Currency": {
+                  "Iso": "EUR",
+                  "Name": "Euro",
+                  "Exponent": 2,
+                  "Id": 1
+                },
+                "Value": 794.77
+              }
+            },
+            {
+              "Name": "DeliveryTaxes",
+              "ExactValue": {
+                "CurrencyCodeIso": "EUR",
+                "Currency": {
+                  "Iso": "EUR",
+                  "Name": "Euro",
+                  "Exponent": 2,
+                  "Id": 1
+                },
+                "Value": 5.7
+              }
+            },
+            {
+              "Name": "ItemTaxOnDuties",
+              "ExactValue": {
+                "CurrencyCodeIso": "EUR",
+                "Currency": {
+                  "Iso": "EUR",
+                  "Name": "Euro",
+                  "Exponent": 2,
+                  "Id": 1
+                },
+                "Value": 0.79
+              }
+            },
+            {
+              "Name": "DeliveryTaxOnDuties",
+              "ExactValue": {
+                "CurrencyCodeIso": "EUR",
+                "Currency": {
+                  "Iso": "EUR",
+                  "Name": "Euro",
+                  "Exponent": 2,
+                  "Id": 1
+                },
+                "Value": 0.01
+              }
+            },
+            {
+              "Name": "ItemRounding",
+              "ExactValue": {
+                "CurrencyCodeIso": "EUR",
+                "Currency": {
+                  "Iso": "EUR",
+                  "Name": "Euro",
+                  "Exponent": 2,
+                  "Id": 1
+                },
+                "Value": -0.01
+              }
+            }
+          ],
+          "Package": {
+            "ChargeTargets": [
+              {
+                "Name": "DeliveryTotal",
+                "TargetValue": {
+                  "CurrencyCodeIso": "EUR",
+                  "Currency": {
+                    "Iso": "EUR",
+                    "Name": "Euro",
+                    "Exponent": 2,
+                    "Id": 1
+                  },
+                  "Value": 100.0
+                }
+              }
+            ]
+          },
+          "ChargeTargets": []
+        },
+        {
+          "Charges": [
+            {
+              "Name": "InputItem",
+              "ExactValue": {
+                "CurrencyCodeIso": "EUR",
+                "Currency": {
+                  "Iso": "EUR",
+                  "Name": "Euro",
+                  "Exponent": 2,
+                  "Id": 1
+                },
+                "Value": 3977.86
+              }
+            },
+            {
+              "Name": "InputDelivery",
+              "ExactValue": {
+                "CurrencyCodeIso": "EUR",
+                "Currency": {
+                  "Iso": "EUR",
+                  "Name": "Euro",
+                  "Exponent": 2,
+                  "Id": 1
+                },
+                "Value": 28.55
+              }
+            },
+            {
+              "Name": "Items",
+              "ExactValue": {
+                "CurrencyCodeIso": "EUR",
+                "Currency": {
+                  "Iso": "EUR",
+                  "Name": "Euro",
+                  "Exponent": 2,
+                  "Id": 1
+                },
+                "Value": 3179.1077822177822
+              }
+            },
+            {
+              "Name": "Delivery",
+              "ExactValue": {
+                "CurrencyCodeIso": "EUR",
+                "Currency": {
+                  "Iso": "EUR",
+                  "Name": "Euro",
+                  "Exponent": 2,
+                  "Id": 1
+                },
+                "Value": 22.814365634365636
+              }
+            },
+            {
+              "Name": "ItemDuties",
+              "ExactValue": {
+                "CurrencyCodeIso": "EUR",
+                "Currency": {
+                  "Iso": "EUR",
+                  "Name": "Euro",
+                  "Exponent": 2,
+                  "Id": 1
+                },
+                "Value": 3.18
+              }
+            },
+            {
+              "Name": "DeliveryDuties",
+              "ExactValue": {
+                "CurrencyCodeIso": "EUR",
+                "Currency": {
+                  "Iso": "EUR",
+                  "Name": "Euro",
+                  "Exponent": 2,
+                  "Id": 1
+                },
+                "Value": 0.02
+              }
+            },
+            {
+              "Name": "ItemTaxes",
+              "ExactValue": {
+                "CurrencyCodeIso": "EUR",
+                "Currency": {
+                  "Iso": "EUR",
+                  "Name": "Euro",
+                  "Exponent": 2,
+                  "Id": 1
+                },
+                "Value": 794.775
+              }
+            },
+            {
+              "Name": "DeliveryTaxes",
+              "ExactValue": {
+                "CurrencyCodeIso": "EUR",
+                "Currency": {
+                  "Iso": "EUR",
+                  "Name": "Euro",
+                  "Exponent": 2,
+                  "Id": 1
+                },
+                "Value": 5.7075
+              }
+            },
+            {
+              "Name": "ItemTaxOnDuties",
+              "ExactValue": {
+                "CurrencyCodeIso": "EUR",
+                "Currency": {
+                  "Iso": "EUR",
+                  "Name": "Euro",
+                  "Exponent": 2,
+                  "Id": 1
+                },
+                "Value": 0.799555
+              }
+            },
+            {
+              "Name": "DeliveryTaxOnDuties",
+              "ExactValue": {
+                "CurrencyCodeIso": "EUR",
+                "Currency": {
+                  "Iso": "EUR",
+                  "Name": "Euro",
+                  "Exponent": 2,
+                  "Id": 1
+                },
+                "Value": 0.0014075
+              }
+            },
+            {
+              "Name": "ItemRounding",
+              "ExactValue": {
+                "CurrencyCodeIso": "EUR",
+                "Currency": {
+                  "Iso": "EUR",
+                  "Name": "Euro",
+                  "Exponent": 2,
+                  "Id": 1
+                },
+                "Value": 0.0
+              }
+            }
+          ],
+          "Package": {
+            "ChargeTargets": [
+              {
+                "Name": "DeliveryTotal",
+                "TargetValue": {
+                  "CurrencyCodeIso": "EUR",
+                  "Currency": {
+                    "Iso": "EUR",
+                    "Name": "Euro",
+                    "Exponent": 2,
+                    "Id": 1
+                  },
+                  "Value": 100.0
+                }
+              }
+            ]
+          },
+          "ChargeTargets": []
+        }
+      ],
+      "Available": true,
+      "CalculationRates": {
+        "ItemVatRateApplied": 0.25,
+        "DeliveryVatRateApplied": 0.25,
+        "ItemDutyRateApplied": 0.001,
+        "DeliveryDutyRateApplied": 0.001,
+        "ItemFeeRateApplied": 0.0,
+        "DeliveryFeeRateApplied": 0.0,
+        "ItemReverseCalculationRate": 0.25125,
+        "DeliveryReverseCalculationRate": 0.25125
+      },
+      "VatRate": 0.25,
+      "DutyRate": 0.001,
+      "Weight": 300.0,
+      "WeightUnit": 0,
+      "CountryOfOriginIso": null,
+      "HsCode": "330300",
+      "EstimatedDeliveryDate": "2019-05-28T15:08:09.964Z",
+      "Quantity": 2,
+      "Product": {
+        "ProductCode": "3701018206001",
+        "Upc": null,
+        "Title": "Red Dress",
+        "Description": "Red Striped Dress",
+        "RetailerCurrencyProductPriceInfo": {
+          "Title": "Shopper price",
+          "Description": "Shopper price info",
+          "Price": {
+            "CurrencyCodeIso": "EUR",
+            "Currency": {
+              "Iso": "EUR",
+              "Name": "Euro",
+              "Exponent": 2,
+              "Id": 1
+            },
+            "Value": 3977.86
+          },
+          "DiscountAmount": {
+            "CurrencyCodeIso": "EUR",
+            "Currency": {
+              "Iso": "EUR",
+              "Name": "Euro",
+              "Exponent": 2,
+              "Id": 1
+            },
+            "Value": 50.06
+          },
+          "BeforeDiscount": {
+            "CurrencyCodeIso": "EUR",
+            "Currency": {
+              "Iso": "EUR",
+              "Name": "Euro",
+              "Exponent": 2,
+              "Id": 1
+            },
+            "Value": 4027.92
+          },
+          "DiscountPercentage": null
+        },
+        "ShopperCurrencyProductPriceInfo": {
+          "Title": "Shopper price",
+          "Description": "Shopper price info",
+          "Price": {
+            "CurrencyCodeIso": "EUR",
+            "Currency": {
+              "Iso": "EUR",
+              "Name": "Euro",
+              "Exponent": 2,
+              "Id": 1
+            },
+            "Value": 3977.86
+          },
+          "DiscountAmount": {
+            "CurrencyCodeIso": "EUR",
+            "Currency": {
+              "Iso": "EUR",
+              "Name": "Euro",
+              "Exponent": 2,
+              "Id": 1
+            },
+            "Value": 50.06
+          },
+          "BeforeDiscount": {
+            "CurrencyCodeIso": "EUR",
+            "Currency": {
+              "Iso": "EUR",
+              "Name": "Euro",
+              "Exponent": 2,
+              "Id": 1
+            },
+            "Value": 4027.92
+          },
+          "DiscountPercentage": null
+        },
+        "ImageUrl": "assets/images/cart/cart-item1.png",
+        "Color": "Red",
+        "Size": "38",
+        "IsRestrictedForCountry": false,
+        "OverridePrice": false,
+        "Dimension5": null,
+        "Dimension6": null,
+        "IsNonStandardCatalogItem": true,
+        "MetadataItems": []
+      },
+      "LineItemId": "2",
+      "CartGrouping": "Group 2",
+      "MetadataItems": [],
+      "IsCountryDefault": false,
+      "ChargeTargets": [
+        {
+          "Name": "ItemTotal",
+          "TargetValue": {
+            "CurrencyCodeIso": "EUR",
+            "Currency": {
+              "Iso": "EUR",
+              "Name": "Euro",
+              "Exponent": 2,
+              "Id": 1
+            },
+            "Value": 7955.72
+          }
+        }
+      ]
+    }
+  ],
+  "RetailerPromoCodes": [
+    {
+      "PromoCode": "PROMO1",
+      "Title": "Promo 1",
+      "Description": "Promo code #1"
+    }
+  ],
+  "OrderDiscounts": [
+    {
+      "Title": "DISCOUNT20",
+      "Description": "Discount 20%",
+      "RetailerCurrencyOrderDiscountAmount": {
+        "Title": "Discount title",
+        "Description": "Retailer discount title",
+        "Price": {
+          "CurrencyCodeIso": "EUR",
+          "Currency": {
+            "Iso": "EUR",
+            "Name": "Euro",
+            "Exponent": 2,
+            "Id": 1
+          },
+          "Value": 20.0
+        },
+        "DiscountAmount": {
+          "CurrencyCodeIso": "EUR",
+          "Currency": {
+            "Iso": "EUR",
+            "Name": "Euro",
+            "Exponent": 2,
+            "Id": 1
+          },
+          "Value": 1.0
+        },
+        "BeforeDiscount": {
+          "CurrencyCodeIso": "EUR",
+          "Currency": {
+            "Iso": "EUR",
+            "Name": "Euro",
+            "Exponent": 2,
+            "Id": 1
+          },
+          "Value": 21.0
+        },
+        "DiscountPercentage": null
+      },
+      "ShopperCurrencyOrderDiscountAmount": {
+        "Title": "Discount title",
+        "Description": "Shopper discount title",
+        "Price": {
+          "CurrencyCodeIso": "EUR",
+          "Currency": {
+            "Iso": "EUR",
+            "Name": "Euro",
+            "Exponent": 2,
+            "Id": 1
+          },
+          "Value": 22.0
+        },
+        "DiscountAmount": {
+          "CurrencyCodeIso": "EUR",
+          "Currency": {
+            "Iso": "EUR",
+            "Name": "Euro",
+            "Exponent": 2,
+            "Id": 1
+          },
+          "Value": 2.0
+        },
+        "BeforeDiscount": {
+          "CurrencyCodeIso": "EUR",
+          "Currency": {
+            "Iso": "EUR",
+            "Name": "Euro",
+            "Exponent": 2,
+            "Id": 1
+          },
+          "Value": 2.0
+        },
+        "DiscountPercentage": null
+      }
+    }
+  ],
+  "DeliveryDetails": [
+    {
+      "Id": 1,
+      "ContactDetailsNickName": null,
+      "Address1": "Address 1",
+      "Address2": "Address 2",
+      "Address3": null,
+      "City": "Chisinau",
+      "PostalCode": null,
+      "Region": null,
+      "Country": "NO",
+      "Email": null,
+      "FirstName": "First Name",
+      "LastName": "Last Name",
+      "Gender": 0,
+      "Telephone": null,
+      "PoBox": null,
+      "MetadataItems": []
+    }
+  ],
+  "PaymentDetails": [
+    {
+      "Id": 1,
+      "ContactDetailsNickName": null,
+      "Address1": "Address 1",
+      "Address2": "Address 2",
+      "Address3": null,
+      "City": "Chisinau",
+      "PostalCode": null,
+      "Region": null,
+      "Country": "NO",
+      "Email": null,
+      "FirstName": "First Name",
+      "LastName": "Last Name",
+      "Gender": 0,
+      "Telephone": null,
+      "PoBox": null,
+      "MetadataItems": []
+    }
+  ],
+  "DeliveryOption": {
+    "Option": 3,
+    "IsExpressDelivery": true
+  },
+  "Errors": [],
+  "RetailerCheckoutExperience": {
+    "RetailerCheckoutExperienceId": "EXP001",
+    "BackToCartUrl": "https://no.maxmara.com/cart/1",
+    "ContinueShoppingUrl": "https://no.maxmara.com/continue/1",
+    "MetadataItems": []
+  },
+  "ShopperCurrencyIso": "EUR",
+  "RetailerCurrencyIso": "EUR",
+  "RetailerFxGroupId": 1617,
+  "SourceCountryIso": "IT",
+  "DeliveryCountryIso": "NO",
+  "ShopperCheckoutExperience": {
+    "UseDeliveryContactDetailsForPaymentContactDetails": true,
+    "EmailMarketingOptIn": true,
+    "RegisteredProfileId": "PROF 0001",
+    "ShopperCultureLanguageIso": "en-IE",
+    "ExpressPaymentMethod": "Paypal",
+    "MetadataItems": []
+  },
+  "DeliveryOptions": [
+    {
+      "DeliveryOption": "Exp2",
+      "EstimatedDeliveryDate": "2019-06-03T10:38:26.35Z",
+      "RetailerCurrencyOveridePriceInfo": {
+        "Title": "RCOPI_Title",
+        "Description": "RCOPI_Description",
+        "Price": {
+          "CurrencyCodeIso": "EUR",
+          "Currency": {
+            "Iso": "EUR",
+            "Name": "Euro",
+            "Exponent": 2,
+            "Id": 1
+          },
+          "Value": 100.0
+        },
+        "DiscountAmount": {
+          "CurrencyCodeIso": "EUR",
+          "Currency": {
+            "Iso": "EUR",
+            "Name": "Euro",
+            "Exponent": 2,
+            "Id": 1
+          },
+          "Value": 101.0
+        },
+        "BeforeDiscount": {
+          "CurrencyCodeIso": "EUR",
+          "Currency": {
+            "Iso": "EUR",
+            "Name": "Euro",
+            "Exponent": 2,
+            "Id": 1
+          },
+          "Value": 102.0
+        },
+        "DiscountPercentage": null
+      },
+      "ShopperCurrencyOveridePriceInfo": {
+        "Title": "SCOPI_Title",
+        "Description": "SCOPI_Description",
+        "Price": {
+          "CurrencyCodeIso": "EUR",
+          "Currency": {
+            "Iso": "EUR",
+            "Name": "Euro",
+            "Exponent": 2,
+            "Id": 1
+          },
+          "Value": 100.0
+        },
+        "DiscountAmount": {
+          "CurrencyCodeIso": "EUR",
+          "Currency": {
+            "Iso": "EUR",
+            "Name": "Euro",
+            "Exponent": 2,
+            "Id": 1
+          },
+          "Value": 111.0
+        },
+        "BeforeDiscount": {
+          "CurrencyCodeIso": "EUR",
+          "Currency": {
+            "Iso": "EUR",
+            "Name": "Euro",
+            "Exponent": 2,
+            "Id": 1
+          },
+          "Value": 112.0
+        },
+        "DiscountPercentage": null
+      },
+      "MetadataItems": []
+    }
+  ],
+  "RetailerDeliveryOptions": [],
+  "Payment": {
+    "PaymentId": "00000000-0000-0000-0000-000000000000",
+    "PaymentAttemptRef": "00000000-0000-0000-0000-000000000000",
+    "PaymentFraudStatusId": null,
+    "AuthCode": null,
+    "State": "Unknown",
+    "PaymentGatewayCode": null,
+    "PaymentMethodCode": null,
+    "AuthorizationDetails": null,
+    "PaymentTime": null,
+    "IsPaymentSuccessful": false
+  },
+  "IpAddress": null,
+  "CalculationParameters": {
+    "UseDutyAboveDeminimis": true,
+    "UseFeeAboveDeminimis": true,
+    "UseVatAboveDeminimis": true,
+    "CalculationCurrencyIso": "EUR",
+    "ProductInputCurrencyIso": "EUR",
+    "DeliveryInputCurrencyIso": "EUR",
+    "ProductInputType": 1,
+    "DeliveryInputType": 1,
+    "OrderChargeInfos": {
+      "InputItem": {
+        "IncludesMerchandise": true,
+        "IncludesMerchandiseDuty": true,
+        "IncludesMerchandiseTax": true,
+        "IncludesMerchandiseFee": true,
+        "IncludesMerchandiseFixedFee": true,
+        "IncludesDeliveryItem": false,
+        "IncludesDeliveryDuty": false,
+        "IncludesDeliveryTax": false,
+        "IncludesDeliveryFee": false,
+        "IncludesDeliveryFixedFee": false,
+        "IsMerchandiseItemPrice": false,
+        "IsMerchandiseAllInclusivePrice": false,
+        "IsDeliveryItemPrice": false
+      },
+      "InputDelivery": {
+        "IncludesMerchandise": false,
+        "IncludesMerchandiseDuty": false,
+        "IncludesMerchandiseTax": false,
+        "IncludesMerchandiseFee": false,
+        "IncludesMerchandiseFixedFee": false,
+        "IncludesDeliveryItem": true,
+        "IncludesDeliveryDuty": true,
+        "IncludesDeliveryTax": true,
+        "IncludesDeliveryFee": true,
+        "IncludesDeliveryFixedFee": false,
+        "IsMerchandiseItemPrice": false,
+        "IsMerchandiseAllInclusivePrice": false,
+        "IsDeliveryItemPrice": false
+      }
+    },
+    "FxRates": [
+      {
+        "FromCurrency": "EUR",
+        "ToCurrency": "EUR",
+        "Rate": 1.0
+      },
+      {
+        "FromCurrency": "NOK",
+        "ToCurrency": "EUR",
+        "Rate": 0.0
+      }
+    ],
+    "RetailerToShopperRate": 1.0,
+    "ShopperToRetailerRate": 1.0
+  },
+  "Status": "Initialized",
+  "OrderConfirmationErrorInformation": null,
+  "Pricing": {
+    "id": "NO",
+    "CountryIso": "NO",
+    "ProductInput": {
+      "InputPriceId": 1260,
+      "PreOrderSecurityModelId": 1,
+      "InputPriceTypeId": 1,
+      "InputPriceSourceId": 0,
+      "CanOverrideCatalogPrice": true,
+      "CatalogOverrideInputPriceTypeId": 1,
+      "DutyRate": 0.106,
+      "TaxRate": 0.25,
+      "OtherRate": null,
+      "MatchInputPrice": true
+    },
+    "DeliveryInput": {
+      "InputPriceId": 1656,
+      "PreOrderSecurityModelId": 0,
+      "InputPriceTypeId": 1,
+      "InputPriceSourceId": 1,
+      "CanOverrideShippingPrice": true,
+      "ShippingOverrideInputPriceTypeId": 1,
+      "DutyRate": 0.106,
+      "TaxRate": 0.25,
+      "OtherRate": null,
+      "MatchInputPrice": true
+    },
+    "Calculation": {
+      "BrandCountryCalculationId": 2270,
+      "DutyTaxCalculationModelId": 9,
+      "IsAccurateCalculationRequired": true,
+      "IsReverseAccurateCalculationRequired": null,
+      "IsReverseEstimatedCalculationRequired": null,
+      "IsReverseTaxesCalculationRequired": null,
+      "IsReverseDutyCalculationRequired": null,
+      "EstimatedDutyRate": 0.106,
+      "EstimatedTaxRate": 0.25,
+      "BrandCountryMarkupId": 3142,
+      "MarkupPercentage": null,
+      "PricingGroupId": 4,
+      "CustomsCalculationType": "CIF"
+    },
+    "Display": {
+      "BrandCountryDisplayModelId": 2466,
+      "ProductDisplay": {
+        "MerchandiseDisplayModelId": 6,
+        "Name": null,
+        "Description": null,
+        "IncludeAllDutyAndTax": false,
+        "IncludeMerchandiseDuty": true,
+        "IncludeMerchandiseTax": true,
+        "IncludeShipping": false,
+        "IncludeShippingDuty": false,
+        "IncludeShippingTax": false,
+        "IncludeOtherTaxes": true,
+        "IncludeOtherFees": true,
+        "DefaultDisplayText": "Merchandise",
+        "DisplayTextKey": "Merchandise"
+      },
+      "DutyAndTaxDisplay1": null,
+      "DutyAndTaxDisplay2": null,
+      "DeliveryDisplay": {
+        "IncludeAllDutyAndTax": false,
+        "ShippingDisplayModelId": 2,
+        "Name": null,
+        "Description": null,
+        "IncludeMerchandiseDuty": false,
+        "IncludeMerchandiseTax": false,
+        "IncludeShipping": true,
+        "IncludeShippingDuty": true,
+        "IncludeShippingTax": true,
+        "IncludeOtherTaxes": false,
+        "IncludeOtherFees": false,
+        "IsShippingVisible": true,
+        "DefaultDisplayText": "Shipping",
+        "DisplayTextKey": "Shipping"
+      }
+    }
+  },
+  "Features": [
+    {
+      "Type": "AsyncOrderConfirmation",
+      "Active": false
+    },
+    {
+      "Type": "AsyncCorePlatformOrderCreate",
+      "Active": false
+    }
+  ],
+  "ExpiryTimeUtc": "2018-10-16T11:25:34.0012704Z",
+  "ChargeTargets": [],
+  "GdprAccepted": false,
+  "GdprAcceptanceHistory": [],
+  "brandCode": "MAX",
+  "eventName": "CreateOrder",
+  "correlationId": "74fe36913ec17f46a837c955257bcaf6010ce75303cdba3ab3920b35cbf12200",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36",
+  "queryString": "http://checkout-api-max.test.eshopworld.net/api/v2/Order/d81ef9fe-e3dc-477c-a2be-51199035c5a4",
+  "created": "1539687945186"
+}

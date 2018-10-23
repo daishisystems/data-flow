@@ -1,140 +1,247 @@
+
 package com.dataflow.sample;
 
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
+import com.fasterxml.jackson.annotation.JsonAnyGetter;
+import com.fasterxml.jackson.annotation.JsonAnySetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-import org.apache.beam.sdk.coders.DefaultCoder;
-import org.apache.beam.sdk.coders.SerializableCoder;
-
-@DefaultCoder(SerializableCoder.class)
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonPropertyOrder({ "IncludeAllDutyAndTax", "ShippingDisplayModelId", "Name", "Description", "IncludeMerchandiseDuty",
+        "IncludeMerchandiseTax", "IncludeShipping", "IncludeShippingDuty", "IncludeShippingTax", "IncludeOtherTaxes",
+        "IncludeOtherFees", "IsShippingVisible", "DefaultDisplayText", "DisplayTextKey" })
 public class DeliveryDisplay implements Serializable {
-    private boolean IncludeAllDutyAndTax;
-    private float ShippingDisplayModelId;
-    private String Name = null;
-    private String Description = null;
-    private boolean IncludeMerchandiseDuty;
-    private boolean IncludeMerchandiseTax;
-    private boolean IncludeShipping;
-    private boolean IncludeShippingDuty;
-    private boolean IncludeShippingTax;
-    private boolean IncludeOtherTaxes;
-    private boolean IncludeOtherFees;
-    private boolean IsShippingVisible;
-    private String DefaultDisplayText;
-    private String DisplayTextKey;
 
-    // Getter Methods
+    @JsonProperty("IncludeAllDutyAndTax")
+    private Boolean includeAllDutyAndTax;
+    @JsonProperty("ShippingDisplayModelId")
+    private Integer shippingDisplayModelId;
+    @JsonProperty("Name")
+    private Object name;
+    @JsonProperty("Description")
+    private Object description;
+    @JsonProperty("IncludeMerchandiseDuty")
+    private Boolean includeMerchandiseDuty;
+    @JsonProperty("IncludeMerchandiseTax")
+    private Boolean includeMerchandiseTax;
+    @JsonProperty("IncludeShipping")
+    private Boolean includeShipping;
+    @JsonProperty("IncludeShippingDuty")
+    private Boolean includeShippingDuty;
+    @JsonProperty("IncludeShippingTax")
+    private Boolean includeShippingTax;
+    @JsonProperty("IncludeOtherTaxes")
+    private Boolean includeOtherTaxes;
+    @JsonProperty("IncludeOtherFees")
+    private Boolean includeOtherFees;
+    @JsonProperty("IsShippingVisible")
+    private Boolean isShippingVisible;
+    @JsonProperty("DefaultDisplayText")
+    private String defaultDisplayText;
+    @JsonProperty("DisplayTextKey")
+    private String displayTextKey;
+    @JsonIgnore
+    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+    private final static long serialVersionUID = 5484827506617311445L;
 
-    public boolean getIncludeAllDutyAndTax() {
-        return IncludeAllDutyAndTax;
+    /**
+     * No args constructor for use in serialization
+     * 
+     */
+    public DeliveryDisplay() {
     }
 
-    public float getShippingDisplayModelId() {
-        return ShippingDisplayModelId;
+    /**
+     * 
+     * @param includeMerchandiseTax
+     * @param displayTextKey
+     * @param includeShippingTax
+     * @param includeShipping
+     * @param includeAllDutyAndTax
+     * @param includeShippingDuty
+     * @param description
+     * @param includeOtherTaxes
+     * @param name
+     * @param isShippingVisible
+     * @param includeOtherFees
+     * @param defaultDisplayText
+     * @param includeMerchandiseDuty
+     * @param shippingDisplayModelId
+     */
+    public DeliveryDisplay(Boolean includeAllDutyAndTax, Integer shippingDisplayModelId, Object name,
+            Object description, Boolean includeMerchandiseDuty, Boolean includeMerchandiseTax, Boolean includeShipping,
+            Boolean includeShippingDuty, Boolean includeShippingTax, Boolean includeOtherTaxes,
+            Boolean includeOtherFees, Boolean isShippingVisible, String defaultDisplayText, String displayTextKey) {
+        super();
+        this.includeAllDutyAndTax = includeAllDutyAndTax;
+        this.shippingDisplayModelId = shippingDisplayModelId;
+        this.name = name;
+        this.description = description;
+        this.includeMerchandiseDuty = includeMerchandiseDuty;
+        this.includeMerchandiseTax = includeMerchandiseTax;
+        this.includeShipping = includeShipping;
+        this.includeShippingDuty = includeShippingDuty;
+        this.includeShippingTax = includeShippingTax;
+        this.includeOtherTaxes = includeOtherTaxes;
+        this.includeOtherFees = includeOtherFees;
+        this.isShippingVisible = isShippingVisible;
+        this.defaultDisplayText = defaultDisplayText;
+        this.displayTextKey = displayTextKey;
     }
 
-    public String getName() {
-        return Name;
+    @JsonProperty("IncludeAllDutyAndTax")
+    public Boolean getIncludeAllDutyAndTax() {
+        return includeAllDutyAndTax;
     }
 
-    public String getDescription() {
-        return Description;
+    @JsonProperty("IncludeAllDutyAndTax")
+    public void setIncludeAllDutyAndTax(Boolean includeAllDutyAndTax) {
+        this.includeAllDutyAndTax = includeAllDutyAndTax;
     }
 
-    public boolean getIncludeMerchandiseDuty() {
-        return IncludeMerchandiseDuty;
+    @JsonProperty("ShippingDisplayModelId")
+    public Integer getShippingDisplayModelId() {
+        return shippingDisplayModelId;
     }
 
-    public boolean getIncludeMerchandiseTax() {
-        return IncludeMerchandiseTax;
+    @JsonProperty("ShippingDisplayModelId")
+    public void setShippingDisplayModelId(Integer shippingDisplayModelId) {
+        this.shippingDisplayModelId = shippingDisplayModelId;
     }
 
-    public boolean getIncludeShipping() {
-        return IncludeShipping;
+    @JsonProperty("Name")
+    public Object getName() {
+        return name;
     }
 
-    public boolean getIncludeShippingDuty() {
-        return IncludeShippingDuty;
+    @JsonProperty("Name")
+    public void setName(Object name) {
+        this.name = name;
     }
 
-    public boolean getIncludeShippingTax() {
-        return IncludeShippingTax;
+    @JsonProperty("Description")
+    public Object getDescription() {
+        return description;
     }
 
-    public boolean getIncludeOtherTaxes() {
-        return IncludeOtherTaxes;
+    @JsonProperty("Description")
+    public void setDescription(Object description) {
+        this.description = description;
     }
 
-    public boolean getIncludeOtherFees() {
-        return IncludeOtherFees;
+    @JsonProperty("IncludeMerchandiseDuty")
+    public Boolean getIncludeMerchandiseDuty() {
+        return includeMerchandiseDuty;
     }
 
-    public boolean getIsShippingVisible() {
-        return IsShippingVisible;
+    @JsonProperty("IncludeMerchandiseDuty")
+    public void setIncludeMerchandiseDuty(Boolean includeMerchandiseDuty) {
+        this.includeMerchandiseDuty = includeMerchandiseDuty;
     }
 
+    @JsonProperty("IncludeMerchandiseTax")
+    public Boolean getIncludeMerchandiseTax() {
+        return includeMerchandiseTax;
+    }
+
+    @JsonProperty("IncludeMerchandiseTax")
+    public void setIncludeMerchandiseTax(Boolean includeMerchandiseTax) {
+        this.includeMerchandiseTax = includeMerchandiseTax;
+    }
+
+    @JsonProperty("IncludeShipping")
+    public Boolean getIncludeShipping() {
+        return includeShipping;
+    }
+
+    @JsonProperty("IncludeShipping")
+    public void setIncludeShipping(Boolean includeShipping) {
+        this.includeShipping = includeShipping;
+    }
+
+    @JsonProperty("IncludeShippingDuty")
+    public Boolean getIncludeShippingDuty() {
+        return includeShippingDuty;
+    }
+
+    @JsonProperty("IncludeShippingDuty")
+    public void setIncludeShippingDuty(Boolean includeShippingDuty) {
+        this.includeShippingDuty = includeShippingDuty;
+    }
+
+    @JsonProperty("IncludeShippingTax")
+    public Boolean getIncludeShippingTax() {
+        return includeShippingTax;
+    }
+
+    @JsonProperty("IncludeShippingTax")
+    public void setIncludeShippingTax(Boolean includeShippingTax) {
+        this.includeShippingTax = includeShippingTax;
+    }
+
+    @JsonProperty("IncludeOtherTaxes")
+    public Boolean getIncludeOtherTaxes() {
+        return includeOtherTaxes;
+    }
+
+    @JsonProperty("IncludeOtherTaxes")
+    public void setIncludeOtherTaxes(Boolean includeOtherTaxes) {
+        this.includeOtherTaxes = includeOtherTaxes;
+    }
+
+    @JsonProperty("IncludeOtherFees")
+    public Boolean getIncludeOtherFees() {
+        return includeOtherFees;
+    }
+
+    @JsonProperty("IncludeOtherFees")
+    public void setIncludeOtherFees(Boolean includeOtherFees) {
+        this.includeOtherFees = includeOtherFees;
+    }
+
+    @JsonProperty("IsShippingVisible")
+    public Boolean getIsShippingVisible() {
+        return isShippingVisible;
+    }
+
+    @JsonProperty("IsShippingVisible")
+    public void setIsShippingVisible(Boolean isShippingVisible) {
+        this.isShippingVisible = isShippingVisible;
+    }
+
+    @JsonProperty("DefaultDisplayText")
     public String getDefaultDisplayText() {
-        return DefaultDisplayText;
+        return defaultDisplayText;
     }
 
+    @JsonProperty("DefaultDisplayText")
+    public void setDefaultDisplayText(String defaultDisplayText) {
+        this.defaultDisplayText = defaultDisplayText;
+    }
+
+    @JsonProperty("DisplayTextKey")
     public String getDisplayTextKey() {
-        return DisplayTextKey;
+        return displayTextKey;
     }
 
-    // Setter Methods
-
-    public void setIncludeAllDutyAndTax(boolean IncludeAllDutyAndTax) {
-        this.IncludeAllDutyAndTax = IncludeAllDutyAndTax;
+    @JsonProperty("DisplayTextKey")
+    public void setDisplayTextKey(String displayTextKey) {
+        this.displayTextKey = displayTextKey;
     }
 
-    public void setShippingDisplayModelId(float ShippingDisplayModelId) {
-        this.ShippingDisplayModelId = ShippingDisplayModelId;
+    @JsonAnyGetter
+    public Map<String, Object> getAdditionalProperties() {
+        return this.additionalProperties;
     }
 
-    public void setName(String Name) {
-        this.Name = Name;
+    @JsonAnySetter
+    public void setAdditionalProperty(String name, Object value) {
+        this.additionalProperties.put(name, value);
     }
 
-    public void setDescription(String Description) {
-        this.Description = Description;
-    }
-
-    public void setIncludeMerchandiseDuty(boolean IncludeMerchandiseDuty) {
-        this.IncludeMerchandiseDuty = IncludeMerchandiseDuty;
-    }
-
-    public void setIncludeMerchandiseTax(boolean IncludeMerchandiseTax) {
-        this.IncludeMerchandiseTax = IncludeMerchandiseTax;
-    }
-
-    public void setIncludeShipping(boolean IncludeShipping) {
-        this.IncludeShipping = IncludeShipping;
-    }
-
-    public void setIncludeShippingDuty(boolean IncludeShippingDuty) {
-        this.IncludeShippingDuty = IncludeShippingDuty;
-    }
-
-    public void setIncludeShippingTax(boolean IncludeShippingTax) {
-        this.IncludeShippingTax = IncludeShippingTax;
-    }
-
-    public void setIncludeOtherTaxes(boolean IncludeOtherTaxes) {
-        this.IncludeOtherTaxes = IncludeOtherTaxes;
-    }
-
-    public void setIncludeOtherFees(boolean IncludeOtherFees) {
-        this.IncludeOtherFees = IncludeOtherFees;
-    }
-
-    public void setIsShippingVisible(boolean IsShippingVisible) {
-        this.IsShippingVisible = IsShippingVisible;
-    }
-
-    public void setDefaultDisplayText(String DefaultDisplayText) {
-        this.DefaultDisplayText = DefaultDisplayText;
-    }
-
-    public void setDisplayTextKey(String DisplayTextKey) {
-        this.DisplayTextKey = DisplayTextKey;
-    }
 }

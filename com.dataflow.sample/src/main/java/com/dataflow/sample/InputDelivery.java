@@ -1,131 +1,235 @@
+
 package com.dataflow.sample;
 
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
+import com.fasterxml.jackson.annotation.JsonAnyGetter;
+import com.fasterxml.jackson.annotation.JsonAnySetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-import org.apache.beam.sdk.coders.DefaultCoder;
-import org.apache.beam.sdk.coders.SerializableCoder;
-
-@DefaultCoder(SerializableCoder.class)
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonPropertyOrder({ "IncludesMerchandise", "IncludesMerchandiseDuty", "IncludesMerchandiseTax",
+        "IncludesMerchandiseFee", "IncludesMerchandiseFixedFee", "IncludesDeliveryItem", "IncludesDeliveryDuty",
+        "IncludesDeliveryTax", "IncludesDeliveryFee", "IncludesDeliveryFixedFee", "IsMerchandiseItemPrice",
+        "IsMerchandiseAllInclusivePrice", "IsDeliveryItemPrice" })
 public class InputDelivery implements Serializable {
-    private boolean IncludesMerchandise;
-    private boolean IncludesMerchandiseDuty;
-    private boolean IncludesMerchandiseTax;
-    private boolean IncludesMerchandiseFee;
-    private boolean IncludesMerchandiseFixedFee;
-    private boolean IncludesDeliveryItem;
-    private boolean IncludesDeliveryDuty;
-    private boolean IncludesDeliveryTax;
-    private boolean IncludesDeliveryFee;
-    private boolean IncludesDeliveryFixedFee;
-    private boolean IsMerchandiseItemPrice;
-    private boolean IsMerchandiseAllInclusivePrice;
-    private boolean IsDeliveryItemPrice;
 
-    // Getter Methods
+    @JsonProperty("IncludesMerchandise")
+    private Boolean includesMerchandise;
+    @JsonProperty("IncludesMerchandiseDuty")
+    private Boolean includesMerchandiseDuty;
+    @JsonProperty("IncludesMerchandiseTax")
+    private Boolean includesMerchandiseTax;
+    @JsonProperty("IncludesMerchandiseFee")
+    private Boolean includesMerchandiseFee;
+    @JsonProperty("IncludesMerchandiseFixedFee")
+    private Boolean includesMerchandiseFixedFee;
+    @JsonProperty("IncludesDeliveryItem")
+    private Boolean includesDeliveryItem;
+    @JsonProperty("IncludesDeliveryDuty")
+    private Boolean includesDeliveryDuty;
+    @JsonProperty("IncludesDeliveryTax")
+    private Boolean includesDeliveryTax;
+    @JsonProperty("IncludesDeliveryFee")
+    private Boolean includesDeliveryFee;
+    @JsonProperty("IncludesDeliveryFixedFee")
+    private Boolean includesDeliveryFixedFee;
+    @JsonProperty("IsMerchandiseItemPrice")
+    private Boolean isMerchandiseItemPrice;
+    @JsonProperty("IsMerchandiseAllInclusivePrice")
+    private Boolean isMerchandiseAllInclusivePrice;
+    @JsonProperty("IsDeliveryItemPrice")
+    private Boolean isDeliveryItemPrice;
+    @JsonIgnore
+    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+    private final static long serialVersionUID = -845251777302748389L;
 
-    public boolean getIncludesMerchandise() {
-        return IncludesMerchandise;
+    /**
+     * No args constructor for use in serialization
+     * 
+     */
+    public InputDelivery() {
     }
 
-    public boolean getIncludesMerchandiseDuty() {
-        return IncludesMerchandiseDuty;
+    /**
+     * 
+     * @param includesMerchandiseTax
+     * @param includesDeliveryFixedFee
+     * @param includesMerchandise
+     * @param isMerchandiseAllInclusivePrice
+     * @param includesMerchandiseFee
+     * @param isDeliveryItemPrice
+     * @param includesDeliveryDuty
+     * @param includesMerchandiseFixedFee
+     * @param isMerchandiseItemPrice
+     * @param includesDeliveryItem
+     * @param includesMerchandiseDuty
+     * @param includesDeliveryFee
+     * @param includesDeliveryTax
+     */
+    public InputDelivery(Boolean includesMerchandise, Boolean includesMerchandiseDuty, Boolean includesMerchandiseTax,
+            Boolean includesMerchandiseFee, Boolean includesMerchandiseFixedFee, Boolean includesDeliveryItem,
+            Boolean includesDeliveryDuty, Boolean includesDeliveryTax, Boolean includesDeliveryFee,
+            Boolean includesDeliveryFixedFee, Boolean isMerchandiseItemPrice, Boolean isMerchandiseAllInclusivePrice,
+            Boolean isDeliveryItemPrice) {
+        super();
+        this.includesMerchandise = includesMerchandise;
+        this.includesMerchandiseDuty = includesMerchandiseDuty;
+        this.includesMerchandiseTax = includesMerchandiseTax;
+        this.includesMerchandiseFee = includesMerchandiseFee;
+        this.includesMerchandiseFixedFee = includesMerchandiseFixedFee;
+        this.includesDeliveryItem = includesDeliveryItem;
+        this.includesDeliveryDuty = includesDeliveryDuty;
+        this.includesDeliveryTax = includesDeliveryTax;
+        this.includesDeliveryFee = includesDeliveryFee;
+        this.includesDeliveryFixedFee = includesDeliveryFixedFee;
+        this.isMerchandiseItemPrice = isMerchandiseItemPrice;
+        this.isMerchandiseAllInclusivePrice = isMerchandiseAllInclusivePrice;
+        this.isDeliveryItemPrice = isDeliveryItemPrice;
     }
 
-    public boolean getIncludesMerchandiseTax() {
-        return IncludesMerchandiseTax;
+    @JsonProperty("IncludesMerchandise")
+    public Boolean getIncludesMerchandise() {
+        return includesMerchandise;
     }
 
-    public boolean getIncludesMerchandiseFee() {
-        return IncludesMerchandiseFee;
+    @JsonProperty("IncludesMerchandise")
+    public void setIncludesMerchandise(Boolean includesMerchandise) {
+        this.includesMerchandise = includesMerchandise;
     }
 
-    public boolean getIncludesMerchandiseFixedFee() {
-        return IncludesMerchandiseFixedFee;
+    @JsonProperty("IncludesMerchandiseDuty")
+    public Boolean getIncludesMerchandiseDuty() {
+        return includesMerchandiseDuty;
     }
 
-    public boolean getIncludesDeliveryItem() {
-        return IncludesDeliveryItem;
+    @JsonProperty("IncludesMerchandiseDuty")
+    public void setIncludesMerchandiseDuty(Boolean includesMerchandiseDuty) {
+        this.includesMerchandiseDuty = includesMerchandiseDuty;
     }
 
-    public boolean getIncludesDeliveryDuty() {
-        return IncludesDeliveryDuty;
+    @JsonProperty("IncludesMerchandiseTax")
+    public Boolean getIncludesMerchandiseTax() {
+        return includesMerchandiseTax;
     }
 
-    public boolean getIncludesDeliveryTax() {
-        return IncludesDeliveryTax;
+    @JsonProperty("IncludesMerchandiseTax")
+    public void setIncludesMerchandiseTax(Boolean includesMerchandiseTax) {
+        this.includesMerchandiseTax = includesMerchandiseTax;
     }
 
-    public boolean getIncludesDeliveryFee() {
-        return IncludesDeliveryFee;
+    @JsonProperty("IncludesMerchandiseFee")
+    public Boolean getIncludesMerchandiseFee() {
+        return includesMerchandiseFee;
     }
 
-    public boolean getIncludesDeliveryFixedFee() {
-        return IncludesDeliveryFixedFee;
+    @JsonProperty("IncludesMerchandiseFee")
+    public void setIncludesMerchandiseFee(Boolean includesMerchandiseFee) {
+        this.includesMerchandiseFee = includesMerchandiseFee;
     }
 
-    public boolean getIsMerchandiseItemPrice() {
-        return IsMerchandiseItemPrice;
+    @JsonProperty("IncludesMerchandiseFixedFee")
+    public Boolean getIncludesMerchandiseFixedFee() {
+        return includesMerchandiseFixedFee;
     }
 
-    public boolean getIsMerchandiseAllInclusivePrice() {
-        return IsMerchandiseAllInclusivePrice;
+    @JsonProperty("IncludesMerchandiseFixedFee")
+    public void setIncludesMerchandiseFixedFee(Boolean includesMerchandiseFixedFee) {
+        this.includesMerchandiseFixedFee = includesMerchandiseFixedFee;
     }
 
-    public boolean getIsDeliveryItemPrice() {
-        return IsDeliveryItemPrice;
+    @JsonProperty("IncludesDeliveryItem")
+    public Boolean getIncludesDeliveryItem() {
+        return includesDeliveryItem;
     }
 
-    // Setter Methods
-
-    public void setIncludesMerchandise(boolean IncludesMerchandise) {
-        this.IncludesMerchandise = IncludesMerchandise;
+    @JsonProperty("IncludesDeliveryItem")
+    public void setIncludesDeliveryItem(Boolean includesDeliveryItem) {
+        this.includesDeliveryItem = includesDeliveryItem;
     }
 
-    public void setIncludesMerchandiseDuty(boolean IncludesMerchandiseDuty) {
-        this.IncludesMerchandiseDuty = IncludesMerchandiseDuty;
+    @JsonProperty("IncludesDeliveryDuty")
+    public Boolean getIncludesDeliveryDuty() {
+        return includesDeliveryDuty;
     }
 
-    public void setIncludesMerchandiseTax(boolean IncludesMerchandiseTax) {
-        this.IncludesMerchandiseTax = IncludesMerchandiseTax;
+    @JsonProperty("IncludesDeliveryDuty")
+    public void setIncludesDeliveryDuty(Boolean includesDeliveryDuty) {
+        this.includesDeliveryDuty = includesDeliveryDuty;
     }
 
-    public void setIncludesMerchandiseFee(boolean IncludesMerchandiseFee) {
-        this.IncludesMerchandiseFee = IncludesMerchandiseFee;
+    @JsonProperty("IncludesDeliveryTax")
+    public Boolean getIncludesDeliveryTax() {
+        return includesDeliveryTax;
     }
 
-    public void setIncludesMerchandiseFixedFee(boolean IncludesMerchandiseFixedFee) {
-        this.IncludesMerchandiseFixedFee = IncludesMerchandiseFixedFee;
+    @JsonProperty("IncludesDeliveryTax")
+    public void setIncludesDeliveryTax(Boolean includesDeliveryTax) {
+        this.includesDeliveryTax = includesDeliveryTax;
     }
 
-    public void setIncludesDeliveryItem(boolean IncludesDeliveryItem) {
-        this.IncludesDeliveryItem = IncludesDeliveryItem;
+    @JsonProperty("IncludesDeliveryFee")
+    public Boolean getIncludesDeliveryFee() {
+        return includesDeliveryFee;
     }
 
-    public void setIncludesDeliveryDuty(boolean IncludesDeliveryDuty) {
-        this.IncludesDeliveryDuty = IncludesDeliveryDuty;
+    @JsonProperty("IncludesDeliveryFee")
+    public void setIncludesDeliveryFee(Boolean includesDeliveryFee) {
+        this.includesDeliveryFee = includesDeliveryFee;
     }
 
-    public void setIncludesDeliveryTax(boolean IncludesDeliveryTax) {
-        this.IncludesDeliveryTax = IncludesDeliveryTax;
+    @JsonProperty("IncludesDeliveryFixedFee")
+    public Boolean getIncludesDeliveryFixedFee() {
+        return includesDeliveryFixedFee;
     }
 
-    public void setIncludesDeliveryFee(boolean IncludesDeliveryFee) {
-        this.IncludesDeliveryFee = IncludesDeliveryFee;
+    @JsonProperty("IncludesDeliveryFixedFee")
+    public void setIncludesDeliveryFixedFee(Boolean includesDeliveryFixedFee) {
+        this.includesDeliveryFixedFee = includesDeliveryFixedFee;
     }
 
-    public void setIncludesDeliveryFixedFee(boolean IncludesDeliveryFixedFee) {
-        this.IncludesDeliveryFixedFee = IncludesDeliveryFixedFee;
+    @JsonProperty("IsMerchandiseItemPrice")
+    public Boolean getIsMerchandiseItemPrice() {
+        return isMerchandiseItemPrice;
     }
 
-    public void setIsMerchandiseItemPrice(boolean IsMerchandiseItemPrice) {
-        this.IsMerchandiseItemPrice = IsMerchandiseItemPrice;
+    @JsonProperty("IsMerchandiseItemPrice")
+    public void setIsMerchandiseItemPrice(Boolean isMerchandiseItemPrice) {
+        this.isMerchandiseItemPrice = isMerchandiseItemPrice;
     }
 
-    public void setIsMerchandiseAllInclusivePrice(boolean IsMerchandiseAllInclusivePrice) {
-        this.IsMerchandiseAllInclusivePrice = IsMerchandiseAllInclusivePrice;
+    @JsonProperty("IsMerchandiseAllInclusivePrice")
+    public Boolean getIsMerchandiseAllInclusivePrice() {
+        return isMerchandiseAllInclusivePrice;
     }
 
-    public void setIsDeliveryItemPrice(boolean IsDeliveryItemPrice) {
-        this.IsDeliveryItemPrice = IsDeliveryItemPrice;
+    @JsonProperty("IsMerchandiseAllInclusivePrice")
+    public void setIsMerchandiseAllInclusivePrice(Boolean isMerchandiseAllInclusivePrice) {
+        this.isMerchandiseAllInclusivePrice = isMerchandiseAllInclusivePrice;
     }
+
+    @JsonProperty("IsDeliveryItemPrice")
+    public Boolean getIsDeliveryItemPrice() {
+        return isDeliveryItemPrice;
+    }
+
+    @JsonProperty("IsDeliveryItemPrice")
+    public void setIsDeliveryItemPrice(Boolean isDeliveryItemPrice) {
+        this.isDeliveryItemPrice = isDeliveryItemPrice;
+    }
+
+    @JsonAnyGetter
+    public Map<String, Object> getAdditionalProperties() {
+        return this.additionalProperties;
+    }
+
+    @JsonAnySetter
+    public void setAdditionalProperty(String name, Object value) {
+        this.additionalProperties.put(name, value);
+    }
+
 }

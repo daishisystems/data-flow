@@ -1,104 +1,190 @@
+
 package com.dataflow.sample;
 
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
+import com.fasterxml.jackson.annotation.JsonAnyGetter;
+import com.fasterxml.jackson.annotation.JsonAnySetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-import org.apache.beam.sdk.coders.DefaultCoder;
-import org.apache.beam.sdk.coders.SerializableCoder;
-
-@DefaultCoder(SerializableCoder.class)
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonPropertyOrder({ "InputPriceId", "PreOrderSecurityModelId", "InputPriceTypeId", "InputPriceSourceId",
+        "CanOverrideShippingPrice", "ShippingOverrideInputPriceTypeId", "DutyRate", "TaxRate", "OtherRate",
+        "MatchInputPrice" })
 public class DeliveryInput implements Serializable {
-    private float InputPriceId;
-    private float PreOrderSecurityModelId;
-    private float InputPriceTypeId;
-    private float InputPriceSourceId;
-    private boolean CanOverrideShippingPrice;
-    private float ShippingOverrideInputPriceTypeId;
-    private float DutyRate;
-    private float TaxRate;
-    private String OtherRate = null;
-    private boolean MatchInputPrice;
 
-    // Getter Methods
+    @JsonProperty("InputPriceId")
+    private Integer inputPriceId;
+    @JsonProperty("PreOrderSecurityModelId")
+    private Integer preOrderSecurityModelId;
+    @JsonProperty("InputPriceTypeId")
+    private Integer inputPriceTypeId;
+    @JsonProperty("InputPriceSourceId")
+    private Integer inputPriceSourceId;
+    @JsonProperty("CanOverrideShippingPrice")
+    private Boolean canOverrideShippingPrice;
+    @JsonProperty("ShippingOverrideInputPriceTypeId")
+    private Integer shippingOverrideInputPriceTypeId;
+    @JsonProperty("DutyRate")
+    private Double dutyRate;
+    @JsonProperty("TaxRate")
+    private Double taxRate;
+    @JsonProperty("OtherRate")
+    private Object otherRate;
+    @JsonProperty("MatchInputPrice")
+    private Boolean matchInputPrice;
+    @JsonIgnore
+    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+    private final static long serialVersionUID = 5498438466502887917L;
 
-    public float getInputPriceId() {
-        return InputPriceId;
+    /**
+     * No args constructor for use in serialization
+     * 
+     */
+    public DeliveryInput() {
     }
 
-    public float getPreOrderSecurityModelId() {
-        return PreOrderSecurityModelId;
+    /**
+     * 
+     * @param shippingOverrideInputPriceTypeId
+     * @param taxRate
+     * @param matchInputPrice
+     * @param preOrderSecurityModelId
+     * @param inputPriceId
+     * @param inputPriceSourceId
+     * @param otherRate
+     * @param inputPriceTypeId
+     * @param dutyRate
+     * @param canOverrideShippingPrice
+     */
+    public DeliveryInput(Integer inputPriceId, Integer preOrderSecurityModelId, Integer inputPriceTypeId,
+            Integer inputPriceSourceId, Boolean canOverrideShippingPrice, Integer shippingOverrideInputPriceTypeId,
+            Double dutyRate, Double taxRate, Object otherRate, Boolean matchInputPrice) {
+        super();
+        this.inputPriceId = inputPriceId;
+        this.preOrderSecurityModelId = preOrderSecurityModelId;
+        this.inputPriceTypeId = inputPriceTypeId;
+        this.inputPriceSourceId = inputPriceSourceId;
+        this.canOverrideShippingPrice = canOverrideShippingPrice;
+        this.shippingOverrideInputPriceTypeId = shippingOverrideInputPriceTypeId;
+        this.dutyRate = dutyRate;
+        this.taxRate = taxRate;
+        this.otherRate = otherRate;
+        this.matchInputPrice = matchInputPrice;
     }
 
-    public float getInputPriceTypeId() {
-        return InputPriceTypeId;
+    @JsonProperty("InputPriceId")
+    public Integer getInputPriceId() {
+        return inputPriceId;
     }
 
-    public float getInputPriceSourceId() {
-        return InputPriceSourceId;
+    @JsonProperty("InputPriceId")
+    public void setInputPriceId(Integer inputPriceId) {
+        this.inputPriceId = inputPriceId;
     }
 
-    public boolean getCanOverrideShippingPrice() {
-        return CanOverrideShippingPrice;
+    @JsonProperty("PreOrderSecurityModelId")
+    public Integer getPreOrderSecurityModelId() {
+        return preOrderSecurityModelId;
     }
 
-    public float getShippingOverrideInputPriceTypeId() {
-        return ShippingOverrideInputPriceTypeId;
+    @JsonProperty("PreOrderSecurityModelId")
+    public void setPreOrderSecurityModelId(Integer preOrderSecurityModelId) {
+        this.preOrderSecurityModelId = preOrderSecurityModelId;
     }
 
-    public float getDutyRate() {
-        return DutyRate;
+    @JsonProperty("InputPriceTypeId")
+    public Integer getInputPriceTypeId() {
+        return inputPriceTypeId;
     }
 
-    public float getTaxRate() {
-        return TaxRate;
+    @JsonProperty("InputPriceTypeId")
+    public void setInputPriceTypeId(Integer inputPriceTypeId) {
+        this.inputPriceTypeId = inputPriceTypeId;
     }
 
-    public String getOtherRate() {
-        return OtherRate;
+    @JsonProperty("InputPriceSourceId")
+    public Integer getInputPriceSourceId() {
+        return inputPriceSourceId;
     }
 
-    public boolean getMatchInputPrice() {
-        return MatchInputPrice;
+    @JsonProperty("InputPriceSourceId")
+    public void setInputPriceSourceId(Integer inputPriceSourceId) {
+        this.inputPriceSourceId = inputPriceSourceId;
     }
 
-    // Setter Methods
-
-    public void setInputPriceId(float InputPriceId) {
-        this.InputPriceId = InputPriceId;
+    @JsonProperty("CanOverrideShippingPrice")
+    public Boolean getCanOverrideShippingPrice() {
+        return canOverrideShippingPrice;
     }
 
-    public void setPreOrderSecurityModelId(float PreOrderSecurityModelId) {
-        this.PreOrderSecurityModelId = PreOrderSecurityModelId;
+    @JsonProperty("CanOverrideShippingPrice")
+    public void setCanOverrideShippingPrice(Boolean canOverrideShippingPrice) {
+        this.canOverrideShippingPrice = canOverrideShippingPrice;
     }
 
-    public void setInputPriceTypeId(float InputPriceTypeId) {
-        this.InputPriceTypeId = InputPriceTypeId;
+    @JsonProperty("ShippingOverrideInputPriceTypeId")
+    public Integer getShippingOverrideInputPriceTypeId() {
+        return shippingOverrideInputPriceTypeId;
     }
 
-    public void setInputPriceSourceId(float InputPriceSourceId) {
-        this.InputPriceSourceId = InputPriceSourceId;
+    @JsonProperty("ShippingOverrideInputPriceTypeId")
+    public void setShippingOverrideInputPriceTypeId(Integer shippingOverrideInputPriceTypeId) {
+        this.shippingOverrideInputPriceTypeId = shippingOverrideInputPriceTypeId;
     }
 
-    public void setCanOverrideShippingPrice(boolean CanOverrideShippingPrice) {
-        this.CanOverrideShippingPrice = CanOverrideShippingPrice;
+    @JsonProperty("DutyRate")
+    public Double getDutyRate() {
+        return dutyRate;
     }
 
-    public void setShippingOverrideInputPriceTypeId(float ShippingOverrideInputPriceTypeId) {
-        this.ShippingOverrideInputPriceTypeId = ShippingOverrideInputPriceTypeId;
+    @JsonProperty("DutyRate")
+    public void setDutyRate(Double dutyRate) {
+        this.dutyRate = dutyRate;
     }
 
-    public void setDutyRate(float DutyRate) {
-        this.DutyRate = DutyRate;
+    @JsonProperty("TaxRate")
+    public Double getTaxRate() {
+        return taxRate;
     }
 
-    public void setTaxRate(float TaxRate) {
-        this.TaxRate = TaxRate;
+    @JsonProperty("TaxRate")
+    public void setTaxRate(Double taxRate) {
+        this.taxRate = taxRate;
     }
 
-    public void setOtherRate(String OtherRate) {
-        this.OtherRate = OtherRate;
+    @JsonProperty("OtherRate")
+    public Object getOtherRate() {
+        return otherRate;
     }
 
-    public void setMatchInputPrice(boolean MatchInputPrice) {
-        this.MatchInputPrice = MatchInputPrice;
+    @JsonProperty("OtherRate")
+    public void setOtherRate(Object otherRate) {
+        this.otherRate = otherRate;
     }
+
+    @JsonProperty("MatchInputPrice")
+    public Boolean getMatchInputPrice() {
+        return matchInputPrice;
+    }
+
+    @JsonProperty("MatchInputPrice")
+    public void setMatchInputPrice(Boolean matchInputPrice) {
+        this.matchInputPrice = matchInputPrice;
+    }
+
+    @JsonAnyGetter
+    public Map<String, Object> getAdditionalProperties() {
+        return this.additionalProperties;
+    }
+
+    @JsonAnySetter
+    public void setAdditionalProperty(String name, Object value) {
+        this.additionalProperties.put(name, value);
+    }
+
 }
