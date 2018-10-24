@@ -94,7 +94,7 @@ public class MasterOrder implements Serializable {
     @JsonProperty("queryString")
     private String queryString;
     @JsonProperty("created")
-    private String created;
+    private long created;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
     private final static long serialVersionUID = -1448068121889069826L;
@@ -156,7 +156,7 @@ public class MasterOrder implements Serializable {
             CalculationParameters calculationParameters, String status, Object orderConfirmationErrorInformation,
             Pricing pricing, List<Feature> features, String expiryTimeUtc, List<Object> chargeTargets,
             Boolean gdprAccepted, List<Object> gdprAcceptanceHistory, String brandCode, String eventName,
-            String correlationId, String userAgent, String queryString, String created) {
+            String correlationId, String userAgent, String queryString, Long created) {
         super();
         this.orderCode = orderCode;
         this.retailerCartId = retailerCartId;
@@ -547,12 +547,12 @@ public class MasterOrder implements Serializable {
     }
 
     @JsonProperty("created")
-    public String getCreated() {
+    public long getCreated() {
         return created;
     }
 
     @JsonProperty("created")
-    public void setCreated(String created) {
+    public void setCreated(Long created) {
         this.created = created;
     }
 

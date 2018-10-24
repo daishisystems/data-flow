@@ -41,7 +41,7 @@ public class OrderSummary implements Serializable {
     @Expose
     long enddate;
     @Expose
-    float orderValue;
+    double orderValue;
     @Expose
     String userAgent;
     @Expose
@@ -50,6 +50,10 @@ public class OrderSummary implements Serializable {
     String country;
     @Expose
     int unitsPerOrder;
+
+    static double deliveryCharge = 0;
+    static int numOrderArticles = 0;
+    static double merchandiseCharge = 0; // todo: Partition OrderSummary by StartDate
 
     public String getCountry() {
         return this.country;
@@ -83,11 +87,11 @@ public class OrderSummary implements Serializable {
         this.userAgent = userAgent;
     }
 
-    public float getOrderValue() {
+    public double getOrderValue() {
         return this.orderValue;
     }
 
-    public void setOrderValue(float orderValue) {
+    public void setOrderValue(Double orderValue) {
         this.orderValue = orderValue;
     }
 
@@ -201,28 +205,28 @@ public class OrderSummary implements Serializable {
      * @param orders orders to sort
      * @return collection of sorted orders
      */
-    public static List<Order> sortOrders(Iterator<Order> orders) {
-        List<Order> sortedOrders = new ArrayList<>();
+    public static List<MasterOrder> sortOrders(Iterator<MasterOrder> orders) {
+        List<MasterOrder> sortedOrders = new ArrayList<>();
         while (orders.hasNext()) {
-            sortedOrders.add((Order) orders.next());
+            sortedOrders.add((MasterOrder) orders.next());
         }
         Collections.sort(sortedOrders, (o1, o2) -> new Long(o1.getCreated()).compareTo(new Long((o2.getCreated()))));
         return sortedOrders;
     }
 
-    public static OrderSummary orderSummary(List<Order> orders, String orderCompleteIdentifier) {
-        Iterator<Order> iterator = orders.iterator();
+    public static OrderSummary orderSummary(List<MasterOrder> orders, String orderCompleteIdentifier) {
+        Iterator<MasterOrder> iterator = orders.iterator();
         OrderSummary orderSummary = new OrderSummary();
         if (!iterator.hasNext()) {
             return orderSummary;
         }
-        Order previous = iterator.next();
+        MasterOrder previous = iterator.next();
         long startTime = previous.getCreated();
         orderSummary.setStartdate(previous.getCreated());
         if (!iterator.hasNext()) {
             return orderSummary; // todo - process exists here if only 1 entry!!! Return this order ...
         }
-        Order current;
+        MasterOrder current;
         List<Long> allDiffs = new ArrayList<>();
         do {
             current = iterator.next();
@@ -250,16 +254,49 @@ public class OrderSummary implements Serializable {
         double average = allDiffs.stream().mapToLong(Long::longValue).average().orElse(0);
         orderSummary.setAvgTimeDelay((long) average);
         orderSummary.setLastEventName(current.getEventName());
-        orderSummary.setNumber(current.getNumber());
+        orderSummary.setNumber(current.getOrderCode());
         orderSummary.setCorrelationid(current.getCorrelationId());
         orderSummary.setEnddate(current.getCreated()); // Order should have a start and endate in DATETIME format
         orderSummary.setUserAgent(current.getUserAgent());
-        orderSummary.setOrderValue(current.getValue());
+
+        current.getOrderItems().forEach(orderItem -> {
+            orderItem.getOrderArticles().forEach(orderArticle -> {
+                orderArticle.getCharges().forEach(charge -> {
+                    String chargeType = charge.getName();
+                    if (chargeType.equals("Delivery") || chargeType.equals("DeliveryDuties")
+                            || chargeType.equals("DeliveryTaxes") || chargeType.equals("DeliveryTaxOnDuties")
+                            || chargeType.equals("DeliveryTaxOnFees") || chargeType.equals("DeliveryFees")
+                            || chargeType.equals("DeliveryFixedFee")) {
+                        deliveryCharge += charge.getExactValue().getValue();
+                    }
+                });
+            });
+        });
+
+        current.getOrderItems().forEach(orderItem -> {
+            orderItem.getOrderArticles().forEach(orderArticle -> {
+                orderArticle.getCharges().forEach(charge -> {
+                    String chargeType = charge.getName();
+                    if (chargeType.equals("Items") || chargeType.equals("ItemDuties") || chargeType.equals("ItemTaxes")
+                            || chargeType.equals("ItemTaxOnDuties") || chargeType.equals("ItemTaxOnFees")
+                            || chargeType.equals("ItemFees") || chargeType.equals("ItemFixedFee")) {
+                        merchandiseCharge += charge.getExactValue().getValue();
+                    }
+                });
+            });
+        });
+
+        orderSummary.setOrderValue(deliveryCharge + merchandiseCharge);
         long endTime = current.getCreated();
         long totalTime = endTime - startTime;
         orderSummary.setTotalTime(totalTime);
-        orderSummary.setCountry(current.getCountry());
-        orderSummary.setUnitsPerOrder(current.getUnitsPerOrder());
+        orderSummary.setCountry(current.getDeliveryCountryIso());
+
+        current.getOrderItems().forEach(orderItem -> {
+            numOrderArticles += orderItem.getQuantity();
+        });
+
+        orderSummary.setUnitsPerOrder(numOrderArticles);
         return orderSummary;
     }
 }

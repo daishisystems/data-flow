@@ -2,8 +2,19 @@ package com.dataflow.sample;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+
+import java.io.File;
+import java.io.IOException;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
+
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import org.junit.Test;
 
 public class OrderTest {
@@ -13,19 +24,19 @@ public class OrderTest {
         long secondTimestamp = 1539093930;
         long thirdTimestamp = 1539093959;
 
-        Order order1 = new Order();
+        MasterOrder order1 = new MasterOrder();
         order1.setCreated(firstTimestamp);
-        Order order2 = new Order();
+        MasterOrder order2 = new MasterOrder();
         order2.setCreated(secondTimestamp);
-        Order order3 = new Order();
+        MasterOrder order3 = new MasterOrder();
         order3.setCreated(thirdTimestamp);
 
-        List<Order> orders = new ArrayList<>();
+        List<MasterOrder> orders = new ArrayList<>();
         orders.add(order3);
         orders.add(order1);
         orders.add(order2);
 
-        List<Order> sortedOrders = OrderSummary.sortOrders(orders.iterator());
+        List<MasterOrder> sortedOrders = OrderSummary.sortOrders(orders.iterator());
 
         assertTrue(sortedOrders.get(0).getCreated() == firstTimestamp);
         assertTrue(sortedOrders.get(1).getCreated() == secondTimestamp);
@@ -40,17 +51,17 @@ public class OrderTest {
         final String order3EventName = "ORDER3";
         final String orderCompleteIdentifier = "ORDER3";
 
-        Order order1 = new Order();
+        MasterOrder order1 = new MasterOrder();
         order1.setCreated((long) 1539093918);
         order1.setEventName(order1EventName);
-        Order order2 = new Order();
+        MasterOrder order2 = new MasterOrder();
         order2.setCreated((long) 1539093930);
         order2.setEventName(order2EventName);
-        Order order3 = new Order();
+        MasterOrder order3 = new MasterOrder();
         order3.setCreated((long) 1539093959);
         order3.setEventName(order3EventName);
 
-        List<Order> orders = new ArrayList<>();
+        List<MasterOrder> orders = new ArrayList<>();
         orders.add(order1);
         orders.add(order2);
         orders.add(order3);
@@ -66,5 +77,44 @@ public class OrderTest {
         assertTrue(orderSummary.getLastEventName() == order3EventName);
         assertTrue(orderSummary.getComplete());
         assertEquals(41, orderSummary.getTotalTime());
+    }
+
+    @Test
+    public void ChargesItemsAndCountryCodeAreCalculated() throws JsonParseException, JsonMappingException, IOException {
+        final String orderCompleteIdentifier = "COMPLETE";
+
+        String json = getFile("order.json");
+        ObjectMapper mapper = new ObjectMapper();
+        MasterOrder masterOrder1 = mapper.readValue(json, MasterOrder.class);
+        MasterOrder masterOrder2 = masterOrder1;
+
+        List<MasterOrder> masterOrders = new ArrayList<>();
+        masterOrders.add(masterOrder1);
+        masterOrders.add(masterOrder2);
+        OrderSummary orderSummary = OrderSummary.orderSummary(masterOrders, orderCompleteIdentifier);
+
+        double expected = 14033.58;
+
+        DecimalFormat df = new DecimalFormat("#.##");
+        Double orderValue = Double.valueOf(df.format(orderSummary.getOrderValue()));
+
+        assertEquals(Double.valueOf(expected), orderValue);
+    }
+
+    private String getFile(String fileName) {
+        StringBuilder result = new StringBuilder("");
+        ClassLoader classLoader = getClass().getClassLoader();
+        File file = new File(classLoader.getResource(fileName).getFile());
+
+        try (Scanner scanner = new Scanner(file)) {
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                result.append(line).append("\n");
+            }
+            scanner.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return result.toString();
     }
 }

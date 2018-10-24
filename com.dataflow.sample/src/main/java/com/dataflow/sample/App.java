@@ -112,18 +112,17 @@ public class App {
         PipelineOptions options = PipelineOptionsFactory.fromArgs(args).withValidation().create();
         Pipeline p = Pipeline.create(options);
 
-        PCollection<String> pubSubOutput = p.apply("Pulling from Pub/Sub",
+        PCollection<String> pubSubOutput = p.apply("Read Pub/Sub",
                 PubsubIO.readStrings().fromTopic("projects/eshop-bigdata/topics/apache_beam_input_2")
                         .withTimestampAttribute("EventTimestamp"));
 
-        PCollection<KV<String, Order>> keyvalues = pubSubOutput.apply("Parsing to KV pairs",
+        PCollection<KV<String, MasterOrder>> keyvalues = pubSubOutput.apply("To KV pairs",
                 ParDo.of(new ParseOrderToKVFn())); // todo: Use MapElements.via?
 
-        PCollection<KV<String, Order>> orders = keyvalues.apply("Creating session window",
-                Window.<KV<String, Order>>into(Sessions.withGapDuration(Duration.standardSeconds(20)))
-                        .withAllowedLateness(Duration.standardDays(10)).accumulatingFiredPanes()); // todo: Accumulating or discarding?!?
+        PCollection<KV<String, MasterOrder>> orders = keyvalues.apply("Creating session window",
+                Window.<KV<String, MasterOrder>>into(Sessions.withGapDuration(Duration.standardSeconds(20))));                        
 
-        PCollection<KV<String, Iterable<Order>>> groupedOrders = orders.apply("Grouping orders", GroupByKey.create());
+        PCollection<KV<String, Iterable<MasterOrder>>> groupedOrders = orders.apply("Grouping orders", GroupByKey.create());
 
         PCollection<OrderSummary> orderSummaries = groupedOrders.apply("Creating order summaries",
                 ParDo.of(new OrderSummaryFn()));
@@ -249,14 +248,14 @@ public class App {
         }
     }
 
-    static class OrderSummaryFn extends DoFn<KV<String, Iterable<Order>>, OrderSummary> {
+    static class OrderSummaryFn extends DoFn<KV<String, Iterable<MasterOrder>>, OrderSummary> {
         private static final long serialVersionUID = -3067528732035106582L;
         final String COMPLETE_EVENT_NAME = "COMPLETE";
 
         @ProcessElement
         public void processElement(ProcessContext c) throws Exception {
-            Iterable<Order> orders = c.element().getValue();
-            List<Order> sortedOrders = OrderSummary.sortOrders(orders.iterator());
+            Iterable<MasterOrder> orders = c.element().getValue();
+            List<MasterOrder> sortedOrders = OrderSummary.sortOrders(orders.iterator());
             OrderSummary orderSummary = OrderSummary.orderSummary(sortedOrders, COMPLETE_EVENT_NAME);
             c.output(orderSummary);
         }
@@ -319,7 +318,7 @@ public class App {
         }
     }
 
-    static class ParseOrderToKVFn extends DoFn<String, KV<String, Order>> {
+    static class ParseOrderToKVFn extends DoFn<String, KV<String, MasterOrder>> {
         private static final long serialVersionUID = 5412656073192665168L;
 
         @ProcessElement
@@ -327,8 +326,8 @@ public class App {
             try {
                 ObjectMapper mapper = new ObjectMapper();
                 String json = c.element();
-                Order order = mapper.readValue(json, Order.class);
-                c.output(KV.of(order.getCorrelationId(), order));
+                MasterOrder masterOrder = mapper.readValue(json, MasterOrder.class);
+                c.output(KV.of(masterOrder.getCorrelationId(), masterOrder));
             } catch (Exception e) {
                 LOG.error(e.getMessage());
             }
