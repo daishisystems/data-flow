@@ -13,9 +13,13 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
+import org.apache.beam.sdk.coders.DefaultCoder;
+import org.apache.beam.sdk.coders.SerializableCoder;
+
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({ "Id", "ContactDetailsNickName", "Address1", "Address2", "Address3", "City", "PostalCode", "Region",
         "Country", "Email", "FirstName", "LastName", "Gender", "Telephone", "PoBox", "MetadataItems" })
+@DefaultCoder(SerializableCoder.class)
 public class DeliveryDetail implements Serializable {
 
     @JsonProperty("Id")

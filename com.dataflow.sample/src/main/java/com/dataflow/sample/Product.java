@@ -13,10 +13,14 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
+import org.apache.beam.sdk.coders.DefaultCoder;
+import org.apache.beam.sdk.coders.SerializableCoder;
+
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({ "ProductCode", "Upc", "Title", "Description", "RetailerCurrencyProductPriceInfo",
         "ShopperCurrencyProductPriceInfo", "ImageUrl", "Color", "Size", "IsRestrictedForCountry", "OverridePrice",
         "Dimension5", "Dimension6", "IsNonStandardCatalogItem", "MetadataItems" })
+@DefaultCoder(SerializableCoder.class)
 public class Product implements Serializable {
 
     @JsonProperty("ProductCode")

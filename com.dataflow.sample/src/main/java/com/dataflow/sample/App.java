@@ -58,8 +58,10 @@ import org.apache.beam.sdk.transforms.GroupByKey;
 import org.apache.beam.sdk.transforms.PTransform;
 import org.apache.beam.sdk.values.KV;
 import org.apache.beam.sdk.values.PCollection;
+import org.apache.beam.sdk.values.PCollectionTuple;
 import org.apache.beam.sdk.values.PCollectionView;
 import org.apache.beam.sdk.values.TupleTag;
+import org.apache.beam.sdk.values.TupleTagList;
 import org.apache.beam.sdk.transforms.windowing.AfterPane;
 import org.apache.beam.sdk.transforms.windowing.AfterProcessingTime;
 import org.apache.beam.sdk.transforms.windowing.AfterWatermark;
@@ -113,31 +115,65 @@ public class App {
         PipelineOptions options = PipelineOptionsFactory.fromArgs(args).withValidation().create();
         Pipeline p = Pipeline.create(options);
 
-        PCollection<String> pubSubOutput = p.apply("Read Pub/Sub",
+        PCollection<String> pubSubOutput = p.apply("Read Input",
                 PubsubIO.readStrings().fromTopic("projects/eshop-bigdata/topics/apache_beam_input_2")
-                        .withTimestampAttribute("EventTimestamp"));        
+                        .withTimestampAttribute("EventTimestamp"));
 
-        PCollection<KV<String, MasterOrder>> keyvalues = pubSubOutput.apply("To KV pairs",
-                ParDo.of(new ParseOrderToKVFn())); // todo: Use MapElements.via?
-        // todo: Group by order-num
+        final TupleTag<KV<String, MasterOrder>> successTag = new TupleTag<KV<String, MasterOrder>>() {
 
-        PCollection<KV<String, MasterOrder>> orders = keyvalues.apply("Creating session window",
-                Window.<KV<String, MasterOrder>>into(Sessions.withGapDuration(Duration.standardSeconds(20)))); // todo: 20 minutes
+            private static final long serialVersionUID = 5729779425621385553L;
+        };
+        final TupleTag<String> deadLetterTag = new TupleTag<String>() {
 
-        PCollection<KV<String, Iterable<MasterOrder>>> groupedOrders = orders.apply("Grouping orders",
-                GroupByKey.create());
+            private static final long serialVersionUID = -3414994155123840086L;
+        };
 
-        PCollection<OrderSummary> orderSummaries = groupedOrders.apply("Creating order summaries",
-                ParDo.of(new OrderSummaryFn()));
+        PCollectionTuple outputTuple = pubSubOutput.apply("Validate Orders",
+                ParDo.of(new DoFn<String, KV<String, MasterOrder>>() {
+                    private static final long serialVersionUID = 5729779425621385553L;
 
-        PCollection<String> serialisedOrders = orderSummaries.apply("Serialising order summaries",
-                ParDo.of(new SerialiseOrderSummaryFn()));
+                    @ProcessElement
+                    public void processElement(ProcessContext c) {
+                        try {
+                            ObjectMapper mapper = new ObjectMapper();
+                            MasterOrder masterOrder = mapper.readValue(c.element(), MasterOrder.class);
+                            c.output(KV.of(masterOrder.getOrderCode(), masterOrder));
+                        } catch (Exception e) {
+                            LOG.error("Failed to process input {} -- adding to dead letter file", c.element(), e);
+                            c.output(deadLetterTag, c.element());
+                        }
+                    }
+                }).withOutputTags(successTag, TupleTagList.of(deadLetterTag)));
 
-        serialisedOrders.apply("Sending order summaries to Pub/Sub",
+        PCollection<KV<String, MasterOrder>> success = outputTuple.get(successTag);
+        PCollection<KV<String, MasterOrder>> orders = success.apply("Session Window",
+                Window.<KV<String, MasterOrder>>into(Sessions.withGapDuration(Duration.standardSeconds(20))));
+
+        // outputTuple.get(deadLetterTag).apply(TextIO.write().to("gs://mooney-orders-dev/invalid/deadletter.json")
+        // .withWindowedWrites().withNumShards(1));
+
+        outputTuple.get(deadLetterTag).apply("Dead Letter Queue",
                 PubsubIO.writeStrings().to("projects/eshop-bigdata/topics/dataflow-test-out"));
 
+        // todo: Window duration -> 20 minutes
+
+        PCollection<KV<String, Iterable<MasterOrder>>> groupedOrders = orders.apply("Group Orders",
+                GroupByKey.create());
+
+        PCollection<OrderSummary> orderSummaries = groupedOrders.apply("Summarise Orders",
+                ParDo.of(new OrderSummaryFn())); // todo: Output masked orders PCollection
+
+        // PCollection<String> serialisedOrders = orderSummaries.apply("Serialising
+        // order summaries",
+        // ParDo.of(new SerialiseOrderSummaryFn()));
+
+        // serialisedOrders.apply("Sending order summaries to Pub/Sub",
+        // PubsubIO.writeStrings().to("projects/eshop-bigdata/topics/dataflow-test-out"));
+
         List<TableFieldSchema> fields = new ArrayList<>();
-        fields.add(new TableFieldSchema().setName("OrderNumber").setType("STRING")); // todo: Validate order schema -> write to storage, redact in memory
+        fields.add(new TableFieldSchema().setName("OrderNumber").setType("STRING")); // todo: Validate order schema ->
+                                                                                     // write to storage, redact in
+                                                                                     // memory
         fields.add(new TableFieldSchema().setName("CorrelationId").setType("STRING"));
         fields.add(new TableFieldSchema().setName("MinTimeDelay").setType("INT64"));
         fields.add(new TableFieldSchema().setName("AvgTimeDelay").setType("INT64"));
@@ -157,8 +193,8 @@ public class App {
         fields.add(new TableFieldSchema().setName("UnitsPerOrder").setType("INT64"));
         TableSchema schema = new TableSchema().setFields(fields);
 
-        orderSummaries.apply("Writing order summaries to BigQuery", new OrderSummariesToTableRows())
-                .apply(BigQueryIO.writeTableRows().to("eshop-bigdata:datalake.order_summary_14").withSchema(schema)
+        orderSummaries.apply("Apply BQ Schema", new OrderSummariesToTableRows()).apply("Save Orders",
+                BigQueryIO.writeTableRows().to("eshop-bigdata:datalake.order_summary_14").withSchema(schema)
                         .withCreateDisposition(BigQueryIO.Write.CreateDisposition.CREATE_IF_NEEDED)
                         .withWriteDisposition(BigQueryIO.Write.WriteDisposition.WRITE_APPEND));
 
@@ -332,7 +368,7 @@ public class App {
                 MasterOrder masterOrder = mapper.readValue(json, MasterOrder.class);
                 c.output(KV.of(masterOrder.getOrderCode(), masterOrder));
             } catch (Exception e) {
-                LOG.error(e.getMessage());                
+                LOG.error(e.getMessage());
                 // todo: DLQ
             }
         }

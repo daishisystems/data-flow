@@ -230,7 +230,7 @@ public class OrderSummary implements Serializable {
         MasterOrder current;
         List<Long> allDiffs = new ArrayList<>();
         do {
-            current = iterator.next();
+            current = iterator.next(); // todo: redact order here
             long currentDiff = current.getCreated() - previous.getCreated();
             if (orderSummary.getMinTimeDelay() == 0) {
                 orderSummary.setMinTimeDelay(currentDiff);

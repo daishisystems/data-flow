@@ -11,11 +11,15 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
+import org.apache.beam.sdk.coders.DefaultCoder;
+import org.apache.beam.sdk.coders.SerializableCoder;
+
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({ "BrandCountryCalculationId", "DutyTaxCalculationModelId", "IsAccurateCalculationRequired",
         "IsReverseAccurateCalculationRequired", "IsReverseEstimatedCalculationRequired",
         "IsReverseTaxesCalculationRequired", "IsReverseDutyCalculationRequired", "EstimatedDutyRate",
         "EstimatedTaxRate", "BrandCountryMarkupId", "MarkupPercentage", "PricingGroupId", "CustomsCalculationType" })
+@DefaultCoder(SerializableCoder.class)
 public class Calculation implements Serializable {
 
     @JsonProperty("BrandCountryCalculationId")

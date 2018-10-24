@@ -11,11 +11,15 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
+import org.apache.beam.sdk.coders.DefaultCoder;
+import org.apache.beam.sdk.coders.SerializableCoder;
+
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({ "IncludesMerchandise", "IncludesMerchandiseDuty", "IncludesMerchandiseTax",
         "IncludesMerchandiseFee", "IncludesMerchandiseFixedFee", "IncludesDeliveryItem", "IncludesDeliveryDuty",
         "IncludesDeliveryTax", "IncludesDeliveryFee", "IncludesDeliveryFixedFee", "IsMerchandiseItemPrice",
         "IsMerchandiseAllInclusivePrice", "IsDeliveryItemPrice" })
+@DefaultCoder(SerializableCoder.class)
 public class InputDelivery implements Serializable {
 
     @JsonProperty("IncludesMerchandise")
