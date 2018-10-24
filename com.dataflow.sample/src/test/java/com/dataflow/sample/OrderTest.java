@@ -93,12 +93,8 @@ public class OrderTest {
         masterOrders.add(masterOrder2);
         OrderSummary orderSummary = OrderSummary.orderSummary(masterOrders, orderCompleteIdentifier);
 
-        double expected = 14033.58;
-
-        DecimalFormat df = new DecimalFormat("#.##");
-        Double orderValue = Double.valueOf(df.format(orderSummary.getOrderValue()));
-
-        assertEquals(Double.valueOf(expected), orderValue);
+        Double expected = 14033.58;
+        assertEquals(Double.valueOf(expected), Double.valueOf(orderSummary.getOrderValue()));
     }
 
     private String getFile(String fileName) {

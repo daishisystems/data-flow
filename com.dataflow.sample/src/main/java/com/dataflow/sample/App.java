@@ -69,6 +69,7 @@ import org.apache.beam.sdk.transforms.windowing.Window;
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.joda.time.Duration;
+import org.apache.beam.sdk.io.TextIO;
 import org.apache.beam.sdk.io.gcp.bigquery.BigQueryIO;
 import org.apache.beam.sdk.io.gcp.bigquery.BigQueryIO.Write.CreateDisposition;
 import org.apache.beam.sdk.io.gcp.bigquery.BigQueryIO.Write.WriteDisposition;
@@ -114,15 +115,17 @@ public class App {
 
         PCollection<String> pubSubOutput = p.apply("Read Pub/Sub",
                 PubsubIO.readStrings().fromTopic("projects/eshop-bigdata/topics/apache_beam_input_2")
-                        .withTimestampAttribute("EventTimestamp"));
+                        .withTimestampAttribute("EventTimestamp"));        
 
         PCollection<KV<String, MasterOrder>> keyvalues = pubSubOutput.apply("To KV pairs",
                 ParDo.of(new ParseOrderToKVFn())); // todo: Use MapElements.via?
+        // todo: Group by order-num
 
         PCollection<KV<String, MasterOrder>> orders = keyvalues.apply("Creating session window",
-                Window.<KV<String, MasterOrder>>into(Sessions.withGapDuration(Duration.standardSeconds(20))));                        
+                Window.<KV<String, MasterOrder>>into(Sessions.withGapDuration(Duration.standardSeconds(20)))); // todo: 20 minutes
 
-        PCollection<KV<String, Iterable<MasterOrder>>> groupedOrders = orders.apply("Grouping orders", GroupByKey.create());
+        PCollection<KV<String, Iterable<MasterOrder>>> groupedOrders = orders.apply("Grouping orders",
+                GroupByKey.create());
 
         PCollection<OrderSummary> orderSummaries = groupedOrders.apply("Creating order summaries",
                 ParDo.of(new OrderSummaryFn()));
@@ -134,7 +137,7 @@ public class App {
                 PubsubIO.writeStrings().to("projects/eshop-bigdata/topics/dataflow-test-out"));
 
         List<TableFieldSchema> fields = new ArrayList<>();
-        fields.add(new TableFieldSchema().setName("OrderNumber").setType("STRING"));
+        fields.add(new TableFieldSchema().setName("OrderNumber").setType("STRING")); // todo: Validate order schema -> write to storage, redact in memory
         fields.add(new TableFieldSchema().setName("CorrelationId").setType("STRING"));
         fields.add(new TableFieldSchema().setName("MinTimeDelay").setType("INT64"));
         fields.add(new TableFieldSchema().setName("AvgTimeDelay").setType("INT64"));
@@ -327,9 +330,10 @@ public class App {
                 ObjectMapper mapper = new ObjectMapper();
                 String json = c.element();
                 MasterOrder masterOrder = mapper.readValue(json, MasterOrder.class);
-                c.output(KV.of(masterOrder.getCorrelationId(), masterOrder));
+                c.output(KV.of(masterOrder.getOrderCode(), masterOrder));
             } catch (Exception e) {
-                LOG.error(e.getMessage());
+                LOG.error(e.getMessage());                
+                // todo: DLQ
             }
         }
     }

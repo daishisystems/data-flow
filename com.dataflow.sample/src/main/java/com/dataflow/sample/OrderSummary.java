@@ -1,6 +1,7 @@
 package com.dataflow.sample;
 
 import java.io.Serializable;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -286,7 +287,10 @@ public class OrderSummary implements Serializable {
             });
         });
 
-        orderSummary.setOrderValue(deliveryCharge + merchandiseCharge);
+        double orderValue = deliveryCharge + merchandiseCharge;
+        double roundedOrderValue = Math.round(orderValue * 100.0) / 100.0;
+
+        orderSummary.setOrderValue(roundedOrderValue);
         long endTime = current.getCreated();
         long totalTime = endTime - startTime;
         orderSummary.setTotalTime(totalTime);
