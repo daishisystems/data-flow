@@ -1,6 +1,7 @@
 package com.dataflow.sample;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
@@ -93,6 +94,46 @@ public class OrderTest {
 
         Double expected = 14033.58;
         assertEquals(Double.valueOf(expected), Double.valueOf(orderSummary.getOrderValue()));
+    }
+
+    @Test
+    public void orderIsComplete() {
+        final String orderCompleteEventName = "COMPLETE";
+
+        MasterOrder masterOrder1 = new MasterOrder();
+        masterOrder1.setEventName("EVENT1");
+        MasterOrder masterOrder2 = new MasterOrder();
+        masterOrder2.setEventName("EVENT2");
+        MasterOrder masterOrder3 = new MasterOrder();
+        masterOrder3.setEventName("COMPLETE");
+
+        List<MasterOrder> masterOrders = new ArrayList<>();
+        masterOrders.add(masterOrder1);
+        masterOrders.add(masterOrder2);
+        masterOrders.add(masterOrder3);
+
+        boolean orderIsComplete = OrderSummary.orderIsComplete(masterOrders.iterator(), orderCompleteEventName);
+        assertTrue(orderIsComplete);
+    }
+
+    @Test
+    public void orderIsNotComplete() {
+        final String orderCompleteEventName = "COMPLETE";
+
+        MasterOrder masterOrder1 = new MasterOrder();
+        masterOrder1.setEventName("EVENT1");
+        MasterOrder masterOrder2 = new MasterOrder();
+        masterOrder2.setEventName("EVENT2");
+        MasterOrder masterOrder3 = new MasterOrder();
+        masterOrder3.setEventName("EVENT3");
+
+        List<MasterOrder> masterOrders = new ArrayList<>();
+        masterOrders.add(masterOrder1);
+        masterOrders.add(masterOrder2);
+        masterOrders.add(masterOrder3);
+
+        boolean orderIsComplete = OrderSummary.orderIsComplete(masterOrders.iterator(), orderCompleteEventName);
+        assertFalse(orderIsComplete);
     }
 
     private String getFile(String fileName) {

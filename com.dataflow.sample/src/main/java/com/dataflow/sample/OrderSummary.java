@@ -302,4 +302,18 @@ public class OrderSummary implements Serializable {
         orderSummary.setUnitsPerOrder(numOrderArticles);
         return orderSummary;
     }
+
+    public static Boolean orderIsComplete(Iterator<MasterOrder> orders, String orderCompleteEventName) {
+        if (!orders.hasNext()) {
+            return false;
+        }
+        boolean complete = false;
+        do {
+            MasterOrder current = orders.next();
+            if (current.getEventName().equals(orderCompleteEventName)) {
+                complete = true;
+            }
+        } while (!complete && orders.hasNext());
+        return complete;
+    }
 }
