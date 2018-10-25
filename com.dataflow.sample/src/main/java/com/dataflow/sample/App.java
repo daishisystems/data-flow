@@ -21,6 +21,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.api.services.bigquery.model.TableFieldSchema;
@@ -87,13 +89,13 @@ public class App {
         PCollection<KV<String, MasterOrder>> orders = success.apply("Session Window",
                 Window.<KV<String, MasterOrder>>into(Sessions.withGapDuration(Duration.standardSeconds(20))));
 
-        outputTuple.get(deadLetterTag).apply("Dead Letter Queue",
+        outputTuple.get(deadLetterTag).apply("Dead Letter Queue", // todo: redact these using DLP
                 PubsubIO.writeStrings().to("projects/eshop-bigdata/topics/dataflow-test-out"));
 
         // todo: Window duration -> 20 minutes
 
         PCollection<KV<String, Iterable<MasterOrder>>> groupedOrders = orders.apply("Group Orders",
-                GroupByKey.create());
+                GroupByKey.create());        
 
         PCollection<OrderSummary> orderSummaries = groupedOrders.apply("Summarise Orders",
                 ParDo.of(new OrderSummaryFn())); // todo: Output masked orders PCollection
@@ -133,7 +135,7 @@ public class App {
     // todo: 2. Fix MaxSecondEventName NULL
     // todo: 3. Fix complete calc
 
-    // todo: Fix Timestamp format
+    // todo: Fix Timestamp format    
 
     static class OrderSummaryFn extends DoFn<KV<String, Iterable<MasterOrder>>, OrderSummary> {
         private static final long serialVersionUID = -3067528732035106582L;
