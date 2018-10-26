@@ -66,7 +66,7 @@ public class App {
             private static final long serialVersionUID = -3414994155123840086L;
         };
 
-        PCollectionTuple outputTuple = pubSubOutput.apply("Validate Orders",
+        PCollectionTuple outputTuple = pubSubOutput.apply("Validate",
                 ParDo.of(new DoFn<String, KV<String, MasterOrder>>() {
                     private static final long serialVersionUID = 5729779425621385553L;
 
@@ -84,6 +84,7 @@ public class App {
                 }).withOutputTags(successTag, TupleTagList.of(deadLetterTag)));
 
         PCollection<KV<String, MasterOrder>> success = outputTuple.get(successTag);
+
         PCollection<KV<String, MasterOrder>> orders = success.apply("Session Window",
                 Window.<KV<String, MasterOrder>>into(Sessions.withGapDuration(Duration.standardSeconds(20))));
 
@@ -92,11 +93,32 @@ public class App {
 
         // todo: Window duration -> 20 minutes
 
-        PCollection<KV<String, Iterable<MasterOrder>>> groupedOrders = orders.apply("Group Orders",
-                GroupByKey.create());        
+        PCollection<KV<String, Iterable<MasterOrder>>> groupedOrders = orders.apply("Group", GroupByKey.create());
 
-        PCollection<OrderSummary> orderSummaries = groupedOrders.apply("Summarise Orders",
-                ParDo.of(new OrderSummaryFn())); // todo: Output masked orders PCollection
+        PCollectionTuple processedOrdersTuple = groupedOrders.apply("Analyse", ParDo.of(new OrderProcessingFn())
+                .withOutputTags(completeOrdersTag, TupleTagList.of(incompleteOrdersTag)));
+
+        PCollection<MasterOrder> completeOrders = processedOrdersTuple.get(completeOrdersTag);
+        PCollection<MasterOrder> incompleteOrders = processedOrdersTuple.get(incompleteOrdersTag);        
+
+        completeOrders.apply("Complete Orders", ParDo.of(new SerialiseMasterOrderFn())).apply("Publish Complete",
+                PubsubIO.writeStrings().to("projects/eshop-bigdata/topics/MasterTable"));
+
+        incompleteOrders.apply("Incomplete Orders", ParDo.of(new SerialiseMasterOrderFn())).apply("Publish Incomplete",
+                PubsubIO.writeStrings().to("projects/eshop-bigdata/topics/MasterTable"));
+
+        // todo: MASK
+
+        // todo: Return PCollection<MasterOrder> -> redact or not, then publish to
+        // Manuel
+        // todo: Refactor OrderSummaryFn
+        // !! May need 2 collections??? Or just apply in processElement
+
+        PCollection<OrderSummary> orderSummaries = groupedOrders.apply("Summarise", ParDo.of(new OrderSummaryFn())); // todo:
+                                                                                                                     // Output
+                                                                                                                     // masked
+                                                                                                                     // orders
+                                                                                                                     // PCollection
 
         List<TableFieldSchema> fields = new ArrayList<>();
         fields.add(new TableFieldSchema().setName("OrderNumber").setType("STRING")); // todo: Validate order schema ->
@@ -121,7 +143,7 @@ public class App {
         fields.add(new TableFieldSchema().setName("UnitsPerOrder").setType("INT64"));
         TableSchema schema = new TableSchema().setFields(fields);
 
-        orderSummaries.apply("Apply BQ Schema", new OrderSummariesToTableRows()).apply("Save Orders",
+        orderSummaries.apply("Apply Schema", new OrderSummariesToTableRows()).apply("Save to BQ",
                 BigQueryIO.writeTableRows().to("eshop-bigdata:datalake.order_summary_14").withSchema(schema)
                         .withCreateDisposition(BigQueryIO.Write.CreateDisposition.CREATE_IF_NEEDED)
                         .withWriteDisposition(BigQueryIO.Write.WriteDisposition.WRITE_APPEND));
@@ -133,7 +155,7 @@ public class App {
     // todo: 2. Fix MaxSecondEventName NULL
     // todo: 3. Fix complete calc
 
-    // todo: Fix Timestamp format    
+    // todo: Fix Timestamp format
 
     static class OrderSummaryFn extends DoFn<KV<String, Iterable<MasterOrder>>, OrderSummary> {
         private static final long serialVersionUID = -3067528732035106582L;
@@ -142,9 +164,37 @@ public class App {
         @ProcessElement
         public void processElement(ProcessContext c) throws Exception {
             Iterable<MasterOrder> orders = c.element().getValue();
-            List<MasterOrder> sortedOrders = OrderSummary.sortOrders(orders.iterator());
+            List<MasterOrder> sortedOrders = OrderSummary.sortOrders(orders);
             OrderSummary orderSummary = OrderSummary.orderSummary(sortedOrders, COMPLETE_EVENT_NAME);
             c.output(orderSummary);
+        }
+    }
+
+    final static TupleTag<MasterOrder> completeOrdersTag = new TupleTag<MasterOrder>() {
+        private static final long serialVersionUID = -8287090181826227743L;
+    };
+    final static TupleTag<MasterOrder> incompleteOrdersTag = new TupleTag<MasterOrder>() {
+        private static final long serialVersionUID = 6238727806361931139L;
+    };
+
+    static class OrderProcessingFn extends DoFn<KV<String, Iterable<MasterOrder>>, MasterOrder> {
+        private static final long serialVersionUID = -6828239956311045906L;
+        final String COMPLETE_EVENT_NAME = "COMPLETE";
+
+        @ProcessElement
+        public void processElement(ProcessContext c) throws Exception {
+            Iterable<MasterOrder> iterableOrders = c.element().getValue();
+            List<MasterOrder> orders = OrderSummary.sortOrders(iterableOrders);
+            boolean orderIsComplete = OrderSummary.orderIsComplete(orders, COMPLETE_EVENT_NAME);
+            if (orderIsComplete) {
+                for (MasterOrder masterOrder : orders) {
+                    c.output(completeOrdersTag, masterOrder);
+                }
+            } else {
+                for (MasterOrder masterOrder : orders) {
+                    c.output(incompleteOrdersTag, masterOrder);
+                }
+            }
         }
     }
 
@@ -156,6 +206,17 @@ public class App {
             ObjectMapper mapper = new ObjectMapper();
             OrderSummary orderSummary = c.element();
             c.output(mapper.writeValueAsString(orderSummary));
+        }
+    }
+
+    static class SerialiseMasterOrderFn extends DoFn<MasterOrder, String> {
+        private static final long serialVersionUID = -6115553959647555680L;
+
+        @ProcessElement
+        public void processElement(ProcessContext c) throws JsonParseException, JsonMappingException, IOException {
+            ObjectMapper mapper = new ObjectMapper();
+            MasterOrder masterOrder = c.element();
+            c.output(mapper.writeValueAsString(masterOrder));
         }
     }
 

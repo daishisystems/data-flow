@@ -35,7 +35,7 @@ public class OrderTest {
         orders.add(order1);
         orders.add(order2);
 
-        List<MasterOrder> sortedOrders = OrderSummary.sortOrders(orders.iterator());
+        List<MasterOrder> sortedOrders = OrderSummary.sortOrders(orders);
 
         assertTrue(sortedOrders.get(0).getCreated() == firstTimestamp);
         assertTrue(sortedOrders.get(1).getCreated() == secondTimestamp);
@@ -112,7 +112,7 @@ public class OrderTest {
         masterOrders.add(masterOrder2);
         masterOrders.add(masterOrder3);
 
-        boolean orderIsComplete = OrderSummary.orderIsComplete(masterOrders.iterator(), orderCompleteEventName);
+        boolean orderIsComplete = OrderSummary.orderIsComplete(masterOrders, orderCompleteEventName);
         assertTrue(orderIsComplete);
     }
 
@@ -132,7 +132,7 @@ public class OrderTest {
         masterOrders.add(masterOrder2);
         masterOrders.add(masterOrder3);
 
-        boolean orderIsComplete = OrderSummary.orderIsComplete(masterOrders.iterator(), orderCompleteEventName);
+        boolean orderIsComplete = OrderSummary.orderIsComplete(masterOrders, orderCompleteEventName);
         assertFalse(orderIsComplete);
     }
 

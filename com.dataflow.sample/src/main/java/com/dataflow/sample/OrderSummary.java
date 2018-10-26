@@ -205,10 +205,11 @@ public class OrderSummary implements Serializable {
      * @param orders orders to sort
      * @return collection of sorted orders
      */
-    public static List<MasterOrder> sortOrders(Iterator<MasterOrder> orders) {
+    public static List<MasterOrder> sortOrders(Iterable<MasterOrder> orders) {
         List<MasterOrder> sortedOrders = new ArrayList<>();
-        while (orders.hasNext()) {
-            sortedOrders.add((MasterOrder) orders.next());
+        Iterator<MasterOrder> iterator = orders.iterator();
+        while (iterator.hasNext()) {
+            sortedOrders.add((MasterOrder) iterator.next());
         }
         Collections.sort(sortedOrders, (o1, o2) -> new Long(o1.getCreated()).compareTo(new Long((o2.getCreated()))));
         return sortedOrders;
@@ -303,17 +304,11 @@ public class OrderSummary implements Serializable {
         return orderSummary;
     }
 
-    public static Boolean orderIsComplete(Iterator<MasterOrder> orders, String orderCompleteEventName) {
-        if (!orders.hasNext()) {
+    public static Boolean orderIsComplete(List<MasterOrder> orders, String orderCompleteEventName) {
+        if (orders == null || orders.isEmpty()) {
             return false;
         }
-        boolean complete = false;
-        do {
-            MasterOrder current = orders.next();
-            if (current.getEventName().equals(orderCompleteEventName)) {
-                complete = true;
-            }
-        } while (!complete && orders.hasNext());
-        return complete;
+        MasterOrder lastOrder = orders.get(orders.size() - 1);
+        return lastOrder.getEventName().equals(orderCompleteEventName);
     }
 }
