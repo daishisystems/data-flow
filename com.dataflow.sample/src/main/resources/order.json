@@ -1,110 +1,104 @@
 {
   "OrderCode": "d81ef9fe-e3dc-477c-a2be-51199035c5a4",
   "RetailerCartId": "3535345",
-  "OrderItems": [
-    {
-      "OrderArticles": [
-        {
-          "Charges": [
-            {
-              "Name": "InputItem",
-              "ExactValue": {
-                "CurrencyCodeIso": "EUR",
-                "Currency": {
-                  "Iso": "EUR",
-                  "Name": "Euro",
-                  "Exponent": 2,
-                  "Id": 1
-                },
-                "Value": 5977.86
-              }
-            },
-            {
-              "Name": "InputDelivery",
-              "ExactValue": {
-                "CurrencyCodeIso": "EUR",
-                "Currency": {
-                  "Iso": "EUR",
-                  "Name": "Euro",
-                  "Exponent": 2,
-                  "Id": 1
-                },
-                "Value": 42.9
-              }
-            },
-            {
-              "Name": "Items",
-              "ExactValue": {
-                "CurrencyCodeIso": "EUR",
-                "Currency": {
-                  "Iso": "EUR",
-                  "Name": "Euro",
-                  "Exponent": 2,
-                  "Id": 1
-                },
-                "Value": 4782.288
-              }
-            },
-            {
-              "Name": "Delivery",
-              "ExactValue": {
-                "CurrencyCodeIso": "EUR",
-                "Currency": {
-                  "Iso": "EUR",
-                  "Name": "Euro",
-                  "Exponent": 2,
-                  "Id": 1
-                },
-                "Value": 34.32
-              }
-            },
-            {
-              "Name": "ItemTaxes",
-              "ExactValue": {
-                "CurrencyCodeIso": "EUR",
-                "Currency": {
-                  "Iso": "EUR",
-                  "Name": "Euro",
-                  "Exponent": 2,
-                  "Id": 1
-                },
-                "Value": 1195.5725
-              }
-            },
-            {
-              "Name": "DeliveryTaxes",
-              "ExactValue": {
-                "CurrencyCodeIso": "EUR",
-                "Currency": {
-                  "Iso": "EUR",
-                  "Name": "Euro",
-                  "Exponent": 2,
-                  "Id": 1
-                },
-                "Value": 8.58
-              }
+  "OrderItems": [{
+      "OrderArticles": [{
+        "Charges": [{
+            "Name": "InputItem",
+            "ExactValue": {
+              "CurrencyCodeIso": "EUR",
+              "Currency": {
+                "Iso": "EUR",
+                "Name": "Euro",
+                "Exponent": 2,
+                "Id": 1
+              },
+              "Value": 5977.86
             }
-          ],
-          "Package": {
-            "ChargeTargets": [
-              {
-                "Name": "DeliveryTotal",
-                "TargetValue": {
-                  "CurrencyCodeIso": "EUR",
-                  "Currency": {
-                    "Iso": "EUR",
-                    "Name": "Euro",
-                    "Exponent": 2,
-                    "Id": 1
-                  },
-                  "Value": 100.0
-                }
-              }
-            ]
           },
-          "ChargeTargets": []
-        }
-      ],
+          {
+            "Name": "InputDelivery",
+            "ExactValue": {
+              "CurrencyCodeIso": "EUR",
+              "Currency": {
+                "Iso": "EUR",
+                "Name": "Euro",
+                "Exponent": 2,
+                "Id": 1
+              },
+              "Value": 42.9
+            }
+          },
+          {
+            "Name": "Items",
+            "ExactValue": {
+              "CurrencyCodeIso": "EUR",
+              "Currency": {
+                "Iso": "EUR",
+                "Name": "Euro",
+                "Exponent": 2,
+                "Id": 1
+              },
+              "Value": 4782.288
+            }
+          },
+          {
+            "Name": "Delivery",
+            "ExactValue": {
+              "CurrencyCodeIso": "EUR",
+              "Currency": {
+                "Iso": "EUR",
+                "Name": "Euro",
+                "Exponent": 2,
+                "Id": 1
+              },
+              "Value": 34.32
+            }
+          },
+          {
+            "Name": "ItemTaxes",
+            "ExactValue": {
+              "CurrencyCodeIso": "EUR",
+              "Currency": {
+                "Iso": "EUR",
+                "Name": "Euro",
+                "Exponent": 2,
+                "Id": 1
+              },
+              "Value": 1195.5725
+            }
+          },
+          {
+            "Name": "DeliveryTaxes",
+            "ExactValue": {
+              "CurrencyCodeIso": "EUR",
+              "Currency": {
+                "Iso": "EUR",
+                "Name": "Euro",
+                "Exponent": 2,
+                "Id": 1
+              },
+              "Value": 8.58
+            }
+          }
+        ],
+        "Package": {
+          "ChargeTargets": [{
+            "Name": "DeliveryTotal",
+            "TargetValue": {
+              "CurrencyCodeIso": "EUR",
+              "Currency": {
+                "Iso": "EUR",
+                "Name": "Euro",
+                "Exponent": 2,
+                "Id": 1
+              },
+              "Value": 100.0
+            }
+          }]
+        },
+        "ChargeTargets": []
+      }],
       "Available": true,
       "CalculationRates": {
         "ItemVatRateApplied": 0.25,
@@ -207,33 +201,32 @@
         "Dimension5": null,
         "Dimension6": null,
         "IsNonStandardCatalogItem": true,
-        "MetadataItems": []
+        "MetadataItems": [{
+          "Name": null,
+          "Value": null
+        }]
       },
       "LineItemId": "1",
       "CartGrouping": "Group 1",
       "MetadataItems": [],
       "IsCountryDefault": false,
-      "ChargeTargets": [
-        {
-          "Name": "ItemTotal",
-          "TargetValue": {
-            "CurrencyCodeIso": "EUR",
-            "Currency": {
-              "Iso": "EUR",
-              "Name": "Euro",
-              "Exponent": 2,
-              "Id": 1
-            },
-            "Value": 5977.86
-          }
+      "ChargeTargets": [{
+        "Name": "ItemTotal",
+        "TargetValue": {
+          "CurrencyCodeIso": "EUR",
+          "Currency": {
+            "Iso": "EUR",
+            "Name": "Euro",
+            "Exponent": 2,
+            "Id": 1
+          },
+          "Value": 5977.86
         }
-      ]
+      }]
     },
     {
-      "OrderArticles": [
-        {
-          "Charges": [
-            {
+      "OrderArticles": [{
+          "Charges": [{
               "Name": "InputItem",
               "ExactValue": {
                 "CurrencyCodeIso": "EUR",
@@ -378,27 +371,24 @@
             }
           ],
           "Package": {
-            "ChargeTargets": [
-              {
-                "Name": "DeliveryTotal",
-                "TargetValue": {
-                  "CurrencyCodeIso": "EUR",
-                  "Currency": {
-                    "Iso": "EUR",
-                    "Name": "Euro",
-                    "Exponent": 2,
-                    "Id": 1
-                  },
-                  "Value": 100.0
-                }
+            "ChargeTargets": [{
+              "Name": "DeliveryTotal",
+              "TargetValue": {
+                "CurrencyCodeIso": "EUR",
+                "Currency": {
+                  "Iso": "EUR",
+                  "Name": "Euro",
+                  "Exponent": 2,
+                  "Id": 1
+                },
+                "Value": 100.0
               }
-            ]
+            }]
           },
           "ChargeTargets": []
         },
         {
-          "Charges": [
-            {
+          "Charges": [{
               "Name": "InputItem",
               "ExactValue": {
                 "CurrencyCodeIso": "EUR",
@@ -434,7 +424,7 @@
                   "Exponent": 2,
                   "Id": 1
                 },
-                "Value": 3179.1077822177822
+                "Value": 3179.10
               }
             },
             {
@@ -447,7 +437,7 @@
                   "Exponent": 2,
                   "Id": 1
                 },
-                "Value": 22.814365634365636
+                "Value": 22.81436
               }
             },
             {
@@ -543,21 +533,19 @@
             }
           ],
           "Package": {
-            "ChargeTargets": [
-              {
-                "Name": "DeliveryTotal",
-                "TargetValue": {
-                  "CurrencyCodeIso": "EUR",
-                  "Currency": {
-                    "Iso": "EUR",
-                    "Name": "Euro",
-                    "Exponent": 2,
-                    "Id": 1
-                  },
-                  "Value": 100.0
-                }
+            "ChargeTargets": [{
+              "Name": "DeliveryTotal",
+              "TargetValue": {
+                "CurrencyCodeIso": "EUR",
+                "Currency": {
+                  "Iso": "EUR",
+                  "Name": "Euro",
+                  "Exponent": 2,
+                  "Id": 1
+                },
+                "Value": 100.0
               }
-            ]
+            }]
           },
           "ChargeTargets": []
         }
@@ -670,127 +658,119 @@
       "CartGrouping": "Group 2",
       "MetadataItems": [],
       "IsCountryDefault": false,
-      "ChargeTargets": [
-        {
-          "Name": "ItemTotal",
-          "TargetValue": {
-            "CurrencyCodeIso": "EUR",
-            "Currency": {
-              "Iso": "EUR",
-              "Name": "Euro",
-              "Exponent": 2,
-              "Id": 1
-            },
-            "Value": 7955.72
-          }
+      "ChargeTargets": [{
+        "Name": "ItemTotal",
+        "TargetValue": {
+          "CurrencyCodeIso": "EUR",
+          "Currency": {
+            "Iso": "EUR",
+            "Name": "Euro",
+            "Exponent": 2,
+            "Id": 1
+          },
+          "Value": 7955.72
         }
-      ]
+      }]
     }
   ],
-  "AvailableOrderItems": [
-    {
-      "OrderArticles": [
-        {
-          "Charges": [
-            {
-              "Name": "InputItem",
-              "ExactValue": {
-                "CurrencyCodeIso": "EUR",
-                "Currency": {
-                  "Iso": "EUR",
-                  "Name": "Euro",
-                  "Exponent": 2,
-                  "Id": 1
-                },
-                "Value": 5977.86
-              }
-            },
-            {
-              "Name": "InputDelivery",
-              "ExactValue": {
-                "CurrencyCodeIso": "EUR",
-                "Currency": {
-                  "Iso": "EUR",
-                  "Name": "Euro",
-                  "Exponent": 2,
-                  "Id": 1
-                },
-                "Value": 42.9
-              }
-            },
-            {
-              "Name": "Items",
-              "ExactValue": {
-                "CurrencyCodeIso": "EUR",
-                "Currency": {
-                  "Iso": "EUR",
-                  "Name": "Euro",
-                  "Exponent": 2,
-                  "Id": 1
-                },
-                "Value": 4782.288
-              }
-            },
-            {
-              "Name": "Delivery",
-              "ExactValue": {
-                "CurrencyCodeIso": "EUR",
-                "Currency": {
-                  "Iso": "EUR",
-                  "Name": "Euro",
-                  "Exponent": 2,
-                  "Id": 1
-                },
-                "Value": 34.32
-              }
-            },
-            {
-              "Name": "ItemTaxes",
-              "ExactValue": {
-                "CurrencyCodeIso": "EUR",
-                "Currency": {
-                  "Iso": "EUR",
-                  "Name": "Euro",
-                  "Exponent": 2,
-                  "Id": 1
-                },
-                "Value": 1195.5725
-              }
-            },
-            {
-              "Name": "DeliveryTaxes",
-              "ExactValue": {
-                "CurrencyCodeIso": "EUR",
-                "Currency": {
-                  "Iso": "EUR",
-                  "Name": "Euro",
-                  "Exponent": 2,
-                  "Id": 1
-                },
-                "Value": 8.58
-              }
+  "AvailableOrderItems": [{
+      "OrderArticles": [{
+        "Charges": [{
+            "Name": "InputItem",
+            "ExactValue": {
+              "CurrencyCodeIso": "EUR",
+              "Currency": {
+                "Iso": "EUR",
+                "Name": "Euro",
+                "Exponent": 2,
+                "Id": 1
+              },
+              "Value": 5977.86
             }
-          ],
-          "Package": {
-            "ChargeTargets": [
-              {
-                "Name": "DeliveryTotal",
-                "TargetValue": {
-                  "CurrencyCodeIso": "EUR",
-                  "Currency": {
-                    "Iso": "EUR",
-                    "Name": "Euro",
-                    "Exponent": 2,
-                    "Id": 1
-                  },
-                  "Value": 100.0
-                }
-              }
-            ]
           },
-          "ChargeTargets": []
-        }
-      ],
+          {
+            "Name": "InputDelivery",
+            "ExactValue": {
+              "CurrencyCodeIso": "EUR",
+              "Currency": {
+                "Iso": "EUR",
+                "Name": "Euro",
+                "Exponent": 2,
+                "Id": 1
+              },
+              "Value": 42.9
+            }
+          },
+          {
+            "Name": "Items",
+            "ExactValue": {
+              "CurrencyCodeIso": "EUR",
+              "Currency": {
+                "Iso": "EUR",
+                "Name": "Euro",
+                "Exponent": 2,
+                "Id": 1
+              },
+              "Value": 4782.288
+            }
+          },
+          {
+            "Name": "Delivery",
+            "ExactValue": {
+              "CurrencyCodeIso": "EUR",
+              "Currency": {
+                "Iso": "EUR",
+                "Name": "Euro",
+                "Exponent": 2,
+                "Id": 1
+              },
+              "Value": 34.32
+            }
+          },
+          {
+            "Name": "ItemTaxes",
+            "ExactValue": {
+              "CurrencyCodeIso": "EUR",
+              "Currency": {
+                "Iso": "EUR",
+                "Name": "Euro",
+                "Exponent": 2,
+                "Id": 1
+              },
+              "Value": 1195.5725
+            }
+          },
+          {
+            "Name": "DeliveryTaxes",
+            "ExactValue": {
+              "CurrencyCodeIso": "EUR",
+              "Currency": {
+                "Iso": "EUR",
+                "Name": "Euro",
+                "Exponent": 2,
+                "Id": 1
+              },
+              "Value": 8.58
+            }
+          }
+        ],
+        "Package": {
+          "ChargeTargets": [{
+            "Name": "DeliveryTotal",
+            "TargetValue": {
+              "CurrencyCodeIso": "EUR",
+              "Currency": {
+                "Iso": "EUR",
+                "Name": "Euro",
+                "Exponent": 2,
+                "Id": 1
+              },
+              "Value": 100.0
+            }
+          }]
+        },
+        "ChargeTargets": []
+      }],
       "Available": true,
       "CalculationRates": {
         "ItemVatRateApplied": 0.25,
@@ -899,27 +879,23 @@
       "CartGrouping": "Group 1",
       "MetadataItems": [],
       "IsCountryDefault": false,
-      "ChargeTargets": [
-        {
-          "Name": "ItemTotal",
-          "TargetValue": {
-            "CurrencyCodeIso": "EUR",
-            "Currency": {
-              "Iso": "EUR",
-              "Name": "Euro",
-              "Exponent": 2,
-              "Id": 1
-            },
-            "Value": 5977.86
-          }
+      "ChargeTargets": [{
+        "Name": "ItemTotal",
+        "TargetValue": {
+          "CurrencyCodeIso": "EUR",
+          "Currency": {
+            "Iso": "EUR",
+            "Name": "Euro",
+            "Exponent": 2,
+            "Id": 1
+          },
+          "Value": 5977.86
         }
-      ]
+      }]
     },
     {
-      "OrderArticles": [
-        {
-          "Charges": [
-            {
+      "OrderArticles": [{
+          "Charges": [{
               "Name": "InputItem",
               "ExactValue": {
                 "CurrencyCodeIso": "EUR",
@@ -1064,27 +1040,24 @@
             }
           ],
           "Package": {
-            "ChargeTargets": [
-              {
-                "Name": "DeliveryTotal",
-                "TargetValue": {
-                  "CurrencyCodeIso": "EUR",
-                  "Currency": {
-                    "Iso": "EUR",
-                    "Name": "Euro",
-                    "Exponent": 2,
-                    "Id": 1
-                  },
-                  "Value": 100.0
-                }
+            "ChargeTargets": [{
+              "Name": "DeliveryTotal",
+              "TargetValue": {
+                "CurrencyCodeIso": "EUR",
+                "Currency": {
+                  "Iso": "EUR",
+                  "Name": "Euro",
+                  "Exponent": 2,
+                  "Id": 1
+                },
+                "Value": 100.0
               }
-            ]
+            }]
           },
           "ChargeTargets": []
         },
         {
-          "Charges": [
-            {
+          "Charges": [{
               "Name": "InputItem",
               "ExactValue": {
                 "CurrencyCodeIso": "EUR",
@@ -1120,7 +1093,7 @@
                   "Exponent": 2,
                   "Id": 1
                 },
-                "Value": 3179.1077822177822
+                "Value": 3179.107
               }
             },
             {
@@ -1133,7 +1106,7 @@
                   "Exponent": 2,
                   "Id": 1
                 },
-                "Value": 22.814365634365636
+                "Value": 22.814
               }
             },
             {
@@ -1229,21 +1202,19 @@
             }
           ],
           "Package": {
-            "ChargeTargets": [
-              {
-                "Name": "DeliveryTotal",
-                "TargetValue": {
-                  "CurrencyCodeIso": "EUR",
-                  "Currency": {
-                    "Iso": "EUR",
-                    "Name": "Euro",
-                    "Exponent": 2,
-                    "Id": 1
-                  },
-                  "Value": 100.0
-                }
+            "ChargeTargets": [{
+              "Name": "DeliveryTotal",
+              "TargetValue": {
+                "CurrencyCodeIso": "EUR",
+                "Currency": {
+                  "Iso": "EUR",
+                  "Name": "Euro",
+                  "Exponent": 2,
+                  "Id": 1
+                },
+                "Value": 100.0
               }
-            ]
+            }]
           },
           "ChargeTargets": []
         }
@@ -1356,146 +1327,136 @@
       "CartGrouping": "Group 2",
       "MetadataItems": [],
       "IsCountryDefault": false,
-      "ChargeTargets": [
-        {
-          "Name": "ItemTotal",
-          "TargetValue": {
-            "CurrencyCodeIso": "EUR",
-            "Currency": {
-              "Iso": "EUR",
-              "Name": "Euro",
-              "Exponent": 2,
-              "Id": 1
-            },
-            "Value": 7955.72
-          }
+      "ChargeTargets": [{
+        "Name": "ItemTotal",
+        "TargetValue": {
+          "CurrencyCodeIso": "EUR",
+          "Currency": {
+            "Iso": "EUR",
+            "Name": "Euro",
+            "Exponent": 2,
+            "Id": 1
+          },
+          "Value": 7955.72
         }
-      ]
+      }]
     }
   ],
-  "RetailerPromoCodes": [
-    {
-      "PromoCode": "PROMO1",
-      "Title": "Promo 1",
-      "Description": "Promo code #1"
-    }
-  ],
-  "OrderDiscounts": [
-    {
-      "Title": "DISCOUNT20",
-      "Description": "Discount 20%",
-      "RetailerCurrencyOrderDiscountAmount": {
-        "Title": "Discount title",
-        "Description": "Retailer discount title",
-        "Price": {
-          "CurrencyCodeIso": "EUR",
-          "Currency": {
-            "Iso": "EUR",
-            "Name": "Euro",
-            "Exponent": 2,
-            "Id": 1
-          },
-          "Value": 20.0
+  "RetailerPromoCodes": [{
+    "PromoCode": "PROMO1",
+    "Title": "Promo 1",
+    "Description": "Promo code #1"
+  }],
+  "OrderDiscounts": [{
+    "Title": "DISCOUNT20",
+    "Description": "Discount 20%",
+    "RetailerCurrencyOrderDiscountAmount": {
+      "Title": "Discount title",
+      "Description": "Retailer discount title",
+      "Price": {
+        "CurrencyCodeIso": "EUR",
+        "Currency": {
+          "Iso": "EUR",
+          "Name": "Euro",
+          "Exponent": 2,
+          "Id": 1
         },
-        "DiscountAmount": {
-          "CurrencyCodeIso": "EUR",
-          "Currency": {
-            "Iso": "EUR",
-            "Name": "Euro",
-            "Exponent": 2,
-            "Id": 1
-          },
-          "Value": 1.0
-        },
-        "BeforeDiscount": {
-          "CurrencyCodeIso": "EUR",
-          "Currency": {
-            "Iso": "EUR",
-            "Name": "Euro",
-            "Exponent": 2,
-            "Id": 1
-          },
-          "Value": 21.0
-        },
-        "DiscountPercentage": null
+        "Value": 20.0
       },
-      "ShopperCurrencyOrderDiscountAmount": {
-        "Title": "Discount title",
-        "Description": "Shopper discount title",
-        "Price": {
-          "CurrencyCodeIso": "EUR",
-          "Currency": {
-            "Iso": "EUR",
-            "Name": "Euro",
-            "Exponent": 2,
-            "Id": 1
-          },
-          "Value": 22.0
+      "DiscountAmount": {
+        "CurrencyCodeIso": "EUR",
+        "Currency": {
+          "Iso": "EUR",
+          "Name": "Euro",
+          "Exponent": 2,
+          "Id": 1
         },
-        "DiscountAmount": {
-          "CurrencyCodeIso": "EUR",
-          "Currency": {
-            "Iso": "EUR",
-            "Name": "Euro",
-            "Exponent": 2,
-            "Id": 1
-          },
-          "Value": 2.0
+        "Value": 1.0
+      },
+      "BeforeDiscount": {
+        "CurrencyCodeIso": "EUR",
+        "Currency": {
+          "Iso": "EUR",
+          "Name": "Euro",
+          "Exponent": 2,
+          "Id": 1
         },
-        "BeforeDiscount": {
-          "CurrencyCodeIso": "EUR",
-          "Currency": {
-            "Iso": "EUR",
-            "Name": "Euro",
-            "Exponent": 2,
-            "Id": 1
-          },
-          "Value": 2.0
+        "Value": 21.0
+      },
+      "DiscountPercentage": null
+    },
+    "ShopperCurrencyOrderDiscountAmount": {
+      "Title": "Discount title",
+      "Description": "Shopper discount title",
+      "Price": {
+        "CurrencyCodeIso": "EUR",
+        "Currency": {
+          "Iso": "EUR",
+          "Name": "Euro",
+          "Exponent": 2,
+          "Id": 1
         },
-        "DiscountPercentage": null
-      }
+        "Value": 22.0
+      },
+      "DiscountAmount": {
+        "CurrencyCodeIso": "EUR",
+        "Currency": {
+          "Iso": "EUR",
+          "Name": "Euro",
+          "Exponent": 2,
+          "Id": 1
+        },
+        "Value": 2.0
+      },
+      "BeforeDiscount": {
+        "CurrencyCodeIso": "EUR",
+        "Currency": {
+          "Iso": "EUR",
+          "Name": "Euro",
+          "Exponent": 2,
+          "Id": 1
+        },
+        "Value": 2.0
+      },
+      "DiscountPercentage": null
     }
-  ],
-  "DeliveryDetails": [
-    {
-      "Id": 1,
-      "ContactDetailsNickName": null,
-      "Address1": "Address 1",
-      "Address2": "Address 2",
-      "Address3": null,
-      "City": "Chisinau",
-      "PostalCode": null,
-      "Region": null,
-      "Country": "NO",
-      "Email": null,
-      "FirstName": "First Name",
-      "LastName": "Last Name",
-      "Gender": 0,
-      "Telephone": null,
-      "PoBox": null,
-      "MetadataItems": []
-    }
-  ],
-  "PaymentDetails": [
-    {
-      "Id": 1,
-      "ContactDetailsNickName": null,
-      "Address1": "Address 1",
-      "Address2": "Address 2",
-      "Address3": null,
-      "City": "Chisinau",
-      "PostalCode": null,
-      "Region": null,
-      "Country": "NO",
-      "Email": null,
-      "FirstName": "First Name",
-      "LastName": "Last Name",
-      "Gender": 0,
-      "Telephone": null,
-      "PoBox": null,
-      "MetadataItems": []
-    }
-  ],
+  }],
+  "DeliveryDetails": [{
+    "Id": 1,
+    "ContactDetailsNickName": null,
+    "Address1": "Address 1",
+    "Address2": "Address 2",
+    "Address3": null,
+    "City": "Chisinau",
+    "PostalCode": null,
+    "Region": null,
+    "Country": "NO",
+    "Email": null,
+    "FirstName": "First Name",
+    "LastName": "Last Name",
+    "Gender": 0,
+    "Telephone": null,
+    "PoBox": null,
+    "MetadataItems": []
+  }],
+  "PaymentDetails": [{
+    "Id": 1,
+    "ContactDetailsNickName": null,
+    "Address1": "Address 1",
+    "Address2": "Address 2",
+    "Address3": null,
+    "City": "Chisinau",
+    "PostalCode": null,
+    "Region": null,
+    "Country": "NO",
+    "Email": null,
+    "FirstName": "First Name",
+    "LastName": "Last Name",
+    "Gender": 0,
+    "Telephone": null,
+    "PoBox": null,
+    "MetadataItems": []
+  }],
   "DeliveryOption": {
     "Option": 3,
     "IsExpressDelivery": true
@@ -1520,83 +1481,81 @@
     "ExpressPaymentMethod": "Paypal",
     "MetadataItems": []
   },
-  "DeliveryOptions": [
-    {
-      "DeliveryOption": "Exp2",
-      "EstimatedDeliveryDate": "2019-06-03T10:38:26.35Z",
-      "RetailerCurrencyOveridePriceInfo": {
-        "Title": "RCOPI_Title",
-        "Description": "RCOPI_Description",
-        "Price": {
-          "CurrencyCodeIso": "EUR",
-          "Currency": {
-            "Iso": "EUR",
-            "Name": "Euro",
-            "Exponent": 2,
-            "Id": 1
-          },
-          "Value": 100.0
+  "DeliveryOptions": [{
+    "DeliveryOption": "Exp2",
+    "EstimatedDeliveryDate": "2019-06-03T10:38:26.35Z",
+    "RetailerCurrencyOveridePriceInfo": {
+      "Title": "RCOPI_Title",
+      "Description": "RCOPI_Description",
+      "Price": {
+        "CurrencyCodeIso": "EUR",
+        "Currency": {
+          "Iso": "EUR",
+          "Name": "Euro",
+          "Exponent": 2,
+          "Id": 1
         },
-        "DiscountAmount": {
-          "CurrencyCodeIso": "EUR",
-          "Currency": {
-            "Iso": "EUR",
-            "Name": "Euro",
-            "Exponent": 2,
-            "Id": 1
-          },
-          "Value": 101.0
-        },
-        "BeforeDiscount": {
-          "CurrencyCodeIso": "EUR",
-          "Currency": {
-            "Iso": "EUR",
-            "Name": "Euro",
-            "Exponent": 2,
-            "Id": 1
-          },
-          "Value": 102.0
-        },
-        "DiscountPercentage": null
+        "Value": 100.0
       },
-      "ShopperCurrencyOveridePriceInfo": {
-        "Title": "SCOPI_Title",
-        "Description": "SCOPI_Description",
-        "Price": {
-          "CurrencyCodeIso": "EUR",
-          "Currency": {
-            "Iso": "EUR",
-            "Name": "Euro",
-            "Exponent": 2,
-            "Id": 1
-          },
-          "Value": 100.0
+      "DiscountAmount": {
+        "CurrencyCodeIso": "EUR",
+        "Currency": {
+          "Iso": "EUR",
+          "Name": "Euro",
+          "Exponent": 2,
+          "Id": 1
         },
-        "DiscountAmount": {
-          "CurrencyCodeIso": "EUR",
-          "Currency": {
-            "Iso": "EUR",
-            "Name": "Euro",
-            "Exponent": 2,
-            "Id": 1
-          },
-          "Value": 111.0
-        },
-        "BeforeDiscount": {
-          "CurrencyCodeIso": "EUR",
-          "Currency": {
-            "Iso": "EUR",
-            "Name": "Euro",
-            "Exponent": 2,
-            "Id": 1
-          },
-          "Value": 112.0
-        },
-        "DiscountPercentage": null
+        "Value": 101.0
       },
-      "MetadataItems": []
-    }
-  ],
+      "BeforeDiscount": {
+        "CurrencyCodeIso": "EUR",
+        "Currency": {
+          "Iso": "EUR",
+          "Name": "Euro",
+          "Exponent": 2,
+          "Id": 1
+        },
+        "Value": 102.0
+      },
+      "DiscountPercentage": null
+    },
+    "ShopperCurrencyOveridePriceInfo": {
+      "Title": "SCOPI_Title",
+      "Description": "SCOPI_Description",
+      "Price": {
+        "CurrencyCodeIso": "EUR",
+        "Currency": {
+          "Iso": "EUR",
+          "Name": "Euro",
+          "Exponent": 2,
+          "Id": 1
+        },
+        "Value": 100.0
+      },
+      "DiscountAmount": {
+        "CurrencyCodeIso": "EUR",
+        "Currency": {
+          "Iso": "EUR",
+          "Name": "Euro",
+          "Exponent": 2,
+          "Id": 1
+        },
+        "Value": 111.0
+      },
+      "BeforeDiscount": {
+        "CurrencyCodeIso": "EUR",
+        "Currency": {
+          "Iso": "EUR",
+          "Name": "Euro",
+          "Exponent": 2,
+          "Id": 1
+        },
+        "Value": 112.0
+      },
+      "DiscountPercentage": null
+    },
+    "MetadataItems": []
+  }],
   "RetailerDeliveryOptions": [],
   "Payment": {
     "PaymentId": "00000000-0000-0000-0000-000000000000",
@@ -1652,8 +1611,7 @@
         "IsDeliveryItemPrice": false
       }
     },
-    "FxRates": [
-      {
+    "FxRates": [{
         "FromCurrency": "EUR",
         "ToCurrency": "EUR",
         "Rate": 1.0
@@ -1748,8 +1706,7 @@
       }
     }
   },
-  "Features": [
-    {
+  "Features": [{
       "Type": "AsyncOrderConfirmation",
       "Active": false
     },

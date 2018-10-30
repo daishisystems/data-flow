@@ -8,14 +8,17 @@ import java.util.Scanner;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.joda.JodaModule;
+
 import org.junit.Test;
 
 public class DeserialisationTest {
 
     @Test
     public void masterOrderIsDeserialised() throws JsonParseException, JsonMappingException, IOException {
-        String json = getFile("order.json");
+        String json = getFile("order3.json");
         ObjectMapper mapper = new ObjectMapper();
+        mapper.registerModule(new JodaModule());
         MasterOrder masterOrder = mapper.readValue(json, MasterOrder.class);
         double expected = 0.106;
         assertEquals(Double.valueOf(expected), masterOrder.getPricing().getCalculation().getEstimatedDutyRate());

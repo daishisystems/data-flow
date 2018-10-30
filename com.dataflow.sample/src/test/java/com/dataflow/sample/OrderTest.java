@@ -13,6 +13,7 @@ import java.util.Scanner;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.joda.JodaModule;
 
 import org.junit.Test;
 
@@ -84,6 +85,7 @@ public class OrderTest {
 
         String json = getFile("order.json");
         ObjectMapper mapper = new ObjectMapper();
+        mapper.registerModule(new JodaModule());
         MasterOrder masterOrder1 = mapper.readValue(json, MasterOrder.class);
         MasterOrder masterOrder2 = masterOrder1;
 
@@ -92,7 +94,7 @@ public class OrderTest {
         masterOrders.add(masterOrder2);
         OrderSummary orderSummary = OrderSummary.orderSummary(masterOrders, orderCompleteIdentifier);
 
-        Double expected = 14033.58;
+        Double expected = 14033.57;
         assertEquals(Double.valueOf(expected), Double.valueOf(orderSummary.getOrderValue()));
     }
 

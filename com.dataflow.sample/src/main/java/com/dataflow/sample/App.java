@@ -25,6 +25,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.joda.JodaModule;
 import com.google.api.services.bigquery.model.TableFieldSchema;
 import com.google.api.services.bigquery.model.TableRow;
 import com.google.api.services.bigquery.model.TableSchema;
@@ -76,6 +77,7 @@ public class App {
                     public void processElement(ProcessContext c) {
                         try {
                             ObjectMapper mapper = new ObjectMapper();
+                            mapper.registerModule(new JodaModule());
                             MasterOrder masterOrder = mapper.readValue(c.element(), MasterOrder.class);
                             c.output(KV.of(masterOrder.getOrderCode(), masterOrder));
                         } catch (Exception e) {
@@ -238,6 +240,7 @@ public class App {
         @ProcessElement
         public void processElement(ProcessContext c) throws JsonParseException, JsonMappingException, IOException {
             ObjectMapper mapper = new ObjectMapper();
+            mapper.registerModule(new JodaModule());
             mapper.setDefaultPropertyInclusion(JsonInclude.Include.ALWAYS);
             OrderSummary orderSummary = c.element();
             c.output(mapper.writeValueAsString(orderSummary));
@@ -250,6 +253,7 @@ public class App {
         @ProcessElement
         public void processElement(ProcessContext c) throws JsonParseException, JsonMappingException, IOException {
             ObjectMapper mapper = new ObjectMapper();
+            mapper.registerModule(new JodaModule());
             mapper.setDefaultPropertyInclusion(JsonInclude.Include.ALWAYS);
             MasterOrder masterOrder = c.element();
             c.output(mapper.writeValueAsString(masterOrder));

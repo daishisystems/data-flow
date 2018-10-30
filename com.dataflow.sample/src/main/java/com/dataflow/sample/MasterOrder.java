@@ -11,9 +11,9 @@ import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-
 import org.apache.beam.sdk.coders.DefaultCoder;
 import org.apache.beam.sdk.coders.SerializableCoder;
+import org.joda.time.DateTime;
 
 @JsonPropertyOrder({ "OrderCode", "RetailerCartId", "OrderItems", "AvailableOrderItems", "RetailerPromoCodes",
         "OrderDiscounts", "DeliveryDetails", "PaymentDetails", "DeliveryOption", "Errors", "RetailerCheckoutExperience",
@@ -78,7 +78,7 @@ public class MasterOrder implements Serializable {
     @JsonProperty("Features")
     private List<Feature> features = new ArrayList<Feature>();
     @JsonProperty("ExpiryTimeUtc")
-    private String expiryTimeUtc;
+    private DateTime expiryTimeUtc;
     @JsonProperty("ChargeTargets")
     private List<ChargeTarget> chargeTargets = new ArrayList<ChargeTarget>();
     @JsonProperty("GdprAccepted")
@@ -156,7 +156,7 @@ public class MasterOrder implements Serializable {
             ShopperCheckoutExperience shopperCheckoutExperience, List<DeliveryOption> deliveryOptions,
             List<RetailerDeliveryOption> retailerDeliveryOptions, Payment payment, Object ipAddress,
             CalculationParameters calculationParameters, String status, Object orderConfirmationErrorInformation,
-            Pricing pricing, List<Feature> features, String expiryTimeUtc, List<ChargeTarget> chargeTargets,
+            Pricing pricing, List<Feature> features, DateTime expiryTimeUtc, List<ChargeTarget> chargeTargets,
             Boolean gdprAccepted, List<GdprAcceptance> gdprAcceptanceHistory, String brandCode, String eventName,
             String correlationId, String userAgent, String queryString, Long created) {
         super();
@@ -459,12 +459,12 @@ public class MasterOrder implements Serializable {
     }
 
     @JsonProperty("ExpiryTimeUtc")
-    public String getExpiryTimeUtc() {
+    public DateTime getExpiryTimeUtc() {
         return expiryTimeUtc;
     }
 
     @JsonProperty("ExpiryTimeUtc")
-    public void setExpiryTimeUtc(String expiryTimeUtc) {
+    public void setExpiryTimeUtc(DateTime expiryTimeUtc) {
         this.expiryTimeUtc = expiryTimeUtc;
     }
 
