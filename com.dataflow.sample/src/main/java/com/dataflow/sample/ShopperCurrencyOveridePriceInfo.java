@@ -28,7 +28,7 @@ public class ShopperCurrencyOveridePriceInfo implements Serializable {
     @JsonProperty("BeforeDiscount")
     private BeforeDiscount beforeDiscount;
     @JsonProperty("DiscountPercentage")
-    private Object discountPercentage;
+    private Double discountPercentage;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
     private final static long serialVersionUID = -291873561351146142L;
@@ -50,7 +50,7 @@ public class ShopperCurrencyOveridePriceInfo implements Serializable {
      * @param discountAmount
      */
     public ShopperCurrencyOveridePriceInfo(String title, String description, Price price, DiscountAmount discountAmount,
-            BeforeDiscount beforeDiscount, Object discountPercentage) {
+            BeforeDiscount beforeDiscount, Double discountPercentage) {
         super();
         this.title = title;
         this.description = description;
@@ -116,7 +116,7 @@ public class ShopperCurrencyOveridePriceInfo implements Serializable {
     }
 
     @JsonProperty("DiscountPercentage")
-    public void setDiscountPercentage(Object discountPercentage) {
+    public void setDiscountPercentage(Double discountPercentage) {
         this.discountPercentage = discountPercentage;
     }
 

@@ -92,12 +92,12 @@ public class App {
         PCollection<KV<String, MasterOrder>> orders = success.apply("Session Window",
                 Window.<KV<String, MasterOrder>>into(Sessions.withGapDuration(Duration.standardSeconds(20))));
 
+        PCollection<KV<String, Iterable<MasterOrder>>> groupedOrders = orders.apply("Group", GroupByKey.create()); // FIXME: Paul Barnes - why is this so slow?
+
         outputTuple.get(deadLetterTag).apply("Dead Letter Queue", // todo: redact these using DLP
-                PubsubIO.writeStrings().to("projects/eshop-bigdata/topics/dataflow-test-out"));
+                PubsubIO.writeStrings().to("projects/eshop-bigdata/topics/dead-letter-queue"));
 
         // FIXME: Window duration -> 20 minutes
-
-        PCollection<KV<String, Iterable<MasterOrder>>> groupedOrders = orders.apply("Group", GroupByKey.create());
 
         PCollectionTuple processedOrdersTuple = groupedOrders.apply("Analyse", ParDo.of(new OrderProcessingFn())
                 .withOutputTags(completeOrdersTag, TupleTagList.of(incompleteOrdersTag)));
@@ -106,12 +106,12 @@ public class App {
         PCollection<MasterOrder> incompleteOrders = processedOrdersTuple.get(incompleteOrdersTag);
 
         completeOrders.apply("Complete Orders", ParDo.of(new SerialiseMasterOrderFn())).apply("Publish Complete",
-                PubsubIO.writeStrings().to("projects/eshop-bigdata/topics/order-master-test"));
+                PubsubIO.writeStrings().to("projects/eshop-bigdata/topics/Orders_MasterTable"));
 
         PCollection<MasterOrder> maskedOrders = incompleteOrders.apply("Mask", new MaskOrdersFn());
 
         maskedOrders.apply("Incomplete Orders", ParDo.of(new SerialiseMasterOrderFn())).apply("Publish Incomplete",
-                PubsubIO.writeStrings().to("projects/eshop-bigdata/topics/order-master-test"));
+                PubsubIO.writeStrings().to("projects/eshop-bigdata/topics/Orders_MasterTable"));
 
         // FIXME: MASK
 
@@ -149,7 +149,7 @@ public class App {
     }
 
     // FIXME: Handle single order events
-    // FIXME: Fix complete calc
+    // FIXME: REFACTOR complete calc to multi ParDo's
 
     static class MaskOrderFn extends DoFn<MasterOrder, MasterOrder> {
         private static final long serialVersionUID = -3894610851045133386L;

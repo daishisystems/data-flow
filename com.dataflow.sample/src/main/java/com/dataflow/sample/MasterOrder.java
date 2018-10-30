@@ -60,7 +60,7 @@ public class MasterOrder implements Serializable {
     @JsonProperty("ShopperCheckoutExperience")
     private ShopperCheckoutExperience shopperCheckoutExperience;
     @JsonProperty("DeliveryOptions")
-    private List<DeliveryOption> deliveryOptions = new ArrayList<DeliveryOption>();
+    private List<DeliveryOptionExtended> deliveryOptions = new ArrayList<DeliveryOptionExtended>();
     @JsonProperty("RetailerDeliveryOptions")
     private List<RetailerDeliveryOption> retailerDeliveryOptions = new ArrayList<RetailerDeliveryOption>();
     @JsonProperty("Payment")
@@ -153,7 +153,7 @@ public class MasterOrder implements Serializable {
             List<PaymentDetail> paymentDetails, DeliveryOption deliveryOption, List<Object> errors,
             RetailerCheckoutExperience retailerCheckoutExperience, String shopperCurrencyIso,
             String retailerCurrencyIso, Integer retailerFxGroupId, String sourceCountryIso, String deliveryCountryIso,
-            ShopperCheckoutExperience shopperCheckoutExperience, List<DeliveryOption> deliveryOptions,
+            ShopperCheckoutExperience shopperCheckoutExperience, List<DeliveryOptionExtended> deliveryOptions,
             List<RetailerDeliveryOption> retailerDeliveryOptions, Payment payment, Object ipAddress,
             CalculationParameters calculationParameters, String status, Object orderConfirmationErrorInformation,
             Pricing pricing, List<Feature> features, DateTime expiryTimeUtc, List<ChargeTarget> chargeTargets,
@@ -369,12 +369,12 @@ public class MasterOrder implements Serializable {
     }
 
     @JsonProperty("DeliveryOptions")
-    public List<DeliveryOption> getDeliveryOptions() {
+    public List<DeliveryOptionExtended> getDeliveryOptions() {
         return deliveryOptions;
     }
 
     @JsonProperty("DeliveryOptions")
-    public void setDeliveryOptions(List<DeliveryOption> deliveryOptions) {
+    public void setDeliveryOptions(List<DeliveryOptionExtended> deliveryOptions) {
         this.deliveryOptions = deliveryOptions;
     }
 
