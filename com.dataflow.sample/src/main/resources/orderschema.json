@@ -1,112 +1,67 @@
 [{
-    "name": "OrderCode",
-    "type": "STRING"
-  },
-  {
-    "name": "RetailerCartId",
-    "type": "STRING"
-  },
-  {
-    "name": "OrderItems",
-    "type": "record",
-    "mode": "repeated",
-    "fields": [{
-        "name": "OrderArticles",
-        "type": "record",
-        "mode": "repeated",
-        "fields": [{
-            "name": "Charges",
-            "type": "record",
-            "mode": "repeated",
-            "fields": [{
-                "name": "Name",
-                "type": "STRING"
-              },
-              {
-                "name": "ExactValue",
-                "type": "record",
-                "fields": [{
-                    "name": "CurrencyCodeIso",
-                    "type": "STRING"
-                  },
-                  {
-                    "name": "Currency",
-                    "type": "record",
-                    "fields": [{
-                        "name": "Iso",
-                        "type": "STRING"
-                      },
-                      {
-                        "name": "Name",
-                        "type": "STRING"
-                      },
-                      {
-                        "name": "Exponent",
-                        "type": "INTEGER"
-                      },
-                      {
-                        "name": "Id",
-                        "type": "INTEGER"
-                      }
-                    ]
-                  },
-                  {
-                    "name": "Value",
-                    "type": "NUMERIC"
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "name": "Package",
-            "type": "record",
-            "fields": [{
-              "name": "ChargeTargets",
+  "name": "OrderCode",
+  "type": "STRING"
+},
+{
+  "name": "RetailerCartId",
+  "type": "STRING"
+},
+{
+  "name": "OrderItems",
+  "type": "record",
+  "mode": "repeated",
+  "fields": [{
+      "name": "OrderArticles",
+      "type": "record",
+      "mode": "repeated",
+      "fields": [{
+          "name": "Charges",
+          "type": "record",
+          "mode": "repeated",
+          "fields": [{
+              "name": "Name",
+              "type": "STRING"
+            },
+            {
+              "name": "ExactValue",
               "type": "record",
-              "mode": "repeated",
               "fields": [{
-                  "name": "Name",
+                  "name": "CurrencyCodeIso",
                   "type": "STRING"
                 },
                 {
-                  "name": "TargetValue",
+                  "name": "Currency",
                   "type": "record",
                   "fields": [{
-                      "name": "CurrencyCodeIso",
+                      "name": "Iso",
                       "type": "STRING"
                     },
                     {
-                      "name": "Currency",
-                      "type": "record",
-                      "fields": [{
-                          "name": "Iso",
-                          "type": "STRING"
-                        },
-                        {
-                          "name": "Name",
-                          "type": "STRING"
-                        },
-                        {
-                          "name": "Exponent",
-                          "type": "INTEGER"
-                        },
-                        {
-                          "name": "Id",
-                          "type": "INTEGER"
-                        }
-                      ]
+                      "name": "Name",
+                      "type": "STRING"
                     },
                     {
-                      "name": "Value",
-                      "type": "NUMERIC"
+                      "name": "Exponent",
+                      "type": "INTEGER"
+                    },
+                    {
+                      "name": "Id",
+                      "type": "INTEGER"
                     }
                   ]
+                },
+                {
+                  "name": "Value",
+                  "type": "NUMERIC"
                 }
               ]
-            }]
-          },
-          {
+            }
+          ]
+        },
+        {
+          "name": "Package",
+          "type": "record",
+          "fields": [{
             "name": "ChargeTargets",
             "type": "record",
             "mode": "repeated",
@@ -149,560 +104,560 @@
                 ]
               }
             ]
-          }
-        ]
-      },
-      {
-        "name": "Available",
-        "type": "BOOLEAN"
-      },
-      {
-        "name": "CalculationRates",
-        "type": "record",
-        "fields": [{
-            "name": "ItemVatRateApplied",
-            "type": "NUMERIC"
-          },
-          {
-            "name": "DeliveryVatRateApplied",
-            "type": "NUMERIC"
-          },
-          {
-            "name": "ItemDutyRateApplied",
-            "type": "NUMERIC"
-          },
-          {
-            "name": "DeliveryDutyRateApplied",
-            "type": "NUMERIC"
-          },
-          {
-            "name": "ItemFeeRateApplied",
-            "type": "NUMERIC"
-          },
-          {
-            "name": "DeliveryFeeRateApplied",
-            "type": "NUMERIC"
-          },
-          {
-            "name": "ItemReverseCalculationRate",
-            "type": "NUMERIC"
-          },
-          {
-            "name": "DeliveryReverseCalculationRate",
-            "type": "NUMERIC"
-          }
-        ]
-      },
-      {
-        "name": "VatRate",
-        "type": "NUMERIC"
-      },
-      {
-        "name": "DutyRate",
-        "type": "NUMERIC"
-      },
-      {
-        "name": "Weight",
-        "type": "NUMERIC"
-      },
-      {
-        "name": "WeightUnit",
-        "type": "NUMERIC"
-      },
-      {
-        "name": "CountryOfOriginIso",
-        "type": "STRING"
-      },
-      {
-        "name": "HsCode",
-        "type": "STRING"
-      },
-      {
-        "name": "EstimatedDeliveryDate",
-        "type": "TIMESTAMP"
-      },
-      {
-        "name": "Quantity",
-        "type": "INTEGER"
-      },
-      {
-        "name": "Product",
-        "type": "record",
-        "fields": [{
-            "name": "ProductCode",
-            "type": "STRING"
-          },
-          {
-            "name": "Upc",
-            "type": "STRING"
-          },
-          {
-            "name": "Title",
-            "type": "STRING"
-          },
-          {
-            "name": "Description",
-            "type": "STRING"
-          },
-          {
-            "name": "RetailerCurrencyProductPriceInfo",
-            "type": "record",
-            "fields": [{
-                "name": "Title",
-                "type": "STRING"
-              },
-              {
-                "name": "Description",
-                "type": "STRING"
-              },
-              {
-                "name": "Price",
-                "type": "record",
-                "fields": [{
-                    "name": "CurrencyCodeIso",
-                    "type": "STRING"
-                  },
-                  {
-                    "name": "Currency",
-                    "type": "record",
-                    "fields": [{
-                        "name": "Iso",
-                        "type": "STRING"
-                      },
-                      {
-                        "name": "Name",
-                        "type": "STRING"
-                      },
-                      {
-                        "name": "Exponent",
-                        "type": "INTEGER"
-                      },
-                      {
-                        "name": "Id",
-                        "type": "INTEGER"
-                      }
-                    ]
-                  },
-                  {
-                    "name": "Value",
-                    "type": "NUMERIC"
-                  }
-                ]
-              },
-              {
-                "name": "DiscountAmount",
-                "type": "record",
-                "fields": [{
-                    "name": "CurrencyCodeIso",
-                    "type": "STRING"
-                  },
-                  {
-                    "name": "Currency",
-                    "type": "record",
-                    "fields": [{
-                        "name": "Iso",
-                        "type": "STRING"
-                      },
-                      {
-                        "name": "Name",
-                        "type": "STRING"
-                      },
-                      {
-                        "name": "Exponent",
-                        "type": "INTEGER"
-                      },
-                      {
-                        "name": "Id",
-                        "type": "INTEGER"
-                      }
-                    ]
-                  },
-                  {
-                    "name": "Value",
-                    "type": "NUMERIC"
-                  }
-                ]
-              },
-              {
-                "name": "BeforeDiscount",
-                "type": "record",
-                "fields": [{
-                    "name": "CurrencyCodeIso",
-                    "type": "STRING"
-                  },
-                  {
-                    "name": "Currency",
-                    "type": "record",
-                    "fields": [{
-                        "name": "Iso",
-                        "type": "STRING"
-                      },
-                      {
-                        "name": "Name",
-                        "type": "STRING"
-                      },
-                      {
-                        "name": "Exponent",
-                        "type": "INTEGER"
-                      },
-                      {
-                        "name": "Id",
-                        "type": "INTEGER"
-                      }
-                    ]
-                  },
-                  {
-                    "name": "Value",
-                    "type": "NUMERIC"
-                  }
-                ]
-              },
-              {
-                "name": "DiscountPercentage",
-                "type": "NUMERIC"
-              }
-            ]
-          },
-          {
-            "name": "ShopperCurrencyProductPriceInfo",
-            "type": "record",
-            "fields": [{
-                "name": "Title",
-                "type": "STRING"
-              },
-              {
-                "name": "Description",
-                "type": "STRING"
-              },
-              {
-                "name": "Price",
-                "type": "record",
-                "fields": [{
-                    "name": "CurrencyCodeIso",
-                    "type": "STRING"
-                  },
-                  {
-                    "name": "Currency",
-                    "type": "record",
-                    "fields": [{
-                        "name": "Iso",
-                        "type": "STRING"
-                      },
-                      {
-                        "name": "Name",
-                        "type": "STRING"
-                      },
-                      {
-                        "name": "Exponent",
-                        "type": "INTEGER"
-                      },
-                      {
-                        "name": "Id",
-                        "type": "INTEGER"
-                      }
-                    ]
-                  },
-                  {
-                    "name": "Value",
-                    "type": "NUMERIC"
-                  }
-                ]
-              },
-              {
-                "name": "DiscountAmount",
-                "type": "record",
-                "fields": [{
-                    "name": "CurrencyCodeIso",
-                    "type": "STRING"
-                  },
-                  {
-                    "name": "Currency",
-                    "type": "record",
-                    "fields": [{
-                        "name": "Iso",
-                        "type": "STRING"
-                      },
-                      {
-                        "name": "Name",
-                        "type": "STRING"
-                      },
-                      {
-                        "name": "Exponent",
-                        "type": "INTEGER"
-                      },
-                      {
-                        "name": "Id",
-                        "type": "INTEGER"
-                      }
-                    ]
-                  },
-                  {
-                    "name": "Value",
-                    "type": "NUMERIC"
-                  }
-                ]
-              },
-              {
-                "name": "BeforeDiscount",
-                "type": "record",
-                "fields": [{
-                    "name": "CurrencyCodeIso",
-                    "type": "STRING"
-                  },
-                  {
-                    "name": "Currency",
-                    "type": "record",
-                    "fields": [{
-                        "name": "Iso",
-                        "type": "STRING"
-                      },
-                      {
-                        "name": "Name",
-                        "type": "STRING"
-                      },
-                      {
-                        "name": "Exponent",
-                        "type": "INTEGER"
-                      },
-                      {
-                        "name": "Id",
-                        "type": "INTEGER"
-                      }
-                    ]
-                  },
-                  {
-                    "name": "Value",
-                    "type": "NUMERIC"
-                  }
-                ]
-              },
-              {
-                "name": "DiscountPercentage",
-                "type": "NUMERIC"
-              }
-            ]
-          },
-          {
-            "name": "ImageUrl",
-            "type": "STRING"
-          },
-          {
-            "name": "Color",
-            "type": "STRING"
-          },
-          {
-            "name": "Size",
-            "type": "STRING"
-          },
-          {
-            "name": "IsRestrictedForCountry",
-            "type": "BOOLEAN"
-          },
-          {
-            "name": "OverridePrice",
-            "type": "BOOLEAN"
-          },
-          {
-            "name": "Dimension5",
-            "type": "STRING"
-          },
-          {
-            "name": "Dimension6",
-            "type": "STRING"
-          },
-          {
-            "name": "IsNonStandardCatalogItem",
-            "type": "BOOLEAN"
-          },
-          {
-            "name": "MetadataItems",
-            "type": "record",
-            "mode": "repeated",
-            "fields": [{
-                "name": "Name",
-                "type": "STRING"
-              },
-              {
-                "name": "Value",
-                "type": "NUMERIC"
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "name": "LineItemId",
-        "type": "STRING"
-      },
-      {
-        "name": "CartGrouping",
-        "type": "STRING"
-      },
-      {
-        "name": "MetadataItems",
-        "type": "record",
-        "mode": "repeated",
-        "fields": [{
-            "name": "Name",
-            "type": "STRING"
-          },
-          {
-            "name": "Value",
-            "type": "NUMERIC"
-          }
-        ]
-      },
-      {
-        "name": "IsCountryDefault",
-        "type": "BOOLEAN"
-      },
-      {
-        "name": "ChargeTargets",
-        "type": "record",
-        "mode": "repeated",
-        "fields": [{
-            "name": "Name",
-            "type": "STRING"
-          },
-          {
-            "name": "TargetValue",
-            "type": "record",
-            "fields": [{
-                "name": "CurrencyCodeIso",
-                "type": "STRING"
-              },
-              {
-                "name": "Currency",
-                "type": "record",
-                "fields": [{
-                    "name": "Iso",
-                    "type": "STRING"
-                  },
-                  {
-                    "name": "Name",
-                    "type": "STRING"
-                  },
-                  {
-                    "name": "Exponent",
-                    "type": "INTEGER"
-                  },
-                  {
-                    "name": "Id",
-                    "type": "INTEGER"
-                  }
-                ]
-              },
-              {
-                "name": "Value",
-                "type": "NUMERIC"
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "name": "AvailableOrderItems",
-    "type": "record",
-    "mode": "repeated",
-    "fields": [{
-        "name": "OrderArticles",
-        "type": "record",
-        "mode": "repeated",
-        "fields": [{
-            "name": "Charges",
-            "type": "record",
-            "mode": "repeated",
-            "fields": [{
-                "name": "Name",
-                "type": "STRING"
-              },
-              {
-                "name": "ExactValue",
-                "type": "record",
-                "fields": [{
-                    "name": "CurrencyCodeIso",
-                    "type": "STRING"
-                  },
-                  {
-                    "name": "Currency",
-                    "type": "record",
-                    "fields": [{
-                        "name": "Iso",
-                        "type": "STRING"
-                      },
-                      {
-                        "name": "Name",
-                        "type": "STRING"
-                      },
-                      {
-                        "name": "Exponent",
-                        "type": "INTEGER"
-                      },
-                      {
-                        "name": "Id",
-                        "type": "INTEGER"
-                      }
-                    ]
-                  },
-                  {
-                    "name": "Value",
-                    "type": "NUMERIC"
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "name": "Package",
-            "type": "record",
-            "fields": [{
-              "name": "ChargeTargets",
+          }]
+        },
+        {
+          "name": "ChargeTargets",
+          "type": "record",
+          "mode": "repeated",
+          "fields": [{
+              "name": "Name",
+              "type": "STRING"
+            },
+            {
+              "name": "TargetValue",
               "type": "record",
-              "mode": "repeated",
               "fields": [{
+                  "name": "CurrencyCodeIso",
+                  "type": "STRING"
+                },
+                {
+                  "name": "Currency",
+                  "type": "record",
+                  "fields": [{
+                      "name": "Iso",
+                      "type": "STRING"
+                    },
+                    {
+                      "name": "Name",
+                      "type": "STRING"
+                    },
+                    {
+                      "name": "Exponent",
+                      "type": "INTEGER"
+                    },
+                    {
+                      "name": "Id",
+                      "type": "INTEGER"
+                    }
+                  ]
+                },
+                {
+                  "name": "Value",
+                  "type": "NUMERIC"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Available",
+      "type": "BOOLEAN"
+    },
+    {
+      "name": "CalculationRates",
+      "type": "record",
+      "fields": [{
+          "name": "ItemVatRateApplied",
+          "type": "NUMERIC"
+        },
+        {
+          "name": "DeliveryVatRateApplied",
+          "type": "NUMERIC"
+        },
+        {
+          "name": "ItemDutyRateApplied",
+          "type": "NUMERIC"
+        },
+        {
+          "name": "DeliveryDutyRateApplied",
+          "type": "NUMERIC"
+        },
+        {
+          "name": "ItemFeeRateApplied",
+          "type": "NUMERIC"
+        },
+        {
+          "name": "DeliveryFeeRateApplied",
+          "type": "NUMERIC"
+        },
+        {
+          "name": "ItemReverseCalculationRate",
+          "type": "NUMERIC"
+        },
+        {
+          "name": "DeliveryReverseCalculationRate",
+          "type": "NUMERIC"
+        }
+      ]
+    },
+    {
+      "name": "VatRate",
+      "type": "NUMERIC"
+    },
+    {
+      "name": "DutyRate",
+      "type": "NUMERIC"
+    },
+    {
+      "name": "Weight",
+      "type": "NUMERIC"
+    },
+    {
+      "name": "WeightUnit",
+      "type": "NUMERIC"
+    },
+    {
+      "name": "CountryOfOriginIso",
+      "type": "STRING"
+    },
+    {
+      "name": "HsCode",
+      "type": "STRING"
+    },
+    {
+      "name": "EstimatedDeliveryDate",
+      "type": "TIMESTAMP"
+    },
+    {
+      "name": "Quantity",
+      "type": "INTEGER"
+    },
+    {
+      "name": "Product",
+      "type": "record",
+      "fields": [{
+          "name": "ProductCode",
+          "type": "STRING"
+        },
+        {
+          "name": "Upc",
+          "type": "STRING"
+        },
+        {
+          "name": "Title",
+          "type": "STRING"
+        },
+        {
+          "name": "Description",
+          "type": "STRING"
+        },
+        {
+          "name": "RetailerCurrencyProductPriceInfo",
+          "type": "record",
+          "fields": [{
+              "name": "Title",
+              "type": "STRING"
+            },
+            {
+              "name": "Description",
+              "type": "STRING"
+            },
+            {
+              "name": "Price",
+              "type": "record",
+              "fields": [{
+                  "name": "CurrencyCodeIso",
+                  "type": "STRING"
+                },
+                {
+                  "name": "Currency",
+                  "type": "record",
+                  "fields": [{
+                      "name": "Iso",
+                      "type": "STRING"
+                    },
+                    {
+                      "name": "Name",
+                      "type": "STRING"
+                    },
+                    {
+                      "name": "Exponent",
+                      "type": "INTEGER"
+                    },
+                    {
+                      "name": "Id",
+                      "type": "INTEGER"
+                    }
+                  ]
+                },
+                {
+                  "name": "Value",
+                  "type": "NUMERIC"
+                }
+              ]
+            },
+            {
+              "name": "DiscountAmount",
+              "type": "record",
+              "fields": [{
+                  "name": "CurrencyCodeIso",
+                  "type": "STRING"
+                },
+                {
+                  "name": "Currency",
+                  "type": "record",
+                  "fields": [{
+                      "name": "Iso",
+                      "type": "STRING"
+                    },
+                    {
+                      "name": "Name",
+                      "type": "STRING"
+                    },
+                    {
+                      "name": "Exponent",
+                      "type": "INTEGER"
+                    },
+                    {
+                      "name": "Id",
+                      "type": "INTEGER"
+                    }
+                  ]
+                },
+                {
+                  "name": "Value",
+                  "type": "NUMERIC"
+                }
+              ]
+            },
+            {
+              "name": "BeforeDiscount",
+              "type": "record",
+              "fields": [{
+                  "name": "CurrencyCodeIso",
+                  "type": "STRING"
+                },
+                {
+                  "name": "Currency",
+                  "type": "record",
+                  "fields": [{
+                      "name": "Iso",
+                      "type": "STRING"
+                    },
+                    {
+                      "name": "Name",
+                      "type": "STRING"
+                    },
+                    {
+                      "name": "Exponent",
+                      "type": "INTEGER"
+                    },
+                    {
+                      "name": "Id",
+                      "type": "INTEGER"
+                    }
+                  ]
+                },
+                {
+                  "name": "Value",
+                  "type": "NUMERIC"
+                }
+              ]
+            },
+            {
+              "name": "DiscountPercentage",
+              "type": "NUMERIC"
+            }
+          ]
+        },
+        {
+          "name": "ShopperCurrencyProductPriceInfo",
+          "type": "record",
+          "fields": [{
+              "name": "Title",
+              "type": "STRING"
+            },
+            {
+              "name": "Description",
+              "type": "STRING"
+            },
+            {
+              "name": "Price",
+              "type": "record",
+              "fields": [{
+                  "name": "CurrencyCodeIso",
+                  "type": "STRING"
+                },
+                {
+                  "name": "Currency",
+                  "type": "record",
+                  "fields": [{
+                      "name": "Iso",
+                      "type": "STRING"
+                    },
+                    {
+                      "name": "Name",
+                      "type": "STRING"
+                    },
+                    {
+                      "name": "Exponent",
+                      "type": "INTEGER"
+                    },
+                    {
+                      "name": "Id",
+                      "type": "INTEGER"
+                    }
+                  ]
+                },
+                {
+                  "name": "Value",
+                  "type": "NUMERIC"
+                }
+              ]
+            },
+            {
+              "name": "DiscountAmount",
+              "type": "record",
+              "fields": [{
+                  "name": "CurrencyCodeIso",
+                  "type": "STRING"
+                },
+                {
+                  "name": "Currency",
+                  "type": "record",
+                  "fields": [{
+                      "name": "Iso",
+                      "type": "STRING"
+                    },
+                    {
+                      "name": "Name",
+                      "type": "STRING"
+                    },
+                    {
+                      "name": "Exponent",
+                      "type": "INTEGER"
+                    },
+                    {
+                      "name": "Id",
+                      "type": "INTEGER"
+                    }
+                  ]
+                },
+                {
+                  "name": "Value",
+                  "type": "NUMERIC"
+                }
+              ]
+            },
+            {
+              "name": "BeforeDiscount",
+              "type": "record",
+              "fields": [{
+                  "name": "CurrencyCodeIso",
+                  "type": "STRING"
+                },
+                {
+                  "name": "Currency",
+                  "type": "record",
+                  "fields": [{
+                      "name": "Iso",
+                      "type": "STRING"
+                    },
+                    {
+                      "name": "Name",
+                      "type": "STRING"
+                    },
+                    {
+                      "name": "Exponent",
+                      "type": "INTEGER"
+                    },
+                    {
+                      "name": "Id",
+                      "type": "INTEGER"
+                    }
+                  ]
+                },
+                {
+                  "name": "Value",
+                  "type": "NUMERIC"
+                }
+              ]
+            },
+            {
+              "name": "DiscountPercentage",
+              "type": "NUMERIC"
+            }
+          ]
+        },
+        {
+          "name": "ImageUrl",
+          "type": "STRING"
+        },
+        {
+          "name": "Color",
+          "type": "STRING"
+        },
+        {
+          "name": "Size",
+          "type": "STRING"
+        },
+        {
+          "name": "IsRestrictedForCountry",
+          "type": "BOOLEAN"
+        },
+        {
+          "name": "OverridePrice",
+          "type": "BOOLEAN"
+        },
+        {
+          "name": "Dimension5",
+          "type": "STRING"
+        },
+        {
+          "name": "Dimension6",
+          "type": "STRING"
+        },
+        {
+          "name": "IsNonStandardCatalogItem",
+          "type": "BOOLEAN"
+        },
+        {
+          "name": "MetadataItems",
+          "type": "record",
+          "mode": "repeated",
+          "fields": [{
+              "name": "Name",
+              "type": "STRING"
+            },
+            {
+              "name": "Value",
+              "type": "NUMERIC"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "LineItemId",
+      "type": "STRING"
+    },
+    {
+      "name": "CartGrouping",
+      "type": "STRING"
+    },
+    {
+      "name": "MetadataItems",
+      "type": "record",
+      "mode": "repeated",
+      "fields": [{
+          "name": "Name",
+          "type": "STRING"
+        },
+        {
+          "name": "Value",
+          "type": "NUMERIC"
+        }
+      ]
+    },
+    {
+      "name": "IsCountryDefault",
+      "type": "BOOLEAN"
+    },
+    {
+      "name": "ChargeTargets",
+      "type": "record",
+      "mode": "repeated",
+      "fields": [{
+          "name": "Name",
+          "type": "STRING"
+        },
+        {
+          "name": "TargetValue",
+          "type": "record",
+          "fields": [{
+              "name": "CurrencyCodeIso",
+              "type": "STRING"
+            },
+            {
+              "name": "Currency",
+              "type": "record",
+              "fields": [{
+                  "name": "Iso",
+                  "type": "STRING"
+                },
+                {
                   "name": "Name",
                   "type": "STRING"
                 },
                 {
-                  "name": "TargetValue",
+                  "name": "Exponent",
+                  "type": "INTEGER"
+                },
+                {
+                  "name": "Id",
+                  "type": "INTEGER"
+                }
+              ]
+            },
+            {
+              "name": "Value",
+              "type": "NUMERIC"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+},
+{
+  "name": "AvailableOrderItems",
+  "type": "record",
+  "mode": "repeated",
+  "fields": [{
+      "name": "OrderArticles",
+      "type": "record",
+      "mode": "repeated",
+      "fields": [{
+          "name": "Charges",
+          "type": "record",
+          "mode": "repeated",
+          "fields": [{
+              "name": "Name",
+              "type": "STRING"
+            },
+            {
+              "name": "ExactValue",
+              "type": "record",
+              "fields": [{
+                  "name": "CurrencyCodeIso",
+                  "type": "STRING"
+                },
+                {
+                  "name": "Currency",
                   "type": "record",
                   "fields": [{
-                      "name": "CurrencyCodeIso",
+                      "name": "Iso",
                       "type": "STRING"
                     },
                     {
-                      "name": "Currency",
-                      "type": "record",
-                      "fields": [{
-                          "name": "Iso",
-                          "type": "STRING"
-                        },
-                        {
-                          "name": "Name",
-                          "type": "STRING"
-                        },
-                        {
-                          "name": "Exponent",
-                          "type": "INTEGER"
-                        },
-                        {
-                          "name": "Id",
-                          "type": "INTEGER"
-                        }
-                      ]
+                      "name": "Name",
+                      "type": "STRING"
                     },
                     {
-                      "name": "Value",
-                      "type": "NUMERIC"
+                      "name": "Exponent",
+                      "type": "INTEGER"
+                    },
+                    {
+                      "name": "Id",
+                      "type": "INTEGER"
                     }
                   ]
+                },
+                {
+                  "name": "Value",
+                  "type": "NUMERIC"
                 }
               ]
-            }]
-          },
-          {
+            }
+          ]
+        },
+        {
+          "name": "Package",
+          "type": "record",
+          "fields": [{
             "name": "ChargeTargets",
             "type": "record",
             "mode": "repeated",
@@ -745,1998 +700,2043 @@
                 ]
               }
             ]
-          }
-        ]
-      },
-      {
-        "name": "Available",
-        "type": "BOOLEAN"
-      },
-      {
-        "name": "CalculationRates",
-        "type": "record",
-        "fields": [{
-            "name": "ItemVatRateApplied",
-            "type": "NUMERIC"
-          },
-          {
-            "name": "DeliveryVatRateApplied",
-            "type": "NUMERIC"
-          },
-          {
-            "name": "ItemDutyRateApplied",
-            "type": "NUMERIC"
-          },
-          {
-            "name": "DeliveryDutyRateApplied",
-            "type": "NUMERIC"
-          },
-          {
-            "name": "ItemFeeRateApplied",
-            "type": "NUMERIC"
-          },
-          {
-            "name": "DeliveryFeeRateApplied",
-            "type": "NUMERIC"
-          },
-          {
-            "name": "ItemReverseCalculationRate",
-            "type": "NUMERIC"
-          },
-          {
-            "name": "DeliveryReverseCalculationRate",
-            "type": "NUMERIC"
-          }
-        ]
-      },
-      {
-        "name": "VatRate",
-        "type": "NUMERIC"
-      },
-      {
-        "name": "DutyRate",
-        "type": "NUMERIC"
-      },
-      {
-        "name": "Weight",
-        "type": "NUMERIC"
-      },
-      {
-        "name": "WeightUnit",
-        "type": "NUMERIC"
-      },
-      {
-        "name": "CountryOfOriginIso",
-        "type": "STRING"
-      },
-      {
-        "name": "HsCode",
-        "type": "STRING"
-      },
-      {
-        "name": "EstimatedDeliveryDate",
-        "type": "TIMESTAMP"
-      },
-      {
-        "name": "Quantity",
-        "type": "INTEGER"
-      },
-      {
-        "name": "Product",
-        "type": "record",
-        "fields": [{
-            "name": "ProductCode",
-            "type": "STRING"
-          },
-          {
-            "name": "Upc",
-            "type": "STRING"
-          },
-          {
-            "name": "Title",
-            "type": "STRING"
-          },
-          {
-            "name": "Description",
-            "type": "STRING"
-          },
-          {
-            "name": "RetailerCurrencyProductPriceInfo",
-            "type": "record",
-            "fields": [{
-                "name": "Title",
-                "type": "STRING"
-              },
-              {
-                "name": "Description",
-                "type": "STRING"
-              },
-              {
-                "name": "Price",
-                "type": "record",
-                "fields": [{
-                    "name": "CurrencyCodeIso",
-                    "type": "STRING"
-                  },
-                  {
-                    "name": "Currency",
-                    "type": "record",
-                    "fields": [{
-                        "name": "Iso",
-                        "type": "STRING"
-                      },
-                      {
-                        "name": "Name",
-                        "type": "STRING"
-                      },
-                      {
-                        "name": "Exponent",
-                        "type": "INTEGER"
-                      },
-                      {
-                        "name": "Id",
-                        "type": "INTEGER"
-                      }
-                    ]
-                  },
-                  {
-                    "name": "Value",
-                    "type": "NUMERIC"
-                  }
-                ]
-              },
-              {
-                "name": "DiscountAmount",
-                "type": "record",
-                "fields": [{
-                    "name": "CurrencyCodeIso",
-                    "type": "STRING"
-                  },
-                  {
-                    "name": "Currency",
-                    "type": "record",
-                    "fields": [{
-                        "name": "Iso",
-                        "type": "STRING"
-                      },
-                      {
-                        "name": "Name",
-                        "type": "STRING"
-                      },
-                      {
-                        "name": "Exponent",
-                        "type": "INTEGER"
-                      },
-                      {
-                        "name": "Id",
-                        "type": "INTEGER"
-                      }
-                    ]
-                  },
-                  {
-                    "name": "Value",
-                    "type": "NUMERIC"
-                  }
-                ]
-              },
-              {
-                "name": "BeforeDiscount",
-                "type": "record",
-                "fields": [{
-                    "name": "CurrencyCodeIso",
-                    "type": "STRING"
-                  },
-                  {
-                    "name": "Currency",
-                    "type": "record",
-                    "fields": [{
-                        "name": "Iso",
-                        "type": "STRING"
-                      },
-                      {
-                        "name": "Name",
-                        "type": "STRING"
-                      },
-                      {
-                        "name": "Exponent",
-                        "type": "INTEGER"
-                      },
-                      {
-                        "name": "Id",
-                        "type": "INTEGER"
-                      }
-                    ]
-                  },
-                  {
-                    "name": "Value",
-                    "type": "NUMERIC"
-                  }
-                ]
-              },
-              {
-                "name": "DiscountPercentage",
-                "type": "NUMERIC"
-              }
-            ]
-          },
-          {
-            "name": "ShopperCurrencyProductPriceInfo",
-            "type": "record",
-            "fields": [{
-                "name": "Title",
-                "type": "STRING"
-              },
-              {
-                "name": "Description",
-                "type": "STRING"
-              },
-              {
-                "name": "Price",
-                "type": "record",
-                "fields": [{
-                    "name": "CurrencyCodeIso",
-                    "type": "STRING"
-                  },
-                  {
-                    "name": "Currency",
-                    "type": "record",
-                    "fields": [{
-                        "name": "Iso",
-                        "type": "STRING"
-                      },
-                      {
-                        "name": "Name",
-                        "type": "STRING"
-                      },
-                      {
-                        "name": "Exponent",
-                        "type": "INTEGER"
-                      },
-                      {
-                        "name": "Id",
-                        "type": "INTEGER"
-                      }
-                    ]
-                  },
-                  {
-                    "name": "Value",
-                    "type": "NUMERIC"
-                  }
-                ]
-              },
-              {
-                "name": "DiscountAmount",
-                "type": "record",
-                "fields": [{
-                    "name": "CurrencyCodeIso",
-                    "type": "STRING"
-                  },
-                  {
-                    "name": "Currency",
-                    "type": "record",
-                    "fields": [{
-                        "name": "Iso",
-                        "type": "STRING"
-                      },
-                      {
-                        "name": "Name",
-                        "type": "STRING"
-                      },
-                      {
-                        "name": "Exponent",
-                        "type": "INTEGER"
-                      },
-                      {
-                        "name": "Id",
-                        "type": "INTEGER"
-                      }
-                    ]
-                  },
-                  {
-                    "name": "Value",
-                    "type": "NUMERIC"
-                  }
-                ]
-              },
-              {
-                "name": "BeforeDiscount",
-                "type": "record",
-                "fields": [{
-                    "name": "CurrencyCodeIso",
-                    "type": "STRING"
-                  },
-                  {
-                    "name": "Currency",
-                    "type": "record",
-                    "fields": [{
-                        "name": "Iso",
-                        "type": "STRING"
-                      },
-                      {
-                        "name": "Name",
-                        "type": "STRING"
-                      },
-                      {
-                        "name": "Exponent",
-                        "type": "INTEGER"
-                      },
-                      {
-                        "name": "Id",
-                        "type": "INTEGER"
-                      }
-                    ]
-                  },
-                  {
-                    "name": "Value",
-                    "type": "NUMERIC"
-                  }
-                ]
-              },
-              {
-                "name": "DiscountPercentage",
-                "type": "NUMERIC"
-              }
-            ]
-          },
-          {
-            "name": "ImageUrl",
-            "type": "STRING"
-          },
-          {
-            "name": "Color",
-            "type": "STRING"
-          },
-          {
-            "name": "Size",
-            "type": "STRING"
-          },
-          {
-            "name": "IsRestrictedForCountry",
-            "type": "BOOLEAN"
-          },
-          {
-            "name": "OverridePrice",
-            "type": "BOOLEAN"
-          },
-          {
-            "name": "Dimension5",
-            "type": "STRING"
-          },
-          {
-            "name": "Dimension6",
-            "type": "STRING"
-          },
-          {
-            "name": "IsNonStandardCatalogItem",
-            "type": "BOOLEAN"
-          },
-          {
-            "name": "MetadataItems",
-            "type": "record",
-            "mode": "repeated",
-            "fields": [{
-                "name": "Name",
-                "type": "STRING"
-              },
-              {
-                "name": "Value",
-                "type": "NUMERIC"
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "name": "LineItemId",
-        "type": "STRING"
-      },
-      {
-        "name": "CartGrouping",
-        "type": "STRING"
-      },
-      {
-        "name": "MetadataItems",
-        "type": "record",
-        "mode": "repeated",
-        "fields": [{
-            "name": "Name",
-            "type": "STRING"
-          },
-          {
-            "name": "Value",
-            "type": "NUMERIC"
-          }
-        ]
-      },
-      {
-        "name": "IsCountryDefault",
-        "type": "BOOLEAN"
-      },
-      {
-        "name": "ChargeTargets",
-        "type": "record",
-        "mode": "repeated",
-        "fields": [{
-            "name": "Name",
-            "type": "STRING"
-          },
-          {
-            "name": "TargetValue",
-            "type": "record",
-            "fields": [{
-                "name": "CurrencyCodeIso",
-                "type": "STRING"
-              },
-              {
-                "name": "Currency",
-                "type": "record",
-                "fields": [{
-                    "name": "Iso",
-                    "type": "STRING"
-                  },
-                  {
-                    "name": "Name",
-                    "type": "STRING"
-                  },
-                  {
-                    "name": "Exponent",
-                    "type": "INTEGER"
-                  },
-                  {
-                    "name": "Id",
-                    "type": "INTEGER"
-                  }
-                ]
-              },
-              {
-                "name": "Value",
-                "type": "NUMERIC"
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "name": "RetailerPromoCodes",
-    "type": "record",
-    "mode": "repeated",
-    "fields": [{
-        "name": "PromoCode",
-        "type": "STRING"
-      },
-      {
-        "name": "Title",
-        "type": "STRING"
-      },
-      {
-        "name": "Description",
-        "type": "STRING"
-      }
-    ]
-  },
-  {
-    "name": "OrderDiscounts",
-    "type": "record",
-    "mode": "repeated",
-    "fields": [{
-        "name": "Title",
-        "type": "STRING"
-      },
-      {
-        "name": "Description",
-        "type": "STRING"
-      },
-      {
-        "name": "RetailerCurrencyOrderDiscountAmount",
-        "type": "record",
-        "fields": [{
-            "name": "Title",
-            "type": "STRING"
-          },
-          {
-            "name": "Description",
-            "type": "STRING"
-          },
-          {
-            "name": "Price",
-            "type": "record",
-            "fields": [{
-                "name": "CurrencyCodeIso",
-                "type": "STRING"
-              },
-              {
-                "name": "Currency",
-                "type": "record",
-                "fields": [{
-                    "name": "Iso",
-                    "type": "STRING"
-                  },
-                  {
-                    "name": "Name",
-                    "type": "STRING"
-                  },
-                  {
-                    "name": "Exponent",
-                    "type": "INTEGER"
-                  },
-                  {
-                    "name": "Id",
-                    "type": "INTEGER"
-                  }
-                ]
-              },
-              {
-                "name": "Value",
-                "type": "NUMERIC"
-              }
-            ]
-          },
-          {
-            "name": "DiscountAmount",
-            "type": "record",
-            "fields": [{
-                "name": "CurrencyCodeIso",
-                "type": "STRING"
-              },
-              {
-                "name": "Currency",
-                "type": "record",
-                "fields": [{
-                    "name": "Iso",
-                    "type": "STRING"
-                  },
-                  {
-                    "name": "Name",
-                    "type": "STRING"
-                  },
-                  {
-                    "name": "Exponent",
-                    "type": "INTEGER"
-                  },
-                  {
-                    "name": "Id",
-                    "type": "INTEGER"
-                  }
-                ]
-              },
-              {
-                "name": "Value",
-                "type": "NUMERIC"
-              }
-            ]
-          },
-          {
-            "name": "BeforeDiscount",
-            "type": "record",
-            "fields": [{
-                "name": "CurrencyCodeIso",
-                "type": "STRING"
-              },
-              {
-                "name": "Currency",
-                "type": "record",
-                "fields": [{
-                    "name": "Iso",
-                    "type": "STRING"
-                  },
-                  {
-                    "name": "Name",
-                    "type": "STRING"
-                  },
-                  {
-                    "name": "Exponent",
-                    "type": "INTEGER"
-                  },
-                  {
-                    "name": "Id",
-                    "type": "INTEGER"
-                  }
-                ]
-              },
-              {
-                "name": "Value",
-                "type": "NUMERIC"
-              }
-            ]
-          },
-          {
-            "name": "DiscountPercentage",
-            "type": "NUMERIC"
-          }
-        ]
-      },
-      {
-        "name": "ShopperCurrencyOrderDiscountAmount",
-        "type": "record",
-        "fields": [{
-            "name": "Title",
-            "type": "STRING"
-          },
-          {
-            "name": "Description",
-            "type": "STRING"
-          },
-          {
-            "name": "Price",
-            "type": "record",
-            "fields": [{
-                "name": "CurrencyCodeIso",
-                "type": "STRING"
-              },
-              {
-                "name": "Currency",
-                "type": "record",
-                "fields": [{
-                    "name": "Iso",
-                    "type": "STRING"
-                  },
-                  {
-                    "name": "Name",
-                    "type": "STRING"
-                  },
-                  {
-                    "name": "Exponent",
-                    "type": "INTEGER"
-                  },
-                  {
-                    "name": "Id",
-                    "type": "INTEGER"
-                  }
-                ]
-              },
-              {
-                "name": "Value",
-                "type": "NUMERIC"
-              }
-            ]
-          },
-          {
-            "name": "DiscountAmount",
-            "type": "record",
-            "fields": [{
-                "name": "CurrencyCodeIso",
-                "type": "STRING"
-              },
-              {
-                "name": "Currency",
-                "type": "record",
-                "fields": [{
-                    "name": "Iso",
-                    "type": "STRING"
-                  },
-                  {
-                    "name": "Name",
-                    "type": "STRING"
-                  },
-                  {
-                    "name": "Exponent",
-                    "type": "INTEGER"
-                  },
-                  {
-                    "name": "Id",
-                    "type": "INTEGER"
-                  }
-                ]
-              },
-              {
-                "name": "Value",
-                "type": "NUMERIC"
-              }
-            ]
-          },
-          {
-            "name": "BeforeDiscount",
-            "type": "record",
-            "fields": [{
-                "name": "CurrencyCodeIso",
-                "type": "STRING"
-              },
-              {
-                "name": "Currency",
-                "type": "record",
-                "fields": [{
-                    "name": "Iso",
-                    "type": "STRING"
-                  },
-                  {
-                    "name": "Name",
-                    "type": "STRING"
-                  },
-                  {
-                    "name": "Exponent",
-                    "type": "INTEGER"
-                  },
-                  {
-                    "name": "Id",
-                    "type": "INTEGER"
-                  }
-                ]
-              },
-              {
-                "name": "Value",
-                "type": "NUMERIC"
-              }
-            ]
-          },
-          {
-            "name": "DiscountPercentage",
-            "type": "NUMERIC"
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "name": "DeliveryDetails",
-    "type": "record",
-    "mode": "repeated",
-    "fields": [{
-        "name": "Id",
-        "type": "INTEGER"
-      },
-      {
-        "name": "ContactDetailsNickName",
-        "type": "STRING"
-      },
-      {
-        "name": "Address1",
-        "type": "STRING"
-      },
-      {
-        "name": "Address2",
-        "type": "STRING"
-      },
-      {
-        "name": "Address3",
-        "type": "STRING"
-      },
-      {
-        "name": "City",
-        "type": "STRING"
-      },
-      {
-        "name": "PostalCode",
-        "type": "STRING"
-      },
-      {
-        "name": "Region",
-        "type": "STRING"
-      },
-      {
-        "name": "Country",
-        "type": "STRING"
-      },
-      {
-        "name": "Email",
-        "type": "STRING"
-      },
-      {
-        "name": "FirstName",
-        "type": "STRING"
-      },
-      {
-        "name": "LastName",
-        "type": "STRING"
-      },
-      {
-        "name": "Gender",
-        "type": "INTEGER"
-      },
-      {
-        "name": "Telephone",
-        "type": "STRING"
-      },
-      {
-        "name": "PoBox",
-        "type": "STRING"
-      },
-      {
-        "name": "MetadataItems",
-        "type": "record",
-        "mode": "repeated",
-        "fields": [{
-            "name": "Name",
-            "type": "STRING"
-          },
-          {
-            "name": "Value",
-            "type": "NUMERIC"
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "name": "PaymentDetails",
-    "type": "record",
-    "mode": "repeated",
-    "fields": [{
-        "name": "Id",
-        "type": "INTEGER"
-      },
-      {
-        "name": "ContactDetailsNickName",
-        "type": "STRING"
-      },
-      {
-        "name": "Address1",
-        "type": "STRING"
-      },
-      {
-        "name": "Address2",
-        "type": "STRING"
-      },
-      {
-        "name": "Address3",
-        "type": "STRING"
-      },
-      {
-        "name": "City",
-        "type": "STRING"
-      },
-      {
-        "name": "PostalCode",
-        "type": "STRING"
-      },
-      {
-        "name": "Region",
-        "type": "STRING"
-      },
-      {
-        "name": "Country",
-        "type": "STRING"
-      },
-      {
-        "name": "Email",
-        "type": "STRING"
-      },
-      {
-        "name": "FirstName",
-        "type": "STRING"
-      },
-      {
-        "name": "LastName",
-        "type": "STRING"
-      },
-      {
-        "name": "Gender",
-        "type": "INTEGER"
-      },
-      {
-        "name": "Telephone",
-        "type": "STRING"
-      },
-      {
-        "name": "PoBox",
-        "type": "STRING"
-      },
-      {
-        "name": "MetadataItems",
-        "type": "record",
-        "mode": "repeated",
-        "fields": [{
-            "name": "Name",
-            "type": "STRING"
-          },
-          {
-            "name": "Value",
-            "type": "NUMERIC"
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "name": "DeliveryOption",
-    "type": "record",
-    "fields": [{
-        "name": "Option",
-        "type": "INTEGER"
-      },
-      {
-        "name": "IsExpressDelivery",
-        "type": "BOOLEAN"
-      }
-    ]
-  },
-  {
-    "name": "Errors",
-    "type": "record",
-    "mode": "repeated",
-    "fields": [{
-        "name": "Code",
-        "type": "INTEGER"
-      },
-      {
-        "name": "Message",
-        "type": "STRING"
-      }
-    ]
-  },
-  {
-    "name": "RetailerCheckoutExperience",
-    "type": "record",
-    "fields": [{
-        "name": "RetailerCheckoutExperienceId",
-        "type": "STRING"
-      },
-      {
-        "name": "BackToCartUrl",
-        "type": "STRING"
-      },
-      {
-        "name": "ContinueShoppingUrl",
-        "type": "STRING"
-      },
-      {
-        "name": "MetadataItems",
-        "type": "record",
-        "mode": "repeated",
-        "fields": [{
-            "name": "Name",
-            "type": "STRING"
-          },
-          {
-            "name": "Value",
-            "type": "NUMERIC"
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "name": "ShopperCurrencyIso",
-    "type": "STRING"
-  },
-  {
-    "name": "RetailerCurrencyIso",
-    "type": "STRING"
-  },
-  {
-    "name": "RetailerFxGroupId",
-    "type": "INTEGER"
-  },
-  {
-    "name": "SourceCountryIso",
-    "type": "STRING"
-  },
-  {
-    "name": "DeliveryCountryIso",
-    "type": "STRING"
-  },
-  {
-    "name": "ShopperCheckoutExperience",
-    "type": "record",
-    "fields": [{
-        "name": "UseDeliveryContactDetailsForPaymentContactDetails",
-        "type": "BOOLEAN"
-      },
-      {
-        "name": "EmailMarketingOptIn",
-        "type": "BOOLEAN"
-      },
-      {
-        "name": "RegisteredProfileId",
-        "type": "STRING"
-      },
-      {
-        "name": "ShopperCultureLanguageIso",
-        "type": "STRING"
-      },
-      {
-        "name": "ExpressPaymentMethod",
-        "type": "STRING"
-      },
-      {
-        "name": "MetadataItems",
-        "type": "record",
-        "mode": "repeated",
-        "fields": [{
-            "name": "Name",
-            "type": "STRING"
-          },
-          {
-            "name": "Value",
-            "type": "NUMERIC"
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "name": "DeliveryOptions",
-    "type": "record",
-    "mode": "repeated",
-    "fields": [{
-        "name": "DeliveryOption",
-        "type": "STRING"
-      },
-      {
-        "name": "EstimatedDeliveryDate",
-        "type": "TIMESTAMP"
-      },
-      {
-        "name": "RetailerCurrencyOveridePriceInfo",
-        "type": "record",
-        "fields": [{
-            "name": "Title",
-            "type": "STRING"
-          },
-          {
-            "name": "Description",
-            "type": "STRING"
-          },
-          {
-            "name": "Price",
-            "type": "record",
-            "fields": [{
-                "name": "CurrencyCodeIso",
-                "type": "STRING"
-              },
-              {
-                "name": "Currency",
-                "type": "record",
-                "fields": [{
-                    "name": "Iso",
-                    "type": "STRING"
-                  },
-                  {
-                    "name": "Name",
-                    "type": "STRING"
-                  },
-                  {
-                    "name": "Exponent",
-                    "type": "INTEGER"
-                  },
-                  {
-                    "name": "Id",
-                    "type": "INTEGER"
-                  }
-                ]
-              },
-              {
-                "name": "Value",
-                "type": "NUMERIC"
-              }
-            ]
-          },
-          {
-            "name": "DiscountAmount",
-            "type": "record",
-            "fields": [{
-                "name": "CurrencyCodeIso",
-                "type": "STRING"
-              },
-              {
-                "name": "Currency",
-                "type": "record",
-                "fields": [{
-                    "name": "Iso",
-                    "type": "STRING"
-                  },
-                  {
-                    "name": "Name",
-                    "type": "STRING"
-                  },
-                  {
-                    "name": "Exponent",
-                    "type": "INTEGER"
-                  },
-                  {
-                    "name": "Id",
-                    "type": "INTEGER"
-                  }
-                ]
-              },
-              {
-                "name": "Value",
-                "type": "NUMERIC"
-              }
-            ]
-          },
-          {
-            "name": "BeforeDiscount",
-            "type": "record",
-            "fields": [{
-                "name": "CurrencyCodeIso",
-                "type": "STRING"
-              },
-              {
-                "name": "Currency",
-                "type": "record",
-                "fields": [{
-                    "name": "Iso",
-                    "type": "STRING"
-                  },
-                  {
-                    "name": "Name",
-                    "type": "STRING"
-                  },
-                  {
-                    "name": "Exponent",
-                    "type": "INTEGER"
-                  },
-                  {
-                    "name": "Id",
-                    "type": "INTEGER"
-                  }
-                ]
-              },
-              {
-                "name": "Value",
-                "type": "NUMERIC"
-              }
-            ]
-          },
-          {
-            "name": "DiscountPercentage",
-            "type": "NUMERIC"
-          }
-        ]
-      },
-      {
-        "name": "ShopperCurrencyOveridePriceInfo",
-        "type": "record",
-        "fields": [{
-            "name": "Title",
-            "type": "STRING"
-          },
-          {
-            "name": "Description",
-            "type": "STRING"
-          },
-          {
-            "name": "Price",
-            "type": "record",
-            "fields": [{
-                "name": "CurrencyCodeIso",
-                "type": "STRING"
-              },
-              {
-                "name": "Currency",
-                "type": "record",
-                "fields": [{
-                    "name": "Iso",
-                    "type": "STRING"
-                  },
-                  {
-                    "name": "Name",
-                    "type": "STRING"
-                  },
-                  {
-                    "name": "Exponent",
-                    "type": "INTEGER"
-                  },
-                  {
-                    "name": "Id",
-                    "type": "INTEGER"
-                  }
-                ]
-              },
-              {
-                "name": "Value",
-                "type": "NUMERIC"
-              }
-            ]
-          },
-          {
-            "name": "DiscountAmount",
-            "type": "record",
-            "fields": [{
-                "name": "CurrencyCodeIso",
-                "type": "STRING"
-              },
-              {
-                "name": "Currency",
-                "type": "record",
-                "fields": [{
-                    "name": "Iso",
-                    "type": "STRING"
-                  },
-                  {
-                    "name": "Name",
-                    "type": "STRING"
-                  },
-                  {
-                    "name": "Exponent",
-                    "type": "INTEGER"
-                  },
-                  {
-                    "name": "Id",
-                    "type": "INTEGER"
-                  }
-                ]
-              },
-              {
-                "name": "Value",
-                "type": "NUMERIC"
-              }
-            ]
-          },
-          {
-            "name": "BeforeDiscount",
-            "type": "record",
-            "fields": [{
-                "name": "CurrencyCodeIso",
-                "type": "STRING"
-              },
-              {
-                "name": "Currency",
-                "type": "record",
-                "fields": [{
-                    "name": "Iso",
-                    "type": "STRING"
-                  },
-                  {
-                    "name": "Name",
-                    "type": "STRING"
-                  },
-                  {
-                    "name": "Exponent",
-                    "type": "INTEGER"
-                  },
-                  {
-                    "name": "Id",
-                    "type": "INTEGER"
-                  }
-                ]
-              },
-              {
-                "name": "Value",
-                "type": "NUMERIC"
-              }
-            ]
-          },
-          {
-            "name": "DiscountPercentage",
-            "type": "NUMERIC"
-          }
-        ]
-      },
-      {
-        "name": "MetadataItems",
-        "type": "record",
-        "mode": "repeated",
-        "fields": [{
-            "name": "Name",
-            "type": "STRING"
-          },
-          {
-            "name": "Value",
-            "type": "NUMERIC"
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "name": "RetailerDeliveryOptions",
-    "type": "record",
-    "mode": "repeated",
-    "fields": [{
-        "name": "Title",
-        "type": "STRING"
-      },
-      {
-        "name": "Description",
-        "type": "STRING"
-      },
-      {
-        "name": "EstimatedDeliveryDate",
-        "type": "TIMESTAMP"
-      },
-      {
-        "name": "RetailerCurrencyDeliveryOptionPriceInfo",
-        "type": "record",
-        "fields": [{
-            "name": "Title",
-            "type": "STRING"
-          },
-          {
-            "name": "Description",
-            "type": "STRING"
-          },
-          {
-            "name": "Price",
-            "type": "NUMERIC"
-          },
-          {
-            "name": "DiscountAmount",
-            "type": "NUMERIC"
-          },
-          {
-            "name": "BeforeDiscount",
-            "type": "NUMERIC"
-          },
-          {
-            "name": "DiscountPercentage",
-            "type": "NUMERIC"
-          }
-        ]
-      },
-      {
-        "name": "ShopperCurrencyDeliveryOptionPriceInfo",
-        "type": "record",
-        "fields": [{
-            "name": "Title",
-            "type": "STRING"
-          },
-          {
-            "name": "Description",
-            "type": "STRING"
-          },
-          {
-            "name": "Price",
-            "type": "NUMERIC"
-          },
-          {
-            "name": "DiscountAmount",
-            "type": "NUMERIC"
-          },
-          {
-            "name": "BeforeDiscount",
-            "type": "NUMERIC"
-          },
-          {
-            "name": "DiscountPercentage",
-            "type": "NUMERIC"
-          }
-        ]
-      },
-      {
-        "name": "MetadataItems",
-        "type": "record",
-        "mode": "repeated",
-        "fields": [{
-            "name": "Name",
-            "type": "STRING"
-          },
-          {
-            "name": "Value",
-            "type": "NUMERIC"
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "name": "Payment",
-    "type": "record",
-    "fields": [{
-        "name": "PaymentId",
-        "type": "STRING"
-      },
-      {
-        "name": "PaymentAttemptRef",
-        "type": "STRING"
-      },
-      {
-        "name": "PaymentFraudStatusId",
-        "type": "STRING"
-      },
-      {
-        "name": "AuthCode",
-        "type": "STRING"
-      },
-      {
-        "name": "State",
-        "type": "STRING"
-      },
-      {
-        "name": "PaymentGatewayCode",
-        "type": "STRING"
-      },
-      {
-        "name": "PaymentMethodCode",
-        "type": "STRING"
-      },
-      {
-        "name": "AuthorizationDetails",
-        "type": "STRING"
-      },
-      {
-        "name": "PaymentTime",
-        "type": "TIMESTAMP"
-      },
-      {
-        "name": "IsPaymentSuccessful",
-        "type": "BOOLEAN"
-      }
-    ]
-  },
-  {
-    "name": "IpAddress",
-    "type": "STRING"
-  },
-  {
-    "name": "CalculationParameters",
-    "type": "record",
-    "fields": [{
-        "name": "UseDutyAboveDeminimis",
-        "type": "BOOLEAN"
-      },
-      {
-        "name": "UseFeeAboveDeminimis",
-        "type": "BOOLEAN"
-      },
-      {
-        "name": "UseVatAboveDeminimis",
-        "type": "BOOLEAN"
-      },
-      {
-        "name": "CalculationCurrencyIso",
-        "type": "STRING"
-      },
-      {
-        "name": "ProductInputCurrencyIso",
-        "type": "STRING"
-      },
-      {
-        "name": "DeliveryInputCurrencyIso",
-        "type": "STRING"
-      },
-      {
-        "name": "ProductInputType",
-        "type": "INTEGER"
-      },
-      {
-        "name": "DeliveryInputType",
-        "type": "INTEGER"
-      },
-      {
-        "name": "OrderChargeInfos",
-        "type": "record",
-        "fields": [{
-            "name": "InputItem",
-            "type": "record",
-            "fields": [{
-                "name": "IncludesMerchandise",
-                "type": "BOOLEAN"
-              },
-              {
-                "name": "IncludesMerchandiseDuty",
-                "type": "BOOLEAN"
-              },
-              {
-                "name": "IncludesMerchandiseTax",
-                "type": "BOOLEAN"
-              },
-              {
-                "name": "IncludesMerchandiseFee",
-                "type": "BOOLEAN"
-              },
-              {
-                "name": "IncludesMerchandiseFixedFee",
-                "type": "BOOLEAN"
-              },
-              {
-                "name": "IncludesDeliveryItem",
-                "type": "BOOLEAN"
-              },
-              {
-                "name": "IncludesDeliveryDuty",
-                "type": "BOOLEAN"
-              },
-              {
-                "name": "IncludesDeliveryTax",
-                "type": "BOOLEAN"
-              },
-              {
-                "name": "IncludesDeliveryFee",
-                "type": "BOOLEAN"
-              },
-              {
-                "name": "IncludesDeliveryFixedFee",
-                "type": "BOOLEAN"
-              },
-              {
-                "name": "IsMerchandiseItemPrice",
-                "type": "BOOLEAN"
-              },
-              {
-                "name": "IsMerchandiseAllInclusivePrice",
-                "type": "BOOLEAN"
-              },
-              {
-                "name": "IsDeliveryItemPrice",
-                "type": "BOOLEAN"
-              }
-            ]
-          },
-          {
-            "name": "InputDelivery",
-            "type": "record",
-            "fields": [{
-                "name": "IncludesMerchandise",
-                "type": "BOOLEAN"
-              },
-              {
-                "name": "IncludesMerchandiseDuty",
-                "type": "BOOLEAN"
-              },
-              {
-                "name": "IncludesMerchandiseTax",
-                "type": "BOOLEAN"
-              },
-              {
-                "name": "IncludesMerchandiseFee",
-                "type": "BOOLEAN"
-              },
-              {
-                "name": "IncludesMerchandiseFixedFee",
-                "type": "BOOLEAN"
-              },
-              {
-                "name": "IncludesDeliveryItem",
-                "type": "BOOLEAN"
-              },
-              {
-                "name": "IncludesDeliveryDuty",
-                "type": "BOOLEAN"
-              },
-              {
-                "name": "IncludesDeliveryTax",
-                "type": "BOOLEAN"
-              },
-              {
-                "name": "IncludesDeliveryFee",
-                "type": "BOOLEAN"
-              },
-              {
-                "name": "IncludesDeliveryFixedFee",
-                "type": "BOOLEAN"
-              },
-              {
-                "name": "IsMerchandiseItemPrice",
-                "type": "BOOLEAN"
-              },
-              {
-                "name": "IsMerchandiseAllInclusivePrice",
-                "type": "BOOLEAN"
-              },
-              {
-                "name": "IsDeliveryItemPrice",
-                "type": "BOOLEAN"
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "name": "FxRates",
-        "type": "record",
-        "mode": "repeated",
-        "fields": [{
-            "name": "FromCurrency",
-            "type": "STRING"
-          },
-          {
-            "name": "ToCurrency",
-            "type": "STRING"
-          },
-          {
-            "name": "Rate",
-            "type": "NUMERIC"
-          }
-        ]
-      },
-      {
-        "name": "RetailerToShopperRate",
-        "type": "NUMERIC"
-      },
-      {
-        "name": "ShopperToRetailerRate",
-        "type": "NUMERIC"
-      }
-    ]
-  },
-  {
-    "name": "Status",
-    "type": "STRING"
-  },
-  {
-    "name": "OrderConfirmationErrorInformation",
-    "type": "STRING"
-  },
-  {
-    "name": "Pricing",
-    "type": "record",
-    "fields": [{
-        "name": "id",
-        "type": "STRING"
-      },
-      {
-        "name": "CountryIso",
-        "type": "STRING"
-      },
-      {
-        "name": "ProductInput",
-        "type": "record",
-        "fields": [{
-            "name": "InputPriceId",
-            "type": "INTEGER"
-          },
-          {
-            "name": "PreOrderSecurityModelId",
-            "type": "INTEGER"
-          },
-          {
-            "name": "InputPriceTypeId",
-            "type": "INTEGER"
-          },
-          {
-            "name": "InputPriceSourceId",
-            "type": "INTEGER"
-          },
-          {
-            "name": "CanOverrideCatalogPrice",
-            "type": "BOOLEAN"
-          },
-          {
-            "name": "CatalogOverrideInputPriceTypeId",
-            "type": "INTEGER"
-          },
-          {
-            "name": "DutyRate",
-            "type": "NUMERIC"
-          },
-          {
-            "name": "TaxRate",
-            "type": "NUMERIC"
-          },
-          {
-            "name": "OtherRate",
-            "type": "NUMERIC"
-          },
-          {
-            "name": "MatchInputPrice",
-            "type": "BOOLEAN"
-          }
-        ]
-      },
-      {
-        "name": "DeliveryInput",
-        "type": "record",
-        "fields": [{
-            "name": "InputPriceId",
-            "type": "INTEGER"
-          },
-          {
-            "name": "PreOrderSecurityModelId",
-            "type": "INTEGER"
-          },
-          {
-            "name": "InputPriceTypeId",
-            "type": "INTEGER"
-          },
-          {
-            "name": "InputPriceSourceId",
-            "type": "INTEGER"
-          },
-          {
-            "name": "CanOverrideShippingPrice",
-            "type": "BOOLEAN"
-          },
-          {
-            "name": "ShippingOverrideInputPriceTypeId",
-            "type": "INTEGER"
-          },
-          {
-            "name": "DutyRate",
-            "type": "NUMERIC"
-          },
-          {
-            "name": "TaxRate",
-            "type": "NUMERIC"
-          },
-          {
-            "name": "OtherRate",
-            "type": "NUMERIC"
-          },
-          {
-            "name": "MatchInputPrice",
-            "type": "BOOLEAN"
-          }
-        ]
-      },
-      {
-        "name": "Calculation",
-        "type": "record",
-        "fields": [{
-            "name": "BrandCountryCalculationId",
-            "type": "INTEGER"
-          },
-          {
-            "name": "DutyTaxCalculationModelId",
-            "type": "INTEGER"
-          },
-          {
-            "name": "IsAccurateCalculationRequired",
-            "type": "BOOLEAN"
-          },
-          {
-            "name": "IsReverseAccurateCalculationRequired",
-            "type": "STRING"
-          },
-          {
-            "name": "IsReverseEstimatedCalculationRequired",
-            "type": "STRING"
-          },
-          {
-            "name": "IsReverseTaxesCalculationRequired",
-            "type": "STRING"
-          },
-          {
-            "name": "IsReverseDutyCalculationRequired",
-            "type": "STRING"
-          },
-          {
-            "name": "EstimatedDutyRate",
-            "type": "NUMERIC"
-          },
-          {
-            "name": "EstimatedTaxRate",
-            "type": "NUMERIC"
-          },
-          {
-            "name": "BrandCountryMarkupId",
-            "type": "INTEGER"
-          },
-          {
-            "name": "MarkupPercentage",
-            "type": "NUMERIC"
-          },
-          {
-            "name": "PricingGroupId",
-            "type": "INTEGER"
-          },
-          {
-            "name": "CustomsCalculationType",
-            "type": "STRING"
-          }
-        ]
-      },
-      {
-        "name": "Display",
-        "type": "record",
-        "fields": [{
-            "name": "BrandCountryDisplayModelId",
-            "type": "INTEGER"
-          },
-          {
-            "name": "ProductDisplay",
-            "type": "record",
-            "fields": [{
-                "name": "MerchandiseDisplayModelId",
-                "type": "INTEGER"
-              },
-              {
-                "name": "Name",
-                "type": "STRING"
-              },
-              {
-                "name": "Description",
-                "type": "STRING"
-              },
-              {
-                "name": "IncludeAllDutyAndTax",
-                "type": "BOOLEAN"
-              },
-              {
-                "name": "IncludeMerchandiseDuty",
-                "type": "BOOLEAN"
-              },
-              {
-                "name": "IncludeMerchandiseTax",
-                "type": "BOOLEAN"
-              },
-              {
-                "name": "IncludeShipping",
-                "type": "BOOLEAN"
-              },
-              {
-                "name": "IncludeShippingDuty",
-                "type": "BOOLEAN"
-              },
-              {
-                "name": "IncludeShippingTax",
-                "type": "BOOLEAN"
-              },
-              {
-                "name": "IncludeOtherTaxes",
-                "type": "BOOLEAN"
-              },
-              {
-                "name": "IncludeOtherFees",
-                "type": "BOOLEAN"
-              },
-              {
-                "name": "DefaultDisplayText",
-                "type": "STRING"
-              },
-              {
-                "name": "DisplayTextKey",
-                "type": "STRING"
-              }
-            ]
-          },
-          {
-            "name": "DutyAndTaxDisplay1",
-            "type": "STRING"
-          },
-          {
-            "name": "DutyAndTaxDisplay2",
-            "type": "STRING"
-          },
-          {
-            "name": "DeliveryDisplay",
-            "type": "record",
-            "fields": [{
-                "name": "IncludeAllDutyAndTax",
-                "type": "BOOLEAN"
-              },
-              {
-                "name": "ShippingDisplayModelId",
-                "type": "INTEGER"
-              },
-              {
-                "name": "Name",
-                "type": "STRING"
-              },
-              {
-                "name": "Description",
-                "type": "STRING"
-              },
-              {
-                "name": "IncludeMerchandiseDuty",
-                "type": "BOOLEAN"
-              },
-              {
-                "name": "IncludeMerchandiseTax",
-                "type": "BOOLEAN"
-              },
-              {
-                "name": "IncludeShipping",
-                "type": "BOOLEAN"
-              },
-              {
-                "name": "IncludeShippingDuty",
-                "type": "BOOLEAN"
-              },
-              {
-                "name": "IncludeShippingTax",
-                "type": "BOOLEAN"
-              },
-              {
-                "name": "IncludeOtherTaxes",
-                "type": "BOOLEAN"
-              },
-              {
-                "name": "IncludeOtherFees",
-                "type": "BOOLEAN"
-              },
-              {
-                "name": "IsShippingVisible",
-                "type": "BOOLEAN"
-              },
-              {
-                "name": "DefaultDisplayText",
-                "type": "STRING"
-              },
-              {
-                "name": "DisplayTextKey",
-                "type": "STRING"
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "name": "Features",
-    "type": "record",
-    "mode": "repeated",
-    "fields": [{
-        "name": "Type",
-        "type": "STRING"
-      },
-      {
-        "name": "Active",
-        "type": "BOOLEAN"
-      }
-    ]
-  },
-  {
-    "name": "ExpiryTimeUtc",
-    "type": "TIMESTAMP"
-  },
-  {
-    "name": "ChargeTargets",
-    "type": "record",
-    "mode": "repeated",
-    "fields": [{
-        "name": "Name",
-        "type": "STRING"
-      },
-      {
-        "name": "TargetValue",
-        "type": "record",
-        "fields": [{
-            "name": "CurrencyCodeIso",
-            "type": "STRING"
-          },
-          {
-            "name": "Currency",
-            "type": "record",
-            "fields": [{
-                "name": "Iso",
-                "type": "STRING"
-              },
-              {
-                "name": "Name",
-                "type": "STRING"
-              },
-              {
-                "name": "Exponent",
-                "type": "INTEGER"
-              },
-              {
-                "name": "Id",
-                "type": "INTEGER"
-              }
-            ]
-          },
-          {
-            "name": "Value",
-            "type": "NUMERIC"
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "name": "GdprAccepted",
-    "type": "BOOLEAN"
-  },
-  {
-    "name": "GdprAcceptanceHistory",
-    "type": "record",
-    "mode": "repeated",
-    "fields": [{
-        "name": "Accepted",
-        "type": "BOOLEAN"
-      },
-      {
-        "name": "DateTime",
-        "type": "TIMESTAMP"
-      }
-    ]
-  },
-  {
-    "name": "brandCode",
-    "type": "STRING"
-  },
-  {
-    "name": "eventName",
-    "type": "STRING"
-  },
-  {
-    "name": "correlationId",
-    "type": "STRING"
-  },
-  {
-    "name": "userAgent",
-    "type": "STRING"
-  },
-  {
-    "name": "queryString",
-    "type": "STRING"
-  },
-  {
-    "name": "created",
-    "type": "TIMESTAMP"
-  }
+          }]
+        },
+        {
+          "name": "ChargeTargets",
+          "type": "record",
+          "mode": "repeated",
+          "fields": [{
+              "name": "Name",
+              "type": "STRING"
+            },
+            {
+              "name": "TargetValue",
+              "type": "record",
+              "fields": [{
+                  "name": "CurrencyCodeIso",
+                  "type": "STRING"
+                },
+                {
+                  "name": "Currency",
+                  "type": "record",
+                  "fields": [{
+                      "name": "Iso",
+                      "type": "STRING"
+                    },
+                    {
+                      "name": "Name",
+                      "type": "STRING"
+                    },
+                    {
+                      "name": "Exponent",
+                      "type": "INTEGER"
+                    },
+                    {
+                      "name": "Id",
+                      "type": "INTEGER"
+                    }
+                  ]
+                },
+                {
+                  "name": "Value",
+                  "type": "NUMERIC"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Available",
+      "type": "BOOLEAN"
+    },
+    {
+      "name": "CalculationRates",
+      "type": "record",
+      "fields": [{
+          "name": "ItemVatRateApplied",
+          "type": "NUMERIC"
+        },
+        {
+          "name": "DeliveryVatRateApplied",
+          "type": "NUMERIC"
+        },
+        {
+          "name": "ItemDutyRateApplied",
+          "type": "NUMERIC"
+        },
+        {
+          "name": "DeliveryDutyRateApplied",
+          "type": "NUMERIC"
+        },
+        {
+          "name": "ItemFeeRateApplied",
+          "type": "NUMERIC"
+        },
+        {
+          "name": "DeliveryFeeRateApplied",
+          "type": "NUMERIC"
+        },
+        {
+          "name": "ItemReverseCalculationRate",
+          "type": "NUMERIC"
+        },
+        {
+          "name": "DeliveryReverseCalculationRate",
+          "type": "NUMERIC"
+        }
+      ]
+    },
+    {
+      "name": "VatRate",
+      "type": "NUMERIC"
+    },
+    {
+      "name": "DutyRate",
+      "type": "NUMERIC"
+    },
+    {
+      "name": "Weight",
+      "type": "NUMERIC"
+    },
+    {
+      "name": "WeightUnit",
+      "type": "NUMERIC"
+    },
+    {
+      "name": "CountryOfOriginIso",
+      "type": "STRING"
+    },
+    {
+      "name": "HsCode",
+      "type": "STRING"
+    },
+    {
+      "name": "EstimatedDeliveryDate",
+      "type": "TIMESTAMP"
+    },
+    {
+      "name": "Quantity",
+      "type": "INTEGER"
+    },
+    {
+      "name": "Product",
+      "type": "record",
+      "fields": [{
+          "name": "ProductCode",
+          "type": "STRING"
+        },
+        {
+          "name": "Upc",
+          "type": "STRING"
+        },
+        {
+          "name": "Title",
+          "type": "STRING"
+        },
+        {
+          "name": "Description",
+          "type": "STRING"
+        },
+        {
+          "name": "RetailerCurrencyProductPriceInfo",
+          "type": "record",
+          "fields": [{
+              "name": "Title",
+              "type": "STRING"
+            },
+            {
+              "name": "Description",
+              "type": "STRING"
+            },
+            {
+              "name": "Price",
+              "type": "record",
+              "fields": [{
+                  "name": "CurrencyCodeIso",
+                  "type": "STRING"
+                },
+                {
+                  "name": "Currency",
+                  "type": "record",
+                  "fields": [{
+                      "name": "Iso",
+                      "type": "STRING"
+                    },
+                    {
+                      "name": "Name",
+                      "type": "STRING"
+                    },
+                    {
+                      "name": "Exponent",
+                      "type": "INTEGER"
+                    },
+                    {
+                      "name": "Id",
+                      "type": "INTEGER"
+                    }
+                  ]
+                },
+                {
+                  "name": "Value",
+                  "type": "NUMERIC"
+                }
+              ]
+            },
+            {
+              "name": "DiscountAmount",
+              "type": "record",
+              "fields": [{
+                  "name": "CurrencyCodeIso",
+                  "type": "STRING"
+                },
+                {
+                  "name": "Currency",
+                  "type": "record",
+                  "fields": [{
+                      "name": "Iso",
+                      "type": "STRING"
+                    },
+                    {
+                      "name": "Name",
+                      "type": "STRING"
+                    },
+                    {
+                      "name": "Exponent",
+                      "type": "INTEGER"
+                    },
+                    {
+                      "name": "Id",
+                      "type": "INTEGER"
+                    }
+                  ]
+                },
+                {
+                  "name": "Value",
+                  "type": "NUMERIC"
+                }
+              ]
+            },
+            {
+              "name": "BeforeDiscount",
+              "type": "record",
+              "fields": [{
+                  "name": "CurrencyCodeIso",
+                  "type": "STRING"
+                },
+                {
+                  "name": "Currency",
+                  "type": "record",
+                  "fields": [{
+                      "name": "Iso",
+                      "type": "STRING"
+                    },
+                    {
+                      "name": "Name",
+                      "type": "STRING"
+                    },
+                    {
+                      "name": "Exponent",
+                      "type": "INTEGER"
+                    },
+                    {
+                      "name": "Id",
+                      "type": "INTEGER"
+                    }
+                  ]
+                },
+                {
+                  "name": "Value",
+                  "type": "NUMERIC"
+                }
+              ]
+            },
+            {
+              "name": "DiscountPercentage",
+              "type": "NUMERIC"
+            }
+          ]
+        },
+        {
+          "name": "ShopperCurrencyProductPriceInfo",
+          "type": "record",
+          "fields": [{
+              "name": "Title",
+              "type": "STRING"
+            },
+            {
+              "name": "Description",
+              "type": "STRING"
+            },
+            {
+              "name": "Price",
+              "type": "record",
+              "fields": [{
+                  "name": "CurrencyCodeIso",
+                  "type": "STRING"
+                },
+                {
+                  "name": "Currency",
+                  "type": "record",
+                  "fields": [{
+                      "name": "Iso",
+                      "type": "STRING"
+                    },
+                    {
+                      "name": "Name",
+                      "type": "STRING"
+                    },
+                    {
+                      "name": "Exponent",
+                      "type": "INTEGER"
+                    },
+                    {
+                      "name": "Id",
+                      "type": "INTEGER"
+                    }
+                  ]
+                },
+                {
+                  "name": "Value",
+                  "type": "NUMERIC"
+                }
+              ]
+            },
+            {
+              "name": "DiscountAmount",
+              "type": "record",
+              "fields": [{
+                  "name": "CurrencyCodeIso",
+                  "type": "STRING"
+                },
+                {
+                  "name": "Currency",
+                  "type": "record",
+                  "fields": [{
+                      "name": "Iso",
+                      "type": "STRING"
+                    },
+                    {
+                      "name": "Name",
+                      "type": "STRING"
+                    },
+                    {
+                      "name": "Exponent",
+                      "type": "INTEGER"
+                    },
+                    {
+                      "name": "Id",
+                      "type": "INTEGER"
+                    }
+                  ]
+                },
+                {
+                  "name": "Value",
+                  "type": "NUMERIC"
+                }
+              ]
+            },
+            {
+              "name": "BeforeDiscount",
+              "type": "record",
+              "fields": [{
+                  "name": "CurrencyCodeIso",
+                  "type": "STRING"
+                },
+                {
+                  "name": "Currency",
+                  "type": "record",
+                  "fields": [{
+                      "name": "Iso",
+                      "type": "STRING"
+                    },
+                    {
+                      "name": "Name",
+                      "type": "STRING"
+                    },
+                    {
+                      "name": "Exponent",
+                      "type": "INTEGER"
+                    },
+                    {
+                      "name": "Id",
+                      "type": "INTEGER"
+                    }
+                  ]
+                },
+                {
+                  "name": "Value",
+                  "type": "NUMERIC"
+                }
+              ]
+            },
+            {
+              "name": "DiscountPercentage",
+              "type": "NUMERIC"
+            }
+          ]
+        },
+        {
+          "name": "ImageUrl",
+          "type": "STRING"
+        },
+        {
+          "name": "Color",
+          "type": "STRING"
+        },
+        {
+          "name": "Size",
+          "type": "STRING"
+        },
+        {
+          "name": "IsRestrictedForCountry",
+          "type": "BOOLEAN"
+        },
+        {
+          "name": "OverridePrice",
+          "type": "BOOLEAN"
+        },
+        {
+          "name": "Dimension5",
+          "type": "STRING"
+        },
+        {
+          "name": "Dimension6",
+          "type": "STRING"
+        },
+        {
+          "name": "IsNonStandardCatalogItem",
+          "type": "BOOLEAN"
+        },
+        {
+          "name": "MetadataItems",
+          "type": "record",
+          "mode": "repeated",
+          "fields": [{
+              "name": "Name",
+              "type": "STRING"
+            },
+            {
+              "name": "Value",
+              "type": "NUMERIC"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "LineItemId",
+      "type": "STRING"
+    },
+    {
+      "name": "CartGrouping",
+      "type": "STRING"
+    },
+    {
+      "name": "MetadataItems",
+      "type": "record",
+      "mode": "repeated",
+      "fields": [{
+          "name": "Name",
+          "type": "STRING"
+        },
+        {
+          "name": "Value",
+          "type": "NUMERIC"
+        }
+      ]
+    },
+    {
+      "name": "IsCountryDefault",
+      "type": "BOOLEAN"
+    },
+    {
+      "name": "ChargeTargets",
+      "type": "record",
+      "mode": "repeated",
+      "fields": [{
+          "name": "Name",
+          "type": "STRING"
+        },
+        {
+          "name": "TargetValue",
+          "type": "record",
+          "fields": [{
+              "name": "CurrencyCodeIso",
+              "type": "STRING"
+            },
+            {
+              "name": "Currency",
+              "type": "record",
+              "fields": [{
+                  "name": "Iso",
+                  "type": "STRING"
+                },
+                {
+                  "name": "Name",
+                  "type": "STRING"
+                },
+                {
+                  "name": "Exponent",
+                  "type": "INTEGER"
+                },
+                {
+                  "name": "Id",
+                  "type": "INTEGER"
+                }
+              ]
+            },
+            {
+              "name": "Value",
+              "type": "NUMERIC"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+},
+{
+  "name": "RetailerPromoCodes",
+  "type": "record",
+  "mode": "repeated",
+  "fields": [{
+      "name": "PromoCode",
+      "type": "STRING"
+    },
+    {
+      "name": "Title",
+      "type": "STRING"
+    },
+    {
+      "name": "Description",
+      "type": "STRING"
+    }
+  ]
+},
+{
+  "name": "OrderDiscounts",
+  "type": "record",
+  "mode": "repeated",
+  "fields": [{
+      "name": "Title",
+      "type": "STRING"
+    },
+    {
+      "name": "Description",
+      "type": "STRING"
+    },
+    {
+      "name": "RetailerCurrencyOrderDiscountAmount",
+      "type": "record",
+      "fields": [{
+          "name": "Title",
+          "type": "STRING"
+        },
+        {
+          "name": "Description",
+          "type": "STRING"
+        },
+        {
+          "name": "Price",
+          "type": "record",
+          "fields": [{
+              "name": "CurrencyCodeIso",
+              "type": "STRING"
+            },
+            {
+              "name": "Currency",
+              "type": "record",
+              "fields": [{
+                  "name": "Iso",
+                  "type": "STRING"
+                },
+                {
+                  "name": "Name",
+                  "type": "STRING"
+                },
+                {
+                  "name": "Exponent",
+                  "type": "INTEGER"
+                },
+                {
+                  "name": "Id",
+                  "type": "INTEGER"
+                }
+              ]
+            },
+            {
+              "name": "Value",
+              "type": "NUMERIC"
+            }
+          ]
+        },
+        {
+          "name": "DiscountAmount",
+          "type": "record",
+          "fields": [{
+              "name": "CurrencyCodeIso",
+              "type": "STRING"
+            },
+            {
+              "name": "Currency",
+              "type": "record",
+              "fields": [{
+                  "name": "Iso",
+                  "type": "STRING"
+                },
+                {
+                  "name": "Name",
+                  "type": "STRING"
+                },
+                {
+                  "name": "Exponent",
+                  "type": "INTEGER"
+                },
+                {
+                  "name": "Id",
+                  "type": "INTEGER"
+                }
+              ]
+            },
+            {
+              "name": "Value",
+              "type": "NUMERIC"
+            }
+          ]
+        },
+        {
+          "name": "BeforeDiscount",
+          "type": "record",
+          "fields": [{
+              "name": "CurrencyCodeIso",
+              "type": "STRING"
+            },
+            {
+              "name": "Currency",
+              "type": "record",
+              "fields": [{
+                  "name": "Iso",
+                  "type": "STRING"
+                },
+                {
+                  "name": "Name",
+                  "type": "STRING"
+                },
+                {
+                  "name": "Exponent",
+                  "type": "INTEGER"
+                },
+                {
+                  "name": "Id",
+                  "type": "INTEGER"
+                }
+              ]
+            },
+            {
+              "name": "Value",
+              "type": "NUMERIC"
+            }
+          ]
+        },
+        {
+          "name": "DiscountPercentage",
+          "type": "NUMERIC"
+        }
+      ]
+    },
+    {
+      "name": "ShopperCurrencyOrderDiscountAmount",
+      "type": "record",
+      "fields": [{
+          "name": "Title",
+          "type": "STRING"
+        },
+        {
+          "name": "Description",
+          "type": "STRING"
+        },
+        {
+          "name": "Price",
+          "type": "record",
+          "fields": [{
+              "name": "CurrencyCodeIso",
+              "type": "STRING"
+            },
+            {
+              "name": "Currency",
+              "type": "record",
+              "fields": [{
+                  "name": "Iso",
+                  "type": "STRING"
+                },
+                {
+                  "name": "Name",
+                  "type": "STRING"
+                },
+                {
+                  "name": "Exponent",
+                  "type": "INTEGER"
+                },
+                {
+                  "name": "Id",
+                  "type": "INTEGER"
+                }
+              ]
+            },
+            {
+              "name": "Value",
+              "type": "NUMERIC"
+            }
+          ]
+        },
+        {
+          "name": "DiscountAmount",
+          "type": "record",
+          "fields": [{
+              "name": "CurrencyCodeIso",
+              "type": "STRING"
+            },
+            {
+              "name": "Currency",
+              "type": "record",
+              "fields": [{
+                  "name": "Iso",
+                  "type": "STRING"
+                },
+                {
+                  "name": "Name",
+                  "type": "STRING"
+                },
+                {
+                  "name": "Exponent",
+                  "type": "INTEGER"
+                },
+                {
+                  "name": "Id",
+                  "type": "INTEGER"
+                }
+              ]
+            },
+            {
+              "name": "Value",
+              "type": "NUMERIC"
+            }
+          ]
+        },
+        {
+          "name": "BeforeDiscount",
+          "type": "record",
+          "fields": [{
+              "name": "CurrencyCodeIso",
+              "type": "STRING"
+            },
+            {
+              "name": "Currency",
+              "type": "record",
+              "fields": [{
+                  "name": "Iso",
+                  "type": "STRING"
+                },
+                {
+                  "name": "Name",
+                  "type": "STRING"
+                },
+                {
+                  "name": "Exponent",
+                  "type": "INTEGER"
+                },
+                {
+                  "name": "Id",
+                  "type": "INTEGER"
+                }
+              ]
+            },
+            {
+              "name": "Value",
+              "type": "NUMERIC"
+            }
+          ]
+        },
+        {
+          "name": "DiscountPercentage",
+          "type": "NUMERIC"
+        }
+      ]
+    }
+  ]
+},
+{
+  "name": "DeliveryDetails",
+  "type": "record",
+  "mode": "repeated",
+  "fields": [{
+      "name": "Id",
+      "type": "INTEGER"
+    },
+    {
+      "name": "ContactDetailsNickName",
+      "type": "STRING"
+    },
+    {
+      "name": "Address1",
+      "type": "STRING"
+    },
+    {
+      "name": "Address2",
+      "type": "STRING"
+    },
+    {
+      "name": "Address3",
+      "type": "STRING"
+    },
+    {
+      "name": "City",
+      "type": "STRING"
+    },
+    {
+      "name": "PostalCode",
+      "type": "STRING"
+    },
+    {
+      "name": "Region",
+      "type": "STRING"
+    },
+    {
+      "name": "Country",
+      "type": "STRING"
+    },
+    {
+      "name": "Email",
+      "type": "STRING"
+    },
+    {
+      "name": "FirstName",
+      "type": "STRING"
+    },
+    {
+      "name": "LastName",
+      "type": "STRING"
+    },
+    {
+      "name": "Gender",
+      "type": "INTEGER"
+    },
+    {
+      "name": "Telephone",
+      "type": "STRING"
+    },
+    {
+      "name": "PoBox",
+      "type": "STRING"
+    },
+    {
+      "name": "MetadataItems",
+      "type": "record",
+      "mode": "repeated",
+      "fields": [{
+          "name": "Name",
+          "type": "STRING"
+        },
+        {
+          "name": "Value",
+          "type": "NUMERIC"
+        }
+      ]
+    }
+  ]
+},
+{
+  "name": "PaymentDetails",
+  "type": "record",
+  "mode": "repeated",
+  "fields": [{
+      "name": "Id",
+      "type": "INTEGER"
+    },
+    {
+      "name": "ContactDetailsNickName",
+      "type": "STRING"
+    },
+    {
+      "name": "Address1",
+      "type": "STRING"
+    },
+    {
+      "name": "Address2",
+      "type": "STRING"
+    },
+    {
+      "name": "Address3",
+      "type": "STRING"
+    },
+    {
+      "name": "City",
+      "type": "STRING"
+    },
+    {
+      "name": "PostalCode",
+      "type": "STRING"
+    },
+    {
+      "name": "Region",
+      "type": "STRING"
+    },
+    {
+      "name": "Country",
+      "type": "STRING"
+    },
+    {
+      "name": "Email",
+      "type": "STRING"
+    },
+    {
+      "name": "FirstName",
+      "type": "STRING"
+    },
+    {
+      "name": "LastName",
+      "type": "STRING"
+    },
+    {
+      "name": "Gender",
+      "type": "INTEGER"
+    },
+    {
+      "name": "Telephone",
+      "type": "STRING"
+    },
+    {
+      "name": "PoBox",
+      "type": "STRING"
+    },
+    {
+      "name": "MetadataItems",
+      "type": "record",
+      "mode": "repeated",
+      "fields": [{
+          "name": "Name",
+          "type": "STRING"
+        },
+        {
+          "name": "Value",
+          "type": "NUMERIC"
+        }
+      ]
+    }
+  ]
+},
+{
+  "name": "DeliveryOption",
+  "type": "record",
+  "fields": [{
+      "name": "Option",
+      "type": "INTEGER"
+    },
+    {
+      "name": "IsExpressDelivery",
+      "type": "BOOLEAN"
+    }
+  ]
+},
+{
+  "name": "Errors",
+  "type": "record",
+  "mode": "repeated",
+  "fields": [{
+      "name": "Code",
+      "type": "INTEGER"
+    },
+    {
+      "name": "Message",
+      "type": "STRING"
+    }
+  ]
+},
+{
+  "name": "RetailerCheckoutExperience",
+  "type": "record",
+  "fields": [{
+      "name": "RetailerCheckoutExperienceId",
+      "type": "STRING"
+    },
+    {
+      "name": "BackToCartUrl",
+      "type": "STRING"
+    },
+    {
+      "name": "ContinueShoppingUrl",
+      "type": "STRING"
+    },
+    {
+      "name": "MetadataItems",
+      "type": "record",
+      "mode": "repeated",
+      "fields": [{
+          "name": "Name",
+          "type": "STRING"
+        },
+        {
+          "name": "Value",
+          "type": "NUMERIC"
+        }
+      ]
+    }
+  ]
+},
+{
+  "name": "ShopperCurrencyIso",
+  "type": "STRING"
+},
+{
+  "name": "RetailerCurrencyIso",
+  "type": "STRING"
+},
+{
+  "name": "RetailerFxGroupId",
+  "type": "INTEGER"
+},
+{
+  "name": "SourceCountryIso",
+  "type": "STRING"
+},
+{
+  "name": "DeliveryCountryIso",
+  "type": "STRING"
+},
+{
+  "name": "ShopperCheckoutExperience",
+  "type": "record",
+  "fields": [{
+      "name": "UseDeliveryContactDetailsForPaymentContactDetails",
+      "type": "BOOLEAN"
+    },
+    {
+      "name": "EmailMarketingOptIn",
+      "type": "BOOLEAN"
+    },
+    {
+      "name": "RegisteredProfileId",
+      "type": "STRING"
+    },
+    {
+      "name": "ShopperCultureLanguageIso",
+      "type": "STRING"
+    },
+    {
+      "name": "ExpressPaymentMethod",
+      "type": "STRING"
+    },
+    {
+      "name": "MetadataItems",
+      "type": "record",
+      "mode": "repeated",
+      "fields": [{
+          "name": "Name",
+          "type": "STRING"
+        },
+        {
+          "name": "Value",
+          "type": "NUMERIC"
+        }
+      ]
+    }
+  ]
+},
+{
+  "name": "DeliveryOptions",
+  "type": "record",
+  "mode": "repeated",
+  "fields": [{
+      "name": "DeliveryOption",
+      "type": "STRING"
+    },
+    {
+      "name": "EstimatedDeliveryDate",
+      "type": "TIMESTAMP"
+    },
+    {
+      "name": "RetailerCurrencyOveridePriceInfo",
+      "type": "record",
+      "fields": [{
+          "name": "Title",
+          "type": "STRING"
+        },
+        {
+          "name": "Description",
+          "type": "STRING"
+        },
+        {
+          "name": "Price",
+          "type": "record",
+          "fields": [{
+              "name": "CurrencyCodeIso",
+              "type": "STRING"
+            },
+            {
+              "name": "Currency",
+              "type": "record",
+              "fields": [{
+                  "name": "Iso",
+                  "type": "STRING"
+                },
+                {
+                  "name": "Name",
+                  "type": "STRING"
+                },
+                {
+                  "name": "Exponent",
+                  "type": "INTEGER"
+                },
+                {
+                  "name": "Id",
+                  "type": "INTEGER"
+                }
+              ]
+            },
+            {
+              "name": "Value",
+              "type": "NUMERIC"
+            }
+          ]
+        },
+        {
+          "name": "DiscountAmount",
+          "type": "record",
+          "fields": [{
+              "name": "CurrencyCodeIso",
+              "type": "STRING"
+            },
+            {
+              "name": "Currency",
+              "type": "record",
+              "fields": [{
+                  "name": "Iso",
+                  "type": "STRING"
+                },
+                {
+                  "name": "Name",
+                  "type": "STRING"
+                },
+                {
+                  "name": "Exponent",
+                  "type": "INTEGER"
+                },
+                {
+                  "name": "Id",
+                  "type": "INTEGER"
+                }
+              ]
+            },
+            {
+              "name": "Value",
+              "type": "NUMERIC"
+            }
+          ]
+        },
+        {
+          "name": "BeforeDiscount",
+          "type": "record",
+          "fields": [{
+              "name": "CurrencyCodeIso",
+              "type": "STRING"
+            },
+            {
+              "name": "Currency",
+              "type": "record",
+              "fields": [{
+                  "name": "Iso",
+                  "type": "STRING"
+                },
+                {
+                  "name": "Name",
+                  "type": "STRING"
+                },
+                {
+                  "name": "Exponent",
+                  "type": "INTEGER"
+                },
+                {
+                  "name": "Id",
+                  "type": "INTEGER"
+                }
+              ]
+            },
+            {
+              "name": "Value",
+              "type": "NUMERIC"
+            }
+          ]
+        },
+        {
+          "name": "DiscountPercentage",
+          "type": "NUMERIC"
+        }
+      ]
+    },
+    {
+      "name": "ShopperCurrencyOveridePriceInfo",
+      "type": "record",
+      "fields": [{
+          "name": "Title",
+          "type": "STRING"
+        },
+        {
+          "name": "Description",
+          "type": "STRING"
+        },
+        {
+          "name": "Price",
+          "type": "record",
+          "fields": [{
+              "name": "CurrencyCodeIso",
+              "type": "STRING"
+            },
+            {
+              "name": "Currency",
+              "type": "record",
+              "fields": [{
+                  "name": "Iso",
+                  "type": "STRING"
+                },
+                {
+                  "name": "Name",
+                  "type": "STRING"
+                },
+                {
+                  "name": "Exponent",
+                  "type": "INTEGER"
+                },
+                {
+                  "name": "Id",
+                  "type": "INTEGER"
+                }
+              ]
+            },
+            {
+              "name": "Value",
+              "type": "NUMERIC"
+            }
+          ]
+        },
+        {
+          "name": "DiscountAmount",
+          "type": "record",
+          "fields": [{
+              "name": "CurrencyCodeIso",
+              "type": "STRING"
+            },
+            {
+              "name": "Currency",
+              "type": "record",
+              "fields": [{
+                  "name": "Iso",
+                  "type": "STRING"
+                },
+                {
+                  "name": "Name",
+                  "type": "STRING"
+                },
+                {
+                  "name": "Exponent",
+                  "type": "INTEGER"
+                },
+                {
+                  "name": "Id",
+                  "type": "INTEGER"
+                }
+              ]
+            },
+            {
+              "name": "Value",
+              "type": "NUMERIC"
+            }
+          ]
+        },
+        {
+          "name": "BeforeDiscount",
+          "type": "record",
+          "fields": [{
+              "name": "CurrencyCodeIso",
+              "type": "STRING"
+            },
+            {
+              "name": "Currency",
+              "type": "record",
+              "fields": [{
+                  "name": "Iso",
+                  "type": "STRING"
+                },
+                {
+                  "name": "Name",
+                  "type": "STRING"
+                },
+                {
+                  "name": "Exponent",
+                  "type": "INTEGER"
+                },
+                {
+                  "name": "Id",
+                  "type": "INTEGER"
+                }
+              ]
+            },
+            {
+              "name": "Value",
+              "type": "NUMERIC"
+            }
+          ]
+        },
+        {
+          "name": "DiscountPercentage",
+          "type": "NUMERIC"
+        }
+      ]
+    },
+    {
+      "name": "MetadataItems",
+      "type": "record",
+      "mode": "repeated",
+      "fields": [{
+          "name": "Name",
+          "type": "STRING"
+        },
+        {
+          "name": "Value",
+          "type": "NUMERIC"
+        }
+      ]
+    }
+  ]
+},
+{
+  "name": "RetailerDeliveryOptions",
+  "type": "record",
+  "mode": "repeated",
+  "fields": [{
+      "name": "Title",
+      "type": "STRING"
+    },
+    {
+      "name": "Description",
+      "type": "STRING"
+    },
+    {
+      "name": "EstimatedDeliveryDate",
+      "type": "TIMESTAMP"
+    },
+    {
+      "name": "RetailerCurrencyDeliveryOptionPriceInfo",
+      "type": "record",
+      "fields": [{
+          "name": "Title",
+          "type": "STRING"
+        },
+        {
+          "name": "Description",
+          "type": "STRING"
+        },
+        {
+          "name": "Price",
+          "type": "NUMERIC"
+        },
+        {
+          "name": "DiscountAmount",
+          "type": "NUMERIC"
+        },
+        {
+          "name": "BeforeDiscount",
+          "type": "NUMERIC"
+        },
+        {
+          "name": "DiscountPercentage",
+          "type": "NUMERIC"
+        }
+      ]
+    },
+    {
+      "name": "ShopperCurrencyDeliveryOptionPriceInfo",
+      "type": "record",
+      "fields": [{
+          "name": "Title",
+          "type": "STRING"
+        },
+        {
+          "name": "Description",
+          "type": "STRING"
+        },
+        {
+          "name": "Price",
+          "type": "NUMERIC"
+        },
+        {
+          "name": "DiscountAmount",
+          "type": "NUMERIC"
+        },
+        {
+          "name": "BeforeDiscount",
+          "type": "NUMERIC"
+        },
+        {
+          "name": "DiscountPercentage",
+          "type": "NUMERIC"
+        }
+      ]
+    },
+    {
+      "name": "MetadataItems",
+      "type": "record",
+      "mode": "repeated",
+      "fields": [{
+          "name": "Name",
+          "type": "STRING"
+        },
+        {
+          "name": "Value",
+          "type": "NUMERIC"
+        }
+      ]
+    }
+  ]
+},
+{
+  "name": "Payment",
+  "type": "record",
+  "fields": [{
+      "name": "PaymentId",
+      "type": "STRING"
+    },
+    {
+      "name": "PaymentAttemptRef",
+      "type": "STRING"
+    },
+    {
+      "name": "PaymentFraudStatusId",
+      "type": "STRING"
+    },
+    {
+      "name": "AuthCode",
+      "type": "STRING"
+    },
+    {
+      "name": "State",
+      "type": "STRING"
+    },
+    {
+      "name": "PaymentGatewayCode",
+      "type": "STRING"
+    },
+    {
+      "name": "PaymentMethodCode",
+      "type": "STRING"
+    },
+    {
+      "name": "AuthorizationDetails",
+      "type": "STRING"
+    },
+    {
+      "name": "PaymentTime",
+      "type": "TIMESTAMP"
+    },
+    {
+      "name": "IsPaymentSuccessful",
+      "type": "BOOLEAN"
+    }
+  ]
+},
+{
+  "name": "IpAddress",
+  "type": "STRING"
+},
+{
+  "name": "CalculationParameters",
+  "type": "record",
+  "fields": [{
+      "name": "UseDutyAboveDeminimis",
+      "type": "BOOLEAN"
+    },
+    {
+      "name": "UseFeeAboveDeminimis",
+      "type": "BOOLEAN"
+    },
+    {
+      "name": "UseVatAboveDeminimis",
+      "type": "BOOLEAN"
+    },
+    {
+      "name": "CalculationCurrencyIso",
+      "type": "STRING"
+    },
+    {
+      "name": "ProductInputCurrencyIso",
+      "type": "STRING"
+    },
+    {
+      "name": "DeliveryInputCurrencyIso",
+      "type": "STRING"
+    },
+    {
+      "name": "ProductInputType",
+      "type": "INTEGER"
+    },
+    {
+      "name": "DeliveryInputType",
+      "type": "INTEGER"
+    },
+    {
+      "name": "OrderChargeInfos",
+      "type": "record",
+      "fields": [{
+          "name": "InputItem",
+          "type": "record",
+          "fields": [{
+              "name": "IncludesMerchandise",
+              "type": "BOOLEAN"
+            },
+            {
+              "name": "IncludesMerchandiseDuty",
+              "type": "BOOLEAN"
+            },
+            {
+              "name": "IncludesMerchandiseTax",
+              "type": "BOOLEAN"
+            },
+            {
+              "name": "IncludesMerchandiseFee",
+              "type": "BOOLEAN"
+            },
+            {
+              "name": "IncludesMerchandiseFixedFee",
+              "type": "BOOLEAN"
+            },
+            {
+              "name": "IncludesDeliveryItem",
+              "type": "BOOLEAN"
+            },
+            {
+              "name": "IncludesDeliveryDuty",
+              "type": "BOOLEAN"
+            },
+            {
+              "name": "IncludesDeliveryTax",
+              "type": "BOOLEAN"
+            },
+            {
+              "name": "IncludesDeliveryFee",
+              "type": "BOOLEAN"
+            },
+            {
+              "name": "IncludesDeliveryFixedFee",
+              "type": "BOOLEAN"
+            },
+            {
+              "name": "IsMerchandiseItemPrice",
+              "type": "BOOLEAN"
+            },
+            {
+              "name": "IsMerchandiseAllInclusivePrice",
+              "type": "BOOLEAN"
+            },
+            {
+              "name": "IsDeliveryItemPrice",
+              "type": "BOOLEAN"
+            }
+          ]
+        },
+        {
+          "name": "InputDelivery",
+          "type": "record",
+          "fields": [{
+              "name": "IncludesMerchandise",
+              "type": "BOOLEAN"
+            },
+            {
+              "name": "IncludesMerchandiseDuty",
+              "type": "BOOLEAN"
+            },
+            {
+              "name": "IncludesMerchandiseTax",
+              "type": "BOOLEAN"
+            },
+            {
+              "name": "IncludesMerchandiseFee",
+              "type": "BOOLEAN"
+            },
+            {
+              "name": "IncludesMerchandiseFixedFee",
+              "type": "BOOLEAN"
+            },
+            {
+              "name": "IncludesDeliveryItem",
+              "type": "BOOLEAN"
+            },
+            {
+              "name": "IncludesDeliveryDuty",
+              "type": "BOOLEAN"
+            },
+            {
+              "name": "IncludesDeliveryTax",
+              "type": "BOOLEAN"
+            },
+            {
+              "name": "IncludesDeliveryFee",
+              "type": "BOOLEAN"
+            },
+            {
+              "name": "IncludesDeliveryFixedFee",
+              "type": "BOOLEAN"
+            },
+            {
+              "name": "IsMerchandiseItemPrice",
+              "type": "BOOLEAN"
+            },
+            {
+              "name": "IsMerchandiseAllInclusivePrice",
+              "type": "BOOLEAN"
+            },
+            {
+              "name": "IsDeliveryItemPrice",
+              "type": "BOOLEAN"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "FxRates",
+      "type": "record",
+      "mode": "repeated",
+      "fields": [{
+          "name": "FromCurrency",
+          "type": "STRING"
+        },
+        {
+          "name": "ToCurrency",
+          "type": "STRING"
+        },
+        {
+          "name": "Rate",
+          "type": "NUMERIC"
+        }
+      ]
+    },
+    {
+      "name": "RetailerToShopperRate",
+      "type": "NUMERIC"
+    },
+    {
+      "name": "ShopperToRetailerRate",
+      "type": "NUMERIC"
+    }
+  ]
+},
+{
+  "name": "Status",
+  "type": "STRING"
+},
+{
+  "name": "OrderConfirmationErrorInformation",
+  "type": "STRING"
+},
+{
+  "name": "Pricing",
+  "type": "record",
+  "fields": [{
+      "name": "id",
+      "type": "STRING"
+    },
+    {
+      "name": "CountryIso",
+      "type": "STRING"
+    },
+    {
+      "name": "ProductInput",
+      "type": "record",
+      "fields": [{
+          "name": "InputPriceId",
+          "type": "INTEGER"
+        },
+        {
+          "name": "PreOrderSecurityModelId",
+          "type": "INTEGER"
+        },
+        {
+          "name": "InputPriceTypeId",
+          "type": "INTEGER"
+        },
+        {
+          "name": "InputPriceSourceId",
+          "type": "INTEGER"
+        },
+        {
+          "name": "CanOverrideCatalogPrice",
+          "type": "BOOLEAN"
+        },
+        {
+          "name": "CatalogOverrideInputPriceTypeId",
+          "type": "INTEGER"
+        },
+        {
+          "name": "DutyRate",
+          "type": "NUMERIC"
+        },
+        {
+          "name": "TaxRate",
+          "type": "NUMERIC"
+        },
+        {
+          "name": "OtherRate",
+          "type": "NUMERIC"
+        },
+        {
+          "name": "MatchInputPrice",
+          "type": "BOOLEAN"
+        }
+      ]
+    },
+    {
+      "name": "DeliveryInput",
+      "type": "record",
+      "fields": [{
+          "name": "InputPriceId",
+          "type": "INTEGER"
+        },
+        {
+          "name": "PreOrderSecurityModelId",
+          "type": "INTEGER"
+        },
+        {
+          "name": "InputPriceTypeId",
+          "type": "INTEGER"
+        },
+        {
+          "name": "InputPriceSourceId",
+          "type": "INTEGER"
+        },
+        {
+          "name": "CanOverrideShippingPrice",
+          "type": "BOOLEAN"
+        },
+        {
+          "name": "ShippingOverrideInputPriceTypeId",
+          "type": "INTEGER"
+        },
+        {
+          "name": "DutyRate",
+          "type": "NUMERIC"
+        },
+        {
+          "name": "TaxRate",
+          "type": "NUMERIC"
+        },
+        {
+          "name": "OtherRate",
+          "type": "NUMERIC"
+        },
+        {
+          "name": "MatchInputPrice",
+          "type": "BOOLEAN"
+        }
+      ]
+    },
+    {
+      "name": "Calculation",
+      "type": "record",
+      "fields": [{
+          "name": "BrandCountryCalculationId",
+          "type": "INTEGER"
+        },
+        {
+          "name": "DutyTaxCalculationModelId",
+          "type": "INTEGER"
+        },
+        {
+          "name": "IsAccurateCalculationRequired",
+          "type": "BOOLEAN"
+        },
+        {
+          "name": "IsReverseAccurateCalculationRequired",
+          "type": "STRING"
+        },
+        {
+          "name": "IsReverseEstimatedCalculationRequired",
+          "type": "STRING"
+        },
+        {
+          "name": "IsReverseTaxesCalculationRequired",
+          "type": "STRING"
+        },
+        {
+          "name": "IsReverseDutyCalculationRequired",
+          "type": "STRING"
+        },
+        {
+          "name": "EstimatedDutyRate",
+          "type": "NUMERIC"
+        },
+        {
+          "name": "EstimatedTaxRate",
+          "type": "NUMERIC"
+        },
+        {
+          "name": "BrandCountryMarkupId",
+          "type": "INTEGER"
+        },
+        {
+          "name": "MarkupPercentage",
+          "type": "NUMERIC"
+        },
+        {
+          "name": "PricingGroupId",
+          "type": "INTEGER"
+        },
+        {
+          "name": "CustomsCalculationType",
+          "type": "STRING"
+        }
+      ]
+    },
+    {
+      "name": "Display",
+      "type": "record",
+      "fields": [{
+          "name": "BrandCountryDisplayModelId",
+          "type": "INTEGER"
+        },
+        {
+          "name": "ProductDisplay",
+          "type": "record",
+          "fields": [{
+              "name": "MerchandiseDisplayModelId",
+              "type": "INTEGER"
+            },
+            {
+              "name": "Name",
+              "type": "STRING"
+            },
+            {
+              "name": "Description",
+              "type": "STRING"
+            },
+            {
+              "name": "IncludeAllDutyAndTax",
+              "type": "BOOLEAN"
+            },
+            {
+              "name": "IncludeMerchandiseDuty",
+              "type": "BOOLEAN"
+            },
+            {
+              "name": "IncludeMerchandiseTax",
+              "type": "BOOLEAN"
+            },
+            {
+              "name": "IncludeShipping",
+              "type": "BOOLEAN"
+            },
+            {
+              "name": "IncludeShippingDuty",
+              "type": "BOOLEAN"
+            },
+            {
+              "name": "IncludeShippingTax",
+              "type": "BOOLEAN"
+            },
+            {
+              "name": "IncludeOtherTaxes",
+              "type": "BOOLEAN"
+            },
+            {
+              "name": "IncludeOtherFees",
+              "type": "BOOLEAN"
+            },
+            {
+              "name": "DefaultDisplayText",
+              "type": "STRING"
+            },
+            {
+              "name": "DisplayTextKey",
+              "type": "STRING"
+            }
+          ]
+        },
+        {
+          "name": "DutyAndTaxDisplay1",
+          "type": "STRING"
+        },
+        {
+          "name": "DutyAndTaxDisplay2",
+          "type": "STRING"
+        },
+        {
+          "name": "DeliveryDisplay",
+          "type": "record",
+          "fields": [{
+              "name": "IncludeAllDutyAndTax",
+              "type": "BOOLEAN"
+            },
+            {
+              "name": "ShippingDisplayModelId",
+              "type": "INTEGER"
+            },
+            {
+              "name": "Name",
+              "type": "STRING"
+            },
+            {
+              "name": "Description",
+              "type": "STRING"
+            },
+            {
+              "name": "IncludeMerchandiseDuty",
+              "type": "BOOLEAN"
+            },
+            {
+              "name": "IncludeMerchandiseTax",
+              "type": "BOOLEAN"
+            },
+            {
+              "name": "IncludeShipping",
+              "type": "BOOLEAN"
+            },
+            {
+              "name": "IncludeShippingDuty",
+              "type": "BOOLEAN"
+            },
+            {
+              "name": "IncludeShippingTax",
+              "type": "BOOLEAN"
+            },
+            {
+              "name": "IncludeOtherTaxes",
+              "type": "BOOLEAN"
+            },
+            {
+              "name": "IncludeOtherFees",
+              "type": "BOOLEAN"
+            },
+            {
+              "name": "IsShippingVisible",
+              "type": "BOOLEAN"
+            },
+            {
+              "name": "DefaultDisplayText",
+              "type": "STRING"
+            },
+            {
+              "name": "DisplayTextKey",
+              "type": "STRING"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+},
+{
+  "name": "Features",
+  "type": "record",
+  "mode": "repeated",
+  "fields": [{
+      "name": "Type",
+      "type": "STRING"
+    },
+    {
+      "name": "Active",
+      "type": "BOOLEAN"
+    }
+  ]
+},
+{
+  "name": "ExpiryTimeUtc",
+  "type": "TIMESTAMP"
+},
+{
+  "name": "ChargeTargets",
+  "type": "record",
+  "mode": "repeated",
+  "fields": [{
+      "name": "Name",
+      "type": "STRING"
+    },
+    {
+      "name": "TargetValue",
+      "type": "record",
+      "fields": [{
+          "name": "CurrencyCodeIso",
+          "type": "STRING"
+        },
+        {
+          "name": "Currency",
+          "type": "record",
+          "fields": [{
+              "name": "Iso",
+              "type": "STRING"
+            },
+            {
+              "name": "Name",
+              "type": "STRING"
+            },
+            {
+              "name": "Exponent",
+              "type": "INTEGER"
+            },
+            {
+              "name": "Id",
+              "type": "INTEGER"
+            }
+          ]
+        },
+        {
+          "name": "Value",
+          "type": "NUMERIC"
+        }
+      ]
+    }
+  ]
+},
+{
+  "name": "GdprAccepted",
+  "type": "BOOLEAN"
+},
+{
+  "name": "GdprAcceptanceHistory",
+  "type": "record",
+  "mode": "repeated",
+  "fields": [{
+      "name": "Accepted",
+      "type": "BOOLEAN"
+    },
+    {
+      "name": "Date",
+      "type": "TIMESTAMP"
+    }
+  ]
+},
+{
+  "name": "brandCode",
+  "type": "STRING"
+},
+{
+  "name": "eventName",
+  "type": "STRING"
+},
+{
+  "name": "correlationId",
+  "type": "STRING"
+},
+{
+  "name": "userAgent",
+  "type": "STRING"
+},
+{
+  "name": "queryString",
+  "type": "STRING"
+},
+{
+  "name": "created",
+  "type": "TIMESTAMP"
+}
 ]
