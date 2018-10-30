@@ -41,7 +41,7 @@ public class RetailerDeliveryOption implements Serializable {
     }
 
     @JsonProperty("EstimatedDeliveryDate")
-    private DateTime estimatedDeliveryDate; // todo: NULLABLE
+    private DateTime estimatedDeliveryDate;
 
     @JsonProperty("EstimatedDeliveryDate")
     public DateTime getEstimateddeliverydate() {

@@ -225,12 +225,12 @@ public class OrderSummary implements Serializable {
         long startTime = previous.getCreated();
         orderSummary.setStartdate(previous.getCreated());
         if (!iterator.hasNext()) {
-            return orderSummary; // todo - process exists here if only 1 entry!!! Return this order ...
+            return orderSummary;
         }
         MasterOrder current;
         List<Long> allDiffs = new ArrayList<>();
         do {
-            current = iterator.next(); // todo: redact order here
+            current = iterator.next();
             long currentDiff = current.getCreated() - previous.getCreated();
             if (orderSummary.getMinTimeDelay() == 0) {
                 orderSummary.setMinTimeDelay(currentDiff);

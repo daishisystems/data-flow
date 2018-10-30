@@ -95,7 +95,7 @@ public class App {
         outputTuple.get(deadLetterTag).apply("Dead Letter Queue", // todo: redact these using DLP
                 PubsubIO.writeStrings().to("projects/eshop-bigdata/topics/dataflow-test-out"));
 
-        // todo: Window duration -> 20 minutes
+        // FIXME: Window duration -> 20 minutes
 
         PCollection<KV<String, Iterable<MasterOrder>>> groupedOrders = orders.apply("Group", GroupByKey.create());
 
@@ -113,20 +113,9 @@ public class App {
         maskedOrders.apply("Incomplete Orders", ParDo.of(new SerialiseMasterOrderFn())).apply("Publish Incomplete",
                 PubsubIO.writeStrings().to("projects/eshop-bigdata/topics/order-master-test"));
 
-        // todo: todo list, serialise NULLS, unit test order.json by value assignment
+        // FIXME: MASK
 
-        // todo: MASK
-
-        // todo: Return PCollection<MasterOrder> -> redact or not, then publish to
-        // Manuel
-        // todo: Refactor OrderSummaryFn
-        // !! May need 2 collections??? Or just apply in processElement
-
-        PCollection<OrderSummary> orderSummaries = groupedOrders.apply("Summarise", ParDo.of(new OrderSummaryFn())); // todo:
-                                                                                                                     // Output
-                                                                                                                     // masked
-                                                                                                                     // orders
-                                                                                                                     // PCollection
+        PCollection<OrderSummary> orderSummaries = groupedOrders.apply("Summarise", ParDo.of(new OrderSummaryFn()));
 
         List<TableFieldSchema> fields = new ArrayList<>();
         fields.add(new TableFieldSchema().setName("OrderNumber").setType("STRING")); // todo: Validate order schema ->
@@ -159,11 +148,8 @@ public class App {
         p.run().waitUntilFinish();
     }
 
-    // todo: 1. Handle single order events
-    // todo: 2. Fix MaxSecondEventName NULL
-    // todo: 3. Fix complete calc
-
-    // todo: Fix Timestamp format
+    // FIXME: Handle single order events
+    // FIXME: Fix complete calc
 
     static class MaskOrderFn extends DoFn<MasterOrder, MasterOrder> {
         private static final long serialVersionUID = -3894610851045133386L;
@@ -254,7 +240,7 @@ public class App {
         public void processElement(ProcessContext c) throws JsonParseException, JsonMappingException, IOException {
             ObjectMapper mapper = new ObjectMapper();
             mapper.registerModule(new JodaModule());
-            mapper.setDefaultPropertyInclusion(JsonInclude.Include.ALWAYS);
+            mapper.setDefaultPropertyInclusion(JsonInclude.Include.ALWAYS); // todo: Delete?
             MasterOrder masterOrder = c.element();
             c.output(mapper.writeValueAsString(masterOrder));
         }
