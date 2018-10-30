@@ -21,14 +21,6 @@ public class DeserialisationTest {
         assertEquals(Double.valueOf(expected), masterOrder.getPricing().getCalculation().getEstimatedDutyRate());
     }
 
-    @Test
-    public void masterOrderNullFieldsAreSerialised() throws JsonParseException, JsonMappingException, IOException {
-        String json = getFile("order.json");
-        ObjectMapper mapper = new ObjectMapper();
-        MasterOrder masterOrder = mapper.readValue(json, MasterOrder.class);
-        String serialisedMasterOrder = mapper.writeValueAsString(masterOrder);
-    }
-
     private String getFile(String fileName) {
 
         StringBuilder result = new StringBuilder("");
