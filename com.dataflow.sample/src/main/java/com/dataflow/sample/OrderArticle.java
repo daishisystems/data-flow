@@ -9,14 +9,12 @@ import java.util.Map;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import org.apache.beam.sdk.coders.DefaultCoder;
 import org.apache.beam.sdk.coders.SerializableCoder;
 
-@JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({ "Charges", "Package", "ChargeTargets" })
 @DefaultCoder(SerializableCoder.class)
 public class OrderArticle implements Serializable {
@@ -26,7 +24,7 @@ public class OrderArticle implements Serializable {
     @JsonProperty("Package")
     private Package _package;
     @JsonProperty("ChargeTargets")
-    private List<Object> chargeTargets = new ArrayList<Object>();
+    private List<ChargeTarget> chargeTargets = new ArrayList<ChargeTarget>();
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
     private final static long serialVersionUID = 2336595865081111803L;
@@ -44,7 +42,7 @@ public class OrderArticle implements Serializable {
      * @param _package
      * @param chargeTargets
      */
-    public OrderArticle(List<Charge> charges, Package _package, List<Object> chargeTargets) {
+    public OrderArticle(List<Charge> charges, Package _package, List<ChargeTarget> chargeTargets) {
         super();
         this.charges = charges;
         this._package = _package;
@@ -72,12 +70,12 @@ public class OrderArticle implements Serializable {
     }
 
     @JsonProperty("ChargeTargets")
-    public List<Object> getChargeTargets() {
+    public List<ChargeTarget> getChargeTargets() {
         return chargeTargets;
     }
 
     @JsonProperty("ChargeTargets")
-    public void setChargeTargets(List<Object> chargeTargets) {
+    public void setChargeTargets(List<ChargeTarget> chargeTargets) {
         this.chargeTargets = chargeTargets;
     }
 

@@ -9,14 +9,12 @@ import java.util.Map;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import org.apache.beam.sdk.coders.DefaultCoder;
 import org.apache.beam.sdk.coders.SerializableCoder;
 
-@JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({ "OrderCode", "RetailerCartId", "OrderItems", "AvailableOrderItems", "RetailerPromoCodes",
         "OrderDiscounts", "DeliveryDetails", "PaymentDetails", "DeliveryOption", "Errors", "RetailerCheckoutExperience",
         "ShopperCurrencyIso", "RetailerCurrencyIso", "RetailerFxGroupId", "SourceCountryIso", "DeliveryCountryIso",
@@ -64,7 +62,7 @@ public class MasterOrder implements Serializable {
     @JsonProperty("DeliveryOptions")
     private List<DeliveryOption> deliveryOptions = new ArrayList<DeliveryOption>();
     @JsonProperty("RetailerDeliveryOptions")
-    private List<Object> retailerDeliveryOptions = new ArrayList<Object>();
+    private List<RetailerDeliveryOption> retailerDeliveryOptions = new ArrayList<RetailerDeliveryOption>();
     @JsonProperty("Payment")
     private Payment payment;
     @JsonProperty("IpAddress")
@@ -82,11 +80,11 @@ public class MasterOrder implements Serializable {
     @JsonProperty("ExpiryTimeUtc")
     private String expiryTimeUtc;
     @JsonProperty("ChargeTargets")
-    private List<Object> chargeTargets = new ArrayList<Object>();
+    private List<ChargeTarget> chargeTargets = new ArrayList<ChargeTarget>();
     @JsonProperty("GdprAccepted")
     private Boolean gdprAccepted;
     @JsonProperty("GdprAcceptanceHistory")
-    private List<Object> gdprAcceptanceHistory = new ArrayList<Object>();
+    private List<GdprAcceptance> gdprAcceptanceHistory = new ArrayList<GdprAcceptance>();
     @JsonProperty("brandCode")
     private String brandCode;
     @JsonProperty("eventName")
@@ -156,10 +154,10 @@ public class MasterOrder implements Serializable {
             RetailerCheckoutExperience retailerCheckoutExperience, String shopperCurrencyIso,
             String retailerCurrencyIso, Integer retailerFxGroupId, String sourceCountryIso, String deliveryCountryIso,
             ShopperCheckoutExperience shopperCheckoutExperience, List<DeliveryOption> deliveryOptions,
-            List<Object> retailerDeliveryOptions, Payment payment, Object ipAddress,
+            List<RetailerDeliveryOption> retailerDeliveryOptions, Payment payment, Object ipAddress,
             CalculationParameters calculationParameters, String status, Object orderConfirmationErrorInformation,
-            Pricing pricing, List<Feature> features, String expiryTimeUtc, List<Object> chargeTargets,
-            Boolean gdprAccepted, List<Object> gdprAcceptanceHistory, String brandCode, String eventName,
+            Pricing pricing, List<Feature> features, String expiryTimeUtc, List<ChargeTarget> chargeTargets,
+            Boolean gdprAccepted, List<GdprAcceptance> gdprAcceptanceHistory, String brandCode, String eventName,
             String correlationId, String userAgent, String queryString, Long created) {
         super();
         this.orderCode = orderCode;
@@ -381,12 +379,12 @@ public class MasterOrder implements Serializable {
     }
 
     @JsonProperty("RetailerDeliveryOptions")
-    public List<Object> getRetailerDeliveryOptions() {
+    public List<RetailerDeliveryOption> getRetailerDeliveryOptions() {
         return retailerDeliveryOptions;
     }
 
     @JsonProperty("RetailerDeliveryOptions")
-    public void setRetailerDeliveryOptions(List<Object> retailerDeliveryOptions) {
+    public void setRetailerDeliveryOptions(List<RetailerDeliveryOption> retailerDeliveryOptions) {
         this.retailerDeliveryOptions = retailerDeliveryOptions;
     }
 
@@ -471,12 +469,12 @@ public class MasterOrder implements Serializable {
     }
 
     @JsonProperty("ChargeTargets")
-    public List<Object> getChargeTargets() {
+    public List<ChargeTarget> getChargeTargets() {
         return chargeTargets;
     }
 
     @JsonProperty("ChargeTargets")
-    public void setChargeTargets(List<Object> chargeTargets) {
+    public void setChargeTargets(List<ChargeTarget> chargeTargets) {
         this.chargeTargets = chargeTargets;
     }
 
@@ -491,12 +489,12 @@ public class MasterOrder implements Serializable {
     }
 
     @JsonProperty("GdprAcceptanceHistory")
-    public List<Object> getGdprAcceptanceHistory() {
+    public List<GdprAcceptance> getGdprAcceptanceHistory() {
         return gdprAcceptanceHistory;
     }
 
     @JsonProperty("GdprAcceptanceHistory")
-    public void setGdprAcceptanceHistory(List<Object> gdprAcceptanceHistory) {
+    public void setGdprAcceptanceHistory(List<GdprAcceptance> gdprAcceptanceHistory) {
         this.gdprAcceptanceHistory = gdprAcceptanceHistory;
     }
 

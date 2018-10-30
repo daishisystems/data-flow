@@ -9,14 +9,12 @@ import java.util.Map;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import org.apache.beam.sdk.coders.DefaultCoder;
 import org.apache.beam.sdk.coders.SerializableCoder;
 
-@JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({ "ProductCode", "Upc", "Title", "Description", "RetailerCurrencyProductPriceInfo",
         "ShopperCurrencyProductPriceInfo", "ImageUrl", "Color", "Size", "IsRestrictedForCountry", "OverridePrice",
         "Dimension5", "Dimension6", "IsNonStandardCatalogItem", "MetadataItems" })
@@ -52,7 +50,7 @@ public class Product implements Serializable {
     @JsonProperty("IsNonStandardCatalogItem")
     private Boolean isNonStandardCatalogItem;
     @JsonProperty("MetadataItems")
-    private List<Object> metadataItems = new ArrayList<Object>();
+    private List<MetadataItem> metadataItems = new ArrayList<MetadataItem>();
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
     private final static long serialVersionUID = -3581130492050196380L;
@@ -86,7 +84,7 @@ public class Product implements Serializable {
             RetailerCurrencyProductPriceInfo retailerCurrencyProductPriceInfo,
             ShopperCurrencyProductPriceInfo shopperCurrencyProductPriceInfo, String imageUrl, String color, String size,
             Boolean isRestrictedForCountry, Boolean overridePrice, Object dimension5, Object dimension6,
-            Boolean isNonStandardCatalogItem, List<Object> metadataItems) {
+            Boolean isNonStandardCatalogItem, List<MetadataItem> metadataItems) {
         super();
         this.productCode = productCode;
         this.upc = upc;
@@ -246,12 +244,12 @@ public class Product implements Serializable {
     }
 
     @JsonProperty("MetadataItems")
-    public List<Object> getMetadataItems() {
+    public List<MetadataItem> getMetadataItems() {
         return metadataItems;
     }
 
     @JsonProperty("MetadataItems")
-    public void setMetadataItems(List<Object> metadataItems) {
+    public void setMetadataItems(List<MetadataItem> metadataItems) {
         this.metadataItems = metadataItems;
     }
 

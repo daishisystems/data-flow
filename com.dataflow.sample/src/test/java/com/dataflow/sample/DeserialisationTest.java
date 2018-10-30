@@ -13,12 +13,20 @@ import org.junit.Test;
 public class DeserialisationTest {
 
     @Test
-    public void MasterOrderIsDeserialised() throws JsonParseException, JsonMappingException, IOException {
+    public void masterOrderIsDeserialised() throws JsonParseException, JsonMappingException, IOException {
         String json = getFile("order.json");
         ObjectMapper mapper = new ObjectMapper();
         MasterOrder masterOrder = mapper.readValue(json, MasterOrder.class);
         double expected = 0.106;
         assertEquals(Double.valueOf(expected), masterOrder.getPricing().getCalculation().getEstimatedDutyRate());
+    }
+
+    @Test
+    public void masterOrderNullFieldsAreSerialised() throws JsonParseException, JsonMappingException, IOException {
+        String json = getFile("order.json");
+        ObjectMapper mapper = new ObjectMapper();
+        MasterOrder masterOrder = mapper.readValue(json, MasterOrder.class);
+        String serialisedMasterOrder = mapper.writeValueAsString(masterOrder);
     }
 
     private String getFile(String fileName) {

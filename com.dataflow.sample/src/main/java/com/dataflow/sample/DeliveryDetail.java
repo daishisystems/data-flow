@@ -9,14 +9,12 @@ import java.util.Map;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import org.apache.beam.sdk.coders.DefaultCoder;
 import org.apache.beam.sdk.coders.SerializableCoder;
 
-@JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({ "Id", "ContactDetailsNickName", "Address1", "Address2", "Address3", "City", "PostalCode", "Region",
         "Country", "Email", "FirstName", "LastName", "Gender", "Telephone", "PoBox", "MetadataItems" })
 @DefaultCoder(SerializableCoder.class)
@@ -53,7 +51,7 @@ public class DeliveryDetail implements Serializable {
     @JsonProperty("PoBox")
     private Object poBox;
     @JsonProperty("MetadataItems")
-    private List<Object> metadataItems = new ArrayList<Object>();
+    private List<MetadataItem> metadataItems = new ArrayList<MetadataItem>();
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
     private final static long serialVersionUID = -6667160257748742367L;
@@ -86,7 +84,7 @@ public class DeliveryDetail implements Serializable {
      */
     public DeliveryDetail(Integer id, Object contactDetailsNickName, String address1, String address2, Object address3,
             String city, Object postalCode, Object region, String country, Object email, String firstName,
-            String lastName, Integer gender, Object telephone, Object poBox, List<Object> metadataItems) {
+            String lastName, Integer gender, Object telephone, Object poBox, List<MetadataItem> metadataItems) {
         super();
         this.id = id;
         this.contactDetailsNickName = contactDetailsNickName;
@@ -257,12 +255,12 @@ public class DeliveryDetail implements Serializable {
     }
 
     @JsonProperty("MetadataItems")
-    public List<Object> getMetadataItems() {
+    public List<MetadataItem> getMetadataItems() {
         return metadataItems;
     }
 
     @JsonProperty("MetadataItems")
-    public void setMetadataItems(List<Object> metadataItems) {
+    public void setMetadataItems(List<MetadataItem> metadataItems) {
         this.metadataItems = metadataItems;
     }
 

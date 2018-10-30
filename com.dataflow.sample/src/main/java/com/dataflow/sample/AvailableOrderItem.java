@@ -9,14 +9,12 @@ import java.util.Map;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import org.apache.beam.sdk.coders.DefaultCoder;
 import org.apache.beam.sdk.coders.SerializableCoder;
 
-@JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({ "OrderArticles", "Available", "CalculationRates", "VatRate", "DutyRate", "Weight", "WeightUnit",
         "CountryOfOriginIso", "HsCode", "EstimatedDeliveryDate", "Quantity", "Product", "LineItemId", "CartGrouping",
         "MetadataItems", "IsCountryDefault", "ChargeTargets" })
@@ -52,7 +50,7 @@ public class AvailableOrderItem implements Serializable {
     @JsonProperty("CartGrouping")
     private String cartGrouping;
     @JsonProperty("MetadataItems")
-    private List<Object> metadataItems = new ArrayList<Object>();
+    private List<MetadataItem> metadataItems = new ArrayList<MetadataItem>();
     @JsonProperty("IsCountryDefault")
     private Boolean isCountryDefault;
     @JsonProperty("ChargeTargets")
@@ -91,7 +89,7 @@ public class AvailableOrderItem implements Serializable {
     public AvailableOrderItem(List<OrderArticle> orderArticles, Boolean available, CalculationRates calculationRates,
             Double vatRate, Double dutyRate, Double weight, Integer weightUnit, Object countryOfOriginIso,
             String hsCode, String estimatedDeliveryDate, Integer quantity, Product product, String lineItemId,
-            String cartGrouping, List<Object> metadataItems, Boolean isCountryDefault,
+            String cartGrouping, List<MetadataItem> metadataItems, Boolean isCountryDefault,
             List<ChargeTarget> chargeTargets) {
         super();
         this.orderArticles = orderArticles;
@@ -254,12 +252,12 @@ public class AvailableOrderItem implements Serializable {
     }
 
     @JsonProperty("MetadataItems")
-    public List<Object> getMetadataItems() {
+    public List<MetadataItem> getMetadataItems() {
         return metadataItems;
     }
 
     @JsonProperty("MetadataItems")
-    public void setMetadataItems(List<Object> metadataItems) {
+    public void setMetadataItems(List<MetadataItem> metadataItems) {
         this.metadataItems = metadataItems;
     }
 

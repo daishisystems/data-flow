@@ -9,14 +9,12 @@ import java.util.Map;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import org.apache.beam.sdk.coders.DefaultCoder;
 import org.apache.beam.sdk.coders.SerializableCoder;
 
-@JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({ "UseDeliveryContactDetailsForPaymentContactDetails", "EmailMarketingOptIn", "RegisteredProfileId",
         "ShopperCultureLanguageIso", "ExpressPaymentMethod", "MetadataItems" })
 @DefaultCoder(SerializableCoder.class)
@@ -33,7 +31,7 @@ public class ShopperCheckoutExperience implements Serializable {
     @JsonProperty("ExpressPaymentMethod")
     private String expressPaymentMethod;
     @JsonProperty("MetadataItems")
-    private List<Object> metadataItems = new ArrayList<Object>();
+    private List<MetadataItem> metadataItems = new ArrayList<MetadataItem>();
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
     private final static long serialVersionUID = 1502372606493616422L;
@@ -56,7 +54,7 @@ public class ShopperCheckoutExperience implements Serializable {
      */
     public ShopperCheckoutExperience(Boolean useDeliveryContactDetailsForPaymentContactDetails,
             Boolean emailMarketingOptIn, String registeredProfileId, String shopperCultureLanguageIso,
-            String expressPaymentMethod, List<Object> metadataItems) {
+            String expressPaymentMethod, List<MetadataItem> metadataItems) {
         super();
         this.useDeliveryContactDetailsForPaymentContactDetails = useDeliveryContactDetailsForPaymentContactDetails;
         this.emailMarketingOptIn = emailMarketingOptIn;
@@ -118,12 +116,12 @@ public class ShopperCheckoutExperience implements Serializable {
     }
 
     @JsonProperty("MetadataItems")
-    public List<Object> getMetadataItems() {
+    public List<MetadataItem> getMetadataItems() {
         return metadataItems;
     }
 
     @JsonProperty("MetadataItems")
-    public void setMetadataItems(List<Object> metadataItems) {
+    public void setMetadataItems(List<MetadataItem> metadataItems) {
         this.metadataItems = metadataItems;
     }
 

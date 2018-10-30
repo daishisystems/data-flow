@@ -22,6 +22,8 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.api.services.bigquery.model.TableFieldSchema;
 import com.google.api.services.bigquery.model.TableRow;
@@ -99,13 +101,17 @@ public class App {
                 .withOutputTags(completeOrdersTag, TupleTagList.of(incompleteOrdersTag)));
 
         PCollection<MasterOrder> completeOrders = processedOrdersTuple.get(completeOrdersTag);
-        PCollection<MasterOrder> incompleteOrders = processedOrdersTuple.get(incompleteOrdersTag);        
+        PCollection<MasterOrder> incompleteOrders = processedOrdersTuple.get(incompleteOrdersTag);
 
         completeOrders.apply("Complete Orders", ParDo.of(new SerialiseMasterOrderFn())).apply("Publish Complete",
-                PubsubIO.writeStrings().to("projects/eshop-bigdata/topics/MasterTable"));
+                PubsubIO.writeStrings().to("projects/eshop-bigdata/topics/order-master-test"));
 
-        incompleteOrders.apply("Incomplete Orders", ParDo.of(new SerialiseMasterOrderFn())).apply("Publish Incomplete",
-                PubsubIO.writeStrings().to("projects/eshop-bigdata/topics/MasterTable"));
+        PCollection<MasterOrder> maskedOrders = incompleteOrders.apply("Mask", new MaskOrdersFn());
+
+        maskedOrders.apply("Incomplete Orders", ParDo.of(new SerialiseMasterOrderFn())).apply("Publish Incomplete",
+                PubsubIO.writeStrings().to("projects/eshop-bigdata/topics/order-master-test"));
+
+        // todo: todo list, serialise NULLS, unit test order.json by value assignment
 
         // todo: MASK
 
@@ -157,6 +163,34 @@ public class App {
 
     // todo: Fix Timestamp format
 
+    static class MaskOrderFn extends DoFn<MasterOrder, MasterOrder> {
+        private static final long serialVersionUID = -3894610851045133386L;
+
+        @ProcessElement
+        public void processElement(ProcessContext c) {
+            MasterOrder o = c.element();
+            List<DeliveryDetail> deliveryDetails = o.getDeliveryDetails();
+            for (DeliveryDetail deliveryDetail : deliveryDetails) {
+                Object contactDetailsNickname = deliveryDetail.getContactDetailsNickName();
+                if (contactDetailsNickname != null && !contactDetailsNickname.toString().isEmpty()) {
+                    deliveryDetail.setContactDetailsNickName(Utils.mask(contactDetailsNickname.toString(), '#'));
+                }
+            }
+            o.setDeliveryDetails(deliveryDetails);
+            c.output(o);
+        }
+    }
+
+    static class MaskOrdersFn extends PTransform<PCollection<MasterOrder>, PCollection<MasterOrder>> {
+        private static final long serialVersionUID = 7336178731649757662L;
+
+        @Override
+        public PCollection<MasterOrder> expand(PCollection<MasterOrder> input) {
+            PCollection<MasterOrder> maskedOrders = input.apply(ParDo.of(new MaskOrderFn()));
+            return maskedOrders;
+        }
+    }
+
     static class OrderSummaryFn extends DoFn<KV<String, Iterable<MasterOrder>>, OrderSummary> {
         private static final long serialVersionUID = -3067528732035106582L;
         final String COMPLETE_EVENT_NAME = "COMPLETE";
@@ -204,6 +238,7 @@ public class App {
         @ProcessElement
         public void processElement(ProcessContext c) throws JsonParseException, JsonMappingException, IOException {
             ObjectMapper mapper = new ObjectMapper();
+            mapper.setDefaultPropertyInclusion(JsonInclude.Include.ALWAYS);
             OrderSummary orderSummary = c.element();
             c.output(mapper.writeValueAsString(orderSummary));
         }
@@ -215,6 +250,7 @@ public class App {
         @ProcessElement
         public void processElement(ProcessContext c) throws JsonParseException, JsonMappingException, IOException {
             ObjectMapper mapper = new ObjectMapper();
+            mapper.setDefaultPropertyInclusion(JsonInclude.Include.ALWAYS);
             MasterOrder masterOrder = c.element();
             c.output(mapper.writeValueAsString(masterOrder));
         }
@@ -251,8 +287,7 @@ public class App {
     }
 
     static class OrderSummariesToTableRows extends PTransform<PCollection<OrderSummary>, PCollection<TableRow>> {
-
-        private static final long serialVersionUID = 1L;
+        private static final long serialVersionUID = -9160884567370640531L;
 
         @Override
         public PCollection<TableRow> expand(PCollection<OrderSummary> input) {
