@@ -163,9 +163,114 @@ public class App {
             MasterOrder o = c.element();
             List<DeliveryDetail> deliveryDetails = o.getDeliveryDetails();
             for (DeliveryDetail deliveryDetail : deliveryDetails) {
-                Object contactDetailsNickname = deliveryDetail.getContactDetailsNickName();
-                if (contactDetailsNickname != null && !contactDetailsNickname.toString().isEmpty()) {
-                    deliveryDetail.setContactDetailsNickName(Utils.mask(contactDetailsNickname.toString(), '#'));
+                String contactDetailsNickname = deliveryDetail.getContactDetailsNickName();
+                if (contactDetailsNickname != null && !contactDetailsNickname.isEmpty()) {
+                    deliveryDetail.setContactDetailsNickName(Utils.mask(contactDetailsNickname, '#'));
+                }
+                String address1 = deliveryDetail.getAddress1();
+                if (address1 != null && !address1.isEmpty()) {
+                    deliveryDetail.setAddress1(Utils.mask(address1, '#'));
+                }
+                String address2 = deliveryDetail.getAddress2();
+                if (address2 != null && !address2.isEmpty()) {
+                    deliveryDetail.setAddress2(Utils.mask(address2, '#'));
+                }
+                String address3 = deliveryDetail.getAddress3();
+                if (address3 != null && !address3.isEmpty()) {
+                    deliveryDetail.setAddress3(Utils.mask(address3, '#'));
+                }
+                String city = deliveryDetail.getCity();
+                if (city != null && !city.isEmpty()) {
+                    deliveryDetail.setCity(Utils.mask(city, '#'));
+                }
+                String postalCode = deliveryDetail.getPostalCode();
+                if (postalCode != null && !postalCode.isEmpty()) {
+                    deliveryDetail.setPostalCode(Utils.mask(postalCode, '#'));
+                }
+                String region = deliveryDetail.getRegion();
+                if (region != null && !region.isEmpty()) {
+                    deliveryDetail.setRegion(Utils.mask(region, '#'));
+                }
+                String country = deliveryDetail.getCountry();
+                if (country != null && !country.isEmpty()) {
+                    deliveryDetail.setCountry(Utils.mask(country, '#'));
+                }
+                String email = deliveryDetail.getEmail();
+                if (email != null && !email.isEmpty()) {
+                    deliveryDetail.setEmail(Utils.mask(email, '#'));
+                }
+                String firstName = deliveryDetail.getFirstName();
+                if (firstName != null && !firstName.isEmpty()) {
+                    deliveryDetail.setFirstName(Utils.mask(firstName, '#'));
+                }
+                String lastName = deliveryDetail.getLastName();
+                if (lastName != null && !lastName.isEmpty()) {
+                    deliveryDetail.setLastName(Utils.mask(lastName, '#'));
+                }
+                deliveryDetail.setGender(-1);
+                String telephone = deliveryDetail.getTelephone();
+                if (telephone != null && !telephone.isEmpty()) {
+                    deliveryDetail.setTelephone(Utils.mask(telephone, '#'));
+                }
+                String poBox = deliveryDetail.getPoBox();
+                if (poBox != null && !poBox.isEmpty()) {
+                    deliveryDetail.setPoBox(Utils.mask(poBox, '#'));
+                }
+            }
+            List<PaymentDetail> paymentDetails = o.getPaymentDetails();
+            for (PaymentDetail paymentDetail : paymentDetails) {
+                String contactDetailsNickname = paymentDetail.getContactDetailsNickName();
+                if (contactDetailsNickname != null && !contactDetailsNickname.isEmpty()) {
+                    paymentDetail.setContactDetailsNickName(Utils.mask(contactDetailsNickname, '#'));
+                }
+                String address1 = paymentDetail.getAddress1();
+                if (address1 != null && !address1.isEmpty()) {
+                    paymentDetail.setAddress1(Utils.mask(address1, '#'));
+                }
+                String address2 = paymentDetail.getAddress2();
+                if (address2 != null && !address2.isEmpty()) {
+                    paymentDetail.setAddress2(Utils.mask(address2, '#'));
+                }
+                String address3 = paymentDetail.getAddress3();
+                if (address3 != null && !address3.isEmpty()) {
+                    paymentDetail.setAddress3(Utils.mask(address3, '#'));
+                }
+                String city = paymentDetail.getCity();
+                if (city != null && !city.isEmpty()) {
+                    paymentDetail.setCity(Utils.mask(city, '#'));
+                }
+                String postalCode = paymentDetail.getPostalCode();
+                if (postalCode != null && !postalCode.isEmpty()) {
+                    paymentDetail.setPostalCode(Utils.mask(postalCode, '#'));
+                }
+                String region = paymentDetail.getRegion();
+                if (region != null && !region.isEmpty()) {
+                    paymentDetail.setRegion(Utils.mask(region, '#'));
+                }
+                String country = paymentDetail.getCountry();
+                if (country != null && !country.isEmpty()) {
+                    paymentDetail.setCountry(Utils.mask(country, '#'));
+                }
+                String email = paymentDetail.getEmail();
+                if (email != null && !email.isEmpty()) {
+                    paymentDetail.setEmail(Utils.mask(email, '#'));
+                }
+                String firstName = paymentDetail.getFirstName();
+                if (firstName != null && !firstName.isEmpty()) {
+                    paymentDetail.setFirstName(Utils.mask(firstName, '#'));
+                }
+                String lastName = paymentDetail.getLastName();
+                if (lastName != null && !lastName.isEmpty()) {
+                    paymentDetail.setLastName(Utils.mask(lastName, '#'));
+                }
+                paymentDetail.setGender(-1);
+                String telephone = paymentDetail.getTelephone();
+                if (telephone != null && !telephone.isEmpty()) {
+                    paymentDetail.setTelephone(Utils.mask(telephone, '#'));
+                }
+                String poBox = paymentDetail.getPoBox();
+                if (poBox != null && !poBox.isEmpty()) {
+                    paymentDetail.setPoBox(Utils.mask(poBox, '#'));
                 }
             }
             o.setDeliveryDetails(deliveryDetails);

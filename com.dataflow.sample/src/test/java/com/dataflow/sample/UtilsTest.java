@@ -11,7 +11,6 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.joda.JodaModule;
-
 import org.junit.Test;
 
 public class UtilsTest {
@@ -28,10 +27,10 @@ public class UtilsTest {
         final Object input = "INPUT";
         String masked = Utils.mask(input.toString(), '#');
         assertEquals("#####", masked);
-    }
+    }   
 
     @Test
-    public void orderIsMasked() throws JsonParseException, JsonMappingException, IOException {
+    public void orderIsPartiallyMasked() throws JsonParseException, JsonMappingException, IOException {
         String json = getFile("order3.json");
         ObjectMapper mapper = new ObjectMapper();
         mapper.registerModule(new JodaModule());

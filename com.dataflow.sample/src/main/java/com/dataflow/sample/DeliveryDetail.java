@@ -23,23 +23,23 @@ public class DeliveryDetail implements Serializable {
     @JsonProperty("Id")
     private Integer id;
     @JsonProperty("ContactDetailsNickName")
-    private Object contactDetailsNickName;
+    private String contactDetailsNickName;
     @JsonProperty("Address1")
     private String address1;
     @JsonProperty("Address2")
     private String address2;
     @JsonProperty("Address3")
-    private Object address3;
+    private String address3;
     @JsonProperty("City")
     private String city;
     @JsonProperty("PostalCode")
-    private Object postalCode;
+    private String postalCode;
     @JsonProperty("Region")
-    private Object region;
+    private String region;
     @JsonProperty("Country")
     private String country;
     @JsonProperty("Email")
-    private Object email;
+    private String email;
     @JsonProperty("FirstName")
     private String firstName;
     @JsonProperty("LastName")
@@ -47,9 +47,9 @@ public class DeliveryDetail implements Serializable {
     @JsonProperty("Gender")
     private Integer gender;
     @JsonProperty("Telephone")
-    private Object telephone;
+    private String telephone;
     @JsonProperty("PoBox")
-    private Object poBox;
+    private String poBox;
     @JsonProperty("MetadataItems")
     private List<MetadataItem> metadataItems = new ArrayList<MetadataItem>();
     @JsonIgnore
@@ -82,9 +82,9 @@ public class DeliveryDetail implements Serializable {
      * @param firstName
      * @param telephone
      */
-    public DeliveryDetail(Integer id, Object contactDetailsNickName, String address1, String address2, Object address3,
-            String city, Object postalCode, Object region, String country, Object email, String firstName,
-            String lastName, Integer gender, Object telephone, Object poBox, List<MetadataItem> metadataItems) {
+    public DeliveryDetail(Integer id, String contactDetailsNickName, String address1, String address2, String address3,
+            String city, String postalCode, String region, String country, String email, String firstName,
+            String lastName, Integer gender, String telephone, String poBox, List<MetadataItem> metadataItems) {
         super();
         this.id = id;
         this.contactDetailsNickName = contactDetailsNickName;
@@ -115,12 +115,12 @@ public class DeliveryDetail implements Serializable {
     }
 
     @JsonProperty("ContactDetailsNickName")
-    public Object getContactDetailsNickName() {
+    public String getContactDetailsNickName() {
         return contactDetailsNickName;
     }
 
     @JsonProperty("ContactDetailsNickName")
-    public void setContactDetailsNickName(Object contactDetailsNickName) {
+    public void setContactDetailsNickName(String contactDetailsNickName) {
         this.contactDetailsNickName = contactDetailsNickName;
     }
 
@@ -145,12 +145,12 @@ public class DeliveryDetail implements Serializable {
     }
 
     @JsonProperty("Address3")
-    public Object getAddress3() {
+    public String getAddress3() {
         return address3;
     }
 
     @JsonProperty("Address3")
-    public void setAddress3(Object address3) {
+    public void setAddress3(String address3) {
         this.address3 = address3;
     }
 
@@ -165,22 +165,22 @@ public class DeliveryDetail implements Serializable {
     }
 
     @JsonProperty("PostalCode")
-    public Object getPostalCode() {
+    public String getPostalCode() {
         return postalCode;
     }
 
     @JsonProperty("PostalCode")
-    public void setPostalCode(Object postalCode) {
+    public void setPostalCode(String postalCode) {
         this.postalCode = postalCode;
     }
 
     @JsonProperty("Region")
-    public Object getRegion() {
+    public String getRegion() {
         return region;
     }
 
     @JsonProperty("Region")
-    public void setRegion(Object region) {
+    public void setRegion(String region) {
         this.region = region;
     }
 
@@ -195,12 +195,12 @@ public class DeliveryDetail implements Serializable {
     }
 
     @JsonProperty("Email")
-    public Object getEmail() {
+    public String getEmail() {
         return email;
     }
 
     @JsonProperty("Email")
-    public void setEmail(Object email) {
+    public void setEmail(String email) {
         this.email = email;
     }
 
@@ -235,22 +235,22 @@ public class DeliveryDetail implements Serializable {
     }
 
     @JsonProperty("Telephone")
-    public Object getTelephone() {
+    public String getTelephone() {
         return telephone;
     }
 
     @JsonProperty("Telephone")
-    public void setTelephone(Object telephone) {
+    public void setTelephone(String telephone) {
         this.telephone = telephone;
     }
 
     @JsonProperty("PoBox")
-    public Object getPoBox() {
+    public String getPoBox() {
         return poBox;
     }
 
     @JsonProperty("PoBox")
-    public void setPoBox(Object poBox) {
+    public void setPoBox(String poBox) {
         this.poBox = poBox;
     }
 
