@@ -214,7 +214,7 @@ public class OrderSummary implements Serializable {
         Collections.sort(sortedOrders, (o1, o2) -> new Long(o1.getCreated()).compareTo(new Long((o2.getCreated()))));
         return sortedOrders;
     }
-
+    // FIXME: Multiple orders w/ same code will result in misaligned OrderValue!
     public static OrderSummary orderSummary(List<MasterOrder> orders, String orderCompleteIdentifier) {
         Iterator<MasterOrder> iterator = orders.iterator();
         OrderSummary orderSummary = new OrderSummary();

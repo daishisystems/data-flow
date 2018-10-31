@@ -83,18 +83,20 @@ public class OrderTest {
     public void ChargesItemsAndCountryCodeAreCalculated() throws JsonParseException, JsonMappingException, IOException {
         final String orderCompleteIdentifier = "COMPLETE";
 
-        String json = getFile("order.json");
+        String json1 = getFile("order8.json");
         ObjectMapper mapper = new ObjectMapper();
         mapper.registerModule(new JodaModule());
-        MasterOrder masterOrder1 = mapper.readValue(json, MasterOrder.class);
-        MasterOrder masterOrder2 = masterOrder1;
+        MasterOrder masterOrder1 = mapper.readValue(json1, MasterOrder.class);
+
+        String json2 = getFile("order4.json");
+        MasterOrder masterOrder2 = mapper.readValue(json2, MasterOrder.class);
 
         List<MasterOrder> masterOrders = new ArrayList<>();
         masterOrders.add(masterOrder1);
         masterOrders.add(masterOrder2);
         OrderSummary orderSummary = OrderSummary.orderSummary(masterOrders, orderCompleteIdentifier);
 
-        Double expected = 14033.57;
+        Double expected = 13983.58;
         assertEquals(Double.valueOf(expected), Double.valueOf(orderSummary.getOrderValue()));
     }
 
