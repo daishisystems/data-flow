@@ -34,6 +34,7 @@ import org.apache.beam.sdk.options.PipelineOptions;
 import org.apache.beam.sdk.options.PipelineOptionsFactory;
 import org.apache.beam.sdk.transforms.DoFn;
 import org.apache.beam.sdk.transforms.ParDo;
+import org.apache.beam.sdk.transforms.Flatten.PCollections;
 import org.apache.beam.sdk.transforms.GroupByKey;
 import org.apache.beam.sdk.transforms.PTransform;
 import org.apache.beam.sdk.values.KV;
@@ -109,13 +110,25 @@ public class App {
         PCollection<MasterOrder> completeOrders = processedOrdersTuple.get(completeOrdersTag);
         PCollection<MasterOrder> incompleteOrders = processedOrdersTuple.get(incompleteOrdersTag);
 
-        completeOrders.apply("Complete Orders", ParDo.of(new SerialiseMasterOrderFn())).apply("Publish Complete",
+        PCollection<String> serialisedCompleteOrders = completeOrders.apply("Serialise Complete",
+                ParDo.of(new SerialiseMasterOrderFn()));
+
+        serialisedCompleteOrders.apply("Publish Complete",
                 PubsubIO.writeStrings().to("projects/eshop-bigdata/topics/Orders_MasterTable"));
+
+        serialisedCompleteOrders.apply("Archive Complete",
+                PubsubIO.writeStrings().to("projects/eshop-bigdata/topics/order-master-archive"));
 
         PCollection<MasterOrder> maskedOrders = incompleteOrders.apply("Mask", new MaskOrdersFn());
 
-        maskedOrders.apply("Incomplete Orders", ParDo.of(new SerialiseMasterOrderFn())).apply("Publish Incomplete",
+        PCollection<String> serialiseMaskedOrders = maskedOrders.apply("Serialise Incomplete",
+                ParDo.of(new SerialiseMasterOrderFn()));
+
+        serialiseMaskedOrders.apply("Publish Incomplete",
                 PubsubIO.writeStrings().to("projects/eshop-bigdata/topics/Orders_MasterTable"));
+
+        serialiseMaskedOrders.apply("Archive Incomplete",
+                PubsubIO.writeStrings().to("projects/eshop-bigdata/topics/order-master-archive"));
 
         // FIXME: MASK
 
@@ -326,6 +339,18 @@ public class App {
                     c.output(incompleteOrdersTag, masterOrder);
                 }
             }
+        }
+    }
+
+    static class SerialiseMasterOrderKVFn extends DoFn<KV<String, MasterOrder>, String> {
+        private static final long serialVersionUID = -2849863818643155573L;
+
+        @ProcessElement
+        public void processElement(ProcessContext c) throws JsonParseException, JsonMappingException, IOException {
+            ObjectMapper mapper = new ObjectMapper();
+            mapper.registerModule(new JodaModule());
+            MasterOrder masterOrder = c.element().getValue();
+            c.output(mapper.writeValueAsString(masterOrder));
         }
     }
 

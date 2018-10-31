@@ -40,7 +40,7 @@ public class OrderItem implements Serializable {
     @JsonProperty("HsCode")
     private String hsCode;
     @JsonProperty("EstimatedDeliveryDate")
-    private String estimatedDeliveryDate;
+    private String estimatedDeliveryDate; // FIXME: Use String for all dates to avoid Unix timestamp issue?
     @JsonProperty("Quantity")
     private Integer quantity;
     @JsonProperty("Product")

@@ -33,7 +33,7 @@ public class GdprAcceptance implements Serializable {
     }
 
     @JsonProperty("Date")
-    public void setDate(DateTime date) {
+    public void setDate(DateTime date) { // FIXME: Seems to be converted to Unix. See Outlook task
         this.date = date;
     }
 
