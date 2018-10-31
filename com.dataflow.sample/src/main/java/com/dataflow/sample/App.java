@@ -34,7 +34,6 @@ import org.apache.beam.sdk.options.PipelineOptions;
 import org.apache.beam.sdk.options.PipelineOptionsFactory;
 import org.apache.beam.sdk.transforms.DoFn;
 import org.apache.beam.sdk.transforms.ParDo;
-import org.apache.beam.sdk.transforms.Flatten.PCollections;
 import org.apache.beam.sdk.transforms.GroupByKey;
 import org.apache.beam.sdk.transforms.PTransform;
 import org.apache.beam.sdk.values.KV;
@@ -57,9 +56,8 @@ public class App {
         PipelineOptions options = PipelineOptionsFactory.fromArgs(args).withValidation().create();
         Pipeline p = Pipeline.create(options);
 
-        PCollection<String> pubSubOutput = p.apply("Read Input",
-                PubsubIO.readStrings().fromTopic("projects/eshop-bigdata/topics/apache_beam_input_2")
-                        .withTimestampAttribute("EventTimestamp"));
+        PCollection<String> pubSubOutput = p.apply("Read Input", PubsubIO.readStrings()
+                .fromTopic("projects/eshop-puddle/topics/checkout-dev").withTimestampAttribute("EventTimestamp"));
 
         final TupleTag<KV<String, MasterOrder>> successTag = new TupleTag<KV<String, MasterOrder>>() {
 
@@ -100,7 +98,7 @@ public class App {
         // FIXME: Add toString, Equals methods to all ...
 
         outputTuple.get(deadLetterTag).apply("Dead Letter Queue", // todo: redact these using DLP
-                PubsubIO.writeStrings().to("projects/eshop-bigdata/topics/dead-letter-queue"));
+                PubsubIO.writeStrings().to("projects/eshop-puddle/topics/checkout-dead-letter-orders-dev"));
 
         // FIXME: Window duration -> 20 minutes
 
@@ -114,10 +112,10 @@ public class App {
                 ParDo.of(new SerialiseMasterOrderFn()));
 
         serialisedCompleteOrders.apply("Publish Complete",
-                PubsubIO.writeStrings().to("projects/eshop-bigdata/topics/Orders_MasterTable"));
+                PubsubIO.writeStrings().to("projects/eshop-puddle/topics/checkout-order-master-dev"));
 
         serialisedCompleteOrders.apply("Archive Complete",
-                PubsubIO.writeStrings().to("projects/eshop-bigdata/topics/order-master-archive"));
+                PubsubIO.writeStrings().to("projects/eshop-puddle/topics/checkout-order-archive-dev"));
 
         PCollection<MasterOrder> maskedOrders = incompleteOrders.apply("Mask", new MaskOrdersFn());
 
@@ -125,10 +123,10 @@ public class App {
                 ParDo.of(new SerialiseMasterOrderFn()));
 
         serialiseMaskedOrders.apply("Publish Incomplete",
-                PubsubIO.writeStrings().to("projects/eshop-bigdata/topics/Orders_MasterTable"));
+                PubsubIO.writeStrings().to("projects/eshop-puddle/topics/checkout-order-master-dev"));
 
         serialiseMaskedOrders.apply("Archive Incomplete",
-                PubsubIO.writeStrings().to("projects/eshop-bigdata/topics/order-master-archive"));
+                PubsubIO.writeStrings().to("projects/eshop-puddle/topics/checkout-order-archive-dev"));
 
         // FIXME: MASK
 
@@ -158,7 +156,7 @@ public class App {
         TableSchema schema = new TableSchema().setFields(fields);
 
         orderSummaries.apply("Apply Schema", new OrderSummariesToTableRows()).apply("Save to BQ",
-                BigQueryIO.writeTableRows().to("eshop-bigdata:datalake.order_summary_14").withSchema(schema)
+                BigQueryIO.writeTableRows().to("eshop-puddle:checkout_dev.order_summary").withSchema(schema)
                         .withCreateDisposition(BigQueryIO.Write.CreateDisposition.CREATE_IF_NEEDED)
                         .withWriteDisposition(BigQueryIO.Write.WriteDisposition.WRITE_APPEND));
 
@@ -303,7 +301,7 @@ public class App {
 
     static class OrderSummaryFn extends DoFn<KV<String, Iterable<MasterOrder>>, OrderSummary> {
         private static final long serialVersionUID = -3067528732035106582L;
-        final String COMPLETE_EVENT_NAME = "COMPLETE";
+        final String COMPLETE_EVENT_NAME = "CompleteOrder";
 
         @ProcessElement
         public void processElement(ProcessContext c) throws Exception {
@@ -323,7 +321,7 @@ public class App {
 
     static class OrderProcessingFn extends DoFn<KV<String, Iterable<MasterOrder>>, MasterOrder> {
         private static final long serialVersionUID = -6828239956311045906L;
-        final String COMPLETE_EVENT_NAME = "COMPLETE";
+        final String COMPLETE_EVENT_NAME = "CompleteOrder";
 
         @ProcessElement
         public void processElement(ProcessContext c) throws Exception {
