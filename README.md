@@ -8,4 +8,4 @@ mvn compile exec:java -Dexec.mainClass=com.dataflow.sample.App -Dexec.args="--pr
 Ontario
 =====
 
-mvn compile exec:java -Dexec.mainClass=com.dataflow.sample.App -Dexec.args="--project=eshop-puddle --gcpTempLocation=gs://esw-checkout-dev/tmp/ --stagingLocation=gs://esw-checkout-dev/staging/ --runner=DataflowRunner" -e
+mvn compile exec:java -Dexec.mainClass=com.dataflow.sample.App -Dexec.args="--project=eshop-puddle --gcpTempLocation=gs://esw-checkout-dev/tmp/ --stagingLocation=gs://esw-checkout-dev/staging/ --region=europe-west1 --runner=DataflowRunner" -e
