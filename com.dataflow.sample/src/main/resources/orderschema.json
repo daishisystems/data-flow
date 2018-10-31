@@ -2728,6 +2728,10 @@
     "type": "STRING"
   },
   {
+    "name": "fingerprintId",
+    "type": "STRING"
+  },
+  {
     "name": "userAgent",
     "type": "STRING"
   },

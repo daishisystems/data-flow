@@ -92,7 +92,11 @@ public class App {
         PCollection<KV<String, MasterOrder>> orders = success.apply("Session Window",
                 Window.<KV<String, MasterOrder>>into(Sessions.withGapDuration(Duration.standardSeconds(20))));
 
-        PCollection<KV<String, Iterable<MasterOrder>>> groupedOrders = orders.apply("Group", GroupByKey.create()); // FIXME: Paul Barnes - why is this so slow?
+        PCollection<KV<String, Iterable<MasterOrder>>> groupedOrders = orders.apply("Group", GroupByKey.create());
+        // FIXME: Test throughput speed by serialising order from C# and publishing.
+        // Otherwise no Timestamp is set
+
+        // FIXME: Add toString, Equals methods to all ...
 
         outputTuple.get(deadLetterTag).apply("Dead Letter Queue", // todo: redact these using DLP
                 PubsubIO.writeStrings().to("projects/eshop-bigdata/topics/dead-letter-queue"));
