@@ -92,6 +92,37 @@ public class App {
                 Window.<KV<String, MasterOrder>>into(Sessions.withGapDuration(Duration.standardSeconds(20))));
 
         PCollection<KV<String, Iterable<MasterOrder>>> groupedOrders = orders.apply("Group", GroupByKey.create());
+
+        PCollection<OrderSummary> orderSummaries = groupedOrders.apply("Summarise", ParDo.of(new OrderSummaryFn()));
+
+        List<TableFieldSchema> fields = new ArrayList<>();
+        fields.add(new TableFieldSchema().setName("OrderNumber").setType("STRING")); // todo: Validate order schema ->
+                                                                                     // write to storage, redact in
+                                                                                     // memory
+        fields.add(new TableFieldSchema().setName("CorrelationId").setType("STRING"));
+        fields.add(new TableFieldSchema().setName("MinTimeDelay").setType("INT64"));
+        fields.add(new TableFieldSchema().setName("AvgTimeDelay").setType("INT64"));
+        fields.add(new TableFieldSchema().setName("MaxTimeDelay").setType("INT64"));
+        fields.add(new TableFieldSchema().setName("MinFirstEventName").setType("STRING"));
+        fields.add(new TableFieldSchema().setName("MaxFirstEventName").setType("STRING"));
+        fields.add(new TableFieldSchema().setName("MinSecondEventName").setType("STRING"));
+        fields.add(new TableFieldSchema().setName("MaxSecondEventName").setType("STRING"));
+        fields.add(new TableFieldSchema().setName("TotalTime").setType("INT64"));
+        fields.add(new TableFieldSchema().setName("LastEventName").setType("STRING"));
+        fields.add(new TableFieldSchema().setName("Complete").setType("BOOLEAN"));
+        fields.add(new TableFieldSchema().setName("StartDate").setType("TIMESTAMP"));
+        fields.add(new TableFieldSchema().setName("EndDate").setType("TIMESTAMP"));
+        fields.add(new TableFieldSchema().setName("OrderValue").setType("NUMERIC"));
+        fields.add(new TableFieldSchema().setName("UserAgent").setType("STRING"));
+        fields.add(new TableFieldSchema().setName("Country").setType("STRING"));
+        fields.add(new TableFieldSchema().setName("UnitsPerOrder").setType("INT64"));
+        TableSchema schema = new TableSchema().setFields(fields);
+
+        orderSummaries.apply("Apply Schema", new OrderSummariesToTableRows()).apply("Save to BQ",
+                BigQueryIO.writeTableRows().to("eshop-puddle:checkout_dev.order_summary").withSchema(schema)
+                        .withCreateDisposition(BigQueryIO.Write.CreateDisposition.CREATE_IF_NEEDED)
+                        .withWriteDisposition(BigQueryIO.Write.WriteDisposition.WRITE_APPEND));
+
         // FIXME: Test throughput speed by serialising order from C# and publishing.
         // Otherwise no Timestamp is set
 
@@ -129,36 +160,6 @@ public class App {
                 PubsubIO.writeStrings().to("projects/eshop-puddle/topics/checkout-order-archive-dev"));
 
         // FIXME: MASK
-
-        PCollection<OrderSummary> orderSummaries = groupedOrders.apply("Summarise", ParDo.of(new OrderSummaryFn()));
-
-        List<TableFieldSchema> fields = new ArrayList<>();
-        fields.add(new TableFieldSchema().setName("OrderNumber").setType("STRING")); // todo: Validate order schema ->
-                                                                                     // write to storage, redact in
-                                                                                     // memory
-        fields.add(new TableFieldSchema().setName("CorrelationId").setType("STRING"));
-        fields.add(new TableFieldSchema().setName("MinTimeDelay").setType("INT64"));
-        fields.add(new TableFieldSchema().setName("AvgTimeDelay").setType("INT64"));
-        fields.add(new TableFieldSchema().setName("MaxTimeDelay").setType("INT64"));
-        fields.add(new TableFieldSchema().setName("MinFirstEventName").setType("STRING"));
-        fields.add(new TableFieldSchema().setName("MaxFirstEventName").setType("STRING"));
-        fields.add(new TableFieldSchema().setName("MinSecondEventName").setType("STRING"));
-        fields.add(new TableFieldSchema().setName("MaxSecondEventName").setType("STRING"));
-        fields.add(new TableFieldSchema().setName("TotalTime").setType("INT64"));
-        fields.add(new TableFieldSchema().setName("LastEventName").setType("STRING"));
-        fields.add(new TableFieldSchema().setName("Complete").setType("BOOLEAN"));
-        fields.add(new TableFieldSchema().setName("StartDate").setType("TIMESTAMP"));
-        fields.add(new TableFieldSchema().setName("EndDate").setType("TIMESTAMP"));
-        fields.add(new TableFieldSchema().setName("OrderValue").setType("NUMERIC"));
-        fields.add(new TableFieldSchema().setName("UserAgent").setType("STRING"));
-        fields.add(new TableFieldSchema().setName("Country").setType("STRING"));
-        fields.add(new TableFieldSchema().setName("UnitsPerOrder").setType("INT64"));
-        TableSchema schema = new TableSchema().setFields(fields);
-
-        orderSummaries.apply("Apply Schema", new OrderSummariesToTableRows()).apply("Save to BQ",
-                BigQueryIO.writeTableRows().to("eshop-puddle:checkout_dev.order_summary").withSchema(schema)
-                        .withCreateDisposition(BigQueryIO.Write.CreateDisposition.CREATE_IF_NEEDED)
-                        .withWriteDisposition(BigQueryIO.Write.WriteDisposition.WRITE_APPEND));
 
         p.run().waitUntilFinish();
     }
@@ -307,7 +308,9 @@ public class App {
         public void processElement(ProcessContext c) throws Exception {
             Iterable<MasterOrder> orders = c.element().getValue();
             List<MasterOrder> sortedOrders = OrderSummary.sortOrders(orders);
+            LOG.warn("Processed " + sortedOrders.size() + " orders. Key: " + c.element().getKey());
             OrderSummary orderSummary = OrderSummary.orderSummary(sortedOrders, COMPLETE_EVENT_NAME);
+            LOG.warn("Total Value: " + orderSummary.getOrderValue());
             c.output(orderSummary);
         }
     }
