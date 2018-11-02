@@ -57,7 +57,7 @@ public class App {
         Pipeline p = Pipeline.create(options);
 
         PCollection<String> pubSubOutput = p.apply("Read Input", PubsubIO.readStrings()
-                .fromTopic("projects/eshop-puddle/topics/checkout-dev").withTimestampAttribute("EventTimestamp"));
+                .fromTopic("projects/{PROJECT}/topics/{TOPIC}").withTimestampAttribute("EventTimestamp"));
 
         final TupleTag<KV<String, MasterOrder>> successTag = new TupleTag<KV<String, MasterOrder>>() {
 
@@ -119,7 +119,7 @@ public class App {
         TableSchema schema = new TableSchema().setFields(fields);
 
         orderSummaries.apply("Apply Schema", new OrderSummariesToTableRows()).apply("Save to BQ",
-                BigQueryIO.writeTableRows().to("eshop-puddle:checkout_dev.order_summary").withSchema(schema)
+                BigQueryIO.writeTableRows().to("{PROJECT}:{DATASET}.{TABLE}").withSchema(schema)
                         .withCreateDisposition(BigQueryIO.Write.CreateDisposition.CREATE_IF_NEEDED)
                         .withWriteDisposition(BigQueryIO.Write.WriteDisposition.WRITE_APPEND));
 
@@ -129,7 +129,7 @@ public class App {
         // FIXME: Add toString, Equals methods to all ...
 
         outputTuple.get(deadLetterTag).apply("Dead Letter Queue", // todo: redact these using DLP
-                PubsubIO.writeStrings().to("projects/eshop-puddle/topics/checkout-dead-letter-orders-dev"));
+                PubsubIO.writeStrings().to("projects/{PROJECT}/topics/{PUB/SUB}"));
 
         // FIXME: Window duration -> 20 minutes
 
@@ -143,10 +143,10 @@ public class App {
                 ParDo.of(new SerialiseMasterOrderFn()));
 
         serialisedCompleteOrders.apply("Publish Complete",
-                PubsubIO.writeStrings().to("projects/eshop-puddle/topics/checkout-order-master-dev"));
+                PubsubIO.writeStrings().to("projects/{PROJECT}/topics/{TOPIC}"));
 
         serialisedCompleteOrders.apply("Archive Complete",
-                PubsubIO.writeStrings().to("projects/eshop-puddle/topics/checkout-order-archive-dev"));
+                PubsubIO.writeStrings().to("projects/{PROJECT}/topics/{TOPIC}"));
 
         PCollection<MasterOrder> maskedOrders = incompleteOrders.apply("Mask", new MaskOrdersFn());
 
@@ -154,10 +154,10 @@ public class App {
                 ParDo.of(new SerialiseMasterOrderFn()));
 
         serialiseMaskedOrders.apply("Publish Incomplete",
-                PubsubIO.writeStrings().to("projects/eshop-puddle/topics/checkout-order-master-dev"));
+                PubsubIO.writeStrings().to("projects/{PROJECT}/topics/{TOPIC}"));
 
         serialiseMaskedOrders.apply("Archive Incomplete",
-                PubsubIO.writeStrings().to("projects/eshop-puddle/topics/checkout-order-archive-dev"));
+                PubsubIO.writeStrings().to("projects/{PROJECT}/topics/{TOPIC}"));
 
         // FIXME: MASK
 
@@ -300,9 +300,7 @@ public class App {
         public void processElement(ProcessContext c) throws Exception {
             Iterable<MasterOrder> orders = c.element().getValue();
             List<MasterOrder> sortedOrders = OrderSummary.sortOrders(orders);
-            LOG.warn("Processed " + sortedOrders.size() + " orders. Key: " + c.element().getKey());
             OrderSummary orderSummary = OrderSummary.orderSummary(sortedOrders, COMPLETE_EVENT_NAME);
-            LOG.warn("Total Value: " + orderSummary.getOrderValue());
             c.output(orderSummary);
         }
     }
