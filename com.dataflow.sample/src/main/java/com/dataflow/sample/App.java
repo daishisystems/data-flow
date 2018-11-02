@@ -203,10 +203,6 @@ public class App {
                 if (region != null && !region.isEmpty()) {
                     deliveryDetail.setRegion(Utils.mask(region, '#'));
                 }
-                String country = deliveryDetail.getCountry();
-                if (country != null && !country.isEmpty()) {
-                    deliveryDetail.setCountry(Utils.mask(country, '#'));
-                }
                 String email = deliveryDetail.getEmail();
                 if (email != null && !email.isEmpty()) {
                     deliveryDetail.setEmail(Utils.mask(email, '#'));
@@ -258,10 +254,6 @@ public class App {
                 String region = paymentDetail.getRegion();
                 if (region != null && !region.isEmpty()) {
                     paymentDetail.setRegion(Utils.mask(region, '#'));
-                }
-                String country = paymentDetail.getCountry();
-                if (country != null && !country.isEmpty()) {
-                    paymentDetail.setCountry(Utils.mask(country, '#'));
                 }
                 String email = paymentDetail.getEmail();
                 if (email != null && !email.isEmpty()) {
