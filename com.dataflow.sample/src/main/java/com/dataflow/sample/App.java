@@ -300,9 +300,7 @@ public class App {
         public void processElement(ProcessContext c) throws Exception {
             Iterable<MasterOrder> orders = c.element().getValue();
             List<MasterOrder> sortedOrders = OrderSummary.sortOrders(orders);
-            LOG.warn("Processed " + sortedOrders.size() + " orders. Key: " + c.element().getKey());
             OrderSummary orderSummary = OrderSummary.orderSummary(sortedOrders, COMPLETE_EVENT_NAME);
-            LOG.warn("Total Value: " + orderSummary.getOrderValue());
             c.output(orderSummary);
         }
     }
