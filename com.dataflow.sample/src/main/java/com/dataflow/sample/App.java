@@ -75,10 +75,10 @@ public class App {
                     @ProcessElement
                     public void processElement(ProcessContext c) {
                         try {
-                            ObjectMapper mapper = new ObjectMapper();
+                            ObjectMapper mapper = new ObjectMapper(); // FIXME: Single reference only
                             mapper.registerModule(new JodaModule());
                             MasterOrder masterOrder = mapper.readValue(c.element(), MasterOrder.class);
-                            c.output(KV.of(masterOrder.getOrderCode(), masterOrder));
+                            c.output(KV.of(masterOrder.getCorrelationId(), masterOrder));
                         } catch (Exception e) {
                             LOG.error("Failed to process input {} -- adding to dead letter file", c.element(), e);
                             c.output(deadLetterTag, c.element());
@@ -89,7 +89,7 @@ public class App {
         PCollection<KV<String, MasterOrder>> success = outputTuple.get(successTag);
 
         PCollection<KV<String, MasterOrder>> orders = success.apply("Session Window",
-                Window.<KV<String, MasterOrder>>into(Sessions.withGapDuration(Duration.standardSeconds(20))));
+                Window.<KV<String, MasterOrder>>into(Sessions.withGapDuration(Duration.standardMinutes(20))));
 
         PCollection<KV<String, Iterable<MasterOrder>>> groupedOrders = orders.apply("Group", GroupByKey.create());
 
