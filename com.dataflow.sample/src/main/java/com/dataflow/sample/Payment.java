@@ -23,19 +23,19 @@ public class Payment implements Serializable {
     @JsonProperty("PaymentAttemptRef")
     private String paymentAttemptRef;
     @JsonProperty("PaymentFraudStatusId")
-    private Object paymentFraudStatusId;
+    private int paymentFraudStatusId;
     @JsonProperty("AuthCode")
-    private Object authCode;
+    private String authCode;
     @JsonProperty("State")
     private String state;
     @JsonProperty("PaymentGatewayCode")
-    private Object paymentGatewayCode;
+    private String paymentGatewayCode;
     @JsonProperty("PaymentMethodCode")
-    private Object paymentMethodCode;
+    private String paymentMethodCode;
     @JsonProperty("AuthorizationDetails")
-    private Object authorizationDetails;
+    private AuthorizationDetails authorizationDetails;
     @JsonProperty("PaymentTime")
-    private Object paymentTime;
+    private String paymentTime;
     @JsonProperty("IsPaymentSuccessful")
     private Boolean isPaymentSuccessful;
     @JsonIgnore
@@ -47,35 +47,6 @@ public class Payment implements Serializable {
      * 
      */
     public Payment() {
-    }
-
-    /**
-     * 
-     * @param authCode
-     * @param paymentMethodCode
-     * @param paymentId
-     * @param paymentTime
-     * @param state
-     * @param paymentAttemptRef
-     * @param authorizationDetails
-     * @param paymentGatewayCode
-     * @param isPaymentSuccessful
-     * @param paymentFraudStatusId
-     */
-    public Payment(String paymentId, String paymentAttemptRef, Object paymentFraudStatusId, Object authCode,
-            String state, Object paymentGatewayCode, Object paymentMethodCode, Object authorizationDetails,
-            Object paymentTime, Boolean isPaymentSuccessful) {
-        super();
-        this.paymentId = paymentId;
-        this.paymentAttemptRef = paymentAttemptRef;
-        this.paymentFraudStatusId = paymentFraudStatusId;
-        this.authCode = authCode;
-        this.state = state;
-        this.paymentGatewayCode = paymentGatewayCode;
-        this.paymentMethodCode = paymentMethodCode;
-        this.authorizationDetails = authorizationDetails;
-        this.paymentTime = paymentTime;
-        this.isPaymentSuccessful = isPaymentSuccessful;
     }
 
     @JsonProperty("PaymentId")
@@ -104,7 +75,7 @@ public class Payment implements Serializable {
     }
 
     @JsonProperty("PaymentFraudStatusId")
-    public void setPaymentFraudStatusId(Object paymentFraudStatusId) {
+    public void setPaymentFraudStatusId(int paymentFraudStatusId) {
         this.paymentFraudStatusId = paymentFraudStatusId;
     }
 
@@ -114,7 +85,7 @@ public class Payment implements Serializable {
     }
 
     @JsonProperty("AuthCode")
-    public void setAuthCode(Object authCode) {
+    public void setAuthCode(String authCode) {
         this.authCode = authCode;
     }
 
@@ -134,7 +105,7 @@ public class Payment implements Serializable {
     }
 
     @JsonProperty("PaymentGatewayCode")
-    public void setPaymentGatewayCode(Object paymentGatewayCode) {
+    public void setPaymentGatewayCode(String paymentGatewayCode) {
         this.paymentGatewayCode = paymentGatewayCode;
     }
 
@@ -144,7 +115,7 @@ public class Payment implements Serializable {
     }
 
     @JsonProperty("PaymentMethodCode")
-    public void setPaymentMethodCode(Object paymentMethodCode) {
+    public void setPaymentMethodCode(String paymentMethodCode) {
         this.paymentMethodCode = paymentMethodCode;
     }
 
@@ -154,7 +125,7 @@ public class Payment implements Serializable {
     }
 
     @JsonProperty("AuthorizationDetails")
-    public void setAuthorizationDetails(Object authorizationDetails) {
+    public void setAuthorizationDetails(AuthorizationDetails authorizationDetails) {
         this.authorizationDetails = authorizationDetails;
     }
 
@@ -164,7 +135,7 @@ public class Payment implements Serializable {
     }
 
     @JsonProperty("PaymentTime")
-    public void setPaymentTime(Object paymentTime) {
+    public void setPaymentTime(String paymentTime) {
         this.paymentTime = paymentTime;
     }
 

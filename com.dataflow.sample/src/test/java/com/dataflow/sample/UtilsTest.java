@@ -27,7 +27,7 @@ public class UtilsTest {
         final Object input = "INPUT";
         String masked = Utils.mask(input.toString(), '#');
         assertEquals("#####", masked);
-    }   
+    }
 
     @Test
     public void orderIsPartiallyMasked() throws JsonParseException, JsonMappingException, IOException {

@@ -51,10 +51,6 @@ public class OrderSummary implements Serializable {
     @Expose
     int unitsPerOrder;
 
-    static double deliveryCharge = 0;
-    static int numOrderArticles = 0;
-    static double merchandiseCharge = 0; // todo: Partition OrderSummary by StartDate
-
     public String getCountry() {
         return this.country;
     }
@@ -215,6 +211,7 @@ public class OrderSummary implements Serializable {
         return sortedOrders;
     }
 
+    // FIXME: Multiple orders w/ same code will result in misaligned OrderValue!
     public static OrderSummary orderSummary(List<MasterOrder> orders, String orderCompleteIdentifier) {
         Iterator<MasterOrder> iterator = orders.iterator();
         OrderSummary orderSummary = new OrderSummary();
@@ -260,9 +257,11 @@ public class OrderSummary implements Serializable {
         orderSummary.setEnddate(current.getCreated()); // Order should have a start and endate in DATETIME format
         orderSummary.setUserAgent(current.getUserAgent());
 
-        current.getOrderItems().forEach(orderItem -> {
-            orderItem.getOrderArticles().forEach(orderArticle -> {
-                orderArticle.getCharges().forEach(charge -> {
+        Double deliveryCharge = 0d;
+
+        for (OrderItem orderItem : current.getOrderItems()) {
+            for (OrderArticle orderArticle : orderItem.getOrderArticles()) {
+                for (Charge charge : orderArticle.getCharges()) {
                     String chargeType = charge.getName();
                     if (chargeType.equals("Delivery") || chargeType.equals("DeliveryDuties")
                             || chargeType.equals("DeliveryTaxes") || chargeType.equals("DeliveryTaxOnDuties")
@@ -270,36 +269,37 @@ public class OrderSummary implements Serializable {
                             || chargeType.equals("DeliveryFixedFee")) {
                         deliveryCharge += charge.getExactValue().getValue();
                     }
-                });
-            });
-        });
+                }
+            }
+        }
 
-        current.getOrderItems().forEach(orderItem -> {
-            orderItem.getOrderArticles().forEach(orderArticle -> {
-                orderArticle.getCharges().forEach(charge -> {
+        Double merchandiseCharge = 0d;
+
+        for (OrderItem orderItem : current.getOrderItems()) {
+            for (OrderArticle orderArticle : orderItem.getOrderArticles()) {
+                for (Charge charge : orderArticle.getCharges()) {
                     String chargeType = charge.getName();
                     if (chargeType.equals("Items") || chargeType.equals("ItemDuties") || chargeType.equals("ItemTaxes")
                             || chargeType.equals("ItemTaxOnDuties") || chargeType.equals("ItemTaxOnFees")
                             || chargeType.equals("ItemFees") || chargeType.equals("ItemFixedFee")) {
                         merchandiseCharge += charge.getExactValue().getValue();
                     }
-                });
-            });
-        });
+                }
+            }
+        }
+
+        Integer numOrderArticles = 0;
+        for (OrderItem orderItem : current.getOrderItems()) {
+            numOrderArticles += orderItem.getQuantity();
+        }
 
         double orderValue = deliveryCharge + merchandiseCharge;
         double roundedOrderValue = Math.round(orderValue * 100.0) / 100.0;
-
         orderSummary.setOrderValue(roundedOrderValue);
         long endTime = current.getCreated();
         long totalTime = endTime - startTime;
         orderSummary.setTotalTime(totalTime);
         orderSummary.setCountry(current.getDeliveryCountryIso());
-
-        current.getOrderItems().forEach(orderItem -> {
-            numOrderArticles += orderItem.getQuantity();
-        });
-
         orderSummary.setUnitsPerOrder(numOrderArticles);
         return orderSummary;
     }

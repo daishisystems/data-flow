@@ -56,9 +56,8 @@ public class App {
         PipelineOptions options = PipelineOptionsFactory.fromArgs(args).withValidation().create();
         Pipeline p = Pipeline.create(options);
 
-        PCollection<String> pubSubOutput = p.apply("Read Input",
-                PubsubIO.readStrings().fromTopic("projects/eshop-bigdata/topics/apache_beam_input_2")
-                        .withTimestampAttribute("EventTimestamp"));
+        PCollection<String> pubSubOutput = p.apply("Read Input", PubsubIO.readStrings()
+                .fromTopic("projects/eshop-puddle/topics/checkout-dev").withTimestampAttribute("EventTimestamp"));
 
         final TupleTag<KV<String, MasterOrder>> successTag = new TupleTag<KV<String, MasterOrder>>() {
 
@@ -93,43 +92,6 @@ public class App {
                 Window.<KV<String, MasterOrder>>into(Sessions.withGapDuration(Duration.standardSeconds(20))));
 
         PCollection<KV<String, Iterable<MasterOrder>>> groupedOrders = orders.apply("Group", GroupByKey.create());
-        // FIXME: Test throughput speed by serialising order from C# and publishing.
-        // Otherwise no Timestamp is set
-
-        // FIXME: Add toString, Equals methods to all ...
-
-        outputTuple.get(deadLetterTag).apply("Dead Letter Queue", // todo: redact these using DLP
-                PubsubIO.writeStrings().to("projects/eshop-bigdata/topics/dead-letter-queue"));
-
-        // FIXME: Window duration -> 20 minutes
-
-        PCollectionTuple processedOrdersTuple = groupedOrders.apply("Analyse", ParDo.of(new OrderProcessingFn())
-                .withOutputTags(completeOrdersTag, TupleTagList.of(incompleteOrdersTag)));
-
-        PCollection<MasterOrder> completeOrders = processedOrdersTuple.get(completeOrdersTag);
-        PCollection<MasterOrder> incompleteOrders = processedOrdersTuple.get(incompleteOrdersTag);
-
-        PCollection<String> serialisedCompleteOrders = completeOrders.apply("Serialise Complete",
-                ParDo.of(new SerialiseMasterOrderFn()));
-
-        serialisedCompleteOrders.apply("Publish Complete",
-                PubsubIO.writeStrings().to("projects/eshop-bigdata/topics/Orders_MasterTable"));
-
-        serialisedCompleteOrders.apply("Archive Complete",
-                PubsubIO.writeStrings().to("projects/eshop-bigdata/topics/order-master-archive"));
-
-        PCollection<MasterOrder> maskedOrders = incompleteOrders.apply("Mask", new MaskOrdersFn());
-
-        PCollection<String> serialiseMaskedOrders = maskedOrders.apply("Serialise Incomplete",
-                ParDo.of(new SerialiseMasterOrderFn()));
-
-        serialiseMaskedOrders.apply("Publish Incomplete",
-                PubsubIO.writeStrings().to("projects/eshop-bigdata/topics/Orders_MasterTable"));
-
-        serialiseMaskedOrders.apply("Archive Incomplete",
-                PubsubIO.writeStrings().to("projects/eshop-bigdata/topics/order-master-archive"));
-
-        // FIXME: MASK
 
         PCollection<OrderSummary> orderSummaries = groupedOrders.apply("Summarise", ParDo.of(new OrderSummaryFn()));
 
@@ -157,9 +119,47 @@ public class App {
         TableSchema schema = new TableSchema().setFields(fields);
 
         orderSummaries.apply("Apply Schema", new OrderSummariesToTableRows()).apply("Save to BQ",
-                BigQueryIO.writeTableRows().to("eshop-bigdata:datalake.order_summary_14").withSchema(schema)
+                BigQueryIO.writeTableRows().to("eshop-puddle:checkout_dev.order_summary").withSchema(schema)
                         .withCreateDisposition(BigQueryIO.Write.CreateDisposition.CREATE_IF_NEEDED)
                         .withWriteDisposition(BigQueryIO.Write.WriteDisposition.WRITE_APPEND));
+
+        // FIXME: Test throughput speed by serialising order from C# and publishing.
+        // Otherwise no Timestamp is set
+
+        // FIXME: Add toString, Equals methods to all ...
+
+        outputTuple.get(deadLetterTag).apply("Dead Letter Queue", // todo: redact these using DLP
+                PubsubIO.writeStrings().to("projects/eshop-puddle/topics/checkout-dead-letter-orders-dev"));
+
+        // FIXME: Window duration -> 20 minutes
+
+        PCollectionTuple processedOrdersTuple = groupedOrders.apply("Analyse", ParDo.of(new OrderProcessingFn())
+                .withOutputTags(completeOrdersTag, TupleTagList.of(incompleteOrdersTag)));
+
+        PCollection<MasterOrder> completeOrders = processedOrdersTuple.get(completeOrdersTag);
+        PCollection<MasterOrder> incompleteOrders = processedOrdersTuple.get(incompleteOrdersTag);
+
+        PCollection<String> serialisedCompleteOrders = completeOrders.apply("Serialise Complete",
+                ParDo.of(new SerialiseMasterOrderFn()));
+
+        serialisedCompleteOrders.apply("Publish Complete",
+                PubsubIO.writeStrings().to("projects/eshop-puddle/topics/checkout-order-master-dev"));
+
+        serialisedCompleteOrders.apply("Archive Complete",
+                PubsubIO.writeStrings().to("projects/eshop-puddle/topics/checkout-order-archive-dev"));
+
+        PCollection<MasterOrder> maskedOrders = incompleteOrders.apply("Mask", new MaskOrdersFn());
+
+        PCollection<String> serialiseMaskedOrders = maskedOrders.apply("Serialise Incomplete",
+                ParDo.of(new SerialiseMasterOrderFn()));
+
+        serialiseMaskedOrders.apply("Publish Incomplete",
+                PubsubIO.writeStrings().to("projects/eshop-puddle/topics/checkout-order-master-dev"));
+
+        serialiseMaskedOrders.apply("Archive Incomplete",
+                PubsubIO.writeStrings().to("projects/eshop-puddle/topics/checkout-order-archive-dev"));
+
+        // FIXME: MASK
 
         p.run().waitUntilFinish();
     }
@@ -302,13 +302,15 @@ public class App {
 
     static class OrderSummaryFn extends DoFn<KV<String, Iterable<MasterOrder>>, OrderSummary> {
         private static final long serialVersionUID = -3067528732035106582L;
-        final String COMPLETE_EVENT_NAME = "COMPLETE";
+        final String COMPLETE_EVENT_NAME = "CompleteOrder";
 
         @ProcessElement
         public void processElement(ProcessContext c) throws Exception {
             Iterable<MasterOrder> orders = c.element().getValue();
             List<MasterOrder> sortedOrders = OrderSummary.sortOrders(orders);
+            LOG.warn("Processed " + sortedOrders.size() + " orders. Key: " + c.element().getKey());
             OrderSummary orderSummary = OrderSummary.orderSummary(sortedOrders, COMPLETE_EVENT_NAME);
+            LOG.warn("Total Value: " + orderSummary.getOrderValue());
             c.output(orderSummary);
         }
     }
@@ -322,7 +324,7 @@ public class App {
 
     static class OrderProcessingFn extends DoFn<KV<String, Iterable<MasterOrder>>, MasterOrder> {
         private static final long serialVersionUID = -6828239956311045906L;
-        final String COMPLETE_EVENT_NAME = "COMPLETE";
+        final String COMPLETE_EVENT_NAME = "CompleteOrder";
 
         @ProcessElement
         public void processElement(ProcessContext c) throws Exception {
