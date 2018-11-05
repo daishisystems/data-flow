@@ -212,16 +212,30 @@ public class OrderSummary implements Serializable {
     }
 
     // FIXME: Multiple orders w/ same code will result in misaligned OrderValue!
+    // (That's OK - long as we sort and group by Ordercode)
     public static OrderSummary orderSummary(List<MasterOrder> orders, String orderCompleteIdentifier) {
         Iterator<MasterOrder> iterator = orders.iterator();
         OrderSummary orderSummary = new OrderSummary();
         if (!iterator.hasNext()) {
-            return orderSummary;
+            return orderSummary; // FIXME: Check for null, empty
         }
         MasterOrder previous = iterator.next();
         long startTime = previous.getCreated();
         orderSummary.setStartdate(previous.getCreated());
         if (!iterator.hasNext()) {
+            orderSummary.setLastEventName(previous.getEventName());
+            orderSummary.setNumber(previous.getOrderCode());
+            orderSummary.setCorrelationid(previous.getCorrelationId());
+            orderSummary.setEnddate(previous.getCreated()); // Order should have a start and endate in DATETIME format
+            orderSummary.setUserAgent(previous.getUserAgent());
+            Double orderValue = calcOrderValue(previous);
+            orderSummary.setOrderValue(orderValue);
+            Integer numOrderArticles = calcNumOrderArticles(previous);
+            orderSummary.setUnitsPerOrder(numOrderArticles);
+            long endTime = previous.getCreated();
+            long totalTime = endTime - startTime;
+            orderSummary.setTotalTime(totalTime);
+            orderSummary.setCountry(previous.getDeliveryCountryIso());
             return orderSummary;
         }
         MasterOrder current;
@@ -251,15 +265,36 @@ public class OrderSummary implements Serializable {
         } while (iterator.hasNext());
         double average = allDiffs.stream().mapToLong(Long::longValue).average().orElse(0);
         orderSummary.setAvgTimeDelay((long) average);
+
         orderSummary.setLastEventName(current.getEventName());
         orderSummary.setNumber(current.getOrderCode());
         orderSummary.setCorrelationid(current.getCorrelationId());
         orderSummary.setEnddate(current.getCreated()); // Order should have a start and endate in DATETIME format
         orderSummary.setUserAgent(current.getUserAgent());
+        Double orderValue = calcOrderValue(current);
+        orderSummary.setOrderValue(orderValue);
+        Integer numOrderArticles = calcNumOrderArticles(current);
+        orderSummary.setUnitsPerOrder(numOrderArticles);
+        long endTime = current.getCreated();
+        long totalTime = endTime - startTime;
+        orderSummary.setTotalTime(totalTime);
+        orderSummary.setCountry(current.getDeliveryCountryIso());
 
+        return orderSummary;
+    }
+
+    public static Boolean orderIsComplete(List<MasterOrder> orders, String orderCompleteEventName) {
+        if (orders == null || orders.isEmpty()) {
+            return false;
+        }
+        MasterOrder lastOrder = orders.get(orders.size() - 1);
+        return lastOrder.getEventName().equals(orderCompleteEventName);
+    }
+
+    private static Double calcOrderValue(MasterOrder masterOrder) {
         Double deliveryCharge = 0d;
 
-        for (OrderItem orderItem : current.getOrderItems()) {
+        for (OrderItem orderItem : masterOrder.getOrderItems()) {
             for (OrderArticle orderArticle : orderItem.getOrderArticles()) {
                 for (Charge charge : orderArticle.getCharges()) {
                     String chargeType = charge.getName();
@@ -275,7 +310,7 @@ public class OrderSummary implements Serializable {
 
         Double merchandiseCharge = 0d;
 
-        for (OrderItem orderItem : current.getOrderItems()) {
+        for (OrderItem orderItem : masterOrder.getOrderItems()) {
             for (OrderArticle orderArticle : orderItem.getOrderArticles()) {
                 for (Charge charge : orderArticle.getCharges()) {
                     String chargeType = charge.getName();
@@ -288,27 +323,15 @@ public class OrderSummary implements Serializable {
             }
         }
 
-        Integer numOrderArticles = 0;
-        for (OrderItem orderItem : current.getOrderItems()) {
-            numOrderArticles += orderItem.getQuantity();
-        }
-
         double orderValue = deliveryCharge + merchandiseCharge;
-        double roundedOrderValue = Math.round(orderValue * 100.0) / 100.0;
-        orderSummary.setOrderValue(roundedOrderValue);
-        long endTime = current.getCreated();
-        long totalTime = endTime - startTime;
-        orderSummary.setTotalTime(totalTime);
-        orderSummary.setCountry(current.getDeliveryCountryIso());
-        orderSummary.setUnitsPerOrder(numOrderArticles);
-        return orderSummary;
+        return Math.round(orderValue * 100.0) / 100.0;
     }
 
-    public static Boolean orderIsComplete(List<MasterOrder> orders, String orderCompleteEventName) {
-        if (orders == null || orders.isEmpty()) {
-            return false;
+    private static int calcNumOrderArticles(MasterOrder masterOrder) {
+        Integer numOrderArticles = 0;
+        for (OrderItem orderItem : masterOrder.getOrderItems()) {
+            numOrderArticles += orderItem.getQuantity();
         }
-        MasterOrder lastOrder = orders.get(orders.size() - 1);
-        return lastOrder.getEventName().equals(orderCompleteEventName);
+        return numOrderArticles;
     }
 }
