@@ -57,7 +57,7 @@ public class App {
         Pipeline p = Pipeline.create(options);
 
         PCollection<String> pubSubOutput = p.apply("Read Input", PubsubIO.readStrings()
-                .fromTopic("projects/project-ontario-prod/topics/checkout").withTimestampAttribute("EventTimestamp"));
+                .fromTopic("projects/project-ontario-prod/topics/checkout-2").withTimestampAttribute("EventTimestamp"));
 
         final TupleTag<KV<String, MasterOrder>> successTag = new TupleTag<KV<String, MasterOrder>>() {
 
