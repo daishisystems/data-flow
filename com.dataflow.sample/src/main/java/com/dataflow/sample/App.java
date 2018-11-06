@@ -239,10 +239,6 @@ public class App {
                 if (address3 != null && !address3.isEmpty()) {
                     paymentDetail.setAddress3(Utils.mask(address3, '#'));
                 }
-                String city = paymentDetail.getCity();
-                if (city != null && !city.isEmpty()) {
-                    paymentDetail.setCity(Utils.mask(city, '#'));
-                }
                 String postalCode = paymentDetail.getPostalCode();
                 if (postalCode != null && !postalCode.isEmpty()) {
                     paymentDetail.setPostalCode(Utils.mask(postalCode, '#'));
