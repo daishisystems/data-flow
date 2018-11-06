@@ -44,8 +44,7 @@ public class UtilsTest {
             }
         }
         masterOrder.setDeliveryDetails(deliveryDetails);
-        String string = masterOrder.getDeliveryDetails().get(0).getContactDetailsNickName().toString();
-        assertEquals("#####", string);
+        assertEquals("#####", masterOrder.getDeliveryDetails().get(0).getContactDetailsNickName());
     }
 
     private String getFile(String fileName) {

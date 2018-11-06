@@ -1,14 +1,12 @@
 package com.dataflow.sample;
 
 import java.io.Serializable;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
-
 import org.apache.beam.sdk.coders.DefaultCoder;
 import org.apache.beam.sdk.coders.SerializableCoder;
 
 @DefaultCoder(SerializableCoder.class)
-public class PriceInfo implements Serializable {
+public class RetailerCurrencyDeliveryOptionPriceInfo implements Serializable {
     private static final long serialVersionUID = 4278350131058872300L;
     @JsonProperty("Title")
     private String title;
@@ -37,41 +35,41 @@ public class PriceInfo implements Serializable {
     }
 
     @JsonProperty("Price")
-    private Double price;
+    private Price price;
 
     @JsonProperty("Price")
-    public Double getPrice() {
+    public Price getPrice() {
         return this.price;
     }
 
     @JsonProperty("Price")
-    public void setPrice(Double price) {
+    public void setPrice(Price price) {
         this.price = price;
     }
 
     @JsonProperty("DiscountAmount")
-    private Double discountAmount;
+    private DiscountAmount discountAmount;
 
     @JsonProperty("DiscountAmount")
-    public Double getDiscountamount() {
+    public DiscountAmount getDiscountamount() {
         return this.discountAmount;
     }
 
     @JsonProperty("DiscountAmount")
-    public void setDiscountamount(Double discountAmount) {
+    public void setDiscountamount(DiscountAmount discountAmount) {
         this.discountAmount = discountAmount;
     }
 
     @JsonProperty("BeforeDiscount")
-    private Double beforeDiscount;
+    private BeforeDiscount beforeDiscount;
 
     @JsonProperty("BeforeDiscount")
-    public Double getBeforediscount() {
+    public BeforeDiscount getBeforediscount() {
         return this.beforeDiscount;
     }
 
     @JsonProperty("BeforeDiscount")
-    public void setBeforediscount(Double beforeDiscount) {
+    public void setBeforediscount(BeforeDiscount beforeDiscount) {
         this.beforeDiscount = beforeDiscount;
     }
 

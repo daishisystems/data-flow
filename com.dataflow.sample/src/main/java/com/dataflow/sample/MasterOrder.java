@@ -3,28 +3,13 @@ package com.dataflow.sample;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import com.fasterxml.jackson.annotation.JsonAnyGetter;
-import com.fasterxml.jackson.annotation.JsonAnySetter;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import org.apache.beam.sdk.coders.DefaultCoder;
 import org.apache.beam.sdk.coders.SerializableCoder;
-import org.joda.time.DateTime;
 
-@JsonPropertyOrder({ "OrderCode", "RetailerCartId", "OrderItems", "AvailableOrderItems", "RetailerPromoCodes",
-        "OrderDiscounts", "DeliveryDetails", "PaymentDetails", "DeliveryOption", "Errors", "RetailerCheckoutExperience",
-        "ShopperCurrencyIso", "RetailerCurrencyIso", "RetailerFxGroupId", "SourceCountryIso", "DeliveryCountryIso",
-        "ShopperCheckoutExperience", "DeliveryOptions", "RetailerDeliveryOptions", "Payment", "IpAddress",
-        "CalculationParameters", "Status", "OrderConfirmationErrorInformation", "Pricing", "Features", "ExpiryTimeUtc",
-        "ChargeTargets", "GdprAccepted", "GdprAcceptanceHistory", "brandCode", "eventName", "correlationId",
-        "userAgent", "queryString", "created" })
 @DefaultCoder(SerializableCoder.class)
 public class MasterOrder implements Serializable {
-
     @JsonProperty("OrderCode")
     private String orderCode;
     @JsonProperty("RetailerCartId")
@@ -60,7 +45,7 @@ public class MasterOrder implements Serializable {
     @JsonProperty("ShopperCheckoutExperience")
     private ShopperCheckoutExperience shopperCheckoutExperience;
     @JsonProperty("DeliveryOptions")
-    private List<DeliveryOptionExtended> deliveryOptions = new ArrayList<DeliveryOptionExtended>();
+    private List<DeliveryOption> deliveryOptions = new ArrayList<DeliveryOption>();
     @JsonProperty("RetailerDeliveryOptions")
     private List<RetailerDeliveryOption> retailerDeliveryOptions = new ArrayList<RetailerDeliveryOption>();
     @JsonProperty("Payment")
@@ -71,20 +56,24 @@ public class MasterOrder implements Serializable {
     private CalculationParameters calculationParameters;
     @JsonProperty("Status")
     private String status;
-    @JsonProperty("OrderConfirmationErrorInformation")
-    private Object orderConfirmationErrorInformation;
+    @JsonProperty("RetailerConfirmation")
+    private RetailerConfirmation retailerConfirmation;
+    @JsonProperty("PlatformCreate")
+    private PlatformCreate platformCreate;
     @JsonProperty("Pricing")
     private Pricing pricing;
     @JsonProperty("Features")
     private List<Feature> features = new ArrayList<Feature>();
     @JsonProperty("ExpiryTimeUtc")
-    private DateTime expiryTimeUtc;
+    private String expiryTimeUtc;
     @JsonProperty("ChargeTargets")
-    private List<ChargeTarget> chargeTargets = new ArrayList<ChargeTarget>();
+    private List<Object> chargeTargets = new ArrayList<Object>();
+    @JsonProperty("FingerprintId")
+    private Object fingerprintId;
     @JsonProperty("GdprAccepted")
     private Boolean gdprAccepted;
     @JsonProperty("GdprAcceptanceHistory")
-    private List<GdprAcceptance> gdprAcceptanceHistory = new ArrayList<GdprAcceptance>();
+    private List<Object> gdprAcceptanceHistory = new ArrayList<Object>();
     @JsonProperty("brandCode")
     private String brandCode;
     @JsonProperty("eventName")
@@ -96,107 +85,8 @@ public class MasterOrder implements Serializable {
     @JsonProperty("queryString")
     private String queryString;
     @JsonProperty("created")
-    private long created;
-    @JsonIgnore
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
-    private final static long serialVersionUID = -1448068121889069826L;
-
-    /**
-     * No args constructor for use in serialization
-     * 
-     */
-    public MasterOrder() {
-    }
-
-    /**
-     * 
-     * @param deliveryOption
-     * @param userAgent
-     * @param orderCode
-     * @param retailerFxGroupId
-     * @param gdprAcceptanceHistory
-     * @param paymentDetails
-     * @param deliveryOptions
-     * @param chargeTargets
-     * @param expiryTimeUtc
-     * @param orderConfirmationErrorInformation
-     * @param errors
-     * @param shopperCurrencyIso
-     * @param created
-     * @param brandCode
-     * @param deliveryCountryIso
-     * @param features
-     * @param orderDiscounts
-     * @param retailerDeliveryOptions
-     * @param availableOrderItems
-     * @param ipAddress
-     * @param deliveryDetails
-     * @param correlationId
-     * @param payment
-     * @param status
-     * @param retailerCurrencyIso
-     * @param retailerCheckoutExperience
-     * @param gdprAccepted
-     * @param orderItems
-     * @param pricing
-     * @param queryString
-     * @param retailerCartId
-     * @param shopperCheckoutExperience
-     * @param retailerPromoCodes
-     * @param eventName
-     * @param calculationParameters
-     * @param sourceCountryIso
-     */
-    public MasterOrder(String orderCode, String retailerCartId, List<OrderItem> orderItems,
-            List<AvailableOrderItem> availableOrderItems, List<RetailerPromoCode> retailerPromoCodes,
-            List<OrderDiscount> orderDiscounts, List<DeliveryDetail> deliveryDetails,
-            List<PaymentDetail> paymentDetails, DeliveryOption deliveryOption, List<Object> errors,
-            RetailerCheckoutExperience retailerCheckoutExperience, String shopperCurrencyIso,
-            String retailerCurrencyIso, Integer retailerFxGroupId, String sourceCountryIso, String deliveryCountryIso,
-            ShopperCheckoutExperience shopperCheckoutExperience, List<DeliveryOptionExtended> deliveryOptions,
-            List<RetailerDeliveryOption> retailerDeliveryOptions, Payment payment, Object ipAddress,
-            CalculationParameters calculationParameters, String status, Object orderConfirmationErrorInformation,
-            Pricing pricing, List<Feature> features, DateTime expiryTimeUtc, List<ChargeTarget> chargeTargets,
-            Boolean gdprAccepted, List<GdprAcceptance> gdprAcceptanceHistory, String brandCode, String eventName,
-            String correlationId, String userAgent, String queryString, Long created) {
-        super();
-        this.orderCode = orderCode;
-        this.retailerCartId = retailerCartId;
-        this.orderItems = orderItems;
-        this.availableOrderItems = availableOrderItems;
-        this.retailerPromoCodes = retailerPromoCodes;
-        this.orderDiscounts = orderDiscounts;
-        this.deliveryDetails = deliveryDetails;
-        this.paymentDetails = paymentDetails;
-        this.deliveryOption = deliveryOption;
-        this.errors = errors;
-        this.retailerCheckoutExperience = retailerCheckoutExperience;
-        this.shopperCurrencyIso = shopperCurrencyIso;
-        this.retailerCurrencyIso = retailerCurrencyIso;
-        this.retailerFxGroupId = retailerFxGroupId;
-        this.sourceCountryIso = sourceCountryIso;
-        this.deliveryCountryIso = deliveryCountryIso;
-        this.shopperCheckoutExperience = shopperCheckoutExperience;
-        this.deliveryOptions = deliveryOptions;
-        this.retailerDeliveryOptions = retailerDeliveryOptions;
-        this.payment = payment;
-        this.ipAddress = ipAddress;
-        this.calculationParameters = calculationParameters;
-        this.status = status;
-        this.orderConfirmationErrorInformation = orderConfirmationErrorInformation;
-        this.pricing = pricing;
-        this.features = features;
-        this.expiryTimeUtc = expiryTimeUtc;
-        this.chargeTargets = chargeTargets;
-        this.gdprAccepted = gdprAccepted;
-        this.gdprAcceptanceHistory = gdprAcceptanceHistory;
-        this.brandCode = brandCode;
-        this.eventName = eventName;
-        this.correlationId = correlationId;
-        this.userAgent = userAgent;
-        this.queryString = queryString;
-        this.created = created;
-    }
+    private Long created;
+    private final static long serialVersionUID = 8817357657140713368L;
 
     @JsonProperty("OrderCode")
     public String getOrderCode() {
@@ -369,12 +259,12 @@ public class MasterOrder implements Serializable {
     }
 
     @JsonProperty("DeliveryOptions")
-    public List<DeliveryOptionExtended> getDeliveryOptions() {
+    public List<DeliveryOption> getDeliveryOptions() {
         return deliveryOptions;
     }
 
     @JsonProperty("DeliveryOptions")
-    public void setDeliveryOptions(List<DeliveryOptionExtended> deliveryOptions) {
+    public void setDeliveryOptions(List<DeliveryOption> deliveryOptions) {
         this.deliveryOptions = deliveryOptions;
     }
 
@@ -428,14 +318,24 @@ public class MasterOrder implements Serializable {
         this.status = status;
     }
 
-    @JsonProperty("OrderConfirmationErrorInformation")
-    public Object getOrderConfirmationErrorInformation() {
-        return orderConfirmationErrorInformation;
+    @JsonProperty("RetailerConfirmation")
+    public RetailerConfirmation getRetailerConfirmation() {
+        return retailerConfirmation;
     }
 
-    @JsonProperty("OrderConfirmationErrorInformation")
-    public void setOrderConfirmationErrorInformation(Object orderConfirmationErrorInformation) {
-        this.orderConfirmationErrorInformation = orderConfirmationErrorInformation;
+    @JsonProperty("RetailerConfirmation")
+    public void setRetailerConfirmation(RetailerConfirmation retailerConfirmation) {
+        this.retailerConfirmation = retailerConfirmation;
+    }
+
+    @JsonProperty("PlatformCreate")
+    public PlatformCreate getPlatformCreate() {
+        return platformCreate;
+    }
+
+    @JsonProperty("PlatformCreate")
+    public void setPlatformCreate(PlatformCreate platformCreate) {
+        this.platformCreate = platformCreate;
     }
 
     @JsonProperty("Pricing")
@@ -459,23 +359,33 @@ public class MasterOrder implements Serializable {
     }
 
     @JsonProperty("ExpiryTimeUtc")
-    public DateTime getExpiryTimeUtc() {
+    public String getExpiryTimeUtc() {
         return expiryTimeUtc;
     }
 
     @JsonProperty("ExpiryTimeUtc")
-    public void setExpiryTimeUtc(DateTime expiryTimeUtc) {
+    public void setExpiryTimeUtc(String expiryTimeUtc) {
         this.expiryTimeUtc = expiryTimeUtc;
     }
 
     @JsonProperty("ChargeTargets")
-    public List<ChargeTarget> getChargeTargets() {
+    public List<Object> getChargeTargets() {
         return chargeTargets;
     }
 
     @JsonProperty("ChargeTargets")
-    public void setChargeTargets(List<ChargeTarget> chargeTargets) {
+    public void setChargeTargets(List<Object> chargeTargets) {
         this.chargeTargets = chargeTargets;
+    }
+
+    @JsonProperty("FingerprintId")
+    public Object getFingerprintId() {
+        return fingerprintId;
+    }
+
+    @JsonProperty("FingerprintId")
+    public void setFingerprintId(Object fingerprintId) {
+        this.fingerprintId = fingerprintId;
     }
 
     @JsonProperty("GdprAccepted")
@@ -489,12 +399,12 @@ public class MasterOrder implements Serializable {
     }
 
     @JsonProperty("GdprAcceptanceHistory")
-    public List<GdprAcceptance> getGdprAcceptanceHistory() {
+    public List<Object> getGdprAcceptanceHistory() {
         return gdprAcceptanceHistory;
     }
 
     @JsonProperty("GdprAcceptanceHistory")
-    public void setGdprAcceptanceHistory(List<GdprAcceptance> gdprAcceptanceHistory) {
+    public void setGdprAcceptanceHistory(List<Object> gdprAcceptanceHistory) {
         this.gdprAcceptanceHistory = gdprAcceptanceHistory;
     }
 
@@ -549,7 +459,7 @@ public class MasterOrder implements Serializable {
     }
 
     @JsonProperty("created")
-    public long getCreated() {
+    public Long getCreated() {
         return created;
     }
 
@@ -557,15 +467,4 @@ public class MasterOrder implements Serializable {
     public void setCreated(Long created) {
         this.created = created;
     }
-
-    @JsonAnyGetter
-    public Map<String, Object> getAdditionalProperties() {
-        return this.additionalProperties;
-    }
-
-    @JsonAnySetter
-    public void setAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
-    }
-
 }

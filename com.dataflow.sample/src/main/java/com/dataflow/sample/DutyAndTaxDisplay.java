@@ -13,14 +13,15 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import org.apache.beam.sdk.coders.DefaultCoder;
 import org.apache.beam.sdk.coders.SerializableCoder;
 
-@JsonPropertyOrder({ "MerchandiseDisplayModelId", "Name", "Description", "IncludeAllDutyAndTax",
+@JsonPropertyOrder({ "DutyAndTaxDisplayModelId", "Name", "Description", "IncludeAllDutyAndTax",
         "IncludeMerchandiseDuty", "IncludeMerchandiseTax", "IncludeShipping", "IncludeShippingDuty",
-        "IncludeShippingTax", "IncludeOtherTaxes", "IncludeOtherFees", "DefaultDisplayText", "DisplayTextKey" })
+        "IncludeShippingTax", "IncludeOtherTaxes", "IncludeOtherFees", "IsDutyAndTaxVisible", "DefaultDisplayText",
+        "DisplayTextKey" })
 @DefaultCoder(SerializableCoder.class)
-public class ProductDisplay implements Serializable {
+public class DutyAndTaxDisplay implements Serializable {
 
-    @JsonProperty("MerchandiseDisplayModelId")
-    private Integer merchandiseDisplayModelId;
+    @JsonProperty("DutyAndTaxDisplayModelId")
+    private Integer dutyAndTaxDisplayModelId;
     @JsonProperty("Name")
     private String name;
     @JsonProperty("Description")
@@ -41,24 +42,26 @@ public class ProductDisplay implements Serializable {
     private Boolean includeOtherTaxes;
     @JsonProperty("IncludeOtherFees")
     private Boolean includeOtherFees;
+    @JsonProperty("IsDutyAndTaxVisible")
+    private Boolean isDutyAndTaxVisible;
     @JsonProperty("DefaultDisplayText")
     private String defaultDisplayText;
     @JsonProperty("DisplayTextKey")
     private String displayTextKey;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
-    private final static long serialVersionUID = -6594707239095342458L;
+    private final static long serialVersionUID = -6986914330069708290L;
 
     /**
      * No args constructor for use in serialization
      * 
      */
-    public ProductDisplay() {
+    public DutyAndTaxDisplay() {
     }
 
     /**
      * 
-     * @param merchandiseDisplayModelId
+     * @param dutyAndTaxDisplayModelId
      * @param includeMerchandiseTax
      * @param displayTextKey
      * @param includeShippingTax
@@ -68,16 +71,17 @@ public class ProductDisplay implements Serializable {
      * @param description
      * @param includeOtherTaxes
      * @param name
+     * @param isDutyAndTaxVisible
      * @param includeOtherFees
      * @param defaultDisplayText
      * @param includeMerchandiseDuty
      */
-    public ProductDisplay(Integer merchandiseDisplayModelId, String name, String description,
+    public DutyAndTaxDisplay(Integer dutyAndTaxDisplayModelId, String name, String description,
             Boolean includeAllDutyAndTax, Boolean includeMerchandiseDuty, Boolean includeMerchandiseTax,
             Boolean includeShipping, Boolean includeShippingDuty, Boolean includeShippingTax, Boolean includeOtherTaxes,
-            Boolean includeOtherFees, String defaultDisplayText, String displayTextKey) {
+            Boolean includeOtherFees, Boolean isDutyAndTaxVisible, String defaultDisplayText, String displayTextKey) {
         super();
-        this.merchandiseDisplayModelId = merchandiseDisplayModelId;
+        this.dutyAndTaxDisplayModelId = dutyAndTaxDisplayModelId;
         this.name = name;
         this.description = description;
         this.includeAllDutyAndTax = includeAllDutyAndTax;
@@ -88,22 +92,23 @@ public class ProductDisplay implements Serializable {
         this.includeShippingTax = includeShippingTax;
         this.includeOtherTaxes = includeOtherTaxes;
         this.includeOtherFees = includeOtherFees;
+        this.isDutyAndTaxVisible = isDutyAndTaxVisible;
         this.defaultDisplayText = defaultDisplayText;
         this.displayTextKey = displayTextKey;
     }
 
-    @JsonProperty("MerchandiseDisplayModelId")
-    public Integer getMerchandiseDisplayModelId() {
-        return merchandiseDisplayModelId;
+    @JsonProperty("DutyAndTaxDisplayModelId")
+    public Object getDutyAndTaxDisplayModelId() {
+        return dutyAndTaxDisplayModelId;
     }
 
-    @JsonProperty("MerchandiseDisplayModelId")
-    public void setMerchandiseDisplayModelId(Integer merchandiseDisplayModelId) {
-        this.merchandiseDisplayModelId = merchandiseDisplayModelId;
+    @JsonProperty("DutyAndTaxDisplayModelId")
+    public void setDutyAndTaxDisplayModelId(Integer dutyAndTaxDisplayModelId) {
+        this.dutyAndTaxDisplayModelId = dutyAndTaxDisplayModelId;
     }
 
     @JsonProperty("Name")
-    public Object getName() {
+    public String getName() {
         return name;
     }
 
@@ -113,7 +118,7 @@ public class ProductDisplay implements Serializable {
     }
 
     @JsonProperty("Description")
-    public Object getDescription() {
+    public String getDescription() {
         return description;
     }
 
@@ -202,6 +207,16 @@ public class ProductDisplay implements Serializable {
         this.includeOtherFees = includeOtherFees;
     }
 
+    @JsonProperty("IsDutyAndTaxVisible")
+    public Boolean getIsDutyAndTaxVisible() {
+        return isDutyAndTaxVisible;
+    }
+
+    @JsonProperty("IsDutyAndTaxVisible")
+    public void setIsDutyAndTaxVisible(Boolean isDutyAndTaxVisible) {
+        this.isDutyAndTaxVisible = isDutyAndTaxVisible;
+    }
+
     @JsonProperty("DefaultDisplayText")
     public String getDefaultDisplayText() {
         return defaultDisplayText;
@@ -231,5 +246,4 @@ public class ProductDisplay implements Serializable {
     public void setAdditionalProperty(String name, Object value) {
         this.additionalProperties.put(name, value);
     }
-
 }

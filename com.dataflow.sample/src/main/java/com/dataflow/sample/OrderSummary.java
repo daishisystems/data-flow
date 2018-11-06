@@ -211,8 +211,7 @@ public class OrderSummary implements Serializable {
         return sortedOrders;
     }
 
-    // FIXME: Multiple orders w/ same code will result in misaligned OrderValue!
-    // (That's OK - long as we sort and group by Ordercode)
+    // FIXME: Group and sort multiple orders per session
     public static OrderSummary orderSummary(List<MasterOrder> orders, String orderCompleteIdentifier) {
         Iterator<MasterOrder> iterator = orders.iterator();
         OrderSummary orderSummary = new OrderSummary();
@@ -226,7 +225,7 @@ public class OrderSummary implements Serializable {
             orderSummary.setLastEventName(previous.getEventName());
             orderSummary.setNumber(previous.getOrderCode());
             orderSummary.setCorrelationid(previous.getCorrelationId());
-            orderSummary.setEnddate(previous.getCreated()); // Order should have a start and endate in DATETIME format
+            orderSummary.setEnddate(previous.getCreated());
             orderSummary.setUserAgent(previous.getUserAgent());
             Double orderValue = calcOrderValue(previous);
             orderSummary.setOrderValue(orderValue);
@@ -269,7 +268,7 @@ public class OrderSummary implements Serializable {
         orderSummary.setLastEventName(current.getEventName());
         orderSummary.setNumber(current.getOrderCode());
         orderSummary.setCorrelationid(current.getCorrelationId());
-        orderSummary.setEnddate(current.getCreated()); // Order should have a start and endate in DATETIME format
+        orderSummary.setEnddate(current.getCreated());
         orderSummary.setUserAgent(current.getUserAgent());
         Double orderValue = calcOrderValue(current);
         orderSummary.setOrderValue(orderValue);

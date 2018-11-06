@@ -20,8 +20,8 @@ public class DeserialisationTest {
         ObjectMapper mapper = new ObjectMapper();
         mapper.registerModule(new JodaModule());
         MasterOrder masterOrder = mapper.readValue(json, MasterOrder.class);
-        double expected = 0.106;
-        assertEquals(Double.valueOf(expected), masterOrder.getPricing().getCalculation().getEstimatedDutyRate());
+        double expected = 1.0;
+        assertEquals(Double.valueOf(expected), masterOrder.getOrderItems().get(0).getDutyRate());
     }
 
     private String getFile(String fileName) {

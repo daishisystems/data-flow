@@ -96,7 +96,7 @@ public class OrderTest {
         masterOrders.add(masterOrder2);
         OrderSummary orderSummary = OrderSummary.orderSummary(masterOrders, orderCompleteIdentifier);
 
-        Double expected = 13983.58;
+        Double expected = 920.00;
         assertEquals(Double.valueOf(expected), Double.valueOf(orderSummary.getOrderValue()));
     }
 
