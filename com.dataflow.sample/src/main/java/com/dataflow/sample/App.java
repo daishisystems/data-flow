@@ -191,10 +191,6 @@ public class App {
                 if (address3 != null && !address3.isEmpty()) {
                     deliveryDetail.setAddress3(Utils.mask(address3, '#'));
                 }
-                String city = deliveryDetail.getCity();
-                if (city != null && !city.isEmpty()) {
-                    deliveryDetail.setCity(Utils.mask(city, '#'));
-                }
                 String postalCode = deliveryDetail.getPostalCode();
                 if (postalCode != null && !postalCode.isEmpty()) {
                     deliveryDetail.setPostalCode(Utils.mask(postalCode, '#'));
