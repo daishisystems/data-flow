@@ -57,7 +57,7 @@ public class App {
         Pipeline p = Pipeline.create(options);
 
         PCollection<String> pubSubOutput = p.apply("Read Input", PubsubIO.readStrings()
-                .fromTopic("projects/project-ontario-prod/topics/checkout").withTimestampAttribute("EventTimestamp"));
+                .fromTopic("projects/eshop-puddle/topics/checkout-dev").withTimestampAttribute("EventTimestamp"));
 
         final TupleTag<KV<String, MasterOrder>> successTag = new TupleTag<KV<String, MasterOrder>>() {
 
@@ -89,7 +89,7 @@ public class App {
         PCollection<KV<String, MasterOrder>> success = outputTuple.get(successTag);
 
         PCollection<KV<String, MasterOrder>> orders = success.apply("Session Window",
-                Window.<KV<String, MasterOrder>>into(Sessions.withGapDuration(Duration.standardMinutes(20))));
+                Window.<KV<String, MasterOrder>>into(Sessions.withGapDuration(Duration.standardSeconds(20))));
 
         PCollection<KV<String, Iterable<MasterOrder>>> groupedOrders = orders.apply("Group", GroupByKey.create());
 
@@ -119,7 +119,7 @@ public class App {
         TableSchema schema = new TableSchema().setFields(fields);
 
         orderSummaries.apply("Apply Schema", new OrderSummariesToTableRows()).apply("Save to BQ",
-                BigQueryIO.writeTableRows().to("project-ontario-prod:checkout.order_summary").withSchema(schema)
+                BigQueryIO.writeTableRows().to("eshop-puddle:checkout_dev.order_summary").withSchema(schema)
                         .withCreateDisposition(BigQueryIO.Write.CreateDisposition.CREATE_IF_NEEDED)
                         .withWriteDisposition(BigQueryIO.Write.WriteDisposition.WRITE_APPEND));
 
@@ -129,7 +129,7 @@ public class App {
         // FIXME: Add toString, Equals methods to all ...
 
         outputTuple.get(deadLetterTag).apply("Dead Letter Queue", // todo: redact these using DLP
-                PubsubIO.writeStrings().to("projects/project-ontario-prod/topics/dead-letter-orders"));
+                PubsubIO.writeStrings().to("projects/eshop-puddle/topics/checkout-dead-letter-orders-dev"));
 
         // FIXME: Window duration -> 20 minutes
 
@@ -143,10 +143,10 @@ public class App {
                 ParDo.of(new SerialiseMasterOrderFn()));
 
         serialisedCompleteOrders.apply("Publish Complete",
-                PubsubIO.writeStrings().to("projects/project-ontario-prod/topics/order-master"));
+                PubsubIO.writeStrings().to("projects/eshop-puddle/topics/checkout-order-master-dev"));
 
         serialisedCompleteOrders.apply("Archive Complete",
-                PubsubIO.writeStrings().to("projects/project-ontario-prod/topics/order-archive"));
+                PubsubIO.writeStrings().to("projects/eshop-puddle/topics/checkout-order-archive-dev"));
 
         PCollection<MasterOrder> maskedOrders = incompleteOrders.apply("Mask", new MaskOrdersFn());
 
@@ -154,10 +154,10 @@ public class App {
                 ParDo.of(new SerialiseMasterOrderFn()));
 
         serialiseMaskedOrders.apply("Publish Incomplete",
-                PubsubIO.writeStrings().to("projects/project-ontario-prod/topics/order-master"));
+                PubsubIO.writeStrings().to("projects/eshop-puddle/topics/checkout-order-master-dev"));
 
         serialiseMaskedOrders.apply("Archive Incomplete",
-                PubsubIO.writeStrings().to("projects/project-ontario-prod/topics/order-archive"));
+                PubsubIO.writeStrings().to("projects/eshop-puddle/topics/checkout-order-archive-dev"));
 
         // FIXME: MASK
 
@@ -238,10 +238,6 @@ public class App {
                 String address3 = paymentDetail.getAddress3();
                 if (address3 != null && !address3.isEmpty()) {
                     paymentDetail.setAddress3(Utils.mask(address3, '#'));
-                }
-                String city = paymentDetail.getCity();
-                if (city != null && !city.isEmpty()) {
-                    paymentDetail.setCity(Utils.mask(city, '#'));
                 }
                 String postalCode = paymentDetail.getPostalCode();
                 if (postalCode != null && !postalCode.isEmpty()) {
