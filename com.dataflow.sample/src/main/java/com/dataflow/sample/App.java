@@ -34,12 +34,14 @@ import org.apache.beam.sdk.options.PipelineOptionsFactory;
 import org.apache.beam.sdk.transforms.DoFn;
 import org.apache.beam.sdk.transforms.ParDo;
 import org.apache.beam.sdk.transforms.GroupByKey;
+import org.apache.beam.sdk.transforms.MapElements;
 import org.apache.beam.sdk.transforms.PTransform;
 import org.apache.beam.sdk.values.KV;
 import org.apache.beam.sdk.values.PCollection;
 import org.apache.beam.sdk.values.PCollectionTuple;
 import org.apache.beam.sdk.values.TupleTag;
 import org.apache.beam.sdk.values.TupleTagList;
+import org.apache.beam.sdk.values.TypeDescriptors;
 import org.apache.beam.sdk.transforms.windowing.Sessions;
 import org.apache.beam.sdk.transforms.windowing.Window;
 import org.codehaus.jackson.JsonParseException;
@@ -53,10 +55,6 @@ public class App {
     private static final Logger LOG = LoggerFactory.getLogger(App.class);
 
     public static void main(String[] args) {
-        mapper.registerModule(new JodaModule());
-        PipelineOptions options = PipelineOptionsFactory.fromArgs(args).withValidation().create();
-        Pipeline p = Pipeline.create(options); // FIXME: Add to boot-up
-
         final TupleTag<KV<String, MasterOrder>> validOrdersTupleTag = new TupleTag<KV<String, MasterOrder>>() {
             private static final long serialVersionUID = 5729779425621385553L;
         };
@@ -70,8 +68,13 @@ public class App {
             private static final long serialVersionUID = 6238727806361931139L;
         };
 
+        mapper.registerModule(new JodaModule());
+
+        PipelineOptions options = PipelineOptionsFactory.fromArgs(args).withValidation().create();
+        Pipeline p = Pipeline.create(options); // FIXME: Add to boot-up
+
         PCollection<String> pubSubOutput = p.apply("Read Input", PubsubIO.readStrings()
-                .fromTopic("projects/eshop-puddle/topics/checkout-dev").withTimestampAttribute("EventTimestamp"));
+                .fromTopic("projects/eshop-puddle/topics/checkout-dev").withTimestampAttribute("EventTimestamp"));        
 
         PCollectionTuple outputTuple = pubSubOutput.apply("Validate",
                 ParDo.of(new DoFn<String, KV<String, MasterOrder>>() {
