@@ -20,7 +20,7 @@ public class DeserialisationTest {
         ObjectMapper mapper = new ObjectMapper();
         mapper.registerModule(new JodaModule());
         MasterOrder masterOrder = mapper.readValue(json, MasterOrder.class);
-        double expected = 1.0;
+        double expected = 0.0;
         assertEquals(Double.valueOf(expected), masterOrder.getOrderItems().get(0).getDutyRate());
     }
 

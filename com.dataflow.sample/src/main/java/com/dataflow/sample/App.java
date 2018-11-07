@@ -63,7 +63,6 @@ public class App {
         final TupleTag<String> invalidOrdersTupleTag = new TupleTag<String>() {
             private static final long serialVersionUID = -3414994155123840086L;
         };
-
         final TupleTag<MasterOrder> completeOrdersTag = new TupleTag<MasterOrder>() {
             private static final long serialVersionUID = -8287090181826227743L;
         };
@@ -101,7 +100,7 @@ public class App {
         masterOrders.apply("Summarise", ParDo.of(new OrderSummaryFn()))
                 .apply("Apply Schema", new OrderSummariesToTableRows()).apply("Save to BQ",
                         BigQueryIO.writeTableRows().to("eshop-puddle:checkout_dev.order_summary")
-                                .withSchema(getTableSchema())
+                                .withSchema(getTableSchema()).withMethod(BigQueryIO.Write.Method.STREAMING_INSERTS)
                                 .withCreateDisposition(BigQueryIO.Write.CreateDisposition.CREATE_IF_NEEDED)
                                 .withWriteDisposition(BigQueryIO.Write.WriteDisposition.WRITE_APPEND));
 

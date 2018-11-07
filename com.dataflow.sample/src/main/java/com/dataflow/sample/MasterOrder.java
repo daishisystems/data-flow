@@ -29,7 +29,7 @@ public class MasterOrder implements Serializable {
     @JsonProperty("DeliveryOption")
     private DeliveryOption deliveryOption;
     @JsonProperty("Errors")
-    private List<Object> errors = new ArrayList<Object>();
+    private List<Error> errors = new ArrayList<Error>();
     @JsonProperty("RetailerCheckoutExperience")
     private RetailerCheckoutExperience retailerCheckoutExperience;
     @JsonProperty("ShopperCurrencyIso")
@@ -51,7 +51,7 @@ public class MasterOrder implements Serializable {
     @JsonProperty("Payment")
     private Payment payment;
     @JsonProperty("IpAddress")
-    private Object ipAddress;
+    private String ipAddress;
     @JsonProperty("CalculationParameters")
     private CalculationParameters calculationParameters;
     @JsonProperty("Status")
@@ -67,13 +67,13 @@ public class MasterOrder implements Serializable {
     @JsonProperty("ExpiryTimeUtc")
     private String expiryTimeUtc;
     @JsonProperty("ChargeTargets")
-    private List<Object> chargeTargets = new ArrayList<Object>();
+    private List<ChargeTarget> chargeTargets = new ArrayList<ChargeTarget>();
     @JsonProperty("FingerprintId")
-    private Object fingerprintId;
+    private String fingerprintId;
     @JsonProperty("GdprAccepted")
     private Boolean gdprAccepted;
     @JsonProperty("GdprAcceptanceHistory")
-    private List<Object> gdprAcceptanceHistory = new ArrayList<Object>();
+    private List<GdprAcceptance> gdprAcceptanceHistory = new ArrayList<GdprAcceptance>();
     @JsonProperty("brandCode")
     private String brandCode;
     @JsonProperty("eventName")
@@ -179,12 +179,12 @@ public class MasterOrder implements Serializable {
     }
 
     @JsonProperty("Errors")
-    public List<Object> getErrors() {
+    public List<Error> getErrors() {
         return errors;
     }
 
     @JsonProperty("Errors")
-    public void setErrors(List<Object> errors) {
+    public void setErrors(List<Error> errors) {
         this.errors = errors;
     }
 
@@ -289,12 +289,12 @@ public class MasterOrder implements Serializable {
     }
 
     @JsonProperty("IpAddress")
-    public Object getIpAddress() {
+    public String getIpAddress() {
         return ipAddress;
     }
 
     @JsonProperty("IpAddress")
-    public void setIpAddress(Object ipAddress) {
+    public void setIpAddress(String ipAddress) {
         this.ipAddress = ipAddress;
     }
 
@@ -369,22 +369,22 @@ public class MasterOrder implements Serializable {
     }
 
     @JsonProperty("ChargeTargets")
-    public List<Object> getChargeTargets() {
+    public List<ChargeTarget> getChargeTargets() {
         return chargeTargets;
     }
 
     @JsonProperty("ChargeTargets")
-    public void setChargeTargets(List<Object> chargeTargets) {
+    public void setChargeTargets(List<ChargeTarget> chargeTargets) {
         this.chargeTargets = chargeTargets;
     }
 
     @JsonProperty("FingerprintId")
-    public Object getFingerprintId() {
+    public String getFingerprintId() {
         return fingerprintId;
     }
 
     @JsonProperty("FingerprintId")
-    public void setFingerprintId(Object fingerprintId) {
+    public void setFingerprintId(String fingerprintId) {
         this.fingerprintId = fingerprintId;
     }
 
@@ -399,12 +399,12 @@ public class MasterOrder implements Serializable {
     }
 
     @JsonProperty("GdprAcceptanceHistory")
-    public List<Object> getGdprAcceptanceHistory() {
+    public List<GdprAcceptance> getGdprAcceptanceHistory() {
         return gdprAcceptanceHistory;
     }
 
     @JsonProperty("GdprAcceptanceHistory")
-    public void setGdprAcceptanceHistory(List<Object> gdprAcceptanceHistory) {
+    public void setGdprAcceptanceHistory(List<GdprAcceptance> gdprAcceptanceHistory) {
         this.gdprAcceptanceHistory = gdprAcceptanceHistory;
     }
 

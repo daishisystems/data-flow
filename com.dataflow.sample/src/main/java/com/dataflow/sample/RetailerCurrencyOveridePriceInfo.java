@@ -111,7 +111,7 @@ public class RetailerCurrencyOveridePriceInfo implements Serializable {
     }
 
     @JsonProperty("DiscountPercentage")
-    public Object getDiscountPercentage() {
+    public Double getDiscountPercentage() {
         return discountPercentage;
     }
 

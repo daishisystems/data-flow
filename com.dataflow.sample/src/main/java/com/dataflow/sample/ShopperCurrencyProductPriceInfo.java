@@ -111,7 +111,7 @@ public class ShopperCurrencyProductPriceInfo implements Serializable {
     }
 
     @JsonProperty("DiscountPercentage")
-    public Object getDiscountPercentage() {
+    public Double getDiscountPercentage() {
         return discountPercentage;
     }
 

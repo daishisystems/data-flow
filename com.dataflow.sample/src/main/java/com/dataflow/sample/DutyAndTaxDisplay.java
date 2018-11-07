@@ -98,7 +98,7 @@ public class DutyAndTaxDisplay implements Serializable {
     }
 
     @JsonProperty("DutyAndTaxDisplayModelId")
-    public Object getDutyAndTaxDisplayModelId() {
+    public Integer getDutyAndTaxDisplayModelId() {
         return dutyAndTaxDisplayModelId;
     }
 

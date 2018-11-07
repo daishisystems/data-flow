@@ -36,7 +36,7 @@ public class OrderItem implements Serializable {
     @JsonProperty("WeightUnit")
     private Integer weightUnit;
     @JsonProperty("CountryOfOriginIso")
-    private Object countryOfOriginIso;
+    private String countryOfOriginIso;
     @JsonProperty("HsCode")
     private String hsCode;
     @JsonProperty("EstimatedDeliveryDate")
@@ -87,7 +87,7 @@ public class OrderItem implements Serializable {
      * @param dutyRate
      */
     public OrderItem(List<OrderArticle> orderArticles, Boolean available, CalculationRates calculationRates,
-            Double vatRate, Double dutyRate, Double weight, Integer weightUnit, Object countryOfOriginIso,
+            Double vatRate, Double dutyRate, Double weight, Integer weightUnit, String countryOfOriginIso,
             String hsCode, String estimatedDeliveryDate, Integer quantity, Product product, String lineItemId,
             String cartGrouping, List<MetadataItem> metadataItems, Boolean isCountryDefault,
             List<ChargeTarget> chargeTargets) {
@@ -182,12 +182,12 @@ public class OrderItem implements Serializable {
     }
 
     @JsonProperty("CountryOfOriginIso")
-    public Object getCountryOfOriginIso() {
+    public String getCountryOfOriginIso() {
         return countryOfOriginIso;
     }
 
     @JsonProperty("CountryOfOriginIso")
-    public void setCountryOfOriginIso(Object countryOfOriginIso) {
+    public void setCountryOfOriginIso(String countryOfOriginIso) {
         this.countryOfOriginIso = countryOfOriginIso;
     }
 

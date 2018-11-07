@@ -79,7 +79,7 @@ public class Display implements Serializable {
     }
 
     @JsonProperty("DutyAndTaxDisplay1")
-    public Object getDutyAndTaxDisplay1() {
+    public DutyAndTaxDisplay getDutyAndTaxDisplay1() {
         return dutyAndTaxDisplay1;
     }
 
@@ -89,7 +89,7 @@ public class Display implements Serializable {
     }
 
     @JsonProperty("DutyAndTaxDisplay2")
-    public Object getDutyAndTaxDisplay2() {
+    public DutyAndTaxDisplay getDutyAndTaxDisplay2() {
         return dutyAndTaxDisplay2;
     }
 

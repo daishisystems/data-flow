@@ -103,7 +103,7 @@ public class ProductDisplay implements Serializable {
     }
 
     @JsonProperty("Name")
-    public Object getName() {
+    public String getName() {
         return name;
     }
 
@@ -113,7 +113,7 @@ public class ProductDisplay implements Serializable {
     }
 
     @JsonProperty("Description")
-    public Object getDescription() {
+    public String getDescription() {
         return description;
     }
 

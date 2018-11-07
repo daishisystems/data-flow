@@ -1,6 +1,6 @@
 {
-	"OrderCode": "3ec0448e-fa9e-4e17-95be-6ba6c7fb5c18",
-	"RetailerCartId": "TST_2018-11-06T10:01:51.9331745Z",
+	"OrderCode": "e24e4580-533b-47a5-9157-b35e39521674",
+	"RetailerCartId": "TST_2018-11-06T18:46:02.2442643Z",
 	"OrderItems": [{
 		"OrderArticles": [{
 				"Charges": [{
@@ -315,7 +315,7 @@
 			"DeliveryReverseCalculationRate": 0.0
 		},
 		"VatRate": 0.0,
-		"DutyRate": 1.0,
+		"DutyRate": 0.0,
 		"Weight": 0.0,
 		"WeightUnit": 0,
 		"CountryOfOriginIso": null,
@@ -932,7 +932,7 @@
 		"City": "Chisinau",
 		"PostalCode": null,
 		"Region": null,
-		"Country": "AL",
+		"Country": "CH",
 		"Email": "test@esw.com",
 		"FirstName": "FirstName",
 		"LastName": "LastName",
@@ -974,7 +974,7 @@
 	"RetailerCurrencyIso": "EUR",
 	"RetailerFxGroupId": 1,
 	"SourceCountryIso": "IT",
-	"DeliveryCountryIso": "AL",
+	"DeliveryCountryIso": "CH",
 	"ShopperCheckoutExperience": {
 		"UseDeliveryContactDetailsForPaymentContactDetails": false,
 		"EmailMarketingOptIn": true,
@@ -1117,7 +1117,7 @@
 		"MetadataItems": null
 	}],
 	"Payment": {
-		"PaymentId": "fa5f0857-7dab-43cf-a1ff-0074d02b49e2",
+		"PaymentId": "37e7c0b3-f45c-4eb2-809a-0aeab7f3e501",
 		"PaymentAttemptRef": "00000000-0000-0000-0000-000000000000",
 		"PaymentFraudStatusId": null,
 		"AuthCode": null,
@@ -1130,7 +1130,7 @@
 			"MerchantTransactionId": null,
 			"AuthResult": null,
 			"PaymentBrand": "VISA",
-			"SettleAfterUtc": "2018-11-06T10:01:51.9331745+00:00"
+			"SettleAfterUtc": "2018-11-06T18:46:02.2442643+00:00"
 		},
 		"PaymentTime": null,
 		"IsPaymentSuccessful": false
@@ -1152,19 +1152,11 @@
 	},
 	"Status": "Initialized",
 	"RetailerConfirmation": {
-		"StatusCode": 1,
+		"Status": "Success",
 		"Response": {
 			"StatusCode": 1,
-			"ReasonPhrase": "OK",
-			"ErrorMessage": "N/A"
-		}
-	},
-	"PlatformCreate": {
-		"StatusCode": 1,
-		"Response": {
-			"StatusCode": 1,
-			"ReasonPhrase": "OK",
-			"ErrorMessage": "N/A"
+			"ReasonPhrase": "Reason",
+			"ErrorMessage": "Error"
 		}
 	},
 	"Pricing": {
@@ -1255,17 +1247,21 @@
 		{
 			"Type": "UpdatedPromoCodeLengthLimits",
 			"Active": true
+		},
+		{
+			"Type": "SeverityLevelInAppinsightEventNames",
+			"Active": true
 		}
 	],
-	"ExpiryTimeUtc": "2018-11-06T10:21:51.9331745Z",
+	"ExpiryTimeUtc": "2018-11-06T19:06:02.2442643Z",
 	"ChargeTargets": [],
 	"FingerprintId": null,
 	"GdprAccepted": false,
 	"GdprAcceptanceHistory": [],
-	"brandCode": "MAX",
+	"brandCode": "GOC",
 	"eventName": "CreateOrder",
 	"correlationId": "IntegrationTests",
 	"userAgent": "IntegrationTestRunner",
-	"queryString": "http://checkout-api-max.ci.eshopworld.net/api/v2/Order/3ec0448e-fa9e-4e17-95be-6ba6c7fb5c18",
-	"created": "1541498511974"
+	"queryString": "http://localhost:63675/api/v2/Order/e24e4580-533b-47a5-9157-b35e39521674",
+	"created": "1541529975174"
 }
