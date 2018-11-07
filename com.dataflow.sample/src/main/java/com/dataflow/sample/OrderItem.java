@@ -1,4 +1,3 @@
-
 package com.dataflow.sample;
 
 import java.io.Serializable;
@@ -11,7 +10,6 @@ import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-
 import org.apache.beam.sdk.coders.DefaultCoder;
 import org.apache.beam.sdk.coders.SerializableCoder;
 
@@ -118,7 +116,9 @@ public class OrderItem implements Serializable {
 
     @JsonProperty("OrderArticles")
     public void setOrderArticles(List<OrderArticle> orderArticles) {
-        this.orderArticles = orderArticles;
+        if (orderArticles != null) {
+            this.orderArticles = orderArticles;
+        }
     }
 
     @JsonProperty("Available")
@@ -148,7 +148,7 @@ public class OrderItem implements Serializable {
 
     @JsonProperty("VatRate")
     public void setVatRate(Double vatRate) {
-        this.vatRate = vatRate;
+        this.vatRate = Utils.round(vatRate);
     }
 
     @JsonProperty("DutyRate")
@@ -158,7 +158,7 @@ public class OrderItem implements Serializable {
 
     @JsonProperty("DutyRate")
     public void setDutyRate(Double dutyRate) {
-        this.dutyRate = dutyRate;
+        this.dutyRate = Utils.round(dutyRate);
     }
 
     @JsonProperty("Weight")
@@ -168,7 +168,7 @@ public class OrderItem implements Serializable {
 
     @JsonProperty("Weight")
     public void setWeight(Double weight) {
-        this.weight = weight;
+        this.weight = Utils.round(weight);
     }
 
     @JsonProperty("WeightUnit")
@@ -258,7 +258,9 @@ public class OrderItem implements Serializable {
 
     @JsonProperty("MetadataItems")
     public void setMetadataItems(List<MetadataItem> metadataItems) {
-        this.metadataItems = metadataItems;
+        if (metadataItems != null) {
+            this.metadataItems = metadataItems;
+        }
     }
 
     @JsonProperty("IsCountryDefault")
@@ -278,7 +280,9 @@ public class OrderItem implements Serializable {
 
     @JsonProperty("ChargeTargets")
     public void setChargeTargets(List<ChargeTarget> chargeTargets) {
-        this.chargeTargets = chargeTargets;
+        if (chargeTargets != null) {
+            this.chargeTargets = chargeTargets;
+        }
     }
 
     @JsonAnyGetter

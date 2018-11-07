@@ -146,7 +146,7 @@ public class DeliveryInput implements Serializable {
 
     @JsonProperty("DutyRate")
     public void setDutyRate(Double dutyRate) {
-        this.dutyRate = dutyRate;
+        this.dutyRate = Utils.round(dutyRate);
     }
 
     @JsonProperty("TaxRate")
@@ -156,7 +156,7 @@ public class DeliveryInput implements Serializable {
 
     @JsonProperty("TaxRate")
     public void setTaxRate(Double taxRate) {
-        this.taxRate = taxRate;
+        this.taxRate = Utils.round(taxRate);
     }
 
     @JsonProperty("OtherRate")
@@ -166,7 +166,7 @@ public class DeliveryInput implements Serializable {
 
     @JsonProperty("OtherRate")
     public void setOtherRate(Double otherRate) {
-        this.otherRate = otherRate;
+        this.otherRate = Utils.round(otherRate);
     }
 
     @JsonProperty("MatchInputPrice")

@@ -188,7 +188,9 @@ public class CalculationParameters implements Serializable {
 
     @JsonProperty("FxRates")
     public void setFxRates(List<FxRate> fxRates) {
-        this.fxRates = fxRates;
+        if (fxRates != null) {
+            this.fxRates = fxRates;
+        }
     }
 
     @JsonProperty("RetailerToShopperRate")
@@ -198,7 +200,7 @@ public class CalculationParameters implements Serializable {
 
     @JsonProperty("RetailerToShopperRate")
     public void setRetailerToShopperRate(Double retailerToShopperRate) {
-        this.retailerToShopperRate = retailerToShopperRate;
+        this.retailerToShopperRate = Utils.round(retailerToShopperRate);
     }
 
     @JsonProperty("ShopperToRetailerRate")
@@ -208,7 +210,7 @@ public class CalculationParameters implements Serializable {
 
     @JsonProperty("ShopperToRetailerRate")
     public void setShopperToRetailerRate(Double shopperToRetailerRate) {
-        this.shopperToRetailerRate = shopperToRetailerRate;
+        this.shopperToRetailerRate = Utils.round(shopperToRetailerRate);
     }
 
     @JsonAnyGetter

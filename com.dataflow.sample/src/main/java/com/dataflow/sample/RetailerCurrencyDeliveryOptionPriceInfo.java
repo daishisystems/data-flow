@@ -83,6 +83,6 @@ public class RetailerCurrencyDeliveryOptionPriceInfo implements Serializable {
 
     @JsonProperty("DiscountPercentage")
     public void setDiscountpercentage(Double discountPercentage) {
-        this.discountPercentage = discountPercentage;
+        this.discountPercentage = Utils.round(discountPercentage);
     }
 }

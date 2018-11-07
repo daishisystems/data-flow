@@ -182,7 +182,7 @@ public class Calculation implements Serializable {
 
     @JsonProperty("EstimatedTaxRate")
     public void setEstimatedTaxRate(Double estimatedTaxRate) {
-        this.estimatedTaxRate = estimatedTaxRate;
+        this.estimatedTaxRate = Utils.round(estimatedTaxRate);
     }
 
     @JsonProperty("BrandCountryMarkupId")
@@ -202,7 +202,7 @@ public class Calculation implements Serializable {
 
     @JsonProperty("MarkupPercentage")
     public void setMarkupPercentage(Double markupPercentage) {
-        this.markupPercentage = markupPercentage;
+        this.markupPercentage = Utils.round(markupPercentage);
     }
 
     @JsonProperty("PricingGroupId")

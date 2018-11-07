@@ -11,7 +11,6 @@ import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-
 import org.apache.beam.sdk.coders.DefaultCoder;
 import org.apache.beam.sdk.coders.SerializableCoder;
 
@@ -122,7 +121,9 @@ public class ShopperCheckoutExperience implements Serializable {
 
     @JsonProperty("MetadataItems")
     public void setMetadataItems(List<MetadataItem> metadataItems) {
-        this.metadataItems = metadataItems;
+        if (metadataItems != null) {
+            this.metadataItems = metadataItems;
+        }
     }
 
     @JsonAnyGetter

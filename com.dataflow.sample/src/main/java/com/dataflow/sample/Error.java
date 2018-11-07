@@ -1,9 +1,7 @@
 package com.dataflow.sample;
 
 import java.io.Serializable;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
-
 import org.apache.beam.sdk.coders.DefaultCoder;
 import org.apache.beam.sdk.coders.SerializableCoder;
 

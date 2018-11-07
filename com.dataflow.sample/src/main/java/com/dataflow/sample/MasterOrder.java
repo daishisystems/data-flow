@@ -115,7 +115,9 @@ public class MasterOrder implements Serializable {
 
     @JsonProperty("OrderItems")
     public void setOrderItems(List<OrderItem> orderItems) {
-        this.orderItems = orderItems;
+        if (orderItems != null) {
+            this.orderItems = orderItems;
+        }
     }
 
     @JsonProperty("AvailableOrderItems")
@@ -125,7 +127,9 @@ public class MasterOrder implements Serializable {
 
     @JsonProperty("AvailableOrderItems")
     public void setAvailableOrderItems(List<AvailableOrderItem> availableOrderItems) {
-        this.availableOrderItems = availableOrderItems;
+        if (availableOrderItems != null) {
+            this.availableOrderItems = availableOrderItems;
+        }
     }
 
     @JsonProperty("RetailerPromoCodes")
@@ -135,7 +139,9 @@ public class MasterOrder implements Serializable {
 
     @JsonProperty("RetailerPromoCodes")
     public void setRetailerPromoCodes(List<RetailerPromoCode> retailerPromoCodes) {
-        this.retailerPromoCodes = retailerPromoCodes;
+        if (retailerPromoCodes != null) {
+            this.retailerPromoCodes = retailerPromoCodes;
+        }
     }
 
     @JsonProperty("OrderDiscounts")
@@ -145,7 +151,9 @@ public class MasterOrder implements Serializable {
 
     @JsonProperty("OrderDiscounts")
     public void setOrderDiscounts(List<OrderDiscount> orderDiscounts) {
-        this.orderDiscounts = orderDiscounts;
+        if (orderDiscounts != null) {
+            this.orderDiscounts = orderDiscounts;
+        }
     }
 
     @JsonProperty("DeliveryDetails")
@@ -155,7 +163,9 @@ public class MasterOrder implements Serializable {
 
     @JsonProperty("DeliveryDetails")
     public void setDeliveryDetails(List<DeliveryDetail> deliveryDetails) {
-        this.deliveryDetails = deliveryDetails;
+        if (deliveryDetails != null) {
+            this.deliveryDetails = deliveryDetails;
+        }
     }
 
     @JsonProperty("PaymentDetails")
@@ -165,7 +175,9 @@ public class MasterOrder implements Serializable {
 
     @JsonProperty("PaymentDetails")
     public void setPaymentDetails(List<PaymentDetail> paymentDetails) {
-        this.paymentDetails = paymentDetails;
+        if (paymentDetails != null) {
+            this.paymentDetails = paymentDetails;
+        }
     }
 
     @JsonProperty("DeliveryOption")
@@ -185,7 +197,9 @@ public class MasterOrder implements Serializable {
 
     @JsonProperty("Errors")
     public void setErrors(List<Error> errors) {
-        this.errors = errors;
+        if (errors != null) {
+            this.errors = errors;
+        }
     }
 
     @JsonProperty("RetailerCheckoutExperience")
@@ -265,7 +279,9 @@ public class MasterOrder implements Serializable {
 
     @JsonProperty("DeliveryOptions")
     public void setDeliveryOptions(List<DeliveryOption> deliveryOptions) {
-        this.deliveryOptions = deliveryOptions;
+        if (deliveryOptions != null) {
+            this.deliveryOptions = deliveryOptions;
+        }
     }
 
     @JsonProperty("RetailerDeliveryOptions")
@@ -275,7 +291,9 @@ public class MasterOrder implements Serializable {
 
     @JsonProperty("RetailerDeliveryOptions")
     public void setRetailerDeliveryOptions(List<RetailerDeliveryOption> retailerDeliveryOptions) {
-        this.retailerDeliveryOptions = retailerDeliveryOptions;
+        if (retailerDeliveryOptions != null) {
+            this.retailerDeliveryOptions = retailerDeliveryOptions;
+        }
     }
 
     @JsonProperty("Payment")
@@ -355,7 +373,9 @@ public class MasterOrder implements Serializable {
 
     @JsonProperty("Features")
     public void setFeatures(List<Feature> features) {
-        this.features = features;
+        if (features != null) {
+            this.features = features;
+        }
     }
 
     @JsonProperty("ExpiryTimeUtc")
@@ -375,7 +395,9 @@ public class MasterOrder implements Serializable {
 
     @JsonProperty("ChargeTargets")
     public void setChargeTargets(List<ChargeTarget> chargeTargets) {
-        this.chargeTargets = chargeTargets;
+        if (chargeTargets != null) {
+            this.chargeTargets = chargeTargets;
+        }
     }
 
     @JsonProperty("FingerprintId")
@@ -405,7 +427,9 @@ public class MasterOrder implements Serializable {
 
     @JsonProperty("GdprAcceptanceHistory")
     public void setGdprAcceptanceHistory(List<GdprAcceptance> gdprAcceptanceHistory) {
-        this.gdprAcceptanceHistory = gdprAcceptanceHistory;
+        if (gdprAcceptanceHistory != null) {
+            this.gdprAcceptanceHistory = gdprAcceptanceHistory;
+        }
     }
 
     @JsonProperty("brandCode")

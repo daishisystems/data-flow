@@ -9,7 +9,6 @@ import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-
 import org.apache.beam.sdk.coders.DefaultCoder;
 import org.apache.beam.sdk.coders.SerializableCoder;
 
@@ -74,7 +73,7 @@ public class Price implements Serializable {
 
     @JsonProperty("Value")
     public void setValue(Double value) {
-        this.value = value;
+        this.value = Utils.round(value);
     }
 
     @JsonAnyGetter

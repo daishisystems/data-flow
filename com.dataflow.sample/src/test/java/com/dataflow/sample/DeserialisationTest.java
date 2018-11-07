@@ -16,7 +16,7 @@ public class DeserialisationTest {
 
     @Test
     public void masterOrderIsDeserialised() throws JsonParseException, JsonMappingException, IOException {
-        String json = getFile("order3.json");
+        String json = getFile("order.json");
         ObjectMapper mapper = new ObjectMapper();
         mapper.registerModule(new JodaModule());
         MasterOrder masterOrder = mapper.readValue(json, MasterOrder.class);

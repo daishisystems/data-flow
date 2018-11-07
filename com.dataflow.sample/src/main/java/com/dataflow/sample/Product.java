@@ -250,7 +250,9 @@ public class Product implements Serializable {
 
     @JsonProperty("MetadataItems")
     public void setMetadataItems(List<MetadataItem> metadataItems) {
-        this.metadataItems = metadataItems;
+        if (metadataItems != null) {
+            this.metadataItems = metadataItems;
+        }
     }
 
     @JsonAnyGetter

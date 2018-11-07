@@ -9,7 +9,6 @@ import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-
 import org.apache.beam.sdk.coders.DefaultCoder;
 import org.apache.beam.sdk.coders.SerializableCoder;
 
@@ -74,7 +73,7 @@ public class FxRate implements Serializable {
 
     @JsonProperty("Rate")
     public void setRate(Double rate) {
-        this.rate = rate;
+        this.rate = Utils.round(rate);
     }
 
     @JsonAnyGetter

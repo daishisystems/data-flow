@@ -78,7 +78,7 @@ public class DeliveryOptionExtended implements Serializable {
     @JsonProperty("MetadataItems")
     public void setMetadataItems(List<MetadataItem> metadataItems) {
         if (metadataItems != null) {
-            this.metadataItems = metadataItems; // FIXME Prevent NULL for all arrays, if this works ...
+            this.metadataItems = metadataItems;
         }
     }
 }
