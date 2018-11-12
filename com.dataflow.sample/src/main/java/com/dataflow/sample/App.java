@@ -71,8 +71,8 @@ public class App {
         PipelineOptions options = PipelineOptionsFactory.fromArgs(args).withValidation().create();
         Pipeline p = Pipeline.create(options); // FIXME: Add to boot-up
 
-        PCollection<String> pubSubOutput = p.apply("Read Input", PubsubIO.readStrings()
-                .fromTopic("projects/eshop-puddle/topics/checkout-dev").withTimestampAttribute("EventTimestamp"));        
+        PCollection<String> pubSubOutput = p.apply("Read Input",
+                PubsubIO.readStrings().fromTopic("{TOPIC}").withTimestampAttribute("EventTimestamp"));
 
         PCollectionTuple outputTuple = pubSubOutput.apply("Validate",
                 ParDo.of(new DoFn<String, KV<String, MasterOrder>>() {
@@ -95,13 +95,12 @@ public class App {
                         Window.<KV<String, MasterOrder>>into(Sessions.withGapDuration(Duration.standardSeconds(20))))
                 .apply("Group", GroupByKey.create());
 
-        outputTuple.get(invalidOrdersTupleTag).apply("Dead Letter Queue",
-                PubsubIO.writeStrings().to("projects/eshop-puddle/topics/checkout-dead-letter-orders-dev"));
+        outputTuple.get(invalidOrdersTupleTag).apply("Dead Letter Queue", PubsubIO.writeStrings().to("{TOPIC}"));
 
         masterOrders.apply("Summarise", ParDo.of(new OrderSummaryFn()))
                 .apply("Apply Schema", new OrderSummariesToTableRows()).apply("Save to BQ",
-                        BigQueryIO.writeTableRows().to("eshop-puddle:checkout_dev.order_summary")
-                                .withSchema(getTableSchema()).withMethod(BigQueryIO.Write.Method.STREAMING_INSERTS)
+                        BigQueryIO.writeTableRows().to("{TABLE}").withSchema(getTableSchema())
+                                .withMethod(BigQueryIO.Write.Method.STREAMING_INSERTS)
                                 .withCreateDisposition(BigQueryIO.Write.CreateDisposition.CREATE_IF_NEEDED)
                                 .withWriteDisposition(BigQueryIO.Write.WriteDisposition.WRITE_APPEND));
 
@@ -130,21 +129,17 @@ public class App {
         PCollection<String> completeOrders = processedOrdersTuple.get(completeOrdersTag).apply("Serialise Complete",
                 ParDo.of(new SerialiseMasterOrderFn()));
 
-        completeOrders.apply("Publish Complete",
-                PubsubIO.writeStrings().to("projects/eshop-puddle/topics/checkout-order-master-dev"));
+        completeOrders.apply("Publish Complete", PubsubIO.writeStrings().to("{TOPIC}"));
 
-        completeOrders.apply("Archive Complete",
-                PubsubIO.writeStrings().to("projects/eshop-puddle/topics/checkout-order-archive-dev"));
+        completeOrders.apply("Archive Complete", PubsubIO.writeStrings().to("{TOPIC}"));
 
         PCollection<String> incompleteOrders = processedOrdersTuple.get(incompleteOrdersTag)
                 .apply("Mask", new MaskOrdersFn())
                 .apply("Serialise Incomplete", ParDo.of(new SerialiseMasterOrderFn()));
 
-        incompleteOrders.apply("Publish Incomplete",
-                PubsubIO.writeStrings().to("projects/eshop-puddle/topics/checkout-order-master-dev"));
+        incompleteOrders.apply("Publish Incomplete", PubsubIO.writeStrings().to("{TOPIC}"));
 
-        incompleteOrders.apply("Archive Incomplete",
-                PubsubIO.writeStrings().to("projects/eshop-puddle/topics/checkout-order-archive-dev"));
+        incompleteOrders.apply("Archive Incomplete", PubsubIO.writeStrings().to("{TOPIC"));
 
         p.run().waitUntilFinish();
 
