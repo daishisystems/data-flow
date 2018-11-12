@@ -71,8 +71,8 @@ public class App {
         PipelineOptions options = PipelineOptionsFactory.fromArgs(args).withValidation().create();
         Pipeline p = Pipeline.create(options); // FIXME: Add to boot-up
 
-        PCollection<String> pubSubOutput = p.apply("Read Input",
-                PubsubIO.readStrings().fromTopic("{TOPIC}").withTimestampAttribute("EventTimestamp"));
+        PCollection<String> pubSubOutput = p.apply("Read Input", PubsubIO.readStrings()
+                .fromTopic("projects/project-ontario-prod/topics/checkout").withTimestampAttribute("EventTimestamp"));
 
         PCollectionTuple outputTuple = pubSubOutput.apply("Validate",
                 ParDo.of(new DoFn<String, KV<String, MasterOrder>>() {
@@ -99,8 +99,8 @@ public class App {
 
         masterOrders.apply("Summarise", ParDo.of(new OrderSummaryFn()))
                 .apply("Apply Schema", new OrderSummariesToTableRows()).apply("Save to BQ",
-                        BigQueryIO.writeTableRows().to("{TABLE}").withSchema(getTableSchema())
-                                .withMethod(BigQueryIO.Write.Method.STREAMING_INSERTS)
+                        BigQueryIO.writeTableRows().to("project-ontario-prod:checkout.order_summary")
+                                .withSchema(getTableSchema()).withMethod(BigQueryIO.Write.Method.STREAMING_INSERTS)
                                 .withCreateDisposition(BigQueryIO.Write.CreateDisposition.CREATE_IF_NEEDED)
                                 .withWriteDisposition(BigQueryIO.Write.WriteDisposition.WRITE_APPEND));
 
@@ -129,17 +129,21 @@ public class App {
         PCollection<String> completeOrders = processedOrdersTuple.get(completeOrdersTag).apply("Serialise Complete",
                 ParDo.of(new SerialiseMasterOrderFn()));
 
-        completeOrders.apply("Publish Complete", PubsubIO.writeStrings().to("{TOPIC}"));
+        completeOrders.apply("Publish Complete",
+                PubsubIO.writeStrings().to("projects/project-ontario-prod/topics/order-master"));
 
-        completeOrders.apply("Archive Complete", PubsubIO.writeStrings().to("{TOPIC}"));
+        completeOrders.apply("Archive Complete",
+                PubsubIO.writeStrings().to("projects/project-ontario-prod/topics/order-archive"));
 
         PCollection<String> incompleteOrders = processedOrdersTuple.get(incompleteOrdersTag)
                 .apply("Mask", new MaskOrdersFn())
                 .apply("Serialise Incomplete", ParDo.of(new SerialiseMasterOrderFn()));
 
-        incompleteOrders.apply("Publish Incomplete", PubsubIO.writeStrings().to("{TOPIC}"));
+        incompleteOrders.apply("Publish Incomplete",
+                PubsubIO.writeStrings().to("projects/project-ontario-prod/topics/order-master"));
 
-        incompleteOrders.apply("Archive Incomplete", PubsubIO.writeStrings().to("{TOPIC"));
+        incompleteOrders.apply("Archive Incomplete",
+                PubsubIO.writeStrings().to("projects/project-ontario-prod/topics/order-archive"));
 
         p.run().waitUntilFinish();
 
