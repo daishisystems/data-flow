@@ -1,4 +1,3 @@
-
 package com.dataflow.sample;
 
 import java.io.Serializable;
@@ -8,58 +7,56 @@ import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import org.apache.beam.sdk.coders.DefaultCoder;
 import org.apache.beam.sdk.coders.SerializableCoder;
 
-@JsonPropertyOrder({ "Type", "Active" })
 @DefaultCoder(SerializableCoder.class)
-public class Feature implements Serializable {
+public class RetailerConfirmation implements Serializable {
 
-    @JsonProperty("Type")
-    private String type;
-    @JsonProperty("Active")
-    private Boolean active;
+    @JsonProperty("Status")
+    private String status;
+    @JsonProperty("Response")
+    private RetailerConfirmationResponse response;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
-    private final static long serialVersionUID = 5340224469099643397L;
+    private final static long serialVersionUID = -3269839451027682757L;
 
     /**
      * No args constructor for use in serialization
      * 
      */
-    public Feature() {
+    public RetailerConfirmation() {
     }
 
     /**
      * 
-     * @param active
-     * @param type
+     * @param response
+     * @param status
      */
-    public Feature(String type, Boolean active) {
+    public RetailerConfirmation(String status, RetailerConfirmationResponse response) {
         super();
-        this.type = type;
-        this.active = active;
+        this.status = status;
+        this.response = response;
     }
 
-    @JsonProperty("Type")
-    public String getType() {
-        return type;
+    @JsonProperty("Status")
+    public String getStatus() {
+        return status;
     }
 
-    @JsonProperty("Type")
-    public void setType(String type) {
-        this.type = type;
+    @JsonProperty("Status")
+    public void setStatus(String status) {
+        this.status = status;
     }
 
-    @JsonProperty("Active")
-    public Boolean getActive() {
-        return active;
+    @JsonProperty("Response")
+    public RetailerConfirmationResponse getResponse() {
+        return response;
     }
 
-    @JsonProperty("Active")
-    public void setActive(Boolean active) {
-        this.active = active;
+    @JsonProperty("Response")
+    public void setResponse(RetailerConfirmationResponse response) {
+        this.response = response;
     }
 
     @JsonAnyGetter
@@ -71,5 +68,4 @@ public class Feature implements Serializable {
     public void setAdditionalProperty(String name, Object value) {
         this.additionalProperties.put(name, value);
     }
-
 }

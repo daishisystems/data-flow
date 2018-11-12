@@ -3,16 +3,12 @@ package com.dataflow.sample;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
-
 import org.apache.beam.sdk.coders.DefaultCoder;
 import org.apache.beam.sdk.coders.SerializableCoder;
-import org.joda.time.DateTime;
 
 @DefaultCoder(SerializableCoder.class)
 public class RetailerDeliveryOption implements Serializable {
-
     private static final long serialVersionUID = 4922788747114672369L;
     @JsonProperty("Title")
     private String title;
@@ -41,41 +37,43 @@ public class RetailerDeliveryOption implements Serializable {
     }
 
     @JsonProperty("EstimatedDeliveryDate")
-    private DateTime estimatedDeliveryDate;
+    private String estimatedDeliveryDate;
 
     @JsonProperty("EstimatedDeliveryDate")
-    public DateTime getEstimateddeliverydate() {
+    public String getEstimateddeliverydate() {
         return this.estimatedDeliveryDate;
     }
 
     @JsonProperty("EstimatedDeliveryDate")
-    public void setEstimateddeliverydate(DateTime estimatedDeliveryDate) {
+    public void setEstimateddeliverydate(String estimatedDeliveryDate) {
         this.estimatedDeliveryDate = estimatedDeliveryDate;
     }
 
     @JsonProperty("RetailerCurrencyDeliveryOptionPriceInfo")
-    private PriceInfo retailerCurrencyDeliveryOptionPriceInfo;
+    private RetailerCurrencyDeliveryOptionPriceInfo retailerCurrencyDeliveryOptionPriceInfo;
 
     @JsonProperty("RetailerCurrencyDeliveryOptionPriceInfo")
-    public PriceInfo getRetailercurrencydeliveryoptionpriceinfo() {
+    public RetailerCurrencyDeliveryOptionPriceInfo getRetailercurrencydeliveryoptionpriceinfo() {
         return this.retailerCurrencyDeliveryOptionPriceInfo;
     }
 
     @JsonProperty("RetailerCurrencyDeliveryOptionPriceInfo")
-    public void setRetailercurrencydeliveryoptionpriceinfo(PriceInfo retailerCurrencyDeliveryOptionPriceInfo) {
+    public void setRetailercurrencydeliveryoptionpriceinfo(
+            RetailerCurrencyDeliveryOptionPriceInfo retailerCurrencyDeliveryOptionPriceInfo) {
         this.retailerCurrencyDeliveryOptionPriceInfo = retailerCurrencyDeliveryOptionPriceInfo;
     }
 
     @JsonProperty("ShopperCurrencyDeliveryOptionPriceInfo")
-    private PriceInfo shopperCurrencyDeliveryOptionPriceInfo;
+    private RetailerCurrencyDeliveryOptionPriceInfo shopperCurrencyDeliveryOptionPriceInfo;
 
     @JsonProperty("ShopperCurrencyDeliveryOptionPriceInfo")
-    public PriceInfo getShoppercurrencydeliveryoptionpriceinfo() {
+    public RetailerCurrencyDeliveryOptionPriceInfo getShoppercurrencydeliveryoptionpriceinfo() {
         return this.shopperCurrencyDeliveryOptionPriceInfo;
     }
 
     @JsonProperty("ShopperCurrencyDeliveryOptionPriceInfo")
-    public void setShoppercurrencydeliveryoptionpriceinfo(PriceInfo shopperCurrencyDeliveryOptionPriceInfo) {
+    public void setShoppercurrencydeliveryoptionpriceinfo(
+            RetailerCurrencyDeliveryOptionPriceInfo shopperCurrencyDeliveryOptionPriceInfo) {
         this.shopperCurrencyDeliveryOptionPriceInfo = shopperCurrencyDeliveryOptionPriceInfo;
     }
 
@@ -89,6 +87,8 @@ public class RetailerDeliveryOption implements Serializable {
 
     @JsonProperty("MetadataItems")
     public void setMetadataitems(List<MetadataItem> metadataItems) {
-        this.metadataItems = metadataItems;
+        if (metadataItems != null) {
+            this.metadataItems = metadataItems;
+        }
     }
 }

@@ -36,7 +36,7 @@ public class DeliveryInput implements Serializable {
     @JsonProperty("TaxRate")
     private Double taxRate;
     @JsonProperty("OtherRate")
-    private Object otherRate;
+    private Double otherRate;
     @JsonProperty("MatchInputPrice")
     private Boolean matchInputPrice;
     @JsonIgnore
@@ -65,7 +65,7 @@ public class DeliveryInput implements Serializable {
      */
     public DeliveryInput(Integer inputPriceId, Integer preOrderSecurityModelId, Integer inputPriceTypeId,
             Integer inputPriceSourceId, Boolean canOverrideShippingPrice, Integer shippingOverrideInputPriceTypeId,
-            Double dutyRate, Double taxRate, Object otherRate, Boolean matchInputPrice) {
+            Double dutyRate, Double taxRate, Double otherRate, Boolean matchInputPrice) {
         super();
         this.inputPriceId = inputPriceId;
         this.preOrderSecurityModelId = preOrderSecurityModelId;
@@ -146,7 +146,7 @@ public class DeliveryInput implements Serializable {
 
     @JsonProperty("DutyRate")
     public void setDutyRate(Double dutyRate) {
-        this.dutyRate = dutyRate;
+        this.dutyRate = Utils.round(dutyRate);
     }
 
     @JsonProperty("TaxRate")
@@ -156,17 +156,17 @@ public class DeliveryInput implements Serializable {
 
     @JsonProperty("TaxRate")
     public void setTaxRate(Double taxRate) {
-        this.taxRate = taxRate;
+        this.taxRate = Utils.round(taxRate);
     }
 
     @JsonProperty("OtherRate")
-    public Object getOtherRate() {
+    public Double getOtherRate() {
         return otherRate;
     }
 
     @JsonProperty("OtherRate")
-    public void setOtherRate(Object otherRate) {
-        this.otherRate = otherRate;
+    public void setOtherRate(Double otherRate) {
+        this.otherRate = Utils.round(otherRate);
     }
 
     @JsonProperty("MatchInputPrice")

@@ -27,13 +27,13 @@ public class Calculation implements Serializable {
     @JsonProperty("IsAccurateCalculationRequired")
     private Boolean isAccurateCalculationRequired;
     @JsonProperty("IsReverseAccurateCalculationRequired")
-    private Object isReverseAccurateCalculationRequired;
+    private Boolean isReverseAccurateCalculationRequired;
     @JsonProperty("IsReverseEstimatedCalculationRequired")
-    private Object isReverseEstimatedCalculationRequired;
+    private Boolean isReverseEstimatedCalculationRequired;
     @JsonProperty("IsReverseTaxesCalculationRequired")
-    private Object isReverseTaxesCalculationRequired;
+    private Boolean isReverseTaxesCalculationRequired;
     @JsonProperty("IsReverseDutyCalculationRequired")
-    private Object isReverseDutyCalculationRequired;
+    private Boolean isReverseDutyCalculationRequired;
     @JsonProperty("EstimatedDutyRate")
     private Double estimatedDutyRate;
     @JsonProperty("EstimatedTaxRate")
@@ -41,7 +41,7 @@ public class Calculation implements Serializable {
     @JsonProperty("BrandCountryMarkupId")
     private Integer brandCountryMarkupId;
     @JsonProperty("MarkupPercentage")
-    private Object markupPercentage;
+    private Double markupPercentage;
     @JsonProperty("PricingGroupId")
     private Integer pricingGroupId;
     @JsonProperty("CustomsCalculationType")
@@ -74,10 +74,10 @@ public class Calculation implements Serializable {
      * @param estimatedDutyRate
      */
     public Calculation(Integer brandCountryCalculationId, Integer dutyTaxCalculationModelId,
-            Boolean isAccurateCalculationRequired, Object isReverseAccurateCalculationRequired,
-            Object isReverseEstimatedCalculationRequired, Object isReverseTaxesCalculationRequired,
-            Object isReverseDutyCalculationRequired, Double estimatedDutyRate, Double estimatedTaxRate,
-            Integer brandCountryMarkupId, Object markupPercentage, Integer pricingGroupId,
+            Boolean isAccurateCalculationRequired, Boolean isReverseAccurateCalculationRequired,
+            Boolean isReverseEstimatedCalculationRequired, Boolean isReverseTaxesCalculationRequired,
+            Boolean isReverseDutyCalculationRequired, Double estimatedDutyRate, Double estimatedTaxRate,
+            Integer brandCountryMarkupId, Double markupPercentage, Integer pricingGroupId,
             String customsCalculationType) {
         super();
         this.brandCountryCalculationId = brandCountryCalculationId;
@@ -126,42 +126,42 @@ public class Calculation implements Serializable {
     }
 
     @JsonProperty("IsReverseAccurateCalculationRequired")
-    public Object getIsReverseAccurateCalculationRequired() {
+    public Boolean getIsReverseAccurateCalculationRequired() {
         return isReverseAccurateCalculationRequired;
     }
 
     @JsonProperty("IsReverseAccurateCalculationRequired")
-    public void setIsReverseAccurateCalculationRequired(Object isReverseAccurateCalculationRequired) {
+    public void setIsReverseAccurateCalculationRequired(Boolean isReverseAccurateCalculationRequired) {
         this.isReverseAccurateCalculationRequired = isReverseAccurateCalculationRequired;
     }
 
     @JsonProperty("IsReverseEstimatedCalculationRequired")
-    public Object getIsReverseEstimatedCalculationRequired() {
+    public Boolean getIsReverseEstimatedCalculationRequired() {
         return isReverseEstimatedCalculationRequired;
     }
 
     @JsonProperty("IsReverseEstimatedCalculationRequired")
-    public void setIsReverseEstimatedCalculationRequired(Object isReverseEstimatedCalculationRequired) {
+    public void setIsReverseEstimatedCalculationRequired(Boolean isReverseEstimatedCalculationRequired) {
         this.isReverseEstimatedCalculationRequired = isReverseEstimatedCalculationRequired;
     }
 
     @JsonProperty("IsReverseTaxesCalculationRequired")
-    public Object getIsReverseTaxesCalculationRequired() {
+    public Boolean getIsReverseTaxesCalculationRequired() {
         return isReverseTaxesCalculationRequired;
     }
 
     @JsonProperty("IsReverseTaxesCalculationRequired")
-    public void setIsReverseTaxesCalculationRequired(Object isReverseTaxesCalculationRequired) {
+    public void setIsReverseTaxesCalculationRequired(Boolean isReverseTaxesCalculationRequired) {
         this.isReverseTaxesCalculationRequired = isReverseTaxesCalculationRequired;
     }
 
     @JsonProperty("IsReverseDutyCalculationRequired")
-    public Object getIsReverseDutyCalculationRequired() {
+    public Boolean getIsReverseDutyCalculationRequired() {
         return isReverseDutyCalculationRequired;
     }
 
     @JsonProperty("IsReverseDutyCalculationRequired")
-    public void setIsReverseDutyCalculationRequired(Object isReverseDutyCalculationRequired) {
+    public void setIsReverseDutyCalculationRequired(Boolean isReverseDutyCalculationRequired) {
         this.isReverseDutyCalculationRequired = isReverseDutyCalculationRequired;
     }
 
@@ -182,7 +182,7 @@ public class Calculation implements Serializable {
 
     @JsonProperty("EstimatedTaxRate")
     public void setEstimatedTaxRate(Double estimatedTaxRate) {
-        this.estimatedTaxRate = estimatedTaxRate;
+        this.estimatedTaxRate = Utils.round(estimatedTaxRate);
     }
 
     @JsonProperty("BrandCountryMarkupId")
@@ -196,13 +196,13 @@ public class Calculation implements Serializable {
     }
 
     @JsonProperty("MarkupPercentage")
-    public Object getMarkupPercentage() {
+    public Double getMarkupPercentage() {
         return markupPercentage;
     }
 
     @JsonProperty("MarkupPercentage")
-    public void setMarkupPercentage(Object markupPercentage) {
-        this.markupPercentage = markupPercentage;
+    public void setMarkupPercentage(Double markupPercentage) {
+        this.markupPercentage = Utils.round(markupPercentage);
     }
 
     @JsonProperty("PricingGroupId")

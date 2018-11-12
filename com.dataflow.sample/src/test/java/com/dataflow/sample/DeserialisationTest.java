@@ -16,12 +16,12 @@ public class DeserialisationTest {
 
     @Test
     public void masterOrderIsDeserialised() throws JsonParseException, JsonMappingException, IOException {
-        String json = getFile("order3.json");
+        String json = getFile("order.json");
         ObjectMapper mapper = new ObjectMapper();
         mapper.registerModule(new JodaModule());
         MasterOrder masterOrder = mapper.readValue(json, MasterOrder.class);
-        double expected = 0.106;
-        assertEquals(Double.valueOf(expected), masterOrder.getPricing().getCalculation().getEstimatedDutyRate());
+        double expected = 0.0;
+        assertEquals(Double.valueOf(expected), masterOrder.getOrderItems().get(0).getDutyRate());
     }
 
     private String getFile(String fileName) {

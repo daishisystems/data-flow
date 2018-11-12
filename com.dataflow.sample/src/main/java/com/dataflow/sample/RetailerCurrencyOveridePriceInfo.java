@@ -9,7 +9,6 @@ import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-
 import org.apache.beam.sdk.coders.DefaultCoder;
 import org.apache.beam.sdk.coders.SerializableCoder;
 
@@ -111,13 +110,13 @@ public class RetailerCurrencyOveridePriceInfo implements Serializable {
     }
 
     @JsonProperty("DiscountPercentage")
-    public Object getDiscountPercentage() {
+    public Double getDiscountPercentage() {
         return discountPercentage;
     }
 
     @JsonProperty("DiscountPercentage")
     public void setDiscountPercentage(Double discountPercentage) {
-        this.discountPercentage = discountPercentage;
+        this.discountPercentage = Utils.round(discountPercentage);
     }
 
     @JsonAnyGetter

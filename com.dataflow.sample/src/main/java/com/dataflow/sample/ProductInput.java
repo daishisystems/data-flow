@@ -9,7 +9,6 @@ import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-
 import org.apache.beam.sdk.coders.DefaultCoder;
 import org.apache.beam.sdk.coders.SerializableCoder;
 
@@ -36,7 +35,7 @@ public class ProductInput implements Serializable {
     @JsonProperty("TaxRate")
     private Double taxRate;
     @JsonProperty("OtherRate")
-    private Object otherRate;
+    private Double otherRate;
     @JsonProperty("MatchInputPrice")
     private Boolean matchInputPrice;
     @JsonIgnore
@@ -65,7 +64,7 @@ public class ProductInput implements Serializable {
      */
     public ProductInput(Integer inputPriceId, Integer preOrderSecurityModelId, Integer inputPriceTypeId,
             Integer inputPriceSourceId, Boolean canOverrideCatalogPrice, Integer catalogOverrideInputPriceTypeId,
-            Double dutyRate, Double taxRate, Object otherRate, Boolean matchInputPrice) {
+            Double dutyRate, Double taxRate, Double otherRate, Boolean matchInputPrice) {
         super();
         this.inputPriceId = inputPriceId;
         this.preOrderSecurityModelId = preOrderSecurityModelId;
@@ -146,7 +145,7 @@ public class ProductInput implements Serializable {
 
     @JsonProperty("DutyRate")
     public void setDutyRate(Double dutyRate) {
-        this.dutyRate = dutyRate;
+        this.dutyRate = Utils.round(dutyRate);
     }
 
     @JsonProperty("TaxRate")
@@ -156,17 +155,17 @@ public class ProductInput implements Serializable {
 
     @JsonProperty("TaxRate")
     public void setTaxRate(Double taxRate) {
-        this.taxRate = taxRate;
+        this.taxRate = Utils.round(taxRate);
     }
 
     @JsonProperty("OtherRate")
-    public Object getOtherRate() {
+    public Double getOtherRate() {
         return otherRate;
     }
 
     @JsonProperty("OtherRate")
-    public void setOtherRate(Object otherRate) {
-        this.otherRate = otherRate;
+    public void setOtherRate(Double otherRate) {
+        this.otherRate = Utils.round(otherRate);
     }
 
     @JsonProperty("MatchInputPrice")

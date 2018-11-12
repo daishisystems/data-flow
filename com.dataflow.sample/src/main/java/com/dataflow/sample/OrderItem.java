@@ -1,4 +1,3 @@
-
 package com.dataflow.sample;
 
 import java.io.Serializable;
@@ -11,7 +10,6 @@ import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-
 import org.apache.beam.sdk.coders.DefaultCoder;
 import org.apache.beam.sdk.coders.SerializableCoder;
 
@@ -36,11 +34,11 @@ public class OrderItem implements Serializable {
     @JsonProperty("WeightUnit")
     private Integer weightUnit;
     @JsonProperty("CountryOfOriginIso")
-    private Object countryOfOriginIso;
+    private String countryOfOriginIso;
     @JsonProperty("HsCode")
     private String hsCode;
     @JsonProperty("EstimatedDeliveryDate")
-    private String estimatedDeliveryDate; // FIXME: Use String for all dates to avoid Unix timestamp issue?
+    private String estimatedDeliveryDate;
     @JsonProperty("Quantity")
     private Integer quantity;
     @JsonProperty("Product")
@@ -87,7 +85,7 @@ public class OrderItem implements Serializable {
      * @param dutyRate
      */
     public OrderItem(List<OrderArticle> orderArticles, Boolean available, CalculationRates calculationRates,
-            Double vatRate, Double dutyRate, Double weight, Integer weightUnit, Object countryOfOriginIso,
+            Double vatRate, Double dutyRate, Double weight, Integer weightUnit, String countryOfOriginIso,
             String hsCode, String estimatedDeliveryDate, Integer quantity, Product product, String lineItemId,
             String cartGrouping, List<MetadataItem> metadataItems, Boolean isCountryDefault,
             List<ChargeTarget> chargeTargets) {
@@ -118,7 +116,9 @@ public class OrderItem implements Serializable {
 
     @JsonProperty("OrderArticles")
     public void setOrderArticles(List<OrderArticle> orderArticles) {
-        this.orderArticles = orderArticles;
+        if (orderArticles != null) {
+            this.orderArticles = orderArticles;
+        }
     }
 
     @JsonProperty("Available")
@@ -148,7 +148,7 @@ public class OrderItem implements Serializable {
 
     @JsonProperty("VatRate")
     public void setVatRate(Double vatRate) {
-        this.vatRate = vatRate;
+        this.vatRate = Utils.round(vatRate);
     }
 
     @JsonProperty("DutyRate")
@@ -158,7 +158,7 @@ public class OrderItem implements Serializable {
 
     @JsonProperty("DutyRate")
     public void setDutyRate(Double dutyRate) {
-        this.dutyRate = dutyRate;
+        this.dutyRate = Utils.round(dutyRate);
     }
 
     @JsonProperty("Weight")
@@ -168,7 +168,7 @@ public class OrderItem implements Serializable {
 
     @JsonProperty("Weight")
     public void setWeight(Double weight) {
-        this.weight = weight;
+        this.weight = Utils.round(weight);
     }
 
     @JsonProperty("WeightUnit")
@@ -182,12 +182,12 @@ public class OrderItem implements Serializable {
     }
 
     @JsonProperty("CountryOfOriginIso")
-    public Object getCountryOfOriginIso() {
+    public String getCountryOfOriginIso() {
         return countryOfOriginIso;
     }
 
     @JsonProperty("CountryOfOriginIso")
-    public void setCountryOfOriginIso(Object countryOfOriginIso) {
+    public void setCountryOfOriginIso(String countryOfOriginIso) {
         this.countryOfOriginIso = countryOfOriginIso;
     }
 
@@ -258,7 +258,9 @@ public class OrderItem implements Serializable {
 
     @JsonProperty("MetadataItems")
     public void setMetadataItems(List<MetadataItem> metadataItems) {
-        this.metadataItems = metadataItems;
+        if (metadataItems != null) {
+            this.metadataItems = metadataItems;
+        }
     }
 
     @JsonProperty("IsCountryDefault")
@@ -278,7 +280,9 @@ public class OrderItem implements Serializable {
 
     @JsonProperty("ChargeTargets")
     public void setChargeTargets(List<ChargeTarget> chargeTargets) {
-        this.chargeTargets = chargeTargets;
+        if (chargeTargets != null) {
+            this.chargeTargets = chargeTargets;
+        }
     }
 
     @JsonAnyGetter
