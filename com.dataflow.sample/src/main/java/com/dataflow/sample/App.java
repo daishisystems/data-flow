@@ -95,7 +95,8 @@ public class App {
                         Window.<KV<String, MasterOrder>>into(Sessions.withGapDuration(Duration.standardSeconds(20))))
                 .apply("Group", GroupByKey.create());
 
-        outputTuple.get(invalidOrdersTupleTag).apply("Dead Letter Queue", PubsubIO.writeStrings().to("{TOPIC}"));
+        outputTuple.get(invalidOrdersTupleTag).apply("Dead Letter Queue",
+                PubsubIO.writeStrings().to("projects/project-ontario-prod/topics/dead-letter-orders"));
 
         masterOrders.apply("Summarise", ParDo.of(new OrderSummaryFn()))
                 .apply("Apply Schema", new OrderSummariesToTableRows()).apply("Save to BQ",
