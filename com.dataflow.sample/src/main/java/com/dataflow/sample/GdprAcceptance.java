@@ -1,11 +1,9 @@
 package com.dataflow.sample;
 
 import java.io.Serializable;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.apache.beam.sdk.coders.DefaultCoder;
 import org.apache.beam.sdk.coders.SerializableCoder;
-import org.joda.time.DateTime;
 
 @DefaultCoder(SerializableCoder.class)
 public class GdprAcceptance implements Serializable {
@@ -15,7 +13,7 @@ public class GdprAcceptance implements Serializable {
     @JsonProperty("Accepted")
     boolean accepted;
     @JsonProperty("Date")
-    DateTime date;
+    String date;
 
     @JsonProperty("Accepted")
     public boolean getAccepted() {
@@ -28,12 +26,12 @@ public class GdprAcceptance implements Serializable {
     }
 
     @JsonProperty("Date")
-    public DateTime getDate() {
+    public String getDate() {
         return this.date;
     }
 
     @JsonProperty("Date")
-    public void setDate(DateTime date) { // FIXME: Seems to be converted to Unix. See Outlook task
+    public void setDate(String date) {
         this.date = date;
     }
 

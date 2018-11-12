@@ -7,7 +7,6 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.apache.beam.sdk.coders.DefaultCoder;
 import org.apache.beam.sdk.coders.SerializableCoder;
-import org.joda.time.DateTime;
 
 @DefaultCoder(SerializableCoder.class)
 public class DeliveryOptionExtended implements Serializable {
@@ -15,7 +14,7 @@ public class DeliveryOptionExtended implements Serializable {
     @JsonProperty("DeliveryOption")
     private String deliveryOption;
     @JsonProperty("EstimatedDeliveryDate")
-    private DateTime estimatedDeliveryDate;
+    private String estimatedDeliveryDate;
     @JsonProperty("RetailerCurrencyOveridePriceInfo")
     private RetailerCurrencyOveridePriceInfo retailerCurrencyOveridePriceInfo;
     @JsonProperty("ShopperCurrencyOveridePriceInfo")
@@ -42,12 +41,12 @@ public class DeliveryOptionExtended implements Serializable {
     }
 
     @JsonProperty("EstimatedDeliveryDate")
-    public DateTime getEstimatedDeliveryDate() {
+    public String getEstimatedDeliveryDate() {
         return estimatedDeliveryDate;
     }
 
     @JsonProperty("EstimatedDeliveryDate")
-    public void setEstimatedDeliveryDate(DateTime estimatedDeliveryDate) {
+    public void setEstimatedDeliveryDate(String estimatedDeliveryDate) {
         this.estimatedDeliveryDate = estimatedDeliveryDate;
     }
 
@@ -79,7 +78,7 @@ public class DeliveryOptionExtended implements Serializable {
     @JsonProperty("MetadataItems")
     public void setMetadataItems(List<MetadataItem> metadataItems) {
         if (metadataItems != null) {
-            this.metadataItems = metadataItems; // FIXME Prevent NULL for all arrays, if this works ...
+            this.metadataItems = metadataItems;
         }
     }
 }

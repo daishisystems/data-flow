@@ -23,9 +23,9 @@ public class Display implements Serializable {
     @JsonProperty("ProductDisplay")
     private ProductDisplay productDisplay;
     @JsonProperty("DutyAndTaxDisplay1")
-    private Object dutyAndTaxDisplay1;
+    private DutyAndTaxDisplay dutyAndTaxDisplay1;
     @JsonProperty("DutyAndTaxDisplay2")
-    private Object dutyAndTaxDisplay2;
+    private DutyAndTaxDisplay dutyAndTaxDisplay2;
     @JsonProperty("DeliveryDisplay")
     private DeliveryDisplay deliveryDisplay;
     @JsonIgnore
@@ -47,8 +47,9 @@ public class Display implements Serializable {
      * @param brandCountryDisplayModelId
      * @param productDisplay
      */
-    public Display(Integer brandCountryDisplayModelId, ProductDisplay productDisplay, Object dutyAndTaxDisplay1,
-            Object dutyAndTaxDisplay2, DeliveryDisplay deliveryDisplay) {
+    public Display(Integer brandCountryDisplayModelId, ProductDisplay productDisplay,
+            DutyAndTaxDisplay dutyAndTaxDisplay1, DutyAndTaxDisplay dutyAndTaxDisplay2,
+            DeliveryDisplay deliveryDisplay) {
         super();
         this.brandCountryDisplayModelId = brandCountryDisplayModelId;
         this.productDisplay = productDisplay;
@@ -78,22 +79,22 @@ public class Display implements Serializable {
     }
 
     @JsonProperty("DutyAndTaxDisplay1")
-    public Object getDutyAndTaxDisplay1() {
+    public DutyAndTaxDisplay getDutyAndTaxDisplay1() {
         return dutyAndTaxDisplay1;
     }
 
     @JsonProperty("DutyAndTaxDisplay1")
-    public void setDutyAndTaxDisplay1(Object dutyAndTaxDisplay1) {
+    public void setDutyAndTaxDisplay1(DutyAndTaxDisplay dutyAndTaxDisplay1) {
         this.dutyAndTaxDisplay1 = dutyAndTaxDisplay1;
     }
 
     @JsonProperty("DutyAndTaxDisplay2")
-    public Object getDutyAndTaxDisplay2() {
+    public DutyAndTaxDisplay getDutyAndTaxDisplay2() {
         return dutyAndTaxDisplay2;
     }
 
     @JsonProperty("DutyAndTaxDisplay2")
-    public void setDutyAndTaxDisplay2(Object dutyAndTaxDisplay2) {
+    public void setDutyAndTaxDisplay2(DutyAndTaxDisplay dutyAndTaxDisplay2) {
         this.dutyAndTaxDisplay2 = dutyAndTaxDisplay2;
     }
 

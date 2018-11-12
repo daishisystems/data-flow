@@ -78,7 +78,7 @@ public class CalculationRates implements Serializable {
 
     @JsonProperty("ItemVatRateApplied")
     public void setItemVatRateApplied(Double itemVatRateApplied) {
-        this.itemVatRateApplied = itemVatRateApplied;
+        this.itemVatRateApplied = Utils.round(itemVatRateApplied);
     }
 
     @JsonProperty("DeliveryVatRateApplied")
@@ -88,7 +88,7 @@ public class CalculationRates implements Serializable {
 
     @JsonProperty("DeliveryVatRateApplied")
     public void setDeliveryVatRateApplied(Double deliveryVatRateApplied) {
-        this.deliveryVatRateApplied = deliveryVatRateApplied;
+        this.deliveryVatRateApplied = Utils.round(deliveryVatRateApplied);
     }
 
     @JsonProperty("ItemDutyRateApplied")
@@ -98,7 +98,7 @@ public class CalculationRates implements Serializable {
 
     @JsonProperty("ItemDutyRateApplied")
     public void setItemDutyRateApplied(Double itemDutyRateApplied) {
-        this.itemDutyRateApplied = itemDutyRateApplied;
+        this.itemDutyRateApplied = Utils.round(itemDutyRateApplied);
     }
 
     @JsonProperty("DeliveryDutyRateApplied")
@@ -108,7 +108,7 @@ public class CalculationRates implements Serializable {
 
     @JsonProperty("DeliveryDutyRateApplied")
     public void setDeliveryDutyRateApplied(Double deliveryDutyRateApplied) {
-        this.deliveryDutyRateApplied = deliveryDutyRateApplied;
+        this.deliveryDutyRateApplied = Utils.round(deliveryDutyRateApplied);
     }
 
     @JsonProperty("ItemFeeRateApplied")
@@ -118,7 +118,7 @@ public class CalculationRates implements Serializable {
 
     @JsonProperty("ItemFeeRateApplied")
     public void setItemFeeRateApplied(Double itemFeeRateApplied) {
-        this.itemFeeRateApplied = itemFeeRateApplied;
+        this.itemFeeRateApplied = Utils.round(itemFeeRateApplied);
     }
 
     @JsonProperty("DeliveryFeeRateApplied")
@@ -128,7 +128,7 @@ public class CalculationRates implements Serializable {
 
     @JsonProperty("DeliveryFeeRateApplied")
     public void setDeliveryFeeRateApplied(Double deliveryFeeRateApplied) {
-        this.deliveryFeeRateApplied = deliveryFeeRateApplied;
+        this.deliveryFeeRateApplied = Utils.round(deliveryFeeRateApplied);
     }
 
     @JsonProperty("ItemReverseCalculationRate")
@@ -138,7 +138,7 @@ public class CalculationRates implements Serializable {
 
     @JsonProperty("ItemReverseCalculationRate")
     public void setItemReverseCalculationRate(Double itemReverseCalculationRate) {
-        this.itemReverseCalculationRate = itemReverseCalculationRate;
+        this.itemReverseCalculationRate = Utils.round(itemReverseCalculationRate);
     }
 
     @JsonProperty("DeliveryReverseCalculationRate")
@@ -148,7 +148,7 @@ public class CalculationRates implements Serializable {
 
     @JsonProperty("DeliveryReverseCalculationRate")
     public void setDeliveryReverseCalculationRate(Double deliveryReverseCalculationRate) {
-        this.deliveryReverseCalculationRate = deliveryReverseCalculationRate;
+        this.deliveryReverseCalculationRate = Utils.round(deliveryReverseCalculationRate);
     }
 
     @JsonAnyGetter

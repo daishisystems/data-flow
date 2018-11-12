@@ -9,7 +9,6 @@ import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-
 import org.apache.beam.sdk.coders.DefaultCoder;
 import org.apache.beam.sdk.coders.SerializableCoder;
 
@@ -28,7 +27,7 @@ public class ShopperCurrencyProductPriceInfo implements Serializable {
     @JsonProperty("BeforeDiscount")
     private BeforeDiscount beforeDiscount;
     @JsonProperty("DiscountPercentage")
-    private Object discountPercentage;
+    private Double discountPercentage;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
     private final static long serialVersionUID = 5493994861205368742L;
@@ -50,7 +49,7 @@ public class ShopperCurrencyProductPriceInfo implements Serializable {
      * @param discountAmount
      */
     public ShopperCurrencyProductPriceInfo(String title, String description, Price price, DiscountAmount discountAmount,
-            BeforeDiscount beforeDiscount, Object discountPercentage) {
+            BeforeDiscount beforeDiscount, Double discountPercentage) {
         super();
         this.title = title;
         this.description = description;
@@ -111,13 +110,13 @@ public class ShopperCurrencyProductPriceInfo implements Serializable {
     }
 
     @JsonProperty("DiscountPercentage")
-    public Object getDiscountPercentage() {
+    public Double getDiscountPercentage() {
         return discountPercentage;
     }
 
     @JsonProperty("DiscountPercentage")
-    public void setDiscountPercentage(Object discountPercentage) {
-        this.discountPercentage = discountPercentage;
+    public void setDiscountPercentage(Double discountPercentage) {
+        this.discountPercentage = Utils.round(discountPercentage);
     }
 
     @JsonAnyGetter

@@ -74,7 +74,7 @@ public class BeforeDiscount implements Serializable {
 
     @JsonProperty("Value")
     public void setValue(Double value) {
-        this.value = value;
+        this.value = Utils.round(value);
     }
 
     @JsonAnyGetter

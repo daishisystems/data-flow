@@ -23,7 +23,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.joda.JodaModule;
 import com.google.api.services.bigquery.model.TableFieldSchema;
@@ -50,23 +49,30 @@ import org.apache.beam.sdk.io.gcp.bigquery.BigQueryIO;
 import org.apache.beam.sdk.io.gcp.pubsub.PubsubIO;
 
 public class App {
+    private static final ObjectMapper mapper = new ObjectMapper();
     private static final Logger LOG = LoggerFactory.getLogger(App.class);
 
     public static void main(String[] args) {
-        PipelineOptions options = PipelineOptionsFactory.fromArgs(args).withValidation().create();
-        Pipeline p = Pipeline.create(options);
-
-        PCollection<String> pubSubOutput = p.apply("Read Input", PubsubIO.readStrings()
-                .fromTopic("projects/project-ontario-prod/topics/checkout").withTimestampAttribute("EventTimestamp"));
-
-        final TupleTag<KV<String, MasterOrder>> successTag = new TupleTag<KV<String, MasterOrder>>() {
-
+        final TupleTag<KV<String, MasterOrder>> validOrdersTupleTag = new TupleTag<KV<String, MasterOrder>>() {
             private static final long serialVersionUID = 5729779425621385553L;
         };
-        final TupleTag<String> deadLetterTag = new TupleTag<String>() {
-
+        final TupleTag<String> invalidOrdersTupleTag = new TupleTag<String>() {
             private static final long serialVersionUID = -3414994155123840086L;
         };
+        final TupleTag<MasterOrder> completeOrdersTag = new TupleTag<MasterOrder>() {
+            private static final long serialVersionUID = -8287090181826227743L;
+        };
+        final TupleTag<MasterOrder> incompleteOrdersTag = new TupleTag<MasterOrder>() {
+            private static final long serialVersionUID = 6238727806361931139L;
+        };
+
+        mapper.registerModule(new JodaModule());
+
+        PipelineOptions options = PipelineOptionsFactory.fromArgs(args).withValidation().create();
+        Pipeline p = Pipeline.create(options); // FIXME: Add to boot-up
+
+        PCollection<String> pubSubOutput = p.apply("Read Input",
+                PubsubIO.readStrings().fromTopic("{TOPIC}").withTimestampAttribute("EventTimestamp"));
 
         PCollectionTuple outputTuple = pubSubOutput.apply("Validate",
                 ParDo.of(new DoFn<String, KV<String, MasterOrder>>() {
@@ -75,30 +81,74 @@ public class App {
                     @ProcessElement
                     public void processElement(ProcessContext c) {
                         try {
-                            ObjectMapper mapper = new ObjectMapper(); // FIXME: Single reference only
-                            mapper.registerModule(new JodaModule());
                             MasterOrder masterOrder = mapper.readValue(c.element(), MasterOrder.class);
                             c.output(KV.of(masterOrder.getCorrelationId(), masterOrder));
                         } catch (Exception e) {
-                            LOG.error("Failed to process input {} -- adding to dead letter file", c.element(), e);
-                            c.output(deadLetterTag, c.element());
+                            LOG.error(e.getMessage());
+                            c.output(invalidOrdersTupleTag, c.element());
                         }
                     }
-                }).withOutputTags(successTag, TupleTagList.of(deadLetterTag)));
+                }).withOutputTags(validOrdersTupleTag, TupleTagList.of(invalidOrdersTupleTag)));
 
-        PCollection<KV<String, MasterOrder>> success = outputTuple.get(successTag);
+        PCollection<KV<String, Iterable<MasterOrder>>> masterOrders = outputTuple.get(validOrdersTupleTag)
+                .apply("Window",
+                        Window.<KV<String, MasterOrder>>into(Sessions.withGapDuration(Duration.standardSeconds(20))))
+                .apply("Group", GroupByKey.create());
 
-        PCollection<KV<String, MasterOrder>> orders = success.apply("Session Window",
-                Window.<KV<String, MasterOrder>>into(Sessions.withGapDuration(Duration.standardMinutes(20))));
+        outputTuple.get(invalidOrdersTupleTag).apply("Dead Letter Queue", PubsubIO.writeStrings().to("{TOPIC}"));
 
-        PCollection<KV<String, Iterable<MasterOrder>>> groupedOrders = orders.apply("Group", GroupByKey.create());
+        masterOrders.apply("Summarise", ParDo.of(new OrderSummaryFn()))
+                .apply("Apply Schema", new OrderSummariesToTableRows()).apply("Save to BQ",
+                        BigQueryIO.writeTableRows().to("{TABLE}").withSchema(getTableSchema())
+                                .withMethod(BigQueryIO.Write.Method.STREAMING_INSERTS)
+                                .withCreateDisposition(BigQueryIO.Write.CreateDisposition.CREATE_IF_NEEDED)
+                                .withWriteDisposition(BigQueryIO.Write.WriteDisposition.WRITE_APPEND));
 
-        PCollection<OrderSummary> orderSummaries = groupedOrders.apply("Summarise", ParDo.of(new OrderSummaryFn()));
+        PCollectionTuple processedOrdersTuple = masterOrders.apply("Analyse",
+                ParDo.of(new DoFn<KV<String, Iterable<MasterOrder>>, MasterOrder>() {
+                    private static final long serialVersionUID = -4644201311299503730L;
+                    final String COMPLETE_EVENT_NAME = "CompleteOrder";
 
+                    @ProcessElement
+                    public void processElement(ProcessContext c) throws Exception {
+                        Iterable<MasterOrder> iterableOrders = c.element().getValue();
+                        List<MasterOrder> orders = OrderSummary.sortOrders(iterableOrders);
+                        boolean orderIsComplete = OrderSummary.orderIsComplete(orders, COMPLETE_EVENT_NAME);
+                        if (orderIsComplete) {
+                            for (MasterOrder masterOrder : orders) {
+                                c.output(completeOrdersTag, masterOrder);
+                            }
+                        } else {
+                            for (MasterOrder masterOrder : orders) {
+                                c.output(incompleteOrdersTag, masterOrder);
+                            }
+                        }
+                    }
+                }).withOutputTags(completeOrdersTag, TupleTagList.of(incompleteOrdersTag)));
+
+        PCollection<String> completeOrders = processedOrdersTuple.get(completeOrdersTag).apply("Serialise Complete",
+                ParDo.of(new SerialiseMasterOrderFn()));
+
+        completeOrders.apply("Publish Complete", PubsubIO.writeStrings().to("{TOPIC}"));
+
+        completeOrders.apply("Archive Complete", PubsubIO.writeStrings().to("{TOPIC}"));
+
+        PCollection<String> incompleteOrders = processedOrdersTuple.get(incompleteOrdersTag)
+                .apply("Mask", new MaskOrdersFn())
+                .apply("Serialise Incomplete", ParDo.of(new SerialiseMasterOrderFn()));
+
+        incompleteOrders.apply("Publish Incomplete", PubsubIO.writeStrings().to("{TOPIC}"));
+
+        incompleteOrders.apply("Archive Incomplete", PubsubIO.writeStrings().to("{TOPIC"));
+
+        p.run().waitUntilFinish();
+
+        // FIXME: Add toString, Equals methods to all ...
+    }
+
+    private static TableSchema getTableSchema() {
         List<TableFieldSchema> fields = new ArrayList<>();
-        fields.add(new TableFieldSchema().setName("OrderNumber").setType("STRING")); // todo: Validate order schema ->
-                                                                                     // write to storage, redact in
-                                                                                     // memory
+        fields.add(new TableFieldSchema().setName("OrderNumber").setType("STRING"));
         fields.add(new TableFieldSchema().setName("CorrelationId").setType("STRING"));
         fields.add(new TableFieldSchema().setName("MinTimeDelay").setType("INT64"));
         fields.add(new TableFieldSchema().setName("AvgTimeDelay").setType("INT64"));
@@ -116,56 +166,8 @@ public class App {
         fields.add(new TableFieldSchema().setName("UserAgent").setType("STRING"));
         fields.add(new TableFieldSchema().setName("Country").setType("STRING"));
         fields.add(new TableFieldSchema().setName("UnitsPerOrder").setType("INT64"));
-        TableSchema schema = new TableSchema().setFields(fields);
-
-        orderSummaries.apply("Apply Schema", new OrderSummariesToTableRows()).apply("Save to BQ",
-                BigQueryIO.writeTableRows().to("project-ontario-prod:checkout.order_summary").withSchema(schema)
-                        .withCreateDisposition(BigQueryIO.Write.CreateDisposition.CREATE_IF_NEEDED)
-                        .withWriteDisposition(BigQueryIO.Write.WriteDisposition.WRITE_APPEND));
-
-        // FIXME: Test throughput speed by serialising order from C# and publishing.
-        // Otherwise no Timestamp is set
-
-        // FIXME: Add toString, Equals methods to all ...
-
-        outputTuple.get(deadLetterTag).apply("Dead Letter Queue", // todo: redact these using DLP
-                PubsubIO.writeStrings().to("projects/project-ontario-prod/topics/dead-letter-orders"));
-
-        // FIXME: Window duration -> 20 minutes
-
-        PCollectionTuple processedOrdersTuple = groupedOrders.apply("Analyse", ParDo.of(new OrderProcessingFn())
-                .withOutputTags(completeOrdersTag, TupleTagList.of(incompleteOrdersTag)));
-
-        PCollection<MasterOrder> completeOrders = processedOrdersTuple.get(completeOrdersTag);
-        PCollection<MasterOrder> incompleteOrders = processedOrdersTuple.get(incompleteOrdersTag);
-
-        PCollection<String> serialisedCompleteOrders = completeOrders.apply("Serialise Complete",
-                ParDo.of(new SerialiseMasterOrderFn()));
-
-        serialisedCompleteOrders.apply("Publish Complete",
-                PubsubIO.writeStrings().to("projects/project-ontario-prod/topics/order-master"));
-
-        serialisedCompleteOrders.apply("Archive Complete",
-                PubsubIO.writeStrings().to("projects/project-ontario-prod/topics/order-archive"));
-
-        PCollection<MasterOrder> maskedOrders = incompleteOrders.apply("Mask", new MaskOrdersFn());
-
-        PCollection<String> serialiseMaskedOrders = maskedOrders.apply("Serialise Incomplete",
-                ParDo.of(new SerialiseMasterOrderFn()));
-
-        serialiseMaskedOrders.apply("Publish Incomplete",
-                PubsubIO.writeStrings().to("projects/project-ontario-prod/topics/order-master"));
-
-        serialiseMaskedOrders.apply("Archive Incomplete",
-                PubsubIO.writeStrings().to("projects/project-ontario-prod/topics/order-archive"));
-
-        // FIXME: MASK
-
-        p.run().waitUntilFinish();
+        return new TableSchema().setFields(fields);
     }
-
-    // FIXME: Handle single order events
-    // FIXME: REFACTOR complete calc to multi ParDo's
 
     static class MaskOrderFn extends DoFn<MasterOrder, MasterOrder> {
         private static final long serialVersionUID = -3894610851045133386L;
@@ -297,67 +299,11 @@ public class App {
         }
     }
 
-    final static TupleTag<MasterOrder> completeOrdersTag = new TupleTag<MasterOrder>() {
-        private static final long serialVersionUID = -8287090181826227743L;
-    };
-    final static TupleTag<MasterOrder> incompleteOrdersTag = new TupleTag<MasterOrder>() {
-        private static final long serialVersionUID = 6238727806361931139L;
-    };
-
-    static class OrderProcessingFn extends DoFn<KV<String, Iterable<MasterOrder>>, MasterOrder> {
-        private static final long serialVersionUID = -6828239956311045906L;
-        final String COMPLETE_EVENT_NAME = "CompleteOrder";
-
-        @ProcessElement
-        public void processElement(ProcessContext c) throws Exception {
-            Iterable<MasterOrder> iterableOrders = c.element().getValue();
-            List<MasterOrder> orders = OrderSummary.sortOrders(iterableOrders);
-            boolean orderIsComplete = OrderSummary.orderIsComplete(orders, COMPLETE_EVENT_NAME);
-            if (orderIsComplete) {
-                for (MasterOrder masterOrder : orders) {
-                    c.output(completeOrdersTag, masterOrder);
-                }
-            } else {
-                for (MasterOrder masterOrder : orders) {
-                    c.output(incompleteOrdersTag, masterOrder);
-                }
-            }
-        }
-    }
-
-    static class SerialiseMasterOrderKVFn extends DoFn<KV<String, MasterOrder>, String> {
-        private static final long serialVersionUID = -2849863818643155573L;
-
-        @ProcessElement
-        public void processElement(ProcessContext c) throws JsonParseException, JsonMappingException, IOException {
-            ObjectMapper mapper = new ObjectMapper();
-            mapper.registerModule(new JodaModule());
-            MasterOrder masterOrder = c.element().getValue();
-            c.output(mapper.writeValueAsString(masterOrder));
-        }
-    }
-
-    static class SerialiseOrderSummaryFn extends DoFn<OrderSummary, String> {
-        private static final long serialVersionUID = 6888807405086595997L;
-
-        @ProcessElement
-        public void processElement(ProcessContext c) throws JsonParseException, JsonMappingException, IOException {
-            ObjectMapper mapper = new ObjectMapper();
-            mapper.registerModule(new JodaModule());
-            mapper.setDefaultPropertyInclusion(JsonInclude.Include.ALWAYS);
-            OrderSummary orderSummary = c.element();
-            c.output(mapper.writeValueAsString(orderSummary));
-        }
-    }
-
     static class SerialiseMasterOrderFn extends DoFn<MasterOrder, String> {
         private static final long serialVersionUID = -6115553959647555680L;
 
         @ProcessElement
         public void processElement(ProcessContext c) throws JsonParseException, JsonMappingException, IOException {
-            ObjectMapper mapper = new ObjectMapper();
-            mapper.registerModule(new JodaModule());
-            mapper.setDefaultPropertyInclusion(JsonInclude.Include.ALWAYS); // todo: Delete?
             MasterOrder masterOrder = c.element();
             c.output(mapper.writeValueAsString(masterOrder));
         }

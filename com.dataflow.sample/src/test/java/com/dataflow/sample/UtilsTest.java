@@ -31,7 +31,7 @@ public class UtilsTest {
 
     @Test
     public void orderIsPartiallyMasked() throws JsonParseException, JsonMappingException, IOException {
-        String json = getFile("order3.json");
+        String json = getFile("order.json");
         ObjectMapper mapper = new ObjectMapper();
         mapper.registerModule(new JodaModule());
         MasterOrder masterOrder = mapper.readValue(json, MasterOrder.class);
@@ -44,8 +44,23 @@ public class UtilsTest {
             }
         }
         masterOrder.setDeliveryDetails(deliveryDetails);
-        String string = masterOrder.getDeliveryDetails().get(0).getContactDetailsNickName().toString();
-        assertEquals("#####", string);
+        assertEquals("######################", masterOrder.getDeliveryDetails().get(0).getContactDetailsNickName());
+    }
+
+    @Test
+    public void valuesAreRounded() {
+        double value = 1.5499999999999999999999999;
+        double expected = 1.55;
+        double actual = Utils.round(value);
+        assertEquals(expected, actual, 0);
+    }
+
+    @Test
+    public void nullValuesAreIgnored() {
+        Double value = null;
+        double expected = 0;
+        double actual = Utils.round(value);
+        assertEquals(expected, actual, 0);
     }
 
     private String getFile(String fileName) {

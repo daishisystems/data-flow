@@ -3,28 +3,13 @@ package com.dataflow.sample;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import com.fasterxml.jackson.annotation.JsonAnyGetter;
-import com.fasterxml.jackson.annotation.JsonAnySetter;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import org.apache.beam.sdk.coders.DefaultCoder;
 import org.apache.beam.sdk.coders.SerializableCoder;
-import org.joda.time.DateTime;
 
-@JsonPropertyOrder({ "OrderCode", "RetailerCartId", "OrderItems", "AvailableOrderItems", "RetailerPromoCodes",
-        "OrderDiscounts", "DeliveryDetails", "PaymentDetails", "DeliveryOption", "Errors", "RetailerCheckoutExperience",
-        "ShopperCurrencyIso", "RetailerCurrencyIso", "RetailerFxGroupId", "SourceCountryIso", "DeliveryCountryIso",
-        "ShopperCheckoutExperience", "DeliveryOptions", "RetailerDeliveryOptions", "Payment", "IpAddress",
-        "CalculationParameters", "Status", "OrderConfirmationErrorInformation", "Pricing", "Features", "ExpiryTimeUtc",
-        "ChargeTargets", "GdprAccepted", "GdprAcceptanceHistory", "brandCode", "eventName", "correlationId",
-        "userAgent", "queryString", "created" })
 @DefaultCoder(SerializableCoder.class)
 public class MasterOrder implements Serializable {
-
     @JsonProperty("OrderCode")
     private String orderCode;
     @JsonProperty("RetailerCartId")
@@ -44,7 +29,7 @@ public class MasterOrder implements Serializable {
     @JsonProperty("DeliveryOption")
     private DeliveryOption deliveryOption;
     @JsonProperty("Errors")
-    private List<Object> errors = new ArrayList<Object>();
+    private List<Error> errors = new ArrayList<Error>();
     @JsonProperty("RetailerCheckoutExperience")
     private RetailerCheckoutExperience retailerCheckoutExperience;
     @JsonProperty("ShopperCurrencyIso")
@@ -60,27 +45,33 @@ public class MasterOrder implements Serializable {
     @JsonProperty("ShopperCheckoutExperience")
     private ShopperCheckoutExperience shopperCheckoutExperience;
     @JsonProperty("DeliveryOptions")
-    private List<DeliveryOptionExtended> deliveryOptions = new ArrayList<DeliveryOptionExtended>();
+    private List<DeliveryOption> deliveryOptions = new ArrayList<DeliveryOption>();
     @JsonProperty("RetailerDeliveryOptions")
     private List<RetailerDeliveryOption> retailerDeliveryOptions = new ArrayList<RetailerDeliveryOption>();
     @JsonProperty("Payment")
     private Payment payment;
     @JsonProperty("IpAddress")
-    private Object ipAddress;
+    private String ipAddress;
     @JsonProperty("CalculationParameters")
     private CalculationParameters calculationParameters;
     @JsonProperty("Status")
     private String status;
-    @JsonProperty("OrderConfirmationErrorInformation")
-    private Object orderConfirmationErrorInformation;
+    @JsonProperty("RetailerConfirmation")
+    private RetailerConfirmation retailerConfirmation;
+    @JsonProperty("PlatformCreate")
+    private PlatformCreate platformCreate;
     @JsonProperty("Pricing")
     private Pricing pricing;
+    @JsonProperty("OrderConfirmationErrorInformation")
+    private OrderConfirmationErrorInformation orderConfirmationErrorInformation;
     @JsonProperty("Features")
     private List<Feature> features = new ArrayList<Feature>();
     @JsonProperty("ExpiryTimeUtc")
-    private DateTime expiryTimeUtc;
+    private String expiryTimeUtc;
     @JsonProperty("ChargeTargets")
     private List<ChargeTarget> chargeTargets = new ArrayList<ChargeTarget>();
+    @JsonProperty("FingerprintId")
+    private String fingerprintId;
     @JsonProperty("GdprAccepted")
     private Boolean gdprAccepted;
     @JsonProperty("GdprAcceptanceHistory")
@@ -96,107 +87,8 @@ public class MasterOrder implements Serializable {
     @JsonProperty("queryString")
     private String queryString;
     @JsonProperty("created")
-    private long created;
-    @JsonIgnore
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
-    private final static long serialVersionUID = -1448068121889069826L;
-
-    /**
-     * No args constructor for use in serialization
-     * 
-     */
-    public MasterOrder() {
-    }
-
-    /**
-     * 
-     * @param deliveryOption
-     * @param userAgent
-     * @param orderCode
-     * @param retailerFxGroupId
-     * @param gdprAcceptanceHistory
-     * @param paymentDetails
-     * @param deliveryOptions
-     * @param chargeTargets
-     * @param expiryTimeUtc
-     * @param orderConfirmationErrorInformation
-     * @param errors
-     * @param shopperCurrencyIso
-     * @param created
-     * @param brandCode
-     * @param deliveryCountryIso
-     * @param features
-     * @param orderDiscounts
-     * @param retailerDeliveryOptions
-     * @param availableOrderItems
-     * @param ipAddress
-     * @param deliveryDetails
-     * @param correlationId
-     * @param payment
-     * @param status
-     * @param retailerCurrencyIso
-     * @param retailerCheckoutExperience
-     * @param gdprAccepted
-     * @param orderItems
-     * @param pricing
-     * @param queryString
-     * @param retailerCartId
-     * @param shopperCheckoutExperience
-     * @param retailerPromoCodes
-     * @param eventName
-     * @param calculationParameters
-     * @param sourceCountryIso
-     */
-    public MasterOrder(String orderCode, String retailerCartId, List<OrderItem> orderItems,
-            List<AvailableOrderItem> availableOrderItems, List<RetailerPromoCode> retailerPromoCodes,
-            List<OrderDiscount> orderDiscounts, List<DeliveryDetail> deliveryDetails,
-            List<PaymentDetail> paymentDetails, DeliveryOption deliveryOption, List<Object> errors,
-            RetailerCheckoutExperience retailerCheckoutExperience, String shopperCurrencyIso,
-            String retailerCurrencyIso, Integer retailerFxGroupId, String sourceCountryIso, String deliveryCountryIso,
-            ShopperCheckoutExperience shopperCheckoutExperience, List<DeliveryOptionExtended> deliveryOptions,
-            List<RetailerDeliveryOption> retailerDeliveryOptions, Payment payment, Object ipAddress,
-            CalculationParameters calculationParameters, String status, Object orderConfirmationErrorInformation,
-            Pricing pricing, List<Feature> features, DateTime expiryTimeUtc, List<ChargeTarget> chargeTargets,
-            Boolean gdprAccepted, List<GdprAcceptance> gdprAcceptanceHistory, String brandCode, String eventName,
-            String correlationId, String userAgent, String queryString, Long created) {
-        super();
-        this.orderCode = orderCode;
-        this.retailerCartId = retailerCartId;
-        this.orderItems = orderItems;
-        this.availableOrderItems = availableOrderItems;
-        this.retailerPromoCodes = retailerPromoCodes;
-        this.orderDiscounts = orderDiscounts;
-        this.deliveryDetails = deliveryDetails;
-        this.paymentDetails = paymentDetails;
-        this.deliveryOption = deliveryOption;
-        this.errors = errors;
-        this.retailerCheckoutExperience = retailerCheckoutExperience;
-        this.shopperCurrencyIso = shopperCurrencyIso;
-        this.retailerCurrencyIso = retailerCurrencyIso;
-        this.retailerFxGroupId = retailerFxGroupId;
-        this.sourceCountryIso = sourceCountryIso;
-        this.deliveryCountryIso = deliveryCountryIso;
-        this.shopperCheckoutExperience = shopperCheckoutExperience;
-        this.deliveryOptions = deliveryOptions;
-        this.retailerDeliveryOptions = retailerDeliveryOptions;
-        this.payment = payment;
-        this.ipAddress = ipAddress;
-        this.calculationParameters = calculationParameters;
-        this.status = status;
-        this.orderConfirmationErrorInformation = orderConfirmationErrorInformation;
-        this.pricing = pricing;
-        this.features = features;
-        this.expiryTimeUtc = expiryTimeUtc;
-        this.chargeTargets = chargeTargets;
-        this.gdprAccepted = gdprAccepted;
-        this.gdprAcceptanceHistory = gdprAcceptanceHistory;
-        this.brandCode = brandCode;
-        this.eventName = eventName;
-        this.correlationId = correlationId;
-        this.userAgent = userAgent;
-        this.queryString = queryString;
-        this.created = created;
-    }
+    private Long created;
+    private final static long serialVersionUID = 8817357657140713368L;
 
     @JsonProperty("OrderCode")
     public String getOrderCode() {
@@ -225,7 +117,9 @@ public class MasterOrder implements Serializable {
 
     @JsonProperty("OrderItems")
     public void setOrderItems(List<OrderItem> orderItems) {
-        this.orderItems = orderItems;
+        if (orderItems != null) {
+            this.orderItems = orderItems;
+        }
     }
 
     @JsonProperty("AvailableOrderItems")
@@ -235,7 +129,9 @@ public class MasterOrder implements Serializable {
 
     @JsonProperty("AvailableOrderItems")
     public void setAvailableOrderItems(List<AvailableOrderItem> availableOrderItems) {
-        this.availableOrderItems = availableOrderItems;
+        if (availableOrderItems != null) {
+            this.availableOrderItems = availableOrderItems;
+        }
     }
 
     @JsonProperty("RetailerPromoCodes")
@@ -245,7 +141,9 @@ public class MasterOrder implements Serializable {
 
     @JsonProperty("RetailerPromoCodes")
     public void setRetailerPromoCodes(List<RetailerPromoCode> retailerPromoCodes) {
-        this.retailerPromoCodes = retailerPromoCodes;
+        if (retailerPromoCodes != null) {
+            this.retailerPromoCodes = retailerPromoCodes;
+        }
     }
 
     @JsonProperty("OrderDiscounts")
@@ -255,7 +153,9 @@ public class MasterOrder implements Serializable {
 
     @JsonProperty("OrderDiscounts")
     public void setOrderDiscounts(List<OrderDiscount> orderDiscounts) {
-        this.orderDiscounts = orderDiscounts;
+        if (orderDiscounts != null) {
+            this.orderDiscounts = orderDiscounts;
+        }
     }
 
     @JsonProperty("DeliveryDetails")
@@ -265,7 +165,9 @@ public class MasterOrder implements Serializable {
 
     @JsonProperty("DeliveryDetails")
     public void setDeliveryDetails(List<DeliveryDetail> deliveryDetails) {
-        this.deliveryDetails = deliveryDetails;
+        if (deliveryDetails != null) {
+            this.deliveryDetails = deliveryDetails;
+        }
     }
 
     @JsonProperty("PaymentDetails")
@@ -275,7 +177,9 @@ public class MasterOrder implements Serializable {
 
     @JsonProperty("PaymentDetails")
     public void setPaymentDetails(List<PaymentDetail> paymentDetails) {
-        this.paymentDetails = paymentDetails;
+        if (paymentDetails != null) {
+            this.paymentDetails = paymentDetails;
+        }
     }
 
     @JsonProperty("DeliveryOption")
@@ -289,13 +193,15 @@ public class MasterOrder implements Serializable {
     }
 
     @JsonProperty("Errors")
-    public List<Object> getErrors() {
+    public List<Error> getErrors() {
         return errors;
     }
 
     @JsonProperty("Errors")
-    public void setErrors(List<Object> errors) {
-        this.errors = errors;
+    public void setErrors(List<Error> errors) {
+        if (errors != null) {
+            this.errors = errors;
+        }
     }
 
     @JsonProperty("RetailerCheckoutExperience")
@@ -369,13 +275,15 @@ public class MasterOrder implements Serializable {
     }
 
     @JsonProperty("DeliveryOptions")
-    public List<DeliveryOptionExtended> getDeliveryOptions() {
+    public List<DeliveryOption> getDeliveryOptions() {
         return deliveryOptions;
     }
 
     @JsonProperty("DeliveryOptions")
-    public void setDeliveryOptions(List<DeliveryOptionExtended> deliveryOptions) {
-        this.deliveryOptions = deliveryOptions;
+    public void setDeliveryOptions(List<DeliveryOption> deliveryOptions) {
+        if (deliveryOptions != null) {
+            this.deliveryOptions = deliveryOptions;
+        }
     }
 
     @JsonProperty("RetailerDeliveryOptions")
@@ -385,7 +293,9 @@ public class MasterOrder implements Serializable {
 
     @JsonProperty("RetailerDeliveryOptions")
     public void setRetailerDeliveryOptions(List<RetailerDeliveryOption> retailerDeliveryOptions) {
-        this.retailerDeliveryOptions = retailerDeliveryOptions;
+        if (retailerDeliveryOptions != null) {
+            this.retailerDeliveryOptions = retailerDeliveryOptions;
+        }
     }
 
     @JsonProperty("Payment")
@@ -399,12 +309,12 @@ public class MasterOrder implements Serializable {
     }
 
     @JsonProperty("IpAddress")
-    public Object getIpAddress() {
+    public String getIpAddress() {
         return ipAddress;
     }
 
     @JsonProperty("IpAddress")
-    public void setIpAddress(Object ipAddress) {
+    public void setIpAddress(String ipAddress) {
         this.ipAddress = ipAddress;
     }
 
@@ -428,14 +338,24 @@ public class MasterOrder implements Serializable {
         this.status = status;
     }
 
-    @JsonProperty("OrderConfirmationErrorInformation")
-    public Object getOrderConfirmationErrorInformation() {
-        return orderConfirmationErrorInformation;
+    @JsonProperty("RetailerConfirmation")
+    public RetailerConfirmation getRetailerConfirmation() {
+        return retailerConfirmation;
     }
 
-    @JsonProperty("OrderConfirmationErrorInformation")
-    public void setOrderConfirmationErrorInformation(Object orderConfirmationErrorInformation) {
-        this.orderConfirmationErrorInformation = orderConfirmationErrorInformation;
+    @JsonProperty("RetailerConfirmation")
+    public void setRetailerConfirmation(RetailerConfirmation retailerConfirmation) {
+        this.retailerConfirmation = retailerConfirmation;
+    }
+
+    @JsonProperty("PlatformCreate")
+    public PlatformCreate getPlatformCreate() {
+        return platformCreate;
+    }
+
+    @JsonProperty("PlatformCreate")
+    public void setPlatformCreate(PlatformCreate platformCreate) {
+        this.platformCreate = platformCreate;
     }
 
     @JsonProperty("Pricing")
@@ -448,6 +368,17 @@ public class MasterOrder implements Serializable {
         this.pricing = pricing;
     }
 
+    @JsonProperty("OrderConfirmationErrorInformation")
+    public OrderConfirmationErrorInformation getOrderConfirmationErrorInformation() {
+        return this.orderConfirmationErrorInformation;
+    }
+
+    @JsonProperty("OrderConfirmationErrorInformation")
+    public void setOrderConfirmationErrorInformation(
+            OrderConfirmationErrorInformation orderConfirmationErrorInformation) {
+        this.orderConfirmationErrorInformation = orderConfirmationErrorInformation;
+    }
+
     @JsonProperty("Features")
     public List<Feature> getFeatures() {
         return features;
@@ -455,16 +386,18 @@ public class MasterOrder implements Serializable {
 
     @JsonProperty("Features")
     public void setFeatures(List<Feature> features) {
-        this.features = features;
+        if (features != null) {
+            this.features = features;
+        }
     }
 
     @JsonProperty("ExpiryTimeUtc")
-    public DateTime getExpiryTimeUtc() {
+    public String getExpiryTimeUtc() {
         return expiryTimeUtc;
     }
 
     @JsonProperty("ExpiryTimeUtc")
-    public void setExpiryTimeUtc(DateTime expiryTimeUtc) {
+    public void setExpiryTimeUtc(String expiryTimeUtc) {
         this.expiryTimeUtc = expiryTimeUtc;
     }
 
@@ -475,7 +408,19 @@ public class MasterOrder implements Serializable {
 
     @JsonProperty("ChargeTargets")
     public void setChargeTargets(List<ChargeTarget> chargeTargets) {
-        this.chargeTargets = chargeTargets;
+        if (chargeTargets != null) {
+            this.chargeTargets = chargeTargets;
+        }
+    }
+
+    @JsonProperty("FingerprintId")
+    public String getFingerprintId() {
+        return fingerprintId;
+    }
+
+    @JsonProperty("FingerprintId")
+    public void setFingerprintId(String fingerprintId) {
+        this.fingerprintId = fingerprintId;
     }
 
     @JsonProperty("GdprAccepted")
@@ -495,7 +440,9 @@ public class MasterOrder implements Serializable {
 
     @JsonProperty("GdprAcceptanceHistory")
     public void setGdprAcceptanceHistory(List<GdprAcceptance> gdprAcceptanceHistory) {
-        this.gdprAcceptanceHistory = gdprAcceptanceHistory;
+        if (gdprAcceptanceHistory != null) {
+            this.gdprAcceptanceHistory = gdprAcceptanceHistory;
+        }
     }
 
     @JsonProperty("brandCode")
@@ -549,7 +496,7 @@ public class MasterOrder implements Serializable {
     }
 
     @JsonProperty("created")
-    public long getCreated() {
+    public Long getCreated() {
         return created;
     }
 
@@ -557,15 +504,4 @@ public class MasterOrder implements Serializable {
     public void setCreated(Long created) {
         this.created = created;
     }
-
-    @JsonAnyGetter
-    public Map<String, Object> getAdditionalProperties() {
-        return this.additionalProperties;
-    }
-
-    @JsonAnySetter
-    public void setAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
-    }
-
 }

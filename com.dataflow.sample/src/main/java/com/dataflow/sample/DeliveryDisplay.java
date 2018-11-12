@@ -24,9 +24,9 @@ public class DeliveryDisplay implements Serializable {
     @JsonProperty("ShippingDisplayModelId")
     private Integer shippingDisplayModelId;
     @JsonProperty("Name")
-    private Object name;
+    private String name;
     @JsonProperty("Description")
-    private Object description;
+    private String description;
     @JsonProperty("IncludeMerchandiseDuty")
     private Boolean includeMerchandiseDuty;
     @JsonProperty("IncludeMerchandiseTax")
@@ -75,8 +75,8 @@ public class DeliveryDisplay implements Serializable {
      * @param includeMerchandiseDuty
      * @param shippingDisplayModelId
      */
-    public DeliveryDisplay(Boolean includeAllDutyAndTax, Integer shippingDisplayModelId, Object name,
-            Object description, Boolean includeMerchandiseDuty, Boolean includeMerchandiseTax, Boolean includeShipping,
+    public DeliveryDisplay(Boolean includeAllDutyAndTax, Integer shippingDisplayModelId, String name,
+            String description, Boolean includeMerchandiseDuty, Boolean includeMerchandiseTax, Boolean includeShipping,
             Boolean includeShippingDuty, Boolean includeShippingTax, Boolean includeOtherTaxes,
             Boolean includeOtherFees, Boolean isShippingVisible, String defaultDisplayText, String displayTextKey) {
         super();
@@ -117,22 +117,22 @@ public class DeliveryDisplay implements Serializable {
     }
 
     @JsonProperty("Name")
-    public Object getName() {
+    public String getName() {
         return name;
     }
 
     @JsonProperty("Name")
-    public void setName(Object name) {
+    public void setName(String name) {
         this.name = name;
     }
 
     @JsonProperty("Description")
-    public Object getDescription() {
+    public String getDescription() {
         return description;
     }
 
     @JsonProperty("Description")
-    public void setDescription(Object description) {
+    public void setDescription(String description) {
         this.description = description;
     }
 

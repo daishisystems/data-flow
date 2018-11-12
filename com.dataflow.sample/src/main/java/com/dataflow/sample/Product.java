@@ -24,7 +24,7 @@ public class Product implements Serializable {
     @JsonProperty("ProductCode")
     private String productCode;
     @JsonProperty("Upc")
-    private Object upc;
+    private String upc;
     @JsonProperty("Title")
     private String title;
     @JsonProperty("Description")
@@ -44,9 +44,9 @@ public class Product implements Serializable {
     @JsonProperty("OverridePrice")
     private Boolean overridePrice;
     @JsonProperty("Dimension5")
-    private Object dimension5;
+    private String dimension5;
     @JsonProperty("Dimension6")
-    private Object dimension6;
+    private String dimension6;
     @JsonProperty("IsNonStandardCatalogItem")
     private Boolean isNonStandardCatalogItem;
     @JsonProperty("MetadataItems")
@@ -80,10 +80,10 @@ public class Product implements Serializable {
      * @param retailerCurrencyProductPriceInfo
      * @param dimension5
      */
-    public Product(String productCode, Object upc, String title, String description,
+    public Product(String productCode, String upc, String title, String description,
             RetailerCurrencyProductPriceInfo retailerCurrencyProductPriceInfo,
             ShopperCurrencyProductPriceInfo shopperCurrencyProductPriceInfo, String imageUrl, String color, String size,
-            Boolean isRestrictedForCountry, Boolean overridePrice, Object dimension5, Object dimension6,
+            Boolean isRestrictedForCountry, Boolean overridePrice, String dimension5, String dimension6,
             Boolean isNonStandardCatalogItem, List<MetadataItem> metadataItems) {
         super();
         this.productCode = productCode;
@@ -114,12 +114,12 @@ public class Product implements Serializable {
     }
 
     @JsonProperty("Upc")
-    public Object getUpc() {
+    public String getUpc() {
         return upc;
     }
 
     @JsonProperty("Upc")
-    public void setUpc(Object upc) {
+    public void setUpc(String upc) {
         this.upc = upc;
     }
 
@@ -214,22 +214,22 @@ public class Product implements Serializable {
     }
 
     @JsonProperty("Dimension5")
-    public Object getDimension5() {
+    public String getDimension5() {
         return dimension5;
     }
 
     @JsonProperty("Dimension5")
-    public void setDimension5(Object dimension5) {
+    public void setDimension5(String dimension5) {
         this.dimension5 = dimension5;
     }
 
     @JsonProperty("Dimension6")
-    public Object getDimension6() {
+    public String getDimension6() {
         return dimension6;
     }
 
     @JsonProperty("Dimension6")
-    public void setDimension6(Object dimension6) {
+    public void setDimension6(String dimension6) {
         this.dimension6 = dimension6;
     }
 
@@ -250,7 +250,9 @@ public class Product implements Serializable {
 
     @JsonProperty("MetadataItems")
     public void setMetadataItems(List<MetadataItem> metadataItems) {
-        this.metadataItems = metadataItems;
+        if (metadataItems != null) {
+            this.metadataItems = metadataItems;
+        }
     }
 
     @JsonAnyGetter
