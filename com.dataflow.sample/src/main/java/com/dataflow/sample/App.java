@@ -92,7 +92,7 @@ public class App {
 
         PCollection<KV<String, Iterable<MasterOrder>>> masterOrders = outputTuple.get(validOrdersTupleTag)
                 .apply("Window",
-                        Window.<KV<String, MasterOrder>>into(Sessions.withGapDuration(Duration.standardSeconds(20))))
+                        Window.<KV<String, MasterOrder>>into(Sessions.withGapDuration(Duration.standardMinutes(20))))
                 .apply("Group", GroupByKey.create());
 
         outputTuple.get(invalidOrdersTupleTag).apply("Dead Letter Queue",
@@ -105,7 +105,7 @@ public class App {
                                 .withCreateDisposition(BigQueryIO.Write.CreateDisposition.CREATE_IF_NEEDED)
                                 .withWriteDisposition(BigQueryIO.Write.WriteDisposition.WRITE_APPEND));
 
-        PCollectionTuple processedOrdersTuple = masterOrders.apply("Analyse",
+        PCollectionTuple processedOrdersTuple = masterOrders.apply("Analyse", // FIXME: !!!This can occur before grouping ...
                 ParDo.of(new DoFn<KV<String, Iterable<MasterOrder>>, MasterOrder>() {
                     private static final long serialVersionUID = -4644201311299503730L;
                     final String COMPLETE_EVENT_NAME = "CompleteOrder";
