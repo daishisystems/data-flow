@@ -62,6 +62,8 @@ public class MasterOrder implements Serializable {
     private PlatformCreate platformCreate;
     @JsonProperty("Pricing")
     private Pricing pricing;
+    @JsonProperty("OrderConfirmationErrorInformation")
+    private OrderConfirmationErrorInformation orderConfirmationErrorInformation;
     @JsonProperty("Features")
     private List<Feature> features = new ArrayList<Feature>();
     @JsonProperty("ExpiryTimeUtc")
@@ -364,6 +366,17 @@ public class MasterOrder implements Serializable {
     @JsonProperty("Pricing")
     public void setPricing(Pricing pricing) {
         this.pricing = pricing;
+    }
+
+    @JsonProperty("OrderConfirmationErrorInformation")
+    public OrderConfirmationErrorInformation getOrderConfirmationErrorInformation() {
+        return this.orderConfirmationErrorInformation;
+    }
+
+    @JsonProperty("OrderConfirmationErrorInformation")
+    public void setOrderConfirmationErrorInformation(
+            OrderConfirmationErrorInformation orderConfirmationErrorInformation) {
+        this.orderConfirmationErrorInformation = orderConfirmationErrorInformation;
     }
 
     @JsonProperty("Features")
