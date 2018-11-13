@@ -22,14 +22,12 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.joda.JodaModule;
 import com.google.api.services.bigquery.model.TableFieldSchema;
 import com.google.api.services.bigquery.model.TableRow;
 import com.google.api.services.bigquery.model.TableSchema;
 import org.apache.beam.sdk.Pipeline;
-import org.apache.beam.sdk.options.PipelineOptions;
 import org.apache.beam.sdk.options.PipelineOptionsFactory;
 import org.apache.beam.sdk.transforms.DoFn;
 import org.apache.beam.sdk.transforms.ParDo;
@@ -53,6 +51,11 @@ public class App {
     private static final Logger LOG = LoggerFactory.getLogger(App.class);
 
     public static void main(String[] args) {
+
+        CustomPipelineOptions options = PipelineOptionsFactory.fromArgs(args).withValidation()
+                .as(CustomPipelineOptions.class);
+        Pipeline p = Pipeline.create(options);        
+
         final TupleTag<KV<String, MasterOrder>> validOrdersTupleTag = new TupleTag<KV<String, MasterOrder>>() {
             private static final long serialVersionUID = 5729779425621385553L;
         };
@@ -68,11 +71,8 @@ public class App {
 
         mapper.registerModule(new JodaModule());
 
-        PipelineOptions options = PipelineOptionsFactory.fromArgs(args).withValidation().create();
-        Pipeline p = Pipeline.create(options); // FIXME: Add to boot-up
-
-        PCollection<String> pubSubOutput = p.apply("Read Input", PubsubIO.readStrings()
-                .fromTopic("projects/project-ontario-prod/topics/checkout").withTimestampAttribute("EventTimestamp"));
+        PCollection<String> pubSubOutput = p.apply("Read Input",
+                PubsubIO.readStrings().fromTopic(options.getInputTopic()).withTimestampAttribute("EventTimestamp"));
 
         PCollectionTuple outputTuple = pubSubOutput.apply("Validate",
                 ParDo.of(new DoFn<String, KV<String, MasterOrder>>() {
@@ -92,16 +92,17 @@ public class App {
 
         PCollection<KV<String, Iterable<MasterOrder>>> masterOrders = outputTuple.get(validOrdersTupleTag)
                 .apply("Window",
-                        Window.<KV<String, MasterOrder>>into(Sessions.withGapDuration(Duration.standardMinutes(20))))
+                        Window.<KV<String, MasterOrder>>into(Sessions.withGapDuration(
+                                Duration.standardSeconds(Long.parseLong(options.getSessionWindowGapDuration())))))
                 .apply("Group", GroupByKey.create());
 
         outputTuple.get(invalidOrdersTupleTag).apply("Dead Letter Queue",
-                PubsubIO.writeStrings().to("projects/project-ontario-prod/topics/dead-letter-orders"));
+                PubsubIO.writeStrings().to(options.getDeadLetterTopic()));
 
         masterOrders.apply("Summarise", ParDo.of(new OrderSummaryFn()))
                 .apply("Apply Schema", new OrderSummariesToTableRows()).apply("Save to BQ",
-                        BigQueryIO.writeTableRows().to("project-ontario-prod:checkout.order_summary")
-                                .withSchema(getTableSchema()).withMethod(BigQueryIO.Write.Method.STREAMING_INSERTS)
+                        BigQueryIO.writeTableRows().to(options.getOrderSummaryTable()).withSchema(getTableSchema())
+                                .withMethod(BigQueryIO.Write.Method.STREAMING_INSERTS)
                                 .withCreateDisposition(BigQueryIO.Write.CreateDisposition.CREATE_IF_NEEDED)
                                 .withWriteDisposition(BigQueryIO.Write.WriteDisposition.WRITE_APPEND));
 
@@ -130,21 +131,15 @@ public class App {
         PCollection<String> completeOrders = processedOrdersTuple.get(completeOrdersTag).apply("Serialise Complete",
                 ParDo.of(new SerialiseMasterOrderFn()));
 
-        completeOrders.apply("Publish Complete",
-                PubsubIO.writeStrings().to("projects/project-ontario-prod/topics/order-master"));
-
-        completeOrders.apply("Archive Complete",
-                PubsubIO.writeStrings().to("projects/project-ontario-prod/topics/order-archive"));
+        completeOrders.apply("Publish Complete", PubsubIO.writeStrings().to(options.getOrderMasterTopic()));
+        completeOrders.apply("Archive Complete", PubsubIO.writeStrings().to(options.getArchiveTopic()));
 
         PCollection<String> incompleteOrders = processedOrdersTuple.get(incompleteOrdersTag)
                 .apply("Mask", new MaskOrdersFn())
                 .apply("Serialise Incomplete", ParDo.of(new SerialiseMasterOrderFn()));
 
-        incompleteOrders.apply("Publish Incomplete",
-                PubsubIO.writeStrings().to("projects/project-ontario-prod/topics/order-master"));
-
-        incompleteOrders.apply("Archive Incomplete",
-                PubsubIO.writeStrings().to("projects/project-ontario-prod/topics/order-archive"));
+        incompleteOrders.apply("Publish Incomplete", PubsubIO.writeStrings().to(options.getOrderMasterTopic()));
+        incompleteOrders.apply("Archive Incomplete", PubsubIO.writeStrings().to(options.getArchiveTopic()));
 
         p.run().waitUntilFinish();
 
