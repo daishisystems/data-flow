@@ -22,14 +22,12 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.joda.JodaModule;
 import com.google.api.services.bigquery.model.TableFieldSchema;
 import com.google.api.services.bigquery.model.TableRow;
 import com.google.api.services.bigquery.model.TableSchema;
 import org.apache.beam.sdk.Pipeline;
-import org.apache.beam.sdk.options.PipelineOptions;
 import org.apache.beam.sdk.options.PipelineOptionsFactory;
 import org.apache.beam.sdk.transforms.DoFn;
 import org.apache.beam.sdk.transforms.ParDo;
@@ -56,7 +54,7 @@ public class App {
 
         CustomPipelineOptions options = PipelineOptionsFactory.fromArgs(args).withValidation()
                 .as(CustomPipelineOptions.class);
-        Pipeline p = Pipeline.create(options);
+        Pipeline p = Pipeline.create(options);        
 
         final TupleTag<KV<String, MasterOrder>> validOrdersTupleTag = new TupleTag<KV<String, MasterOrder>>() {
             private static final long serialVersionUID = 5729779425621385553L;
@@ -94,7 +92,8 @@ public class App {
 
         PCollection<KV<String, Iterable<MasterOrder>>> masterOrders = outputTuple.get(validOrdersTupleTag)
                 .apply("Window",
-                        Window.<KV<String, MasterOrder>>into(Sessions.withGapDuration(Duration.standardSeconds(20))))
+                        Window.<KV<String, MasterOrder>>into(Sessions.withGapDuration(
+                                Duration.standardSeconds(Long.parseLong(options.getSessionWindowGapDuration())))))
                 .apply("Group", GroupByKey.create());
 
         outputTuple.get(invalidOrdersTupleTag).apply("Dead Letter Queue",
@@ -102,8 +101,8 @@ public class App {
 
         masterOrders.apply("Summarise", ParDo.of(new OrderSummaryFn()))
                 .apply("Apply Schema", new OrderSummariesToTableRows()).apply("Save to BQ",
-                        BigQueryIO.writeTableRows().to("eshop-puddle:checkout_dev.order_summary")
-                                .withSchema(getTableSchema()).withMethod(BigQueryIO.Write.Method.STREAMING_INSERTS)
+                        BigQueryIO.writeTableRows().to(options.getOrderSummaryTable()).withSchema(getTableSchema())
+                                .withMethod(BigQueryIO.Write.Method.STREAMING_INSERTS)
                                 .withCreateDisposition(BigQueryIO.Write.CreateDisposition.CREATE_IF_NEEDED)
                                 .withWriteDisposition(BigQueryIO.Write.WriteDisposition.WRITE_APPEND));
 
@@ -132,21 +131,15 @@ public class App {
         PCollection<String> completeOrders = processedOrdersTuple.get(completeOrdersTag).apply("Serialise Complete",
                 ParDo.of(new SerialiseMasterOrderFn()));
 
-        completeOrders.apply("Publish Complete",
-                PubsubIO.writeStrings().to("projects/eshop-puddle/topics/checkout-order-master-dev"));
-
-        completeOrders.apply("Archive Complete",
-                PubsubIO.writeStrings().to("projects/eshop-puddle/topics/checkout-order-archive-dev"));
+        completeOrders.apply("Publish Complete", PubsubIO.writeStrings().to(options.getOrderMasterTopic()));
+        completeOrders.apply("Archive Complete", PubsubIO.writeStrings().to(options.getArchiveTopic()));
 
         PCollection<String> incompleteOrders = processedOrdersTuple.get(incompleteOrdersTag)
                 .apply("Mask", new MaskOrdersFn())
                 .apply("Serialise Incomplete", ParDo.of(new SerialiseMasterOrderFn()));
 
-        incompleteOrders.apply("Publish Incomplete",
-                PubsubIO.writeStrings().to("projects/eshop-puddle/topics/checkout-order-master-dev"));
-
-        incompleteOrders.apply("Archive Incomplete",
-                PubsubIO.writeStrings().to("projects/eshop-puddle/topics/checkout-order-archive-dev"));
+        incompleteOrders.apply("Publish Incomplete", PubsubIO.writeStrings().to(options.getOrderMasterTopic()));
+        incompleteOrders.apply("Archive Incomplete", PubsubIO.writeStrings().to(options.getArchiveTopic()));
 
         p.run().waitUntilFinish();
 

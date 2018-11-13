@@ -4,7 +4,7 @@ import org.apache.beam.sdk.options.Description;
 import org.apache.beam.sdk.options.PipelineOptions;
 
 /**
- * The input Pub/Sub Topic.
+ * Custom pipeline options, inc. Topic names, etc.
  * 
  * @version 1.0
  * 
@@ -20,4 +20,24 @@ public interface CustomPipelineOptions extends PipelineOptions {
     String getDeadLetterTopic();
 
     void setDeadLetterTopic(String deadLetterTopic);
+
+    @Description("The session window gap duration in seconds.")
+    String getSessionWindowGapDuration();
+
+    void setSessionWindowGapDuration(String sessionWindowGapDuration);
+
+    @Description("The Order Summary table.")
+    String getOrderSummaryTable();
+
+    void setOrderSummaryTable(String setOrderSummaryTable);
+
+    @Description("The Order Master Pub/Sub Topic.")
+    String getOrderMasterTopic();
+
+    void setOrderMasterTopic(String orderMasterTopic);
+
+    @Description("The Order archive Pub/Sub Topic.")
+    String getArchiveTopic();
+
+    void setArchiveTopic(String archiveTopic);
 }
