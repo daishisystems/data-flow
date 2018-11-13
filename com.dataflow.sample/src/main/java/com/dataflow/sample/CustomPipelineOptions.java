@@ -10,9 +10,14 @@ import org.apache.beam.sdk.options.PipelineOptions;
  * 
  * @author Paul Mooney
  */
-public interface InputTopicPipelineOptions extends PipelineOptions {
+public interface CustomPipelineOptions extends PipelineOptions {
     @Description("The input Pub/Sub Topic.")
     String getInputTopic();
 
     void setInputTopic(String inputTopic);
+
+    @Description("The dead-letter Pub/Sub Topic.")
+    String getDeadLetterTopic();
+
+    void setDeadLetterTopic(String deadLetterTopic);
 }

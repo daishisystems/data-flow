@@ -54,8 +54,8 @@ public class App {
 
     public static void main(String[] args) {
 
-        InputTopicPipelineOptions options = PipelineOptionsFactory.fromArgs(args).withValidation()
-                .as(InputTopicPipelineOptions.class);
+        CustomPipelineOptions options = PipelineOptionsFactory.fromArgs(args).withValidation()
+                .as(CustomPipelineOptions.class);
         Pipeline p = Pipeline.create(options);
 
         final TupleTag<KV<String, MasterOrder>> validOrdersTupleTag = new TupleTag<KV<String, MasterOrder>>() {
@@ -98,7 +98,7 @@ public class App {
                 .apply("Group", GroupByKey.create());
 
         outputTuple.get(invalidOrdersTupleTag).apply("Dead Letter Queue",
-                PubsubIO.writeStrings().to("projects/eshop-puddle/topics/checkout-dead-letter-orders-dev"));
+                PubsubIO.writeStrings().to(options.getDeadLetterTopic()));
 
         masterOrders.apply("Summarise", ParDo.of(new OrderSummaryFn()))
                 .apply("Apply Schema", new OrderSummariesToTableRows()).apply("Save to BQ",

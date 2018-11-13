@@ -6,7 +6,7 @@ mvn compile exec:java -Dexec.mainClass=com.dataflow.sample.App -Dexec.args="--pr
 
 # Ontario
 
-mvn compile exec:java -Dexec.mainClass=com.dataflow.sample.App -Dexec.args="--project=eshop-puddle --gcpTempLocation=gs://esw-checkout-dev/tmp/ --stagingLocation=gs://esw-checkout-dev/staging/ --region=europe-west1 --numWorkers=4 --inputTopic=projects/eshop-puddle/topics/checkout-dev --runner=DataflowRunner" -e
+mvn compile exec:java -Dexec.mainClass=com.dataflow.sample.App -Dexec.args="--project=eshop-puddle --gcpTempLocation=gs://esw-checkout-dev/tmp/ --stagingLocation=gs://esw-checkout-dev/staging/ --region=europe-west1 --numWorkers=4 --inputTopic=projects/eshop-puddle/topics/checkout-dev --deadLetterTopic=projects/eshop-puddle/topics/checkout-dead-letter-orders-dev --runner=DataflowRunner" -e
 
 # PROD
 
