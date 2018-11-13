@@ -53,6 +53,11 @@ public class App {
     private static final Logger LOG = LoggerFactory.getLogger(App.class);
 
     public static void main(String[] args) {
+
+        InputTopicPipelineOptions options = PipelineOptionsFactory.fromArgs(args).withValidation()
+                .as(InputTopicPipelineOptions.class);
+        Pipeline p = Pipeline.create(options);
+
         final TupleTag<KV<String, MasterOrder>> validOrdersTupleTag = new TupleTag<KV<String, MasterOrder>>() {
             private static final long serialVersionUID = 5729779425621385553L;
         };
@@ -68,11 +73,8 @@ public class App {
 
         mapper.registerModule(new JodaModule());
 
-        PipelineOptions options = PipelineOptionsFactory.fromArgs(args).withValidation().create();
-        Pipeline p = Pipeline.create(options); // FIXME: Add to boot-up
-
-        PCollection<String> pubSubOutput = p.apply("Read Input", PubsubIO.readStrings()
-                .fromTopic("projects/eshop-puddle/topics/checkout-dev").withTimestampAttribute("EventTimestamp"));        
+        PCollection<String> pubSubOutput = p.apply("Read Input",
+                PubsubIO.readStrings().fromTopic(options.getInputTopic()).withTimestampAttribute("EventTimestamp"));
 
         PCollectionTuple outputTuple = pubSubOutput.apply("Validate",
                 ParDo.of(new DoFn<String, KV<String, MasterOrder>>() {
