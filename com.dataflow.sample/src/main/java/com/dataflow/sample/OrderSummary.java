@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.gson.annotations.Expose;
 import org.apache.beam.sdk.coders.DefaultCoder;
 import org.apache.beam.sdk.coders.SerializableCoder;
@@ -48,6 +50,8 @@ public class OrderSummary implements Serializable {
     String country;
     @Expose
     int unitsPerOrder;
+    @JsonProperty("BrandCode")
+    String brandCode;
 
     public String getCountry() {
         return this.country;
@@ -193,6 +197,16 @@ public class OrderSummary implements Serializable {
         this.maxTimeDelay = maxTimeDelay;
     }
 
+    @JsonProperty("BrandCode")
+    public String getBrandCode() {
+        return this.brandCode;
+    }
+
+    @JsonProperty("BrandCode")
+    public void setBrandCode(String brandCode) {
+        this.brandCode = brandCode;
+    }
+
     /**
      * Sorts an iterable collection of orders by created-date.
      * 
@@ -233,6 +247,7 @@ public class OrderSummary implements Serializable {
             long totalTime = endTime - startTime;
             orderSummary.setTotalTime(totalTime);
             orderSummary.setCountry(previous.getDeliveryCountryIso());
+            orderSummary.setBrandCode(previous.getBrandCode());
             return orderSummary;
         }
         MasterOrder current;
@@ -276,6 +291,7 @@ public class OrderSummary implements Serializable {
         long totalTime = endTime - startTime;
         orderSummary.setTotalTime(totalTime);
         orderSummary.setCountry(current.getDeliveryCountryIso());
+        orderSummary.setBrandCode(previous.getBrandCode());
 
         return orderSummary;
     }
