@@ -54,7 +54,7 @@ public class App {
 
         CustomPipelineOptions options = PipelineOptionsFactory.fromArgs(args).withValidation()
                 .as(CustomPipelineOptions.class);
-        Pipeline p = Pipeline.create(options);        
+        Pipeline p = Pipeline.create(options);
 
         final TupleTag<KV<String, MasterOrder>> validOrdersTupleTag = new TupleTag<KV<String, MasterOrder>>() {
             private static final long serialVersionUID = 5729779425621385553L;
@@ -166,6 +166,7 @@ public class App {
         fields.add(new TableFieldSchema().setName("UserAgent").setType("STRING"));
         fields.add(new TableFieldSchema().setName("Country").setType("STRING"));
         fields.add(new TableFieldSchema().setName("UnitsPerOrder").setType("INT64"));
+        fields.add(new TableFieldSchema().setName("BrandCode").setType("STRING"));
         return new TableSchema().setFields(fields);
     }
 
@@ -335,6 +336,7 @@ public class App {
             tableRow.set("UserAgent", orderSummary.getUserAgent());
             tableRow.set("Country", orderSummary.getCountry());
             tableRow.set("UnitsPerOrder", orderSummary.getUnitsPerOrder());
+            tableRow.set("BrandCode", orderSummary.getBrandCode());
             c.output(tableRow);
         }
     }
