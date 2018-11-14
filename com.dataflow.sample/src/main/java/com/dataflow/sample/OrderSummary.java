@@ -5,11 +5,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.gson.annotations.Expose;
 import org.apache.beam.sdk.coders.DefaultCoder;
 import org.apache.beam.sdk.coders.SerializableCoder;
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 
 @DefaultCoder(SerializableCoder.class)
 public class OrderSummary implements Serializable {
@@ -37,9 +38,9 @@ public class OrderSummary implements Serializable {
     @Expose
     String correlationId;
     @Expose
-    long startdate;
+    String startdate;
     @Expose
-    long enddate;
+    String enddate;
     @Expose
     double orderValue;
     @Expose
@@ -93,19 +94,19 @@ public class OrderSummary implements Serializable {
         this.orderValue = orderValue;
     }
 
-    public long getEnddate() {
+    public String getEnddate() {
         return this.enddate;
     }
 
-    public void setEnddate(long enddate) {
+    public void setEnddate(String enddate) {
         this.enddate = enddate;
     }
 
-    public long getStartdate() {
+    public String getStartdate() {
         return this.startdate;
     }
 
-    public void setStartdate(long startDate) {
+    public void setStartdate(String startDate) {
         this.startdate = startDate;
     }
 
@@ -117,11 +118,11 @@ public class OrderSummary implements Serializable {
         this.number = number;
     }
 
-    public String getCorrelationid() {
+    public String getCorrelationId() {
         return this.correlationId;
     }
 
-    public void setCorrelationid(String correlationId) {
+    public void setCorrelationId(String correlationId) {
         this.correlationId = correlationId;
     }
 
@@ -207,6 +208,20 @@ public class OrderSummary implements Serializable {
         this.brandCode = brandCode;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null)
+            return false;
+        if (!(obj instanceof OrderSummary))
+            return false;
+        if (obj == this)
+            return true;
+
+        OrderSummary other = (OrderSummary) obj;
+        return this.number.equals(other.getNumber()) && this.correlationId.equals(other.getCorrelationId())
+                && this.startdate.equals(other.getStartdate()) && this.enddate.equals(other.getEnddate());
+    }
+
     /**
      * Sorts an iterable collection of orders by created-date.
      * 
@@ -232,12 +247,12 @@ public class OrderSummary implements Serializable {
         }
         MasterOrder previous = iterator.next();
         long startTime = previous.getCreated();
-        orderSummary.setStartdate(previous.getCreated());
+        orderSummary.setStartdate(new DateTime(previous.getCreated()).withZone(DateTimeZone.UTC).toString());
         if (!iterator.hasNext()) {
             orderSummary.setLastEventName(previous.getEventName());
             orderSummary.setNumber(previous.getOrderCode());
-            orderSummary.setCorrelationid(previous.getCorrelationId());
-            orderSummary.setEnddate(previous.getCreated());
+            orderSummary.setCorrelationId(previous.getCorrelationId());
+            orderSummary.setEnddate(new DateTime(previous.getCreated()).withZone(DateTimeZone.UTC).toString());
             orderSummary.setUserAgent(previous.getUserAgent());
             Double orderValue = calcOrderValue(previous);
             orderSummary.setOrderValue(orderValue);
@@ -280,8 +295,8 @@ public class OrderSummary implements Serializable {
 
         orderSummary.setLastEventName(current.getEventName());
         orderSummary.setNumber(current.getOrderCode());
-        orderSummary.setCorrelationid(current.getCorrelationId());
-        orderSummary.setEnddate(current.getCreated());
+        orderSummary.setCorrelationId(current.getCorrelationId());
+        orderSummary.setEnddate(new DateTime(current.getCreated()).withZone(DateTimeZone.UTC).toString());
         orderSummary.setUserAgent(current.getUserAgent());
         Double orderValue = calcOrderValue(current);
         orderSummary.setOrderValue(orderValue);

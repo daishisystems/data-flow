@@ -504,4 +504,18 @@ public class MasterOrder implements Serializable {
     public void setCreated(Long created) {
         this.created = created;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null)
+            return false;
+        if (!(obj instanceof MasterOrder))
+            return false;
+        if (obj == this)
+            return true;
+
+        MasterOrder other = (MasterOrder) obj;
+        return this.orderCode.equals(other.getOrderCode()) && this.correlationId.equals(other.getCorrelationId())
+                && this.created.equals(other.getCreated()) && this.eventName.equals(other.getEventName());
+    }
 }

@@ -140,6 +140,28 @@ public class OrderTest {
         assertFalse(orderIsComplete);
     }
 
+    @Test
+    public void masterOrdersAreEqual() {
+        String orderCode = "cf419e1d-a87a-4697-bb81-92ef2f44527d";
+        String correlationId = "060fc8e8-befa-42a4-af36-33f6da10e0a2";
+        Long created = 1542191931l;
+        String eventName = "CREATE";
+
+        MasterOrder masterOrder = new MasterOrder();
+        masterOrder.setOrderCode(orderCode);
+        masterOrder.setCorrelationId(correlationId);
+        masterOrder.setCreated(created);
+        masterOrder.setEventName(eventName);
+
+        MasterOrder other = new MasterOrder();
+        other.setOrderCode(orderCode);
+        other.setCorrelationId(correlationId);
+        other.setCreated(created);
+        other.setEventName(eventName);
+
+        assertTrue(masterOrder.equals(other));
+    }
+
     private String getFile(String fileName) {
         StringBuilder result = new StringBuilder("");
         ClassLoader classLoader = getClass().getClassLoader();

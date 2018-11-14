@@ -17,34 +17,36 @@
  */
 package com.dataflow.sample;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.joda.JodaModule;
 import com.google.api.services.bigquery.model.TableFieldSchema;
 import com.google.api.services.bigquery.model.TableRow;
 import com.google.api.services.bigquery.model.TableSchema;
+
 import org.apache.beam.sdk.Pipeline;
+import org.apache.beam.sdk.io.gcp.bigquery.BigQueryIO;
+import org.apache.beam.sdk.io.gcp.pubsub.PubsubIO;
 import org.apache.beam.sdk.options.PipelineOptionsFactory;
 import org.apache.beam.sdk.transforms.DoFn;
-import org.apache.beam.sdk.transforms.ParDo;
 import org.apache.beam.sdk.transforms.GroupByKey;
 import org.apache.beam.sdk.transforms.PTransform;
+import org.apache.beam.sdk.transforms.ParDo;
+import org.apache.beam.sdk.transforms.windowing.Sessions;
+import org.apache.beam.sdk.transforms.windowing.Window;
 import org.apache.beam.sdk.values.KV;
 import org.apache.beam.sdk.values.PCollection;
 import org.apache.beam.sdk.values.PCollectionTuple;
 import org.apache.beam.sdk.values.TupleTag;
 import org.apache.beam.sdk.values.TupleTagList;
-import org.apache.beam.sdk.transforms.windowing.Sessions;
-import org.apache.beam.sdk.transforms.windowing.Window;
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.joda.time.Duration;
-import org.apache.beam.sdk.io.gcp.bigquery.BigQueryIO;
-import org.apache.beam.sdk.io.gcp.pubsub.PubsubIO;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class App {
     private static final ObjectMapper mapper = new ObjectMapper();
@@ -142,8 +144,6 @@ public class App {
         incompleteOrders.apply("Archive Incomplete", PubsubIO.writeStrings().to(options.getArchiveTopic()));
 
         p.run().waitUntilFinish();
-
-        // FIXME: Add toString, Equals methods to all ...
     }
 
     private static TableSchema getTableSchema() {
@@ -319,7 +319,7 @@ public class App {
             OrderSummary orderSummary = c.element();
 
             tableRow.set("OrderNumber", orderSummary.getNumber());
-            tableRow.set("CorrelationId", orderSummary.getCorrelationid());
+            tableRow.set("CorrelationId", orderSummary.getCorrelationId());
             tableRow.set("MinTimeDelay", orderSummary.getMinTimeDelay());
             tableRow.set("AvgTimeDelay", orderSummary.getAvgTimedelay());
             tableRow.set("MaxTimeDelay", orderSummary.getMaxTimeDelay());
