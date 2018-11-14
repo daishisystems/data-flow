@@ -118,11 +118,11 @@ public class OrderSummary implements Serializable {
         this.number = number;
     }
 
-    public String getCorrelationid() {
+    public String getCorrelationId() {
         return this.correlationId;
     }
 
-    public void setCorrelationid(String correlationId) {
+    public void setCorrelationId(String correlationId) {
         this.correlationId = correlationId;
     }
 
@@ -208,6 +208,20 @@ public class OrderSummary implements Serializable {
         this.brandCode = brandCode;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null)
+            return false;
+        if (!(obj instanceof OrderSummary))
+            return false;
+        if (obj == this)
+            return true;
+
+        OrderSummary other = (OrderSummary) obj;
+        return this.number.equals(other.getNumber()) && this.correlationId.equals(other.getCorrelationId())
+                && this.startdate.equals(other.getStartdate()) && this.enddate.equals(other.getEnddate());
+    }
+
     /**
      * Sorts an iterable collection of orders by created-date.
      * 
@@ -237,7 +251,7 @@ public class OrderSummary implements Serializable {
         if (!iterator.hasNext()) {
             orderSummary.setLastEventName(previous.getEventName());
             orderSummary.setNumber(previous.getOrderCode());
-            orderSummary.setCorrelationid(previous.getCorrelationId());
+            orderSummary.setCorrelationId(previous.getCorrelationId());
             orderSummary.setEnddate(new DateTime(previous.getCreated()).withZone(DateTimeZone.UTC).toString());
             orderSummary.setUserAgent(previous.getUserAgent());
             Double orderValue = calcOrderValue(previous);
@@ -281,7 +295,7 @@ public class OrderSummary implements Serializable {
 
         orderSummary.setLastEventName(current.getEventName());
         orderSummary.setNumber(current.getOrderCode());
-        orderSummary.setCorrelationid(current.getCorrelationId());
+        orderSummary.setCorrelationId(current.getCorrelationId());
         orderSummary.setEnddate(new DateTime(current.getCreated()).withZone(DateTimeZone.UTC).toString());
         orderSummary.setUserAgent(current.getUserAgent());
         Double orderValue = calcOrderValue(current);
