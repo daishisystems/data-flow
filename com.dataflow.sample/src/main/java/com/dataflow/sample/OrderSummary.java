@@ -1,12 +1,15 @@
 package com.dataflow.sample;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.gson.annotations.Expose;
+
 import org.apache.beam.sdk.coders.DefaultCoder;
 import org.apache.beam.sdk.coders.SerializableCoder;
 import org.joda.time.DateTime;
@@ -42,7 +45,7 @@ public class OrderSummary implements Serializable {
     @Expose
     String enddate;
     @Expose
-    double orderValue;
+    BigDecimal orderValue;
     @Expose
     String userAgent;
     @Expose
@@ -86,11 +89,11 @@ public class OrderSummary implements Serializable {
         this.userAgent = userAgent;
     }
 
-    public double getOrderValue() {
+    public BigDecimal getOrderValue() {
         return this.orderValue;
     }
 
-    public void setOrderValue(Double orderValue) {
+    public void setOrderValue(BigDecimal orderValue) {
         this.orderValue = orderValue;
     }
 
@@ -254,7 +257,7 @@ public class OrderSummary implements Serializable {
             orderSummary.setCorrelationId(previous.getCorrelationId());
             orderSummary.setEnddate(new DateTime(previous.getCreated()).withZone(DateTimeZone.UTC).toString());
             orderSummary.setUserAgent(previous.getUserAgent());
-            Double orderValue = calcOrderValue(previous);
+            BigDecimal orderValue = Utils.rounded(Utils.calcOrderValue(previous, "EUR"));
             orderSummary.setOrderValue(orderValue);
             Integer numOrderArticles = calcNumOrderArticles(previous);
             orderSummary.setUnitsPerOrder(numOrderArticles);
@@ -298,7 +301,7 @@ public class OrderSummary implements Serializable {
         orderSummary.setCorrelationId(current.getCorrelationId());
         orderSummary.setEnddate(new DateTime(current.getCreated()).withZone(DateTimeZone.UTC).toString());
         orderSummary.setUserAgent(current.getUserAgent());
-        Double orderValue = calcOrderValue(current);
+        BigDecimal orderValue = Utils.rounded(Utils.calcOrderValue(current, "EUR"));
         orderSummary.setOrderValue(orderValue);
         Integer numOrderArticles = calcNumOrderArticles(current);
         orderSummary.setUnitsPerOrder(numOrderArticles);
@@ -317,42 +320,6 @@ public class OrderSummary implements Serializable {
         }
         MasterOrder lastOrder = orders.get(orders.size() - 1);
         return lastOrder.getEventName().equals(orderCompleteEventName);
-    }
-
-    private static Double calcOrderValue(MasterOrder masterOrder) {
-        Double deliveryCharge = 0d;
-
-        for (OrderItem orderItem : masterOrder.getOrderItems()) {
-            for (OrderArticle orderArticle : orderItem.getOrderArticles()) {
-                for (Charge charge : orderArticle.getCharges()) {
-                    String chargeType = charge.getName();
-                    if (chargeType.equals("Delivery") || chargeType.equals("DeliveryDuties")
-                            || chargeType.equals("DeliveryTaxes") || chargeType.equals("DeliveryTaxOnDuties")
-                            || chargeType.equals("DeliveryTaxOnFees") || chargeType.equals("DeliveryFees")
-                            || chargeType.equals("DeliveryFixedFee")) {
-                        deliveryCharge += charge.getExactValue().getValue();
-                    }
-                }
-            }
-        }
-
-        Double merchandiseCharge = 0d;
-
-        for (OrderItem orderItem : masterOrder.getOrderItems()) {
-            for (OrderArticle orderArticle : orderItem.getOrderArticles()) {
-                for (Charge charge : orderArticle.getCharges()) {
-                    String chargeType = charge.getName();
-                    if (chargeType.equals("Items") || chargeType.equals("ItemDuties") || chargeType.equals("ItemTaxes")
-                            || chargeType.equals("ItemTaxOnDuties") || chargeType.equals("ItemTaxOnFees")
-                            || chargeType.equals("ItemFees") || chargeType.equals("ItemFixedFee")) {
-                        merchandiseCharge += charge.getExactValue().getValue();
-                    }
-                }
-            }
-        }
-
-        double orderValue = deliveryCharge + merchandiseCharge;
-        return Math.round(orderValue * 100.0) / 100.0;
     }
 
     private static int calcNumOrderArticles(MasterOrder masterOrder) {

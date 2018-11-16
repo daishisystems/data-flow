@@ -2,13 +2,16 @@
 package com.dataflow.sample;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
+
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
 import org.apache.beam.sdk.coders.DefaultCoder;
 import org.apache.beam.sdk.coders.SerializableCoder;
 
@@ -21,7 +24,7 @@ public class FxRate implements Serializable {
     @JsonProperty("ToCurrency")
     private String toCurrency;
     @JsonProperty("Rate")
-    private Double rate;
+    private BigDecimal rate;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
     private final static long serialVersionUID = 4540677166791904262L;
@@ -31,19 +34,6 @@ public class FxRate implements Serializable {
      * 
      */
     public FxRate() {
-    }
-
-    /**
-     * 
-     * @param fromCurrency
-     * @param rate
-     * @param toCurrency
-     */
-    public FxRate(String fromCurrency, String toCurrency, Double rate) {
-        super();
-        this.fromCurrency = fromCurrency;
-        this.toCurrency = toCurrency;
-        this.rate = rate;
     }
 
     @JsonProperty("FromCurrency")
@@ -67,13 +57,13 @@ public class FxRate implements Serializable {
     }
 
     @JsonProperty("Rate")
-    public Double getRate() {
+    public BigDecimal getRate() {
         return rate;
     }
 
     @JsonProperty("Rate")
-    public void setRate(Double rate) {
-        this.rate = Utils.round(rate);
+    public void setRate(BigDecimal rate) {
+        this.rate = rate;
     }
 
     @JsonAnyGetter

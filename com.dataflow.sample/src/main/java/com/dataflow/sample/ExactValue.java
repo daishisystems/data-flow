@@ -2,13 +2,16 @@
 package com.dataflow.sample;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
+
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
 import org.apache.beam.sdk.coders.DefaultCoder;
 import org.apache.beam.sdk.coders.SerializableCoder;
 
@@ -21,7 +24,7 @@ public class ExactValue implements Serializable {
     @JsonProperty("Currency")
     private Currency currency;
     @JsonProperty("Value")
-    private Double value;
+    private BigDecimal value;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
     private final static long serialVersionUID = -5270350813609374145L;
@@ -31,19 +34,6 @@ public class ExactValue implements Serializable {
      * 
      */
     public ExactValue() {
-    }
-
-    /**
-     * 
-     * @param currencyCodeIso
-     * @param value
-     * @param currency
-     */
-    public ExactValue(String currencyCodeIso, Currency currency, Double value) {
-        super();
-        this.currencyCodeIso = currencyCodeIso;
-        this.currency = currency;
-        this.value = value;
     }
 
     @JsonProperty("CurrencyCodeIso")
@@ -67,13 +57,13 @@ public class ExactValue implements Serializable {
     }
 
     @JsonProperty("Value")
-    public Double getValue() {
+    public BigDecimal getValue() {
         return value;
     }
 
     @JsonProperty("Value")
-    public void setValue(Double value) {
-        this.value = Utils.round(value);
+    public void setValue(BigDecimal value) {
+        this.value = value;
     }
 
     @JsonAnyGetter

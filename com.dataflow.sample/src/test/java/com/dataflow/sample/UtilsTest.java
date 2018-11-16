@@ -4,6 +4,8 @@ import static org.junit.Assert.assertEquals;
 
 import java.io.File;
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.util.Hashtable;
 import java.util.List;
 import java.util.Scanner;
 
@@ -11,6 +13,7 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.joda.JodaModule;
+
 import org.junit.Test;
 
 public class UtilsTest {
@@ -63,8 +66,35 @@ public class UtilsTest {
         assertEquals(expected, actual, 0);
     }
 
-    private String getFile(String fileName) {
+    @Test
+    public void fxRatesAreReturnedFromOrder() throws JsonParseException, JsonMappingException, IOException {
+        String json = getFile("order.json");
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.registerModule(new JodaModule());
+        MasterOrder masterOrder = mapper.readValue(json, MasterOrder.class);
 
+        Hashtable<String, BigDecimal> fxRates = Utils.getFxRates(masterOrder, "EUR");
+        assertEquals(new BigDecimal("0.20"), fxRates.get("RON"));
+    }
+
+    @Test
+    public void valueIsConvertedByCurrencyConversionRate() {
+        final BigDecimal amount = new BigDecimal("100");
+        final BigDecimal conversionRate = new BigDecimal("0.20");
+
+        BigDecimal converted = Utils.convertCurrency(amount, conversionRate);
+        assertEquals(new BigDecimal("20.00"), converted);
+    }
+
+    @Test
+    public void NumberisRounded() {
+        BigDecimal pi = new BigDecimal("3.14159265359");
+        BigDecimal rounded = Utils.rounded(pi);
+
+        assertEquals("3.14", rounded.toString());
+    }
+
+    private String getFile(String fileName) {
         StringBuilder result = new StringBuilder("");
         ClassLoader classLoader = getClass().getClassLoader();
         File file = new File(classLoader.getResource(fileName).getFile());

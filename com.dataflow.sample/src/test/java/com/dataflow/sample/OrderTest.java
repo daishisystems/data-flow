@@ -6,6 +6,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -96,8 +97,8 @@ public class OrderTest {
         masterOrders.add(masterOrder2);
         OrderSummary orderSummary = OrderSummary.orderSummary(masterOrders, orderCompleteIdentifier);
 
-        Double expected = 21685.34;
-        assertEquals(Double.valueOf(expected), Double.valueOf(orderSummary.getOrderValue()));
+        BigDecimal expected = new BigDecimal("7317.68");
+        assertEquals(expected, orderSummary.getOrderValue());
     }
 
     @Test
