@@ -97,7 +97,7 @@ public class OrderTest {
         masterOrders.add(masterOrder2);
         OrderSummary orderSummary = OrderSummary.orderSummary(masterOrders, orderCompleteIdentifier);
 
-        BigDecimal expected = new BigDecimal("7317.68");
+        BigDecimal expected = new BigDecimal("3725.76");
         assertEquals(expected, orderSummary.getOrderValue());
     }
 

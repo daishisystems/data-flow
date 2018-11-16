@@ -66,37 +66,25 @@ public class Utils {
     }
 
     /**
-     * calcOrderValue aggregates all charge amounts in {@link masterOrder},
-     * converting each amount to {@link baseCurrency} where necessary.
+     * calcOrderValue aggregates delivery and merchanise charge amounts in
+     * {@link masterOrder}, for where applicable to {@link currency} .
      * 
      * @version 1.0
      * 
      * @author Paul Mooney
      */
-    public static BigDecimal calcOrderValue(MasterOrder masterOrder, String baseCurrency) {
+    public static BigDecimal calcOrderValue(MasterOrder masterOrder, String currency) {
         BigDecimal deliveryCharge = BigDecimal.ZERO;
-
-        Hashtable<String, BigDecimal> fxRates = getFxRates(masterOrder, baseCurrency);
 
         for (OrderItem orderItem : masterOrder.getOrderItems()) {
             for (OrderArticle orderArticle : orderItem.getOrderArticles()) {
                 for (Charge charge : orderArticle.getCharges()) {
                     String chargeType = charge.getName();
-                    if (chargeType.equals("Delivery") || chargeType.equals("DeliveryDuties")
-                            || chargeType.equals("DeliveryTaxes") || chargeType.equals("DeliveryTaxOnDuties")
-                            || chargeType.equals("DeliveryTaxOnFees") || chargeType.equals("DeliveryFees")
-                            || chargeType.equals("DeliveryFixedFee")) {
-
-                        String currencyCodeIso = charge.getExactValue().getCurrencyCodeIso();
-                        BigDecimal amount = charge.getExactValue().getValue();
-
-                        if (!currencyCodeIso.equals(baseCurrency)) {
-                            BigDecimal conversionRate = fxRates.get(currencyCodeIso);
-                            BigDecimal convertedAmount = convertCurrency(amount, conversionRate);
-                            deliveryCharge = deliveryCharge.add(convertedAmount);
-                        } else {
-                            deliveryCharge = deliveryCharge.add(amount);
-                        }
+                    if (charge.getExactValue().getCurrencyCodeIso().equals(currency) && (chargeType.equals("Delivery")
+                            || chargeType.equals("DeliveryDuties") || chargeType.equals("DeliveryTaxes")
+                            || chargeType.equals("DeliveryTaxOnDuties") || chargeType.equals("DeliveryTaxOnFees")
+                            || chargeType.equals("DeliveryFees") || chargeType.equals("DeliveryFixedFee"))) {
+                        deliveryCharge = deliveryCharge.add(charge.getExactValue().getValue());
                     }
                 }
             }
@@ -108,20 +96,11 @@ public class Utils {
             for (OrderArticle orderArticle : orderItem.getOrderArticles()) {
                 for (Charge charge : orderArticle.getCharges()) {
                     String chargeType = charge.getName();
-                    if (chargeType.equals("Items") || chargeType.equals("ItemDuties") || chargeType.equals("ItemTaxes")
+                    if (charge.getExactValue().getCurrencyCodeIso().equals(currency) && (chargeType.equals("Items")
+                            || chargeType.equals("ItemDuties") || chargeType.equals("ItemTaxes")
                             || chargeType.equals("ItemTaxOnDuties") || chargeType.equals("ItemTaxOnFees")
-                            || chargeType.equals("ItemFees") || chargeType.equals("ItemFixedFee")) {
-
-                        String currencyCodeIso = charge.getExactValue().getCurrencyCodeIso();
-                        BigDecimal amount = charge.getExactValue().getValue();
-
-                        if (!currencyCodeIso.equals(baseCurrency)) {
-                            BigDecimal conversionRate = fxRates.get(currencyCodeIso);
-                            BigDecimal convertedAmount = convertCurrency(amount, conversionRate);
-                            deliveryCharge = deliveryCharge.add(convertedAmount);
-                        } else {
-                            deliveryCharge = deliveryCharge.add(amount);
-                        }
+                            || chargeType.equals("ItemFees") || chargeType.equals("ItemFixedFee"))) {
+                        merchandiseCharge = merchandiseCharge.add(charge.getExactValue().getValue());
                     }
                 }
             }

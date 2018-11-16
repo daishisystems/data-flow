@@ -56,7 +56,7 @@ public class ExactValue implements Serializable {
         this.currency = currency;
     }
 
-    @JsonProperty("Value")
+    @JsonProperty("Value") // FIXME: Round to 9 decimal places
     public BigDecimal getValue() {
         return value;
     }
