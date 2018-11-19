@@ -2,6 +2,9 @@ package com.dataflow.sample;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.List;
 
@@ -117,5 +120,33 @@ public class Utils {
      */
     public static BigDecimal rounded(BigDecimal number) {
         return number.setScale(2, RoundingMode.HALF_EVEN);
+    }
+
+    /**
+     * groupOrders groups a disparat collection of {@link MasterOrder}s into
+     * individual collections, bsed on {@link MasterOrder.OrderCode} .
+     * 
+     * @version 1.0
+     * 
+     * @author Paul Mooney
+     */
+    public static List<List<MasterOrder>> groupOrders(List<MasterOrder> masterOrders) {
+
+        if (masterOrders == null)
+            return null; // FIXME: Error handling, validation
+
+        HashMap<String, List<MasterOrder>> orderMap = new HashMap<String, List<MasterOrder>>();
+
+        for (MasterOrder masterOrder : masterOrders) {
+            if (!orderMap.containsKey(masterOrder.getOrderCode())) {
+                List<MasterOrder> orderList = new ArrayList<MasterOrder>();
+                orderList.add(masterOrder);
+                orderMap.put(masterOrder.getOrderCode(), orderList);
+            } else {
+                orderMap.get(masterOrder.getOrderCode()).add(masterOrder);
+            }
+        }
+
+        return new ArrayList<List<MasterOrder>>(orderMap.values());
     }
 }

@@ -1,10 +1,13 @@
 package com.dataflow.sample;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Scanner;
@@ -92,6 +95,31 @@ public class UtilsTest {
         BigDecimal rounded = Utils.rounded(pi);
 
         assertEquals("3.14", rounded.toString());
+    }
+
+    @Test
+    public void ordersAreGroupedByOrderCode() {
+
+        String order1Code = "ORDER1";
+        String order2Code = "ORDER2";
+
+        MasterOrder order1 = new MasterOrder();
+        order1.setOrderCode(order1Code);
+
+        MasterOrder order2 = new MasterOrder();
+        order2.setOrderCode(order2Code);
+
+        List<MasterOrder> masterOrders = new ArrayList<MasterOrder>();
+
+        masterOrders.add(order1);
+        masterOrders.add(order2);
+
+        List<List<MasterOrder>> groupedOrders = Utils.groupOrders(masterOrders);
+
+        assertEquals(2, groupedOrders.size());
+        assertEquals(order1Code, groupedOrders.get(0).get(0).getOrderCode());
+        assertEquals(order2Code, groupedOrders.get(1).get(0).getOrderCode());
+
     }
 
     private String getFile(String fileName) {
