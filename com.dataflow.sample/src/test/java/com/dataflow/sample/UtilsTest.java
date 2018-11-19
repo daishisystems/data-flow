@@ -1,14 +1,14 @@
 package com.dataflow.sample;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.Collections;
 import java.util.Hashtable;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -119,7 +119,24 @@ public class UtilsTest {
         assertEquals(2, groupedOrders.size());
         assertEquals(order1Code, groupedOrders.get(0).get(0).getOrderCode());
         assertEquals(order2Code, groupedOrders.get(1).get(0).getOrderCode());
+    }
 
+    /**
+     * Sorts an iterable collection of orders by created-date.
+     * 
+     * @version 1.0
+     * 
+     * @author Paul Mooney
+     */
+    public static List<MasterOrder> sortOrders(Iterable<MasterOrder> orders) {
+
+        List<MasterOrder> sortedOrders = new ArrayList<>();
+        Iterator<MasterOrder> iterator = orders.iterator();
+        while (iterator.hasNext()) {
+            sortedOrders.add((MasterOrder) iterator.next());
+        }
+        Collections.sort(sortedOrders, (o1, o2) -> new Long(o1.getCreated()).compareTo(new Long((o2.getCreated()))));
+        return sortedOrders;
     }
 
     private String getFile(String fileName) {

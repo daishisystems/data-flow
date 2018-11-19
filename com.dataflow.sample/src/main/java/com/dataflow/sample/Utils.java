@@ -3,7 +3,6 @@ package com.dataflow.sample;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.List;
@@ -129,11 +128,11 @@ public class Utils {
      * @version 1.0
      * 
      * @author Paul Mooney
-     */
-    public static List<List<MasterOrder>> groupOrders(List<MasterOrder> masterOrders) {
+     */ // FIXME: Error handling, validation
+    public static List<List<MasterOrder>> groupOrders(Iterable<MasterOrder> masterOrders) {
 
         if (masterOrders == null)
-            return null; // FIXME: Error handling, validation
+            return null;
 
         HashMap<String, List<MasterOrder>> orderMap = new HashMap<String, List<MasterOrder>>();
 
@@ -149,4 +148,5 @@ public class Utils {
 
         return new ArrayList<List<MasterOrder>>(orderMap.values());
     }
+
 }

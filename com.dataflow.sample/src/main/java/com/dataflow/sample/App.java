@@ -101,14 +101,17 @@ public class App {
         outputTuple.get(invalidOrdersTupleTag).apply("Dead Letter Queue",
                 PubsubIO.writeStrings().to(options.getDeadLetterTopic()));
 
-        masterOrders.apply("Summarise", ParDo.of(new OrderSummaryFn()))
+        PCollection<List<MasterOrder>> groupedOrders = masterOrders.apply("Map", ParDo.of(new GroupOrdersFn()));
+
+        groupedOrders.apply("Summarise", ParDo.of(new OrderSummaryFn()))
                 .apply("Apply Schema", new OrderSummariesToTableRows()).apply("Save to BQ",
                         BigQueryIO.writeTableRows().to(options.getOrderSummaryTable()).withSchema(getTableSchema())
                                 .withMethod(BigQueryIO.Write.Method.STREAMING_INSERTS)
                                 .withCreateDisposition(BigQueryIO.Write.CreateDisposition.CREATE_IF_NEEDED)
                                 .withWriteDisposition(BigQueryIO.Write.WriteDisposition.WRITE_APPEND));
 
-        PCollectionTuple processedOrdersTuple = masterOrders.apply("Analyse", // FIXME: !!!This can occur before grouping ...
+        PCollectionTuple processedOrdersTuple = masterOrders.apply("Analyse", // FIXME: !!!This can occur before
+                                                                              // grouping ...
                 ParDo.of(new DoFn<KV<String, Iterable<MasterOrder>>, MasterOrder>() {
                     private static final long serialVersionUID = -4644201311299503730L;
                     final String COMPLETE_EVENT_NAME = "CompleteOrder";
@@ -287,16 +290,27 @@ public class App {
         }
     }
 
-    static class OrderSummaryFn extends DoFn<KV<String, Iterable<MasterOrder>>, OrderSummary> {
+    static class OrderSummaryFn extends DoFn<List<MasterOrder>, OrderSummary> {
         private static final long serialVersionUID = -3067528732035106582L;
         final String COMPLETE_EVENT_NAME = "CompleteOrder";
 
         @ProcessElement
         public void processElement(ProcessContext c) throws Exception {
-            Iterable<MasterOrder> orders = c.element().getValue();
-            List<MasterOrder> sortedOrders = OrderSummary.sortOrders(orders);
+            List<MasterOrder> sortedOrders = OrderSummary.sortOrders(c.element());
             OrderSummary orderSummary = OrderSummary.orderSummary(sortedOrders, COMPLETE_EVENT_NAME);
             c.output(orderSummary);
+        }
+    }
+
+    static class GroupOrdersFn extends DoFn<KV<String, Iterable<MasterOrder>>, List<MasterOrder>> {
+
+        private static final long serialVersionUID = -8421532686353495449L;
+
+        @ProcessElement
+        public void ProcessElement(ProcessContext c) {
+            for (List<MasterOrder> masterOrders : Utils.groupOrders(c.element().getValue())) {
+                c.output(masterOrders);
+            }
         }
     }
 
