@@ -74,7 +74,7 @@ public class App {
         mapper.registerModule(new JodaModule());
 
         PCollection<String> pubSubOutput = p.apply("Read Input",
-                PubsubIO.readStrings().fromTopic(options.getInputTopic()).withTimestampAttribute("EventTimestamp"));
+                PubsubIO.readStrings().fromTopic(options.getInputTopic()));
 
         PCollectionTuple outputTuple = pubSubOutput.apply("Validate",
                 ParDo.of(new DoFn<String, KV<String, MasterOrder>>() {
