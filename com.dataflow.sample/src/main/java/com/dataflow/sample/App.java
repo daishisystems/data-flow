@@ -275,7 +275,8 @@ public class App {
                     paymentDetail.setPoBox(Utils.mask(poBox, '#'));
                 }
             }
-            o.setDeliveryDetails(deliveryDetails);
+            o.setCorrelationId(Utils.mask(o.getCorrelationId(), '#'));
+            o.setFingerprintId(Utils.mask(o.getFingerprintId(), '#'));
             c.output(o);
         }
     }
