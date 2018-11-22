@@ -275,8 +275,14 @@ public class App {
                     paymentDetail.setPoBox(Utils.mask(poBox, '#'));
                 }
             }
-            o.setCorrelationId(Utils.mask(o.getCorrelationId(), '#'));
-            o.setFingerprintId(Utils.mask(o.getFingerprintId(), '#'));
+            if (o.getCorrelationId() != null && !o.getCorrelationId().isEmpty()) {
+                o.setCorrelationId(Utils.mask(o.getCorrelationId(), '#'));
+            }
+
+            if (o.getFingerprintId() != null && !o.getFingerprintId().isEmpty()) {
+                o.setFingerprintId(Utils.mask(o.getFingerprintId(), '#'));
+            }
+
             c.output(o);
         }
     }
