@@ -1,154 +1,171 @@
-
 package com.dataflow.sample;
 
 import java.io.Serializable;
-import java.util.Objects;
-import com.google.gson.annotations.Expose;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import org.apache.beam.sdk.coders.DefaultCoder;
 import org.apache.beam.sdk.coders.SerializableCoder;
 
 @DefaultCoder(SerializableCoder.class)
 public class Order implements Serializable {
-    private static final long serialVersionUID = -7348367869296778970L;
-    @Expose
-    String number;
-    @Expose
-    float value;
-    @Expose
-    String brandCode;
-    @Expose
-    String eventName;
-    @Expose
-    String correlationId;
-    @Expose
-    long created;
-    @Expose
-    boolean complete;
-    @Expose
-    String emailAddress;
-    @Expose
-    String userAgent;
-    @Expose
-    String queryString;
-    @Expose
-    String country;
-    @Expose
-    int unitsPerOrder;
+    @JsonProperty("OrderRef")
+    private String orderRef;
+    @JsonProperty("OrderNumber")
+    private String orderNumber;
+    @JsonProperty("TotalPaymentAmount")
+    private Double totalPaymentAmount;
+    @JsonProperty("CurrencyIso")
+    private String currencyIso;
+    @JsonProperty("IsProductLaunchOrder")
+    private Boolean isProductLaunchOrder;
+    @JsonProperty("HasCustomizedProduct")
+    private Boolean hasCustomizedProduct;
+    @JsonProperty("HasBackOrderedItems")
+    private Boolean hasBackOrderedItems;
+    @JsonProperty("MaxEstimatedDeliveryDateInDays")
+    private Integer maxEstimatedDeliveryDateInDays;
+    @JsonProperty("CustomClientCulture")
+    private String customClientCulture;
+    @JsonProperty("IpAddress")
+    private String ipAddress;
+    @JsonProperty("ShippingAddress")
+    private ShippingAddress shippingAddress;
+    @JsonProperty("BillingAddress")
+    private BillingAddress billingAddress;
+    @JsonProperty("OrderItems")
+    private List<OrderItem> orderItems = new ArrayList<OrderItem>();
+    private final static long serialVersionUID = -3518183751690070434L;
 
-    public String getCountry() {
-        return this.country;
+    @JsonProperty("OrderRef")
+    public String getOrderRef() {
+        return orderRef;
     }
 
-    public void setCountry(String country) {
-        this.country = country;
+    @JsonProperty("OrderRef")
+    public void setOrderRef(String orderRef) {
+        this.orderRef = orderRef;
     }
 
-    public int getUnitsPerOrder() {
-        return this.unitsPerOrder;
+    @JsonProperty("OrderNumber")
+    public String getOrderNumber() {
+        return orderNumber;
     }
 
-    public void setUnitsPerOrder(int unitsPerOrder) {
-        this.unitsPerOrder = unitsPerOrder;
+    @JsonProperty("OrderNumber")
+    public void setOrderNumber(String orderNumber) {
+        this.orderNumber = orderNumber;
     }
 
-    public Order() {
-
+    @JsonProperty("TotalPaymentAmount")
+    public Double getTotalPaymentAmount() {
+        return totalPaymentAmount;
     }
 
-    public String getNumber() {
-        return this.number;
+    @JsonProperty("TotalPaymentAmount")
+    public void setTotalPaymentAmount(Double totalPaymentAmount) {
+        this.totalPaymentAmount = totalPaymentAmount;
     }
 
-    public void setNumber(String number) {
-        this.number = number;
+    @JsonProperty("CurrencyIso")
+    public String getCurrencyIso() {
+        return currencyIso;
     }
 
-    public float getValue() {
-        return this.value;
+    @JsonProperty("CurrencyIso")
+    public void setCurrencyIso(String currencyIso) {
+        this.currencyIso = currencyIso;
     }
 
-    public void setValue(float value) {
-        this.value = value;
+    @JsonProperty("IsProductLaunchOrder")
+    public Boolean getIsProductLaunchOrder() {
+        return isProductLaunchOrder;
     }
 
-    public String getBrandCode() {
-        return this.brandCode;
+    @JsonProperty("IsProductLaunchOrder")
+    public void setIsProductLaunchOrder(Boolean isProductLaunchOrder) {
+        this.isProductLaunchOrder = isProductLaunchOrder;
     }
 
-    public void setBrandCode(String brandCode) {
-        this.brandCode = brandCode;
+    @JsonProperty("HasCustomizedProduct")
+    public Boolean getHasCustomizedProduct() {
+        return hasCustomizedProduct;
     }
 
-    public String getEventName() {
-        return this.eventName;
+    @JsonProperty("HasCustomizedProduct")
+    public void setHasCustomizedProduct(Boolean hasCustomizedProduct) {
+        this.hasCustomizedProduct = hasCustomizedProduct;
     }
 
-    public void setEventName(String eventName) {
-        this.eventName = eventName;
+    @JsonProperty("HasBackOrderedItems")
+    public Boolean getHasBackOrderedItems() {
+        return hasBackOrderedItems;
     }
 
-    public String getCorrelationId() {
-        return this.correlationId;
+    @JsonProperty("HasBackOrderedItems")
+    public void setHasBackOrderedItems(Boolean hasBackOrderedItems) {
+        this.hasBackOrderedItems = hasBackOrderedItems;
     }
 
-    public void setCorrelationId(String correlationId) {
-        this.correlationId = correlationId;
+    @JsonProperty("MaxEstimatedDeliveryDateInDays")
+    public Integer getMaxEstimatedDeliveryDateInDays() {
+        return maxEstimatedDeliveryDateInDays;
     }
 
-    public long getCreated() {
-        return this.created;
+    @JsonProperty("MaxEstimatedDeliveryDateInDays")
+    public void setMaxEstimatedDeliveryDateInDays(Integer maxEstimatedDeliveryDateInDays) {
+        this.maxEstimatedDeliveryDateInDays = maxEstimatedDeliveryDateInDays;
     }
 
-    public void setCreated(Long created) {
-        this.created = created;
+    @JsonProperty("CustomClientCulture")
+    public String getCustomClientCulture() {
+        return customClientCulture;
     }
 
-    public boolean getComplete() {
-        return this.complete;
+    @JsonProperty("CustomClientCulture")
+    public void setCustomClientCulture(String customClientCulture) {
+        this.customClientCulture = customClientCulture;
     }
 
-    public void setComplete(Boolean complete) {
-        this.complete = complete;
+    @JsonProperty("IpAddress")
+    public String getIpAddress() {
+        return ipAddress;
     }
 
-    public String getEmailAddress() {
-        return emailAddress;
+    @JsonProperty("IpAddress")
+    public void setIpAddress(String ipAddress) {
+        this.ipAddress = ipAddress;
     }
 
-    public void setEmailAddress(String emailAddress) {
-        this.emailAddress = emailAddress;
+    @JsonProperty("ShippingAddress")
+    public ShippingAddress getShippingAddress() {
+        return shippingAddress;
     }
 
-    public String getUserAgent() {
-        return this.userAgent;
+    @JsonProperty("ShippingAddress")
+    public void setShippingAddress(ShippingAddress shippingAddress) {
+        this.shippingAddress = shippingAddress;
     }
 
-    public void setUserAgent(String userAgent) {
-        this.userAgent = userAgent;
+    @JsonProperty("BillingAddress")
+    public BillingAddress getBillingAddress() {
+        return billingAddress;
     }
 
-    public String getQueryString() {
-        return this.queryString;
+    @JsonProperty("BillingAddress")
+    public void setBillingAddress(BillingAddress billingAddress) {
+        this.billingAddress = billingAddress;
     }
 
-    public void setQueryString(String queryString) {
-        this.queryString = queryString;
+    @JsonProperty("OrderItems")
+    public List<OrderItem> getOrderItems() {
+        return orderItems;
     }
 
-    @Override
-    public boolean equals(Object o) {
-
-        if (o == this)
-            return true;
-        if (!(o instanceof Order)) {
-            return false;
-        }
-        Order order = (Order) o;
-        return Objects.equals(number, order.number);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(number);
+    @JsonProperty("OrderItems")
+    public void setOrderItems(List<OrderItem> orderItems) {
+        this.orderItems = orderItems;
     }
 }
