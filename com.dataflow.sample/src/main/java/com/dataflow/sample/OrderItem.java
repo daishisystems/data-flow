@@ -19,7 +19,7 @@ import org.apache.beam.sdk.coders.SerializableCoder;
 @DefaultCoder(SerializableCoder.class)
 public class OrderItem implements Serializable {
 
-    @JsonProperty("OrderArticles")
+    @JsonProperty("OrderArticlesAll")
     private List<OrderArticle> orderArticles = new ArrayList<OrderArticle>();
     @JsonProperty("Available")
     private Boolean available;
@@ -109,12 +109,12 @@ public class OrderItem implements Serializable {
         this.chargeTargets = chargeTargets;
     }
 
-    @JsonProperty("OrderArticles")
+    @JsonProperty("OrderArticlesAll")
     public List<OrderArticle> getOrderArticles() {
         return orderArticles;
     }
 
-    @JsonProperty("OrderArticles")
+    @JsonProperty("OrderArticlesAll")
     public void setOrderArticles(List<OrderArticle> orderArticles) {
         if (orderArticles != null) {
             this.orderArticles = orderArticles;

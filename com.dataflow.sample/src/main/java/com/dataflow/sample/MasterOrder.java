@@ -10,14 +10,18 @@ import org.apache.beam.sdk.coders.SerializableCoder;
 
 @DefaultCoder(SerializableCoder.class)
 public class MasterOrder implements Serializable {
+    @JsonProperty("ShopperCurrencyPaymentAmount")
+    private ShopperCurrencyPaymentAmount shopperCurrencyPaymentAmount;
+    @JsonProperty("RetailerCurrencyPaymentAmount")
+    private RetailerCurrencyPaymentAmount retailerCurrencyPaymentAmount;
+    @JsonProperty("EShopWorldCurrencyPaymentAmount")
+    private EShopWorldCurrencyPaymentAmount eShopWorldCurrencyPaymentAmount;
     @JsonProperty("OrderCode")
     private String orderCode;
     @JsonProperty("RetailerCartId")
     private String retailerCartId;
-    @JsonProperty("OrderItems")
+    @JsonProperty("OrderItemsAll")
     private List<OrderItem> orderItems = new ArrayList<OrderItem>();
-    @JsonProperty("AvailableOrderItems")
-    private List<AvailableOrderItem> availableOrderItems = new ArrayList<AvailableOrderItem>();
     @JsonProperty("RetailerPromoCodes")
     private List<RetailerPromoCode> retailerPromoCodes = new ArrayList<RetailerPromoCode>();
     @JsonProperty("OrderDiscounts")
@@ -110,27 +114,15 @@ public class MasterOrder implements Serializable {
         this.retailerCartId = retailerCartId;
     }
 
-    @JsonProperty("OrderItems")
+    @JsonProperty("OrderItemsAll")
     public List<OrderItem> getOrderItems() {
         return orderItems;
     }
 
-    @JsonProperty("OrderItems")
+    @JsonProperty("OrderItemsAll")
     public void setOrderItems(List<OrderItem> orderItems) {
         if (orderItems != null) {
             this.orderItems = orderItems;
-        }
-    }
-
-    @JsonProperty("AvailableOrderItems")
-    public List<AvailableOrderItem> getAvailableOrderItems() {
-        return availableOrderItems;
-    }
-
-    @JsonProperty("AvailableOrderItems")
-    public void setAvailableOrderItems(List<AvailableOrderItem> availableOrderItems) {
-        if (availableOrderItems != null) {
-            this.availableOrderItems = availableOrderItems;
         }
     }
 
