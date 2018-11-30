@@ -149,4 +149,12 @@ public class Utils {
         return new ArrayList<List<MasterOrder>>(orderMap.values());
     }
 
+    public static boolean startsWithDigit(String input) {
+
+        if (input == null || input.isEmpty()) {
+            return false;
+        }
+        return Character.isDigit(input.charAt(0));
+    }
+
 }

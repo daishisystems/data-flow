@@ -40,8 +40,6 @@ public class DeviceAtlasTest {
             module.addSerializer(Properties.class, new PropertiesSerialiser());
             mapper.registerModule(module);
 
-            String serialised = mapper.writeValueAsString(properties);
-
             assertTrue(properties.containsKey("vendor"));
             assertEquals("Apple", properties.get("vendor").value());
         } finally {

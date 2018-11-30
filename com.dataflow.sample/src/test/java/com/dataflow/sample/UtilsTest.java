@@ -1,6 +1,7 @@
 package com.dataflow.sample;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
@@ -119,6 +120,13 @@ public class UtilsTest {
         assertEquals(2, groupedOrders.size());
         assertEquals(order1Code, groupedOrders.get(0).get(0).getOrderCode());
         assertEquals(order2Code, groupedOrders.get(1).get(0).getOrderCode());
+    }
+
+    @Test
+    public void stringStartsWithDigit() {
+
+        boolean startsWithDigit = Utils.startsWithDigit("1A");
+        assertTrue(startsWithDigit);
     }
 
     /**
