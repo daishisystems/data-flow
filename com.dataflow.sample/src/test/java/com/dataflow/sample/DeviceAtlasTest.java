@@ -12,17 +12,21 @@ import com.deviceatlas.cloud.deviceidentification.client.Client;
 import com.deviceatlas.cloud.deviceidentification.client.ClientException;
 import com.deviceatlas.cloud.deviceidentification.client.Properties;
 import com.deviceatlas.cloud.deviceidentification.client.Result;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.module.SimpleModule;
 
 import org.junit.Test;
 
 public class DeviceAtlasTest {
 
     @Test
-    public void devicePropertiesAreDeterminedFromUserAgent() throws CacheException, ClientException {
+    public void devicePropertiesAreDeterminedFromUserAgent()
+            throws CacheException, ClientException, JsonProcessingException {
 
         Map<String, String> headers = new HashMap<String, String>();
         headers.put("user-agent",
-                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.110 Safari/537.36");
+                "Mozilla/5.0 (iPhone; CPU iPhone OS 12_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.0 Mobile/15E148 Safari/604.1");
 
         Client client = Client.getInstance(new EhCacheCacheProvider());
         client.setLicenceKey("940587294e780cf8ccf52f1162ac2db7");
@@ -31,8 +35,15 @@ public class DeviceAtlasTest {
             Result result = client.getResult(headers);
             Properties properties = result.getProperties();
 
+            ObjectMapper mapper = new ObjectMapper();
+            SimpleModule module = new SimpleModule();
+            module.addSerializer(Properties.class, new PropertiesSerialiser());
+            mapper.registerModule(module);
+
+            String serialised = mapper.writeValueAsString(properties);
+
             assertTrue(properties.containsKey("vendor"));
-            assertEquals("Google", properties.get("vendor").value());
+            assertEquals("Apple", properties.get("vendor").value());
         } finally {
             if (client != null) {
                 client.shutdown();
