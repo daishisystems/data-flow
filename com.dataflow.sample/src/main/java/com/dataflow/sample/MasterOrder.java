@@ -67,7 +67,7 @@ public class MasterOrder implements Serializable {
     @JsonProperty("Pricing")
     private Pricing pricing;
     @JsonProperty("OrderConfirmationErrorInformation")
-    private OrderConfirmationErrorInformation orderConfirmationErrorInformation;
+    private String orderConfirmationErrorInformation;
     @JsonProperty("Features")
     private List<Feature> features = new ArrayList<Feature>();
     @JsonProperty("ExpiryTimeUtc")
@@ -361,13 +361,12 @@ public class MasterOrder implements Serializable {
     }
 
     @JsonProperty("OrderConfirmationErrorInformation")
-    public OrderConfirmationErrorInformation getOrderConfirmationErrorInformation() {
+    public String getOrderConfirmationErrorInformation() {
         return this.orderConfirmationErrorInformation;
     }
 
     @JsonProperty("OrderConfirmationErrorInformation")
-    public void setOrderConfirmationErrorInformation(
-            OrderConfirmationErrorInformation orderConfirmationErrorInformation) {
+    public void setOrderConfirmationErrorInformation(String orderConfirmationErrorInformation) {
         this.orderConfirmationErrorInformation = orderConfirmationErrorInformation;
     }
 

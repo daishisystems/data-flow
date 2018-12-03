@@ -40,4 +40,9 @@ public interface CustomPipelineOptions extends PipelineOptions {
     String getArchiveTopic();
 
     void setArchiveTopic(String archiveTopic);
+
+    @Description("The Device Atlas Pub/Sub Topic.")
+    String getDeviceAtlasTopic();
+
+    void setDeviceAtlasTopic(String deviceAtlasTopic);
 }

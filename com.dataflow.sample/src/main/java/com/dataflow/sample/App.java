@@ -21,7 +21,15 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.deviceatlas.cloud.deviceidentification.cacheprovider.CacheException;
+import com.deviceatlas.cloud.deviceidentification.cacheprovider.EhCacheCacheProvider;
+import com.deviceatlas.cloud.deviceidentification.client.Client;
+import com.deviceatlas.cloud.deviceidentification.client.ClientException;
+import com.deviceatlas.cloud.deviceidentification.client.Properties;
+import com.deviceatlas.cloud.deviceidentification.client.Result;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.datatype.joda.JodaModule;
 import com.google.api.services.bigquery.model.TableFieldSchema;
 import com.google.api.services.bigquery.model.TableRow;
@@ -91,6 +99,47 @@ public class App {
                         }
                     }
                 }).withOutputTags(validOrdersTupleTag, TupleTagList.of(invalidOrdersTupleTag)));
+
+        outputTuple.get(validOrdersTupleTag)
+                .apply("Device Atlas GET", ParDo.of(new DoFn<KV<String, MasterOrder>, String>() {
+                    private static final long serialVersionUID = -8188680683281752951L;
+                    Client client = null;
+                    ObjectMapper mapper = null;
+
+                    @StartBundle
+                    public void startBundle(StartBundleContext c) { // FIXME: Is this the best way? Is Client threadsafe?
+                        try {
+                            client = Client.getInstance(new EhCacheCacheProvider());
+                            client.setLicenceKey("940587294e780cf8ccf52f1162ac2db7");
+
+                            mapper = new ObjectMapper();
+                            SimpleModule module = new SimpleModule();
+                            module.addSerializer(Properties.class, new PropertiesSerialiser());
+                            mapper.registerModule(module);
+                        } catch (CacheException e) {
+                            LOG.error(e.getMessage());
+                        } catch (Exception e) {
+                            LOG.error(e.getMessage());
+                        }
+                    }
+
+                    @ProcessElement
+                    public void processElement(ProcessContext c) {
+                        Result result = null;
+                        try {
+                            result = client.getResultByUserAgent(c.element().getValue().getUserAgent());
+                            Properties properties = result.getProperties(); // FIXME: Ignore internal UA
+                            c.output(mapper.writeValueAsString(properties));
+                        } catch (ClientException e) {
+                            LOG.error(e.getMessage());
+                        } catch (JsonProcessingException e) {
+                            LOG.error(e.getMessage());
+                        } catch (Exception e) {
+                            LOG.error(e.getMessage());
+                        }
+                    }
+                })).apply("Device Atlas Publish", PubsubIO.writeStrings().to(options.getDeviceAtlasTopic()));
+        ;
 
         PCollection<KV<String, Iterable<MasterOrder>>> masterOrders = outputTuple.get(validOrdersTupleTag)
                 .apply("Window",
