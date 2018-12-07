@@ -1413,7 +1413,7 @@
 	"brandCode": "DIF",
 	"eventName": "ConfirmOrder",
 	"correlationId": "aac75b2513b0dbc015de17c6de2100f1727058244d223677e79ef6d8a47825e2",
-	"userAgent": "FxVersion/4.7.3221.0 OSName/WindowsServer2016Datacenter OSVersion/6.3.14393 Checkout.Api.AutoRest.Client.Proxies.CheckoutApiPaymentV2/1.0.0.0",
+	"userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.110 Safari/537.36",
 	"queryString": "http://checkout-api-diftes.ci.eshopworld.net/api/v2/Payment/AuthorizeOrder",
 	"created": "1541521629766"
 }

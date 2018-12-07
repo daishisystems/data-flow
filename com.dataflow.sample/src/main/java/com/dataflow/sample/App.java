@@ -21,13 +21,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.deviceatlas.cloud.deviceidentification.cacheprovider.CacheException;
 import com.deviceatlas.cloud.deviceidentification.cacheprovider.EhCacheCacheProvider;
 import com.deviceatlas.cloud.deviceidentification.client.Client;
-import com.deviceatlas.cloud.deviceidentification.client.ClientException;
 import com.deviceatlas.cloud.deviceidentification.client.Properties;
 import com.deviceatlas.cloud.deviceidentification.client.Result;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.datatype.joda.JodaModule;
@@ -52,13 +49,44 @@ import org.apache.beam.sdk.values.TupleTag;
 import org.apache.beam.sdk.values.TupleTagList;
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 import org.joda.time.Duration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class App {
-    private static final ObjectMapper mapper = new ObjectMapper();
+    private static final ObjectMapper mapper = getObjectMapper();
     private static final Logger LOG = LoggerFactory.getLogger(App.class);
+    private static final Client client = getClient();
+
+    static Client getClient() {
+        Client client = null;
+        try {
+            client = Client.getInstance(new EhCacheCacheProvider());
+            client.setLicenceKey("940587294e780cf8ccf52f1162ac2db7");
+            LOG.warn("Client created.");
+        } catch (Exception e2) {
+            LOG.warn("Could not create new client. " + e2.getMessage());
+            try {
+                client = Client.getInstance();
+                client.setLicenceKey("940587294e780cf8ccf52f1162ac2db7");
+                LOG.warn("Client retrieved.");
+            } catch (Exception e1) {
+                LOG.error("Failed to get existing client. " + e1.getMessage());
+            }
+        }
+        return client;
+    }
+
+    static ObjectMapper getObjectMapper() {
+        ObjectMapper mapper = new ObjectMapper();
+        SimpleModule module = new SimpleModule();
+        module.addSerializer(Properties.class, new PropertiesSerialiser());
+        mapper.registerModule(module);
+        mapper.registerModule(new JodaModule());
+        return mapper;
+    }
 
     public static void main(String[] args) {
 
@@ -78,8 +106,6 @@ public class App {
         final TupleTag<MasterOrder> incompleteOrdersTag = new TupleTag<MasterOrder>() {
             private static final long serialVersionUID = 6238727806361931139L;
         };
-
-        mapper.registerModule(new JodaModule());
 
         PCollection<String> pubSubOutput = p.apply("Read Input",
                 PubsubIO.readStrings().fromTopic(options.getInputTopic()));
@@ -102,44 +128,28 @@ public class App {
 
         outputTuple.get(validOrdersTupleTag)
                 .apply("Device Atlas GET", ParDo.of(new DoFn<KV<String, MasterOrder>, String>() {
-                    private static final long serialVersionUID = -8188680683281752951L;
-                    Client client = null;
-                    ObjectMapper mapper = null;
+                    private static final long serialVersionUID = 5752210303711482564L;
 
-                    @StartBundle
-                    public void startBundle(StartBundleContext c) { // FIXME: Is this the best way? Is Client threadsafe?
-                        try {
-                            client = Client.getInstance(new EhCacheCacheProvider());
-                            client.setLicenceKey("940587294e780cf8ccf52f1162ac2db7");
-
-                            mapper = new ObjectMapper();
-                            SimpleModule module = new SimpleModule();
-                            module.addSerializer(Properties.class, new PropertiesSerialiser());
-                            mapper.registerModule(module);
-                        } catch (CacheException e) {
-                            LOG.error(e.getMessage());
-                        } catch (Exception e) {
-                            LOG.error(e.getMessage());
-                        }
-                    }
-
+                    // FIXME: Add ordercode, timestamp, etc.
+                    // FIXME: Ignore invalid User Agents
                     @ProcessElement
                     public void processElement(ProcessContext c) {
-                        Result result = null;
                         try {
-                            result = client.getResultByUserAgent(c.element().getValue().getUserAgent());
-                            Properties properties = result.getProperties(); // FIXME: Ignore internal UA
-                            c.output(mapper.writeValueAsString(properties));
-                        } catch (ClientException e) {
-                            LOG.error(e.getMessage());
-                        } catch (JsonProcessingException e) {
-                            LOG.error(e.getMessage());
+                            MasterOrder masterOrder = c.element().getValue();
+                            Result result = client.getResultByUserAgent(masterOrder.getUserAgent());
+                            Properties properties = result.getProperties();
+                            String serialised = mapper.writeValueAsString(properties);
+                            DeviceAtlasProperties deviceAtlasProperties = mapper.readValue(serialised,
+                                    DeviceAtlasProperties.class); // FIXME: Adapt, rather than serialise
+                            deviceAtlasProperties.setCreated(
+                                    new DateTime(masterOrder.getCreated()).withZone(DateTimeZone.UTC).toString());
+                            deviceAtlasProperties.setOrdercode(masterOrder.getOrderCode());
+                            c.output(mapper.writeValueAsString(deviceAtlasProperties));
                         } catch (Exception e) {
-                            LOG.error(e.getMessage());
+                            LOG.error("Unable to get device properties. " + e.getMessage());
                         }
                     }
                 })).apply("Device Atlas Publish", PubsubIO.writeStrings().to(options.getDeviceAtlasTopic()));
-        ;
 
         PCollection<KV<String, Iterable<MasterOrder>>> masterOrders = outputTuple.get(validOrdersTupleTag)
                 .apply("Window",
@@ -186,7 +196,9 @@ public class App {
                 ParDo.of(new SerialiseMasterOrderFn()));
 
         completeOrders.apply("Publish Complete", PubsubIO.writeStrings().to(options.getOrderMasterTopic()));
-        completeOrders.apply("Archive Complete", PubsubIO.writeStrings().to(options.getArchiveTopic()));
+        completeOrders.apply("Archive Complete", PubsubIO.writeStrings().to(options.getArchiveTopic())); // FIXME: Use
+                                                                                                         // separate DF
+                                                                                                         // job.
 
         PCollection<String> incompleteOrders = processedOrdersTuple.get(incompleteOrdersTag)
                 .apply("Mask", new MaskOrdersFn())
