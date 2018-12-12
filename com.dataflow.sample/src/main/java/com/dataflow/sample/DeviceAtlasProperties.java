@@ -10,7 +10,7 @@ public class DeviceAtlasProperties implements Serializable {
     @JsonProperty("orderCode")
     private String orderCode;
     @JsonProperty("created")
-    private String created; //
+    private String created;
     @JsonProperty("displayHeight")
     private Integer displayHeight;
     @JsonProperty("jswebSockets")
@@ -299,6 +299,15 @@ public class DeviceAtlasProperties implements Serializable {
     private Boolean jssupportBasicJavaScript;
     @JsonProperty("botName")
     private String botName;
+    @JsonProperty("jsr139")
+    private Boolean jsr139;
+    @JsonProperty("markupwml1")
+    private Boolean markupwml1;
+    @JsonProperty("qcelp")
+    private Boolean qcelp;
+    @JsonProperty("amr")
+    private Boolean amr;
+
     private final static long serialVersionUID = -1244023105926151334L;
 
     @JsonProperty("orderCode")
@@ -1761,4 +1770,43 @@ public class DeviceAtlasProperties implements Serializable {
         this.botName = botName;
     }
 
+    @JsonProperty("jsr139")
+    public Boolean getJsr139() {
+        return this.jsr139;
+    }
+
+    @JsonProperty("jsr139")
+    public void isJsr139(Boolean jsr139) {
+        this.jsr139 = jsr139;
+    }
+
+    @JsonProperty("markupwml1")
+    public Boolean getMarkupwml1() {
+        return this.markupwml1;
+    }
+
+    @JsonProperty("markupwml1")
+    public void isMarkupwml1(Boolean markupwml1) {
+        this.markupwml1 = markupwml1;
+    }
+
+    @JsonProperty("qcelp")
+    public Boolean getQcelp() {
+        return this.qcelp;
+    }
+
+    @JsonProperty("qcelp")
+    public void isQcelp(Boolean qcelp) {
+        this.qcelp = qcelp;
+    }
+
+    @JsonProperty("amr")
+    public Boolean getAmr() {
+        return this.amr;
+    }
+
+    @JsonProperty("amr")
+    public void isAmr(Boolean amr) {
+        this.amr = amr;
+    }
 }
