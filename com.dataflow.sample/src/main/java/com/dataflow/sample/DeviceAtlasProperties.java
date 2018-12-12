@@ -317,6 +317,8 @@ public class DeviceAtlasProperties implements Serializable {
     private Boolean jsr37;
     @JsonProperty("jsr118")
     private Boolean jsr118;
+    @JsonProperty("osProprietary")
+    private String osProprietary;
 
     private final static long serialVersionUID = -1244023105926151334L;
 
@@ -1868,5 +1870,15 @@ public class DeviceAtlasProperties implements Serializable {
     @JsonProperty("jsr118")
     public void isJsr118(Boolean jsr118) {
         this.jsr118 = jsr118;
+    }
+
+    @JsonProperty("osProprietary")
+    public String getOsproprietary() {
+        return this.osProprietary;
+    }
+
+    @JsonProperty("osProprietary")
+    public void setOsproprietary(String osProprietary) {
+        this.osProprietary = osProprietary;
     }
 }
