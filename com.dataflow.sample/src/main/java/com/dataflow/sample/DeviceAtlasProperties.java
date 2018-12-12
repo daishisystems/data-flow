@@ -307,6 +307,16 @@ public class DeviceAtlasProperties implements Serializable {
     private Boolean qcelp;
     @JsonProperty("amr")
     private Boolean amr;
+    @JsonProperty("midp")
+    private String midp;
+    @JsonProperty("cldc")
+    private String cldc;
+    @JsonProperty("jsr30")
+    private Boolean jsr30;
+    @JsonProperty("jsr37")
+    private Boolean jsr37;
+    @JsonProperty("jsr118")
+    private Boolean jsr118;
 
     private final static long serialVersionUID = -1244023105926151334L;
 
@@ -1808,5 +1818,55 @@ public class DeviceAtlasProperties implements Serializable {
     @JsonProperty("amr")
     public void isAmr(Boolean amr) {
         this.amr = amr;
+    }
+
+    @JsonProperty("midp")
+    public String getMidp() {
+        return this.midp;
+    }
+
+    @JsonProperty("midp")
+    public void setMidp(String midp) {
+        this.midp = midp;
+    }
+
+    @JsonProperty("cldc")
+    public String getCldc() {
+        return this.cldc;
+    }
+
+    @JsonProperty("cldc")
+    public void setCldc(String cldc) {
+        this.cldc = cldc;
+    }
+
+    @JsonProperty("jsr30")
+    public Boolean getJsr30() {
+        return this.jsr30;
+    }
+
+    @JsonProperty("jsr30")
+    public void isJsr30(Boolean jsr30) {
+        this.jsr30 = jsr30;
+    }
+
+    @JsonProperty("jsr37")
+    public Boolean getJsr37() {
+        return this.jsr37;
+    }
+
+    @JsonProperty("jsr37")
+    public void isJsr37(Boolean jsr37) {
+        this.jsr37 = jsr37;
+    }
+
+    @JsonProperty("jsr118")
+    public Boolean getJsr118() {
+        return this.jsr118;
+    }
+
+    @JsonProperty("jsr118")
+    public void isJsr118(Boolean jsr118) {
+        this.jsr118 = jsr118;
     }
 }
