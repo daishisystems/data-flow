@@ -118,11 +118,11 @@ public class App {
                     public void processElement(ProcessContext c) {
                         try {
                             MasterOrder masterOrder = mapper.readValue(c.element(), MasterOrder.class);
-                            c.output(KV.of(masterOrder.getCorrelationId(), masterOrder));
+                            c.output(KV.of(masterOrder.getCorrelationId(), masterOrder)); // FIXME: Obfuscate here if !complete
                         } catch (Exception e) {
                             LOG.error(e.getMessage());
                             c.output(invalidOrdersTupleTag, c.element());
-                        }
+                        }   
                     }
                 }).withOutputTags(validOrdersTupleTag, TupleTagList.of(invalidOrdersTupleTag)));
 

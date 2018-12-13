@@ -321,6 +321,24 @@ public class DeviceAtlasProperties implements Serializable {
     private String osProprietary;
     @JsonProperty("drmOmaCombinedDelivery")
     private Boolean drmOmaCombinedDelivery;
+    @JsonProperty("isMasqueradingAsDesktop")
+    private Boolean isMasqueradingAsDesktop;
+    @JsonProperty("version")
+    private String version;
+    @JsonProperty("developerPlatform")
+    private String developerPlatform;
+    @JsonProperty("developerPlatformVersion")
+    private String developerPlatformVersion;
+    @JsonProperty("language")
+    private String language;
+    @JsonProperty("languageLocale")
+    private String languageLocale;
+    @JsonProperty("drmOmaForwardLock")
+    private Boolean drmOmaForwardLock;
+    @JsonProperty("drmOmaSeparateDelivery")
+    private Boolean drmOmaSeparateDelivery;
+    @JsonProperty("drmOmaDownload")
+    private Boolean drmOmaDownload;
 
     private final static long serialVersionUID = -1244023105926151334L;
 
@@ -1892,5 +1910,95 @@ public class DeviceAtlasProperties implements Serializable {
     @JsonProperty("drmOmaCombinedDelivery")
     public void isDrmomacombineddelivery(Boolean drmOmaCombinedDelivery) {
         this.drmOmaCombinedDelivery = drmOmaCombinedDelivery;
+    }
+
+    @JsonProperty("isMasqueradingAsDesktop")
+    public Boolean getIsmasqueradingasdesktop() {
+        return this.isMasqueradingAsDesktop;
+    }
+
+    @JsonProperty("isMasqueradingAsDesktop")
+    public void isIsmasqueradingasdesktop(Boolean isMasqueradingAsDesktop) {
+        this.isMasqueradingAsDesktop = isMasqueradingAsDesktop;
+    }
+
+    @JsonProperty("version")
+    public String getVersion() {
+        return this.version;
+    }
+
+    @JsonProperty("version")
+    public void setVersion(String version) {
+        this.version = version;
+    }
+
+    @JsonProperty("developerPlatform")
+    public String getDeveloperplatform() {
+        return this.developerPlatform;
+    }
+
+    @JsonProperty("developerPlatform")
+    public void setDeveloperplatform(String developerPlatform) {
+        this.developerPlatform = developerPlatform;
+    }
+
+    @JsonProperty("developerPlatformVersion")
+    public String getDeveloperplatformversion() {
+        return this.developerPlatformVersion;
+    }
+
+    @JsonProperty("developerPlatformVersion")
+    public void setDeveloperplatformversion(String developerPlatformVersion) {
+        this.developerPlatformVersion = developerPlatformVersion;
+    }
+
+    @JsonProperty("language")
+    public String getLanguage() {
+        return this.language;
+    }
+
+    @JsonProperty("language")
+    public void setLanguage(String language) {
+        this.language = language;
+    }
+
+    @JsonProperty("languageLocale")
+    public String getLanguagelocale() {
+        return this.languageLocale;
+    }
+
+    @JsonProperty("languageLocale")
+    public void setLanguagelocale(String languageLocale) {
+        this.languageLocale = languageLocale;
+    }
+
+    @JsonProperty("drmOmaForwardLock")
+    public Boolean getDrmomaforwardlock() {
+        return this.drmOmaForwardLock;
+    }
+
+    @JsonProperty("drmOmaForwardLock")
+    public void isDrmomaforwardlock(Boolean drmOmaForwardLock) {
+        this.drmOmaForwardLock = drmOmaForwardLock;
+    }
+
+    @JsonProperty("drmOmaSeparateDelivery")
+    public Boolean getDrmomaseparatedelivery() {
+        return this.drmOmaSeparateDelivery;
+    }
+
+    @JsonProperty("drmOmaSeparateDelivery")
+    public void isDrmomaseparatedelivery(Boolean drmOmaSeparateDelivery) {
+        this.drmOmaSeparateDelivery = drmOmaSeparateDelivery;
+    }
+
+    @JsonProperty("drmOmaDownload")
+    public Boolean getDrmomadownload() {
+        return this.drmOmaDownload;
+    }
+
+    @JsonProperty("drmOmaDownload")
+    public void isDrmomadownload(Boolean drmOmaDownload) {
+        this.drmOmaDownload = drmOmaDownload;
     }
 }
