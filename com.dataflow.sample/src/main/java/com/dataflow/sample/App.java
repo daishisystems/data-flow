@@ -108,7 +108,7 @@ public class App {
         };
 
         PCollection<String> pubSubOutput = p.apply("Read Input",
-                PubsubIO.readStrings().fromTopic(options.getInputTopic()));
+                PubsubIO.readStrings().fromTopic(options.getInputTopic())); // FIXME: Read from Subscription!
 
         PCollectionTuple outputTuple = pubSubOutput.apply("Validate",
                 ParDo.of(new DoFn<String, KV<String, MasterOrder>>() {

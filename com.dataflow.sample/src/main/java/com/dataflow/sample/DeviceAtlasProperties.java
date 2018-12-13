@@ -319,6 +319,8 @@ public class DeviceAtlasProperties implements Serializable {
     private Boolean jsr118;
     @JsonProperty("osProprietary")
     private String osProprietary;
+    @JsonProperty("drmOmaCombinedDelivery")
+    private Boolean drmOmaCombinedDelivery;
 
     private final static long serialVersionUID = -1244023105926151334L;
 
@@ -1880,5 +1882,15 @@ public class DeviceAtlasProperties implements Serializable {
     @JsonProperty("osProprietary")
     public void setOsproprietary(String osProprietary) {
         this.osProprietary = osProprietary;
+    }
+
+    @JsonProperty("drmOmaCombinedDelivery")
+    public Boolean getDrmomacombineddelivery() {
+        return this.drmOmaCombinedDelivery;
+    }
+
+    @JsonProperty("drmOmaCombinedDelivery")
+    public void isDrmomacombineddelivery(Boolean drmOmaCombinedDelivery) {
+        this.drmOmaCombinedDelivery = drmOmaCombinedDelivery;
     }
 }
