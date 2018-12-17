@@ -92,6 +92,15 @@ public class MasterOrder implements Serializable {
     private String queryString;
     @JsonProperty("created")
     private Long created;
+    @JsonProperty("isRobot")
+    private Boolean isRobot;
+    @JsonProperty("primaryHardwareType")
+    private String primaryHardwareType;
+    @JsonProperty("browserName")
+    private String browserName;
+    @JsonProperty("osName")
+    private String osName;
+
     private final static long serialVersionUID = 8817357657140713368L;
 
     @JsonProperty("OrderCode")
@@ -494,6 +503,46 @@ public class MasterOrder implements Serializable {
     @JsonProperty("created")
     public void setCreated(Long created) {
         this.created = created;
+    }
+
+    @JsonProperty("isRobot")
+    public Boolean getIsRobot() {
+        return isRobot;
+    }
+
+    @JsonProperty("isRobot")
+    public void setIsRobot(Boolean isRobot) {
+        this.isRobot = isRobot;
+    }
+
+    @JsonProperty("primaryHardwareType")
+    public String getPrimaryHardwareType() {
+        return primaryHardwareType;
+    }
+
+    @JsonProperty("primaryHardwareType")
+    public void setPrimaryHardwareType(String primaryHardwareType) {
+        this.primaryHardwareType = primaryHardwareType;
+    }
+
+    @JsonProperty("browserName")
+    public String getBrowserName() {
+        return browserName;
+    }
+
+    @JsonProperty("browserName")
+    public void setBrowserName(String browserName) {
+        this.browserName = browserName;
+    }
+
+    @JsonProperty("osName")
+    public String getOsName() {
+        return osName;
+    }
+
+    @JsonProperty("osName")
+    public void setOsName(String osName) {
+        this.osName = osName;
     }
 
     @Override

@@ -118,11 +118,12 @@ public class App {
                     public void processElement(ProcessContext c) {
                         try {
                             MasterOrder masterOrder = mapper.readValue(c.element(), MasterOrder.class);
-                            c.output(KV.of(masterOrder.getCorrelationId(), masterOrder)); // FIXME: Obfuscate here if !complete
+                            c.output(KV.of(masterOrder.getCorrelationId(), masterOrder)); // FIXME: Obfuscate here if
+                                                                                          // !complete
                         } catch (Exception e) {
                             LOG.error(e.getMessage());
                             c.output(invalidOrdersTupleTag, c.element());
-                        }   
+                        }
                     }
                 }).withOutputTags(validOrdersTupleTag, TupleTagList.of(invalidOrdersTupleTag)));
 
@@ -155,7 +156,7 @@ public class App {
                 .apply("Window",
                         Window.<KV<String, MasterOrder>>into(Sessions.withGapDuration(
                                 Duration.standardSeconds(Long.parseLong(options.getSessionWindowGapDuration())))))
-                .apply("Group", GroupByKey.create());
+                .apply("Group", GroupByKey.create()); // FIXME: Use triggers to push early
 
         outputTuple.get(invalidOrdersTupleTag).apply("Dead Letter Queue",
                 PubsubIO.writeStrings().to(options.getDeadLetterTopic()));
@@ -231,6 +232,10 @@ public class App {
         fields.add(new TableFieldSchema().setName("Country").setType("STRING"));
         fields.add(new TableFieldSchema().setName("UnitsPerOrder").setType("INT64"));
         fields.add(new TableFieldSchema().setName("BrandCode").setType("STRING"));
+        fields.add(new TableFieldSchema().setName("PrimaryHardwareType").setType("STRING"));
+        fields.add(new TableFieldSchema().setName("IsRobot").setType("BOOLEAN"));
+        fields.add(new TableFieldSchema().setName("BrowserName").setType("STRING"));
+        fields.add(new TableFieldSchema().setName("OsName").setType("STRING"));
         return new TableSchema().setFields(fields);
     }
 
@@ -366,6 +371,25 @@ public class App {
         public void processElement(ProcessContext c) throws Exception {
             List<MasterOrder> sortedOrders = OrderSummary.sortOrders(c.element());
             OrderSummary orderSummary = OrderSummary.orderSummary(sortedOrders, COMPLETE_EVENT_NAME);
+
+            Result result = client.getResultByUserAgent(orderSummary.getUserAgent());
+            Properties properties = result.getProperties();
+
+            LOG.warn("User Agent: " + orderSummary.getUserAgent());
+
+            if (properties.containsKey("primaryHardwareType")) {
+                orderSummary.setPrimaryHardwareType(properties.get("primaryHardwareType").asString());
+                LOG.warn("primaryHardwareType: " + properties.get("primaryHardwareType").asString());
+            }
+            if (properties.containsKey("isRobot")) {
+                orderSummary.setIsRobot(properties.get("isRobot").asBoolean());
+            }
+            if (properties.containsKey("browserName")) {
+                orderSummary.setBrowserName(properties.get("browserName").asString());
+            }
+            if (properties.containsKey("osName")) {
+                orderSummary.setOsName(properties.get("osName").asString());
+            }
             c.output(orderSummary);
         }
     }
@@ -419,6 +443,10 @@ public class App {
             tableRow.set("Country", orderSummary.getCountry());
             tableRow.set("UnitsPerOrder", orderSummary.getUnitsPerOrder());
             tableRow.set("BrandCode", orderSummary.getBrandCode());
+            tableRow.set("PrimaryHardwareType", orderSummary.getPrimaryHardwareType());
+            tableRow.set("IsRobot", orderSummary.getIsRobot());
+            tableRow.set("BrowserName", orderSummary.getBrowserName());
+            tableRow.set("OsName", orderSummary.getOsName());
             c.output(tableRow);
         }
     }
