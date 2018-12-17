@@ -320,6 +320,9 @@ public class OrderSummary implements Serializable {
         List<Long> allDiffs = new ArrayList<>();
         do {
             current = iterator.next();
+            if (!current.getUserAgent().isEmpty() && !current.getUserAgent().contains("FxVersion")) {
+                orderSummary.setUserAgent(current.getUserAgent());
+            }
             long currentDiff = current.getCreated() - previous.getCreated();
             if (orderSummary.getMinTimeDelay() == 0) {
                 orderSummary.setMinTimeDelay(currentDiff);
@@ -348,7 +351,6 @@ public class OrderSummary implements Serializable {
         orderSummary.setNumber(current.getOrderCode());
         orderSummary.setCorrelationId(current.getCorrelationId());
         orderSummary.setEnddate(new DateTime(current.getCreated()).withZone(DateTimeZone.UTC).toString());
-        orderSummary.setUserAgent(current.getUserAgent());
         BigDecimal orderValue = Utils.rounded(Utils.calcOrderValue(current, "EUR"));
         orderSummary.setOrderValue(orderValue);
         Integer numOrderArticles = calcNumOrderArticles(current);

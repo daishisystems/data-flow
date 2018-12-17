@@ -375,11 +375,8 @@ public class App {
             Result result = client.getResultByUserAgent(orderSummary.getUserAgent());
             Properties properties = result.getProperties();
 
-            LOG.warn("User Agent: " + orderSummary.getUserAgent());
-
             if (properties.containsKey("primaryHardwareType")) {
                 orderSummary.setPrimaryHardwareType(properties.get("primaryHardwareType").asString());
-                LOG.warn("primaryHardwareType: " + properties.get("primaryHardwareType").asString());
             }
             if (properties.containsKey("isRobot")) {
                 orderSummary.setIsRobot(properties.get("isRobot").asBoolean());
