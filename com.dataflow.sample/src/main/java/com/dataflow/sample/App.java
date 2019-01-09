@@ -156,7 +156,7 @@ public class App {
                 .apply("Window",
                         Window.<KV<String, MasterOrder>>into(Sessions.withGapDuration(
                                 Duration.standardSeconds(Long.parseLong(options.getSessionWindowGapDuration())))))
-                .apply("Group", GroupByKey.create()); // FIXME: Use triggers to push early
+                .apply("Group", GroupByKey.create()); // FIXME: Use triggers to push early!!!
 
         outputTuple.get(invalidOrdersTupleTag).apply("Dead Letter Queue",
                 PubsubIO.writeStrings().to(options.getDeadLetterTopic()));
@@ -243,9 +243,12 @@ public class App {
         private static final long serialVersionUID = -3894610851045133386L;
 
         @ProcessElement
-        public void processElement(ProcessContext c) {
-            MasterOrder o = c.element();
-            List<DeliveryDetail> deliveryDetails = o.getDeliveryDetails();
+        public void processElement(ProcessContext c) throws IOException {
+            // FIXME: Obfuscate here and in order-summary flow
+            String copy = mapper.writeValueAsString(c.element());
+            MasterOrder masterOrder = mapper.readValue(copy, MasterOrder.class);
+
+            List<DeliveryDetail> deliveryDetails = masterOrder.getDeliveryDetails();
             for (DeliveryDetail deliveryDetail : deliveryDetails) {
                 String contactDetailsNickname = deliveryDetail.getContactDetailsNickName();
                 if (contactDetailsNickname != null && !contactDetailsNickname.isEmpty()) {
@@ -293,7 +296,7 @@ public class App {
                     deliveryDetail.setPoBox(Utils.mask(poBox, '#'));
                 }
             }
-            List<PaymentDetail> paymentDetails = o.getPaymentDetails();
+            List<PaymentDetail> paymentDetails = masterOrder.getPaymentDetails();
             for (PaymentDetail paymentDetail : paymentDetails) {
                 String contactDetailsNickname = paymentDetail.getContactDetailsNickName();
                 if (contactDetailsNickname != null && !contactDetailsNickname.isEmpty()) {
@@ -341,15 +344,16 @@ public class App {
                     paymentDetail.setPoBox(Utils.mask(poBox, '#'));
                 }
             }
-            if (o.getCorrelationId() != null && !o.getCorrelationId().isEmpty()) {
-                o.setCorrelationId(Utils.mask(o.getCorrelationId(), '#'));
+            if (masterOrder.getCorrelationId() != null && !masterOrder.getCorrelationId().isEmpty()) {
+                masterOrder.setCorrelationId(Utils.mask(masterOrder.getCorrelationId(), '#'));
             }
 
-            if (o.getFingerprintId() != null && !o.getFingerprintId().isEmpty()) {
-                o.setFingerprintId(Utils.mask(o.getFingerprintId(), '#'));
+            if (masterOrder.getFingerprintId() != null && !masterOrder.getFingerprintId().isEmpty()) {
+                masterOrder.setFingerprintId(Utils.mask(masterOrder.getFingerprintId(), '#'));
             }
 
-            c.output(o);
+            LOG.warn("Loaded order num " + masterOrder.getOrderCode());
+            c.output(masterOrder);            
         }
     }
 
@@ -398,6 +402,7 @@ public class App {
         @ProcessElement
         public void ProcessElement(ProcessContext c) {
             for (List<MasterOrder> masterOrders : Utils.groupOrders(c.element().getValue())) {
+                LOG.warn("Orders grouped");
                 c.output(masterOrders);
             }
         }

@@ -78,7 +78,7 @@ public class UtilsTest {
         MasterOrder masterOrder = mapper.readValue(json, MasterOrder.class);
 
         Hashtable<String, BigDecimal> fxRates = Utils.getFxRates(masterOrder, "EUR");
-        assertEquals(new BigDecimal("0.20"), fxRates.get("RON"));
+        assertEquals(new BigDecimal("0.623"), fxRates.get("AUD"));
     }
 
     @Test

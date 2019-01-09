@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -45,6 +46,9 @@ public class CalculationParameters implements Serializable {
     private Double retailerToShopperRate;
     @JsonProperty("ShopperToRetailerRate")
     private Double shopperToRetailerRate;
+    @JsonProperty("DeminimisRegionToUse")
+    private DeminimisRegion deminimisRegionToUse;
+
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
     private final static long serialVersionUID = -5266451718458184736L;
@@ -213,8 +217,19 @@ public class CalculationParameters implements Serializable {
         this.shopperToRetailerRate = Utils.round(shopperToRetailerRate);
     }
 
+    @JsonProperty("DeminimisRegionToUse")
+    public DeminimisRegion getDeminimisRegionToUse() {
+        return this.deminimisRegionToUse;
+    }
+
+    @JsonProperty("DeminimisRegionToUse")
+    public void setDeminimisRegionToUse(DeminimisRegion deminimisRegionToUse) {
+        this.deminimisRegionToUse = deminimisRegionToUse;
+    }
+
     @JsonAnyGetter
-    public Map<String, Object> getAdditionalProperties() {
+    public Map<String, Object> getAdditionalProperties() { // FIXME: New properties are auto-added here!!! Use as part
+                                                           // of Square Enix solution?
         return this.additionalProperties;
     }
 
