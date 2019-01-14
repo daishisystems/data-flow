@@ -666,7 +666,7 @@
 	}],
 	"ExpiryTimeUtc": "2019-01-07T00:18:42.817286Z",
 	"ChargeTargets": [],
-	"FingerprintId": "################################################################",
+	"FingerprintId": "d52cb6c1-bf93-47e1-9805-76d4208cf2e4",
 	"GdprAccepted": true,
 	"GdprAcceptanceHistory": [{
 		"Accepted": true,
@@ -674,7 +674,7 @@
 	}],
 	"brandCode": "MAX",
 	"eventName": "PaymentAttempted",
-	"correlationId": "################################################################",
+	"correlationId": "312f2dd7-ad63-45fe-b56e-1679876b6f7d",
 	"userAgent": "Mozilla/5.0 (iPhone; CPU iPhone OS 11_4_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15G77 Instagram 75.0.0.23.99 (iPhone10,3; iOS 11_4_1; en_AU; en-AU; scale=3.00; gamut=wide; 1125x2436; 135054585)",
 	"queryString": "http://checkout-api-max.production.eshopworld.com/api/v2/Order/7ef59786-c482-47e5-a42f-758ced11fe14/PaymentUrl",
 	"created": 1546819204478,

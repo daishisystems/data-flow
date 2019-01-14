@@ -352,7 +352,6 @@ public class App {
                 masterOrder.setFingerprintId(Utils.mask(masterOrder.getFingerprintId(), '#'));
             }
 
-            LOG.warn("Loaded order num " + masterOrder.getOrderCode());
             c.output(masterOrder);            
         }
     }
@@ -402,7 +401,6 @@ public class App {
         @ProcessElement
         public void ProcessElement(ProcessContext c) {
             for (List<MasterOrder> masterOrders : Utils.groupOrders(c.element().getValue())) {
-                LOG.warn("Orders grouped");
                 c.output(masterOrders);
             }
         }
