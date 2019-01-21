@@ -16,7 +16,7 @@ public class UpperBoundary implements Serializable {
     @JsonProperty("Currency")
     private Currency currency;
     @JsonProperty("Value")
-    private Double value;
+    private String value;
     private final static long serialVersionUID = 1752833738020851814L;
 
     @JsonProperty("CurrencyCodeIso")
@@ -40,12 +40,12 @@ public class UpperBoundary implements Serializable {
     }
 
     @JsonProperty("Value")
-    public Double getValue() {
+    public String getValue() {
         return value;
     }
 
     @JsonProperty("Value")
-    public void setValue(Double value) {
+    public void setValue(String value) {
         this.value = value;
     }
 

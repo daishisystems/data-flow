@@ -102,6 +102,8 @@ public class MasterOrder implements Serializable {
     private String browserName;
     @JsonProperty("osName")
     private String osName;
+    @JsonProperty("DocumentLifetime")
+    private String documentLifetime;
 
     private final static long serialVersionUID = 8817357657140713368L;
 
@@ -545,6 +547,16 @@ public class MasterOrder implements Serializable {
     @JsonProperty("osName")
     public void setOsName(String osName) {
         this.osName = osName;
+    }
+
+    @JsonProperty("DocumentLifetime")
+    public String getDocumentLifetime() {
+        return this.documentLifetime;
+    }
+
+    @JsonProperty("DocumentLifetime")
+    public void setDocumentLifetime(String documentLifetime) {
+        this.documentLifetime = documentLifetime;
     }
 
     @Override
