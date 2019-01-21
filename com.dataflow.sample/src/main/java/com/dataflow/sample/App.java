@@ -236,6 +236,7 @@ public class App {
         fields.add(new TableFieldSchema().setName("IsRobot").setType("BOOLEAN"));
         fields.add(new TableFieldSchema().setName("BrowserName").setType("STRING"));
         fields.add(new TableFieldSchema().setName("OsName").setType("STRING"));
+        fields.add(new TableFieldSchema().setName("RetailerCartId").setType("STRING"));
         return new TableSchema().setFields(fields);
     }
 
@@ -447,6 +448,7 @@ public class App {
             tableRow.set("IsRobot", orderSummary.getIsRobot());
             tableRow.set("BrowserName", orderSummary.getBrowserName());
             tableRow.set("OsName", orderSummary.getOsName());
+            tableRow.set("RetailerCartId", orderSummary.getRetailerCartId());
             c.output(tableRow);
         }
     }

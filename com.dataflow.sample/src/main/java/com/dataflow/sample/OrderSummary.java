@@ -64,6 +64,8 @@ public class OrderSummary implements Serializable {
     private String browserName;
     @JsonProperty("osName")
     private String osName;
+    @JsonProperty("RetailerCartId")
+    private String retailerCartId;
 
     public String getCountry() {
         return this.country;
@@ -259,6 +261,16 @@ public class OrderSummary implements Serializable {
         this.osName = osName;
     }
 
+    @JsonProperty("RetailerCartId")
+    public String getRetailerCartId() {
+        return retailerCartId;
+    }
+
+    @JsonProperty("RetailerCartId")
+    public void setRetailerCartId(String retailerCartId) {
+        this.retailerCartId = retailerCartId;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (obj == null)
@@ -314,6 +326,7 @@ public class OrderSummary implements Serializable {
             orderSummary.setTotalTime(totalTime);
             orderSummary.setCountry(previous.getDeliveryCountryIso());
             orderSummary.setBrandCode(previous.getBrandCode());
+            orderSummary.setRetailerCartId(previous.getRetailerCartId());
             return orderSummary;
         }
         MasterOrder current;
@@ -361,6 +374,7 @@ public class OrderSummary implements Serializable {
         orderSummary.setTotalTime(totalTime);
         orderSummary.setCountry(current.getDeliveryCountryIso());
         orderSummary.setBrandCode(previous.getBrandCode());
+        orderSummary.setRetailerCartId(previous.getRetailerCartId());
 
         return orderSummary;
     }
