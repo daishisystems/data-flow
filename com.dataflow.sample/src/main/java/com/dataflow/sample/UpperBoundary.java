@@ -20,6 +20,10 @@ public class UpperBoundary implements Serializable {
     @JsonProperty("Value")
     @JsonDeserialize(using = StringDeserializer.class, as = String.class)
     private String value;
+    @JsonProperty("IsZero")
+    private Boolean isZero;
+    @JsonProperty("IsNotZero")
+    private Boolean isNotZero;
     private final static long serialVersionUID = 1752833738020851814L;
 
     @JsonProperty("CurrencyCodeIso")
@@ -52,6 +56,26 @@ public class UpperBoundary implements Serializable {
     @JsonDeserialize(using = StringDeserializer.class, as = String.class)
     public void setValue(String value) {
         this.value = value;
+    }
+
+    @JsonProperty("IsZero")
+    public Boolean getIsZero() {
+        return this.isZero;
+    }
+
+    @JsonProperty("IsZero")
+    public void setIsZero(Boolean isZero) {
+        this.isZero = isZero;
+    }
+
+    @JsonProperty("IsNotZero")
+    public Boolean getIsNotZero() {
+        return this.isNotZero;
+    }
+
+    @JsonProperty("IsNotZero")
+    public void setIsNotZero(Boolean isNotZero) {
+        this.isNotZero = isNotZero;
     }
 
 }

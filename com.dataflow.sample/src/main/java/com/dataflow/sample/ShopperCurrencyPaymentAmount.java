@@ -18,6 +18,11 @@ public class ShopperCurrencyPaymentAmount implements Serializable {
     private Currency currency;
     @JsonProperty("Value")
     private BigDecimal value;
+    @JsonProperty("IsZero")
+    private Boolean isZero;
+    @JsonProperty("IsNotZero")
+    private Boolean isNotZero;
+
     private final static long serialVersionUID = -7667279460193420736L;
 
     @JsonProperty("CurrencyCodeIso")
@@ -48,6 +53,26 @@ public class ShopperCurrencyPaymentAmount implements Serializable {
     @JsonProperty("Value")
     public void setValue(BigDecimal value) {
         this.value = value;
+    }
+
+    @JsonProperty("IsZero")
+    public Boolean getIsZero() {
+        return this.isZero;
+    }
+
+    @JsonProperty("IsZero")
+    public void setIsZero(Boolean isZero) {
+        this.isZero = isZero;
+    }
+
+    @JsonProperty("IsNotZero")
+    public Boolean getIsNotZero() {
+        return this.isNotZero;
+    }
+
+    @JsonProperty("IsNotZero")
+    public void setIsNotZero(Boolean isNotZero) {
+        this.isNotZero = isNotZero;
     }
 
 }

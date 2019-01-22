@@ -4,6 +4,7 @@ package com.dataflow.sample;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
+
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -23,6 +24,10 @@ public class TargetValue implements Serializable {
     private Currency currency;
     @JsonProperty("Value")
     private Double value;
+    @JsonProperty("IsZero")
+    private Boolean isZero;
+    @JsonProperty("IsNotZero")
+    private Boolean isNotZero;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
     private final static long serialVersionUID = 8169107640796834331L;
@@ -75,6 +80,26 @@ public class TargetValue implements Serializable {
     @JsonProperty("Value")
     public void setValue(Double value) {
         this.value = Utils.round(value);
+    }
+
+    @JsonProperty("IsZero")
+    public Boolean getIsZero() {
+        return this.isZero;
+    }
+
+    @JsonProperty("IsZero")
+    public void setIsZero(Boolean isZero) {
+        this.isZero = isZero;
+    }
+
+    @JsonProperty("IsNotZero")
+    public Boolean getIsNotZero() {
+        return this.isNotZero;
+    }
+
+    @JsonProperty("IsNotZero")
+    public void setIsNotZero(Boolean isNotZero) {
+        this.isNotZero = isNotZero;
     }
 
     @JsonAnyGetter
