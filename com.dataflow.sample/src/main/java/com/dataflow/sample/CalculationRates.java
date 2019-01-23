@@ -4,6 +4,7 @@ package com.dataflow.sample;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
+
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -31,45 +32,22 @@ public class CalculationRates implements Serializable {
     private Double itemFeeRateApplied;
     @JsonProperty("DeliveryFeeRateApplied")
     private Double deliveryFeeRateApplied;
-    @JsonProperty("ItemReverseCalculationRate")
-    private Double itemReverseCalculationRate;
-    @JsonProperty("DeliveryReverseCalculationRate")
-    private Double deliveryReverseCalculationRate;
+    @JsonProperty("ReverseItemVatRateApplied")
+    private Double reverseItemVatRateApplied;
+    @JsonProperty("ReverseDeliveryVatRateApplied")
+    private Double reverseDeliveryVatRateApplied;
+    @JsonProperty("ReverseItemDutyRateApplied")
+    private Double reverseItemDutyRateApplied;
+    @JsonProperty("ReverseDeliveryDutyRateApplied")
+    private Double reverseDeliveryDutyRateApplied;
+    @JsonProperty("ReverseItemFeeRateApplied")
+    private Double reverseItemFeeRateApplied;
+    @JsonProperty("ReverseDeliveryFeeRateApplied")
+    private Double reverseDeliveryFeeRateApplied;
+
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
     private final static long serialVersionUID = -1852982147355522267L;
-
-    /**
-     * No args constructor for use in serialization
-     * 
-     */
-    public CalculationRates() {
-    }
-
-    /**
-     * 
-     * @param deliveryVatRateApplied
-     * @param deliveryReverseCalculationRate
-     * @param itemVatRateApplied
-     * @param itemFeeRateApplied
-     * @param itemReverseCalculationRate
-     * @param deliveryDutyRateApplied
-     * @param deliveryFeeRateApplied
-     * @param itemDutyRateApplied
-     */
-    public CalculationRates(Double itemVatRateApplied, Double deliveryVatRateApplied, Double itemDutyRateApplied,
-            Double deliveryDutyRateApplied, Double itemFeeRateApplied, Double deliveryFeeRateApplied,
-            Double itemReverseCalculationRate, Double deliveryReverseCalculationRate) {
-        super();
-        this.itemVatRateApplied = itemVatRateApplied;
-        this.deliveryVatRateApplied = deliveryVatRateApplied;
-        this.itemDutyRateApplied = itemDutyRateApplied;
-        this.deliveryDutyRateApplied = deliveryDutyRateApplied;
-        this.itemFeeRateApplied = itemFeeRateApplied;
-        this.deliveryFeeRateApplied = deliveryFeeRateApplied;
-        this.itemReverseCalculationRate = itemReverseCalculationRate;
-        this.deliveryReverseCalculationRate = deliveryReverseCalculationRate;
-    }
 
     @JsonProperty("ItemVatRateApplied")
     public Double getItemVatRateApplied() {
@@ -131,24 +109,64 @@ public class CalculationRates implements Serializable {
         this.deliveryFeeRateApplied = Utils.round(deliveryFeeRateApplied);
     }
 
-    @JsonProperty("ItemReverseCalculationRate")
-    public Double getItemReverseCalculationRate() {
-        return itemReverseCalculationRate;
+    @JsonProperty("ReverseItemVatRateApplied")
+    public Double getReverseItemVatRateApplied() {
+        return this.reverseItemVatRateApplied;
     }
 
-    @JsonProperty("ItemReverseCalculationRate")
-    public void setItemReverseCalculationRate(Double itemReverseCalculationRate) {
-        this.itemReverseCalculationRate = Utils.round(itemReverseCalculationRate);
+    @JsonProperty("ReverseItemVatRateApplied")
+    public void setReverseItemVatRateApplied(Double reverseItemVatRateApplied) {
+        this.reverseItemVatRateApplied = reverseItemVatRateApplied;
     }
 
-    @JsonProperty("DeliveryReverseCalculationRate")
-    public Double getDeliveryReverseCalculationRate() {
-        return deliveryReverseCalculationRate;
+    @JsonProperty("ReverseDeliveryVatRateApplied")
+    public Double getReverseDeliveryVatRateApplied() {
+        return this.reverseDeliveryVatRateApplied;
     }
 
-    @JsonProperty("DeliveryReverseCalculationRate")
-    public void setDeliveryReverseCalculationRate(Double deliveryReverseCalculationRate) {
-        this.deliveryReverseCalculationRate = Utils.round(deliveryReverseCalculationRate);
+    @JsonProperty("ReverseDeliveryVatRateApplied")
+    public void setReverseDeliveryVatRateApplied(Double reverseDeliveryVatRateApplied) {
+        this.reverseDeliveryVatRateApplied = reverseDeliveryVatRateApplied;
+    }
+
+    @JsonProperty("ReverseItemDutyRateApplied")
+    public Double getReverseItemDutyRateApplied() {
+        return this.reverseItemDutyRateApplied;
+    }
+
+    @JsonProperty("ReverseItemDutyRateApplied")
+    public void setReverseItemDutyRateApplied(Double reverseItemDutyRateApplied) {
+        this.reverseItemDutyRateApplied = reverseItemDutyRateApplied;
+    }
+
+    @JsonProperty("ReverseDeliveryDutyRateApplied")
+    public Double getReverseDeliveryDutyRateApplied() {
+        return this.reverseDeliveryDutyRateApplied;
+    }
+
+    @JsonProperty("ReverseDeliveryDutyRateApplied")
+    public void setReverseDeliveryDutyRateApplied(Double reverseDeliveryDutyRateApplied) {
+        this.reverseDeliveryDutyRateApplied = reverseDeliveryDutyRateApplied;
+    }
+
+    @JsonProperty("ReverseItemFeeRateApplied")
+    public Double getReverseItemFeeRateApplied() {
+        return this.reverseItemFeeRateApplied;
+    }
+
+    @JsonProperty("ReverseItemFeeRateApplied")
+    public void setReverseItemFeeRateApplied(Double reverseItemFeeRateApplied) {
+        this.reverseItemFeeRateApplied = reverseItemFeeRateApplied;
+    }
+
+    @JsonProperty("ReverseDeliveryFeeRateApplied")
+    public Double getReverseDeliveryFeeRateApplied() {
+        return this.reverseDeliveryFeeRateApplied;
+    }
+
+    @JsonProperty("ReverseDeliveryFeeRateApplied")
+    public void setReverseDeliveryFeeRateApplied(Double reverseDeliveryFeeRateApplied) {
+        this.reverseDeliveryFeeRateApplied = reverseDeliveryFeeRateApplied;
     }
 
     @JsonAnyGetter
