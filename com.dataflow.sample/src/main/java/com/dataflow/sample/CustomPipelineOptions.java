@@ -45,4 +45,9 @@ public interface CustomPipelineOptions extends PipelineOptions {
     String getDeviceAtlasTopic();
 
     void setDeviceAtlasTopic(String deviceAtlasTopic);
+
+    @Description("The Pub/Sub Topic Subscription name.")
+    String getPubSubTopicSubscriptionName();
+
+    void setPubSubTopicSubscriptionName(String pubSubTopicSubscriptionName);
 }

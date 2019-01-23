@@ -108,7 +108,7 @@ public class App {
         };
 
         PCollection<String> pubSubOutput = p.apply("Read Input",
-                PubsubIO.readStrings().fromTopic(options.getInputTopic())); // FIXME: Read from Subscription!
+                PubsubIO.readStrings().fromSubscription(options.getPubSubTopicSubscriptionName()));
 
         PCollectionTuple outputTuple = pubSubOutput.apply("Validate",
                 ParDo.of(new DoFn<String, KV<String, MasterOrder>>() {
@@ -353,7 +353,7 @@ public class App {
                 masterOrder.setFingerprintId(Utils.mask(masterOrder.getFingerprintId(), '#'));
             }
 
-            c.output(masterOrder);            
+            c.output(masterOrder);
         }
     }
 
