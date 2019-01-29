@@ -47,4 +47,17 @@ public class RetailerConfirmationResponse implements Serializable {
     public void setErrormessage(String errorMessage) {
         this.errorMessage = errorMessage;
     }
+
+    @JsonProperty("OrderNumber")
+    private String orderNumber;
+
+    @JsonProperty("OrderNumber")
+    public String getOrderNumber() {
+        return this.orderNumber;
+    }
+
+    @JsonProperty("OrderNumber")
+    public void setOrderNumber(String orderNumber) {
+        this.orderNumber = orderNumber;
+    }
 }
