@@ -18,6 +18,8 @@
 package com.dataflow.sample;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,6 +33,7 @@ import com.fasterxml.jackson.datatype.joda.JodaModule;
 import com.google.api.services.bigquery.model.TableFieldSchema;
 import com.google.api.services.bigquery.model.TableRow;
 import com.google.api.services.bigquery.model.TableSchema;
+import com.google.common.hash.Hashing;
 
 import org.apache.beam.sdk.Pipeline;
 import org.apache.beam.sdk.io.gcp.bigquery.BigQueryIO;
@@ -244,8 +247,8 @@ public class App {
         private static final long serialVersionUID = -3894610851045133386L;
 
         @ProcessElement
-        public void processElement(ProcessContext c) throws IOException {
-            // FIXME: Obfuscate here and in order-summary flow
+        public void processElement(ProcessContext c) throws IOException, NoSuchAlgorithmException {
+
             String copy = mapper.writeValueAsString(c.element());
             MasterOrder masterOrder = mapper.readValue(copy, MasterOrder.class);
 
@@ -345,12 +348,17 @@ public class App {
                     paymentDetail.setPoBox(Utils.mask(poBox, '#'));
                 }
             }
+
             if (masterOrder.getCorrelationId() != null && !masterOrder.getCorrelationId().isEmpty()) {
-                masterOrder.setCorrelationId(Utils.mask(masterOrder.getCorrelationId(), '#'));
+                String sha256hex = Hashing.sha256().hashString(masterOrder.getCorrelationId(), StandardCharsets.UTF_8)
+                        .toString();
+                masterOrder.setCorrelationId(sha256hex);
             }
 
             if (masterOrder.getFingerprintId() != null && !masterOrder.getFingerprintId().isEmpty()) {
-                masterOrder.setFingerprintId(Utils.mask(masterOrder.getFingerprintId(), '#'));
+                String sha256hex = Hashing.sha256().hashString(masterOrder.getFingerprintId(), StandardCharsets.UTF_8)
+                        .toString();
+                masterOrder.setFingerprintId(sha256hex);
             }
 
             c.output(masterOrder);
