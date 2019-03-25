@@ -104,6 +104,10 @@ public class MasterOrder implements Serializable {
     private String osName;
     @JsonProperty("DocumentLifetime")
     private String documentLifetime;
+    @JsonProperty("ProductDataRetrievedAndInstalled")
+    private Boolean productDataRetrievedAndInstalled;
+    @JsonProperty("ProductDataCountryIso")
+    private String productDataCountryIso;
 
     private final static long serialVersionUID = 8817357657140713368L;
 
@@ -557,6 +561,26 @@ public class MasterOrder implements Serializable {
     @JsonProperty("DocumentLifetime")
     public void setDocumentLifetime(String documentLifetime) {
         this.documentLifetime = documentLifetime;
+    }
+
+    @JsonProperty("ProductDataRetrievedAndInstalled")
+    public Boolean getProductDataRetrievedAndInstalled() {
+        return this.productDataRetrievedAndInstalled;
+    }
+
+    @JsonProperty("ProductDataRetrievedAndInstalled")
+    public void isProductDataRetrievedAndInstalled(Boolean productDataRetrievedAndInstalled) {
+        this.productDataRetrievedAndInstalled = productDataRetrievedAndInstalled;
+    }
+
+    @JsonProperty("ProductDataCountryIso")
+    public String getProductDataCountryIso() {
+        return this.productDataCountryIso;
+    }
+
+    @JsonProperty("ProductDataCountryIso")
+    public void setProductDataCountryIso(String productDataCountryIso) {
+        this.productDataCountryIso = productDataCountryIso;
     }
 
     @Override
