@@ -76,38 +76,11 @@ public class Utils {
      * @author Paul Mooney
      */
     public static BigDecimal calcOrderValue(MasterOrder masterOrder, String currency) {
-        BigDecimal deliveryCharge = BigDecimal.ZERO;
-
-        for (OrderItem orderItem : masterOrder.getOrderItems()) {
-            for (OrderArticle orderArticle : orderItem.getOrderArticles()) {
-                for (Charge charge : orderArticle.getCharges()) {
-                    String chargeType = charge.getName();
-                    if (charge.getExactValue().getCurrencyCodeIso().equals(currency) && (chargeType.equals("Delivery")
-                            || chargeType.equals("DeliveryDuties") || chargeType.equals("DeliveryTaxes")
-                            || chargeType.equals("DeliveryTaxOnDuties") || chargeType.equals("DeliveryTaxOnFees")
-                            || chargeType.equals("DeliveryFees") || chargeType.equals("DeliveryFixedFee"))) {
-                        deliveryCharge = deliveryCharge.add(charge.getExactValue().getValue());
-                    }
-                }
-            }
+        if (masterOrder.getEShopWorldCurrencyPaymentAmount() != null) {
+            return masterOrder.getEShopWorldCurrencyPaymentAmount().getValue();
+        } else {
+            return new BigDecimal(0);
         }
-
-        BigDecimal merchandiseCharge = BigDecimal.ZERO;
-
-        for (OrderItem orderItem : masterOrder.getOrderItems()) {
-            for (OrderArticle orderArticle : orderItem.getOrderArticles()) {
-                for (Charge charge : orderArticle.getCharges()) {
-                    String chargeType = charge.getName();
-                    if (charge.getExactValue().getCurrencyCodeIso().equals(currency) && (chargeType.equals("Items")
-                            || chargeType.equals("ItemDuties") || chargeType.equals("ItemTaxes")
-                            || chargeType.equals("ItemTaxOnDuties") || chargeType.equals("ItemTaxOnFees")
-                            || chargeType.equals("ItemFees") || chargeType.equals("ItemFixedFee"))) {
-                        merchandiseCharge = merchandiseCharge.add(charge.getExactValue().getValue());
-                    }
-                }
-            }
-        }
-        return deliveryCharge.add(merchandiseCharge);
     }
 
     /**

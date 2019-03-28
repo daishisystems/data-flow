@@ -111,6 +111,16 @@ public class MasterOrder implements Serializable {
 
     private final static long serialVersionUID = 8817357657140713368L;
 
+    @JsonProperty("EShopWorldCurrencyPaymentAmount")
+    public EShopWorldCurrencyPaymentAmount getEShopWorldCurrencyPaymentAmount() {
+        return this.eShopWorldCurrencyPaymentAmount;
+    }
+
+    @JsonProperty("EShopWorldCurrencyPaymentAmount")
+    public void setEShopWorldCurrencyPaymentAmount(EShopWorldCurrencyPaymentAmount eShopWorldCurrencyPaymentAmount) {
+        this.eShopWorldCurrencyPaymentAmount = eShopWorldCurrencyPaymentAmount;
+    }
+
     @JsonProperty("OrderCode")
     public String getOrderCode() {
         return orderCode;
