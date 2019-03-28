@@ -3,8 +3,10 @@ package com.dataflow.sample;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import org.apache.beam.sdk.coders.DefaultCoder;
@@ -108,6 +110,8 @@ public class MasterOrder implements Serializable {
     private Boolean productDataRetrievedAndInstalled;
     @JsonProperty("ProductDataCountryIso")
     private String productDataCountryIso;
+    @JsonProperty("httpHeaders")
+    private HashMap<String, String> httpHeaders;
 
     private final static long serialVersionUID = 8817357657140713368L;
 
@@ -591,6 +595,17 @@ public class MasterOrder implements Serializable {
     @JsonProperty("ProductDataCountryIso")
     public void setProductDataCountryIso(String productDataCountryIso) {
         this.productDataCountryIso = productDataCountryIso;
+    }
+
+    @JsonIgnore
+    @JsonProperty("httpHeaders")
+    public HashMap<String, String> getHttpHeaders() {
+        return this.httpHeaders;
+    }
+
+    @JsonProperty("httpHeaders")
+    public void setHttpHeaders(HashMap<String, String> httpHeaders) {
+        this.httpHeaders = httpHeaders;
     }
 
     @Override
