@@ -1,0 +1,2689 @@
+{
+    "extension": "linecount",
+    "version": "0.1.7",
+    "workspace": "c:\\Users\\pmooney\\java\\data-flow",
+    "linecount": [
+        {
+            "version": "0.1.7",
+            "counttime": "2019-04-02 11:40:48",
+            "filesum": 205,
+            "codesum": 28338,
+            "commentsum": 1777,
+            "blanksum": 2374,
+            "filelist": [
+                {
+                    "blank": 0,
+                    "code": 2,
+                    "comment": 0,
+                    "filename": ".gitattributes"
+                },
+                {
+                    "blank": 1,
+                    "code": 11,
+                    "comment": 0,
+                    "filename": ".gitignore"
+                },
+                {
+                    "blank": 0,
+                    "code": 49,
+                    "comment": 0,
+                    "filename": "com.dataflow.sample\\.classpath"
+                },
+                {
+                    "blank": 0,
+                    "code": 109,
+                    "comment": 0,
+                    "filename": "com.dataflow.sample\\.factorypath"
+                },
+                {
+                    "blank": 0,
+                    "code": 23,
+                    "comment": 0,
+                    "filename": "com.dataflow.sample\\.project"
+                },
+                {
+                    "blank": 0,
+                    "code": 5,
+                    "comment": 3,
+                    "filename": "com.dataflow.sample\\.settings\\org.eclipse.core.resources.prefs"
+                },
+                {
+                    "blank": 0,
+                    "code": 4,
+                    "comment": 0,
+                    "filename": "com.dataflow.sample\\.settings\\org.eclipse.jdt.apt.core.prefs"
+                },
+                {
+                    "blank": 0,
+                    "code": 7,
+                    "comment": 0,
+                    "filename": "com.dataflow.sample\\.settings\\org.eclipse.jdt.core.prefs"
+                },
+                {
+                    "blank": 0,
+                    "code": 4,
+                    "comment": 0,
+                    "filename": "com.dataflow.sample\\.settings\\org.eclipse.m2e.core.prefs"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "com.dataflow.sample\\mvn"
+                },
+                {
+                    "blank": 0,
+                    "code": 118,
+                    "comment": 3,
+                    "filename": "com.dataflow.sample\\pom.xml"
+                },
+                {
+                    "blank": 49,
+                    "code": 401,
+                    "comment": 28,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\App.java"
+                },
+                {
+                    "blank": 20,
+                    "code": 79,
+                    "comment": 0,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\Attempt.java"
+                },
+                {
+                    "blank": 20,
+                    "code": 99,
+                    "comment": 13,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\AuthorizationDetails.java"
+                },
+                {
+                    "blank": 42,
+                    "code": 232,
+                    "comment": 24,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\AvailableOrderItem.java"
+                },
+                {
+                    "blank": 21,
+                    "code": 84,
+                    "comment": 10,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\BeforeDiscount.java"
+                },
+                {
+                    "blank": 31,
+                    "code": 129,
+                    "comment": 0,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\BillingAddress.java"
+                },
+                {
+                    "blank": 36,
+                    "code": 182,
+                    "comment": 20,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\Calculation.java"
+                },
+                {
+                    "blank": 38,
+                    "code": 183,
+                    "comment": 21,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\CalculationParameters.java"
+                },
+                {
+                    "blank": 34,
+                    "code": 148,
+                    "comment": 0,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\CalculationRates.java"
+                },
+                {
+                    "blank": 14,
+                    "code": 53,
+                    "comment": 9,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\Charge.java"
+                },
+                {
+                    "blank": 14,
+                    "code": 53,
+                    "comment": 9,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\ChargeTarget.java"
+                },
+                {
+                    "blank": 18,
+                    "code": 75,
+                    "comment": 11,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\Currency.java"
+                },
+                {
+                    "blank": 17,
+                    "code": 29,
+                    "comment": 7,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\CustomPipelineOptions.java"
+                },
+                {
+                    "blank": 15,
+                    "code": 40,
+                    "comment": 19,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\DeIdentification.java"
+                },
+                {
+                    "blank": 42,
+                    "code": 214,
+                    "comment": 23,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\DeliveryDetail.java"
+                },
+                {
+                    "blank": 38,
+                    "code": 190,
+                    "comment": 21,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\DeliveryDisplay.java"
+                },
+                {
+                    "blank": 30,
+                    "code": 145,
+                    "comment": 17,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\DeliveryInput.java"
+                },
+                {
+                    "blank": 14,
+                    "code": 53,
+                    "comment": 9,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\DeliveryOption.java"
+                },
+                {
+                    "blank": 15,
+                    "code": 65,
+                    "comment": 4,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\DeliveryOptionExtended.java"
+                },
+                {
+                    "blank": 18,
+                    "code": 71,
+                    "comment": 0,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\DeminimisRegion.java"
+                },
+                {
+                    "blank": 12,
+                    "code": 39,
+                    "comment": 0,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\DeminimisRegionRate.java"
+                },
+                {
+                    "blank": 13,
+                    "code": 39,
+                    "comment": 0,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\DeminimisRegionRateForDelivery.java"
+                },
+                {
+                    "blank": 338,
+                    "code": 1666,
+                    "comment": 0,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\DeviceAtlasProperties.java"
+                },
+                {
+                    "blank": 21,
+                    "code": 84,
+                    "comment": 10,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\DiscountAmount.java"
+                },
+                {
+                    "blank": 20,
+                    "code": 89,
+                    "comment": 12,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\Display.java"
+                },
+                {
+                    "blank": 37,
+                    "code": 191,
+                    "comment": 21,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\DutyAndTaxDisplay.java"
+                },
+                {
+                    "blank": 8,
+                    "code": 29,
+                    "comment": 0,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\Error.java"
+                },
+                {
+                    "blank": 17,
+                    "code": 60,
+                    "comment": 0,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\EShopWorldCurrencyPaymentAmount.java"
+                },
+                {
+                    "blank": 20,
+                    "code": 79,
+                    "comment": 5,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\ExactValue.java"
+                },
+                {
+                    "blank": 13,
+                    "code": 53,
+                    "comment": 9,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\Feature.java"
+                },
+                {
+                    "blank": 17,
+                    "code": 59,
+                    "comment": 0,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\FixFee.java"
+                },
+                {
+                    "blank": 16,
+                    "code": 59,
+                    "comment": 4,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\FxRate.java"
+                },
+                {
+                    "blank": 9,
+                    "code": 29,
+                    "comment": 0,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\GdprAcceptance.java"
+                },
+                {
+                    "blank": 35,
+                    "code": 181,
+                    "comment": 20,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\InputDelivery.java"
+                },
+                {
+                    "blank": 35,
+                    "code": 181,
+                    "comment": 20,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\InputItem.java"
+                },
+                {
+                    "blank": 102,
+                    "code": 522,
+                    "comment": 0,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\MasterOrder.java"
+                },
+                {
+                    "blank": 42,
+                    "code": 191,
+                    "comment": 0,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\MasterPayment.java"
+                },
+                {
+                    "blank": 9,
+                    "code": 31,
+                    "comment": 0,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\MetadataItem.java"
+                },
+                {
+                    "blank": 30,
+                    "code": 141,
+                    "comment": 0,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\Order.java"
+                },
+                {
+                    "blank": 15,
+                    "code": 70,
+                    "comment": 10,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\OrderArticle.java"
+                },
+                {
+                    "blank": 13,
+                    "code": 53,
+                    "comment": 9,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\OrderChargeInfos.java"
+                },
+                {
+                    "blank": 5,
+                    "code": 19,
+                    "comment": 0,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\OrderConfirmationErrorInformation.java"
+                },
+                {
+                    "blank": 17,
+                    "code": 80,
+                    "comment": 11,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\OrderDiscount.java"
+                },
+                {
+                    "blank": 42,
+                    "code": 232,
+                    "comment": 24,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\OrderItem.java"
+                },
+                {
+                    "blank": 13,
+                    "code": 43,
+                    "comment": 0,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\OrderStatus.java"
+                },
+                {
+                    "blank": 60,
+                    "code": 330,
+                    "comment": 8,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\OrderSummary.java"
+                },
+                {
+                    "blank": 11,
+                    "code": 46,
+                    "comment": 8,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\Package.java"
+                },
+                {
+                    "blank": 28,
+                    "code": 129,
+                    "comment": 4,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\Payment.java"
+                },
+                {
+                    "blank": 41,
+                    "code": 214,
+                    "comment": 23,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\PaymentDetail.java"
+                },
+                {
+                    "blank": 13,
+                    "code": 49,
+                    "comment": 0,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\PaymentMethod.java"
+                },
+                {
+                    "blank": 23,
+                    "code": 99,
+                    "comment": 0,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\PaymentOrderItem.java"
+                },
+                {
+                    "blank": 9,
+                    "code": 17,
+                    "comment": 7,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\PaymentPipelineOptions.java"
+                },
+                {
+                    "blank": 12,
+                    "code": 48,
+                    "comment": 17,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\Payments.java"
+                },
+                {
+                    "blank": 9,
+                    "code": 44,
+                    "comment": 0,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\PlatformCreate.java"
+                },
+                {
+                    "blank": 11,
+                    "code": 39,
+                    "comment": 0,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\PlatformCreateResponse.java"
+                },
+                {
+                    "blank": 21,
+                    "code": 84,
+                    "comment": 10,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\Price.java"
+                },
+                {
+                    "blank": 21,
+                    "code": 98,
+                    "comment": 13,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\Pricing.java"
+                },
+                {
+                    "blank": 40,
+                    "code": 206,
+                    "comment": 22,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\Product.java"
+                },
+                {
+                    "blank": 35,
+                    "code": 179,
+                    "comment": 20,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\ProductDisplay.java"
+                },
+                {
+                    "blank": 29,
+                    "code": 145,
+                    "comment": 17,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\ProductInput.java"
+                },
+                {
+                    "blank": 9,
+                    "code": 49,
+                    "comment": 1,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\PropertiesSerialiser.java"
+                },
+                {
+                    "blank": 17,
+                    "code": 80,
+                    "comment": 11,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\RetailerCheckoutExperience.java"
+                },
+                {
+                    "blank": 11,
+                    "code": 51,
+                    "comment": 9,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\RetailerConfirmation.java"
+                },
+                {
+                    "blank": 14,
+                    "code": 49,
+                    "comment": 0,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\RetailerConfirmationResponse.java"
+                },
+                {
+                    "blank": 19,
+                    "code": 69,
+                    "comment": 0,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\RetailerCurrencyDeliveryOptionPriceInfo.java"
+                },
+                {
+                    "blank": 21,
+                    "code": 98,
+                    "comment": 13,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\RetailerCurrencyOrderDiscountAmount.java"
+                },
+                {
+                    "blank": 21,
+                    "code": 98,
+                    "comment": 13,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\RetailerCurrencyOveridePriceInfo.java"
+                },
+                {
+                    "blank": 17,
+                    "code": 60,
+                    "comment": 0,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\RetailerCurrencyPaymentAmount.java"
+                },
+                {
+                    "blank": 21,
+                    "code": 98,
+                    "comment": 13,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\RetailerCurrencyProductPriceInfo.java"
+                },
+                {
+                    "blank": 19,
+                    "code": 75,
+                    "comment": 0,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\RetailerDeliveryOption.java"
+                },
+                {
+                    "blank": 15,
+                    "code": 64,
+                    "comment": 10,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\RetailerPromoCode.java"
+                },
+                {
+                    "blank": 29,
+                    "code": 129,
+                    "comment": 0,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\ShippingAddress.java"
+                },
+                {
+                    "blank": 21,
+                    "code": 105,
+                    "comment": 13,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\ShopperCheckoutExperience.java"
+                },
+                {
+                    "blank": 21,
+                    "code": 98,
+                    "comment": 13,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\ShopperCurrencyOrderDiscountAmount.java"
+                },
+                {
+                    "blank": 21,
+                    "code": 98,
+                    "comment": 13,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\ShopperCurrencyOveridePriceInfo.java"
+                },
+                {
+                    "blank": 18,
+                    "code": 60,
+                    "comment": 0,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\ShopperCurrencyPaymentAmount.java"
+                },
+                {
+                    "blank": 21,
+                    "code": 98,
+                    "comment": 13,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\ShopperCurrencyProductPriceInfo.java"
+                },
+                {
+                    "blank": 21,
+                    "code": 84,
+                    "comment": 10,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\TargetValue.java"
+                },
+                {
+                    "blank": 17,
+                    "code": 64,
+                    "comment": 0,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\UpperBoundary.java"
+                },
+                {
+                    "blank": 17,
+                    "code": 80,
+                    "comment": 37,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\Utils.java"
+                },
+                {
+                    "blank": 37,
+                    "code": 51,
+                    "comment": 521,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\deviceatlas-ehcache.xml"
+                },
+                {
+                    "blank": 0,
+                    "code": 685,
+                    "comment": 0,
+                    "filename": "com.dataflow.sample\\src\\main\\resources\\order.json"
+                },
+                {
+                    "blank": 10,
+                    "code": 36,
+                    "comment": 0,
+                    "filename": "com.dataflow.sample\\src\\test\\java\\com\\dataflow\\sample\\DeserialisationTest.java"
+                },
+                {
+                    "blank": 12,
+                    "code": 48,
+                    "comment": 1,
+                    "filename": "com.dataflow.sample\\src\\test\\java\\com\\dataflow\\sample\\DeviceAtlasTest.java"
+                },
+                {
+                    "blank": 33,
+                    "code": 149,
+                    "comment": 0,
+                    "filename": "com.dataflow.sample\\src\\test\\java\\com\\dataflow\\sample\\OrderTest.java"
+                },
+                {
+                    "blank": 33,
+                    "code": 128,
+                    "comment": 7,
+                    "filename": "com.dataflow.sample\\src\\test\\java\\com\\dataflow\\sample\\UtilsTest.java"
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\App$1.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\App$2.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\App$3.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\App$4.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\App$5.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\App$6.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\App$7.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\App$FormatOrderSummaryAsTableRowFn.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\App$GroupOrdersFn.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\App$MaskOrderFn.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\App$MaskOrdersFn.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\App$OrderSummariesToTableRows.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\App$OrderSummaryFn.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\App$SerialiseMasterOrderFn.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\App.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\Attempt.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\AuthorizationDetails.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\AvailableOrderItem.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\BeforeDiscount.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\BillingAddress.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\Calculation.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\CalculationParameters.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\CalculationRates.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\Charge.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\ChargeTarget.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\Currency.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\CustomPipelineOptions.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\DeIdentification.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\DeliveryDetail.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\DeliveryDisplay.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\DeliveryInput.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\DeliveryOption.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\DeliveryOptionExtended.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\DeminimisRegion.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\DeminimisRegionRate.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\DeminimisRegionRateForDelivery.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\DeviceAtlasProperties.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\DiscountAmount.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\Display.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\DutyAndTaxDisplay.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\Error.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\EShopWorldCurrencyPaymentAmount.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\ExactValue.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\Feature.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\FixFee.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\FxRate.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\GdprAcceptance.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\InputDelivery.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\InputItem.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\MasterOrder.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\MasterPayment.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\MetadataItem.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\Order.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\OrderArticle.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\OrderChargeInfos.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\OrderConfirmationErrorInformation.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\OrderDiscount.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\OrderItem.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\OrderStatus.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\OrderSummary.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\Package.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\Payment.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\PaymentDetail.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\PaymentMethod.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\PaymentOrderItem.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\PaymentPipelineOptions.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\Payments$1.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\Payments$2.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\Payments$3.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\Payments.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\PlatformCreate.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\PlatformCreateResponse.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\Price.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\Pricing.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\Product.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\ProductDisplay.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\ProductInput.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\PropertiesSerialiser.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\RetailerCheckoutExperience.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\RetailerConfirmation.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\RetailerConfirmationResponse.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\RetailerCurrencyDeliveryOptionPriceInfo.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\RetailerCurrencyOrderDiscountAmount.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\RetailerCurrencyOveridePriceInfo.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\RetailerCurrencyPaymentAmount.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\RetailerCurrencyProductPriceInfo.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\RetailerDeliveryOption.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\RetailerPromoCode.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\ShippingAddress.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\ShopperCheckoutExperience.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\ShopperCurrencyOrderDiscountAmount.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\ShopperCurrencyOveridePriceInfo.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\ShopperCurrencyPaymentAmount.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\ShopperCurrencyProductPriceInfo.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\TargetValue.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\UpperBoundary.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\Utils.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 37,
+                    "code": 51,
+                    "comment": 521,
+                    "filename": "com.dataflow.sample\\target\\classes\\deviceatlas-ehcache.xml"
+                },
+                {
+                    "blank": 0,
+                    "code": 15788,
+                    "comment": 0,
+                    "filename": "com.dataflow.sample\\target\\classes\\order-2.json"
+                },
+                {
+                    "blank": 0,
+                    "code": 685,
+                    "comment": 0,
+                    "filename": "com.dataflow.sample\\target\\classes\\order.json"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "com.dataflow.sample\\target\\maven-status\\maven-compiler-plugin\\compile\\default-compile\\createdFiles.lst"
+                },
+                {
+                    "blank": 0,
+                    "code": 80,
+                    "comment": 0,
+                    "filename": "com.dataflow.sample\\target\\maven-status\\maven-compiler-plugin\\compile\\default-compile\\inputFiles.lst"
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\test-classes\\com\\dataflow\\sample\\DeserialisationTest.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\test-classes\\com\\dataflow\\sample\\DeviceAtlasTest.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\test-classes\\com\\dataflow\\sample\\OrderTest.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\test-classes\\com\\dataflow\\sample\\UtilsTest.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 47,
+                    "code": 219,
+                    "comment": 3,
+                    "filename": "LICENSE"
+                },
+                {
+                    "blank": 6,
+                    "code": 7,
+                    "comment": 0,
+                    "filename": "README.md"
+                }
+            ]
+        },
+        {
+            "version": "0.1.7",
+            "counttime": "2019-04-02 11:41:11",
+            "filesum": 205,
+            "codesum": 28338,
+            "commentsum": 1777,
+            "blanksum": 2374,
+            "filelist": [
+                {
+                    "blank": 0,
+                    "code": 2,
+                    "comment": 0,
+                    "filename": ".gitattributes"
+                },
+                {
+                    "blank": 1,
+                    "code": 11,
+                    "comment": 0,
+                    "filename": ".gitignore"
+                },
+                {
+                    "blank": 0,
+                    "code": 49,
+                    "comment": 0,
+                    "filename": "com.dataflow.sample\\.classpath"
+                },
+                {
+                    "blank": 0,
+                    "code": 109,
+                    "comment": 0,
+                    "filename": "com.dataflow.sample\\.factorypath"
+                },
+                {
+                    "blank": 0,
+                    "code": 23,
+                    "comment": 0,
+                    "filename": "com.dataflow.sample\\.project"
+                },
+                {
+                    "blank": 0,
+                    "code": 5,
+                    "comment": 3,
+                    "filename": "com.dataflow.sample\\.settings\\org.eclipse.core.resources.prefs"
+                },
+                {
+                    "blank": 0,
+                    "code": 4,
+                    "comment": 0,
+                    "filename": "com.dataflow.sample\\.settings\\org.eclipse.jdt.apt.core.prefs"
+                },
+                {
+                    "blank": 0,
+                    "code": 7,
+                    "comment": 0,
+                    "filename": "com.dataflow.sample\\.settings\\org.eclipse.jdt.core.prefs"
+                },
+                {
+                    "blank": 0,
+                    "code": 4,
+                    "comment": 0,
+                    "filename": "com.dataflow.sample\\.settings\\org.eclipse.m2e.core.prefs"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "com.dataflow.sample\\mvn"
+                },
+                {
+                    "blank": 0,
+                    "code": 118,
+                    "comment": 3,
+                    "filename": "com.dataflow.sample\\pom.xml"
+                },
+                {
+                    "blank": 49,
+                    "code": 401,
+                    "comment": 28,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\App.java"
+                },
+                {
+                    "blank": 20,
+                    "code": 79,
+                    "comment": 0,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\Attempt.java"
+                },
+                {
+                    "blank": 20,
+                    "code": 99,
+                    "comment": 13,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\AuthorizationDetails.java"
+                },
+                {
+                    "blank": 42,
+                    "code": 232,
+                    "comment": 24,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\AvailableOrderItem.java"
+                },
+                {
+                    "blank": 21,
+                    "code": 84,
+                    "comment": 10,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\BeforeDiscount.java"
+                },
+                {
+                    "blank": 31,
+                    "code": 129,
+                    "comment": 0,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\BillingAddress.java"
+                },
+                {
+                    "blank": 36,
+                    "code": 182,
+                    "comment": 20,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\Calculation.java"
+                },
+                {
+                    "blank": 38,
+                    "code": 183,
+                    "comment": 21,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\CalculationParameters.java"
+                },
+                {
+                    "blank": 34,
+                    "code": 148,
+                    "comment": 0,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\CalculationRates.java"
+                },
+                {
+                    "blank": 14,
+                    "code": 53,
+                    "comment": 9,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\Charge.java"
+                },
+                {
+                    "blank": 14,
+                    "code": 53,
+                    "comment": 9,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\ChargeTarget.java"
+                },
+                {
+                    "blank": 18,
+                    "code": 75,
+                    "comment": 11,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\Currency.java"
+                },
+                {
+                    "blank": 17,
+                    "code": 29,
+                    "comment": 7,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\CustomPipelineOptions.java"
+                },
+                {
+                    "blank": 15,
+                    "code": 40,
+                    "comment": 19,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\DeIdentification.java"
+                },
+                {
+                    "blank": 42,
+                    "code": 214,
+                    "comment": 23,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\DeliveryDetail.java"
+                },
+                {
+                    "blank": 38,
+                    "code": 190,
+                    "comment": 21,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\DeliveryDisplay.java"
+                },
+                {
+                    "blank": 30,
+                    "code": 145,
+                    "comment": 17,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\DeliveryInput.java"
+                },
+                {
+                    "blank": 14,
+                    "code": 53,
+                    "comment": 9,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\DeliveryOption.java"
+                },
+                {
+                    "blank": 15,
+                    "code": 65,
+                    "comment": 4,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\DeliveryOptionExtended.java"
+                },
+                {
+                    "blank": 18,
+                    "code": 71,
+                    "comment": 0,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\DeminimisRegion.java"
+                },
+                {
+                    "blank": 12,
+                    "code": 39,
+                    "comment": 0,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\DeminimisRegionRate.java"
+                },
+                {
+                    "blank": 13,
+                    "code": 39,
+                    "comment": 0,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\DeminimisRegionRateForDelivery.java"
+                },
+                {
+                    "blank": 338,
+                    "code": 1666,
+                    "comment": 0,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\DeviceAtlasProperties.java"
+                },
+                {
+                    "blank": 21,
+                    "code": 84,
+                    "comment": 10,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\DiscountAmount.java"
+                },
+                {
+                    "blank": 20,
+                    "code": 89,
+                    "comment": 12,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\Display.java"
+                },
+                {
+                    "blank": 37,
+                    "code": 191,
+                    "comment": 21,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\DutyAndTaxDisplay.java"
+                },
+                {
+                    "blank": 8,
+                    "code": 29,
+                    "comment": 0,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\Error.java"
+                },
+                {
+                    "blank": 17,
+                    "code": 60,
+                    "comment": 0,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\EShopWorldCurrencyPaymentAmount.java"
+                },
+                {
+                    "blank": 20,
+                    "code": 79,
+                    "comment": 5,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\ExactValue.java"
+                },
+                {
+                    "blank": 13,
+                    "code": 53,
+                    "comment": 9,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\Feature.java"
+                },
+                {
+                    "blank": 17,
+                    "code": 59,
+                    "comment": 0,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\FixFee.java"
+                },
+                {
+                    "blank": 16,
+                    "code": 59,
+                    "comment": 4,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\FxRate.java"
+                },
+                {
+                    "blank": 9,
+                    "code": 29,
+                    "comment": 0,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\GdprAcceptance.java"
+                },
+                {
+                    "blank": 35,
+                    "code": 181,
+                    "comment": 20,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\InputDelivery.java"
+                },
+                {
+                    "blank": 35,
+                    "code": 181,
+                    "comment": 20,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\InputItem.java"
+                },
+                {
+                    "blank": 102,
+                    "code": 522,
+                    "comment": 0,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\MasterOrder.java"
+                },
+                {
+                    "blank": 42,
+                    "code": 191,
+                    "comment": 0,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\MasterPayment.java"
+                },
+                {
+                    "blank": 9,
+                    "code": 31,
+                    "comment": 0,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\MetadataItem.java"
+                },
+                {
+                    "blank": 30,
+                    "code": 141,
+                    "comment": 0,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\Order.java"
+                },
+                {
+                    "blank": 15,
+                    "code": 70,
+                    "comment": 10,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\OrderArticle.java"
+                },
+                {
+                    "blank": 13,
+                    "code": 53,
+                    "comment": 9,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\OrderChargeInfos.java"
+                },
+                {
+                    "blank": 5,
+                    "code": 19,
+                    "comment": 0,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\OrderConfirmationErrorInformation.java"
+                },
+                {
+                    "blank": 17,
+                    "code": 80,
+                    "comment": 11,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\OrderDiscount.java"
+                },
+                {
+                    "blank": 42,
+                    "code": 232,
+                    "comment": 24,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\OrderItem.java"
+                },
+                {
+                    "blank": 13,
+                    "code": 43,
+                    "comment": 0,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\OrderStatus.java"
+                },
+                {
+                    "blank": 60,
+                    "code": 330,
+                    "comment": 8,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\OrderSummary.java"
+                },
+                {
+                    "blank": 11,
+                    "code": 46,
+                    "comment": 8,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\Package.java"
+                },
+                {
+                    "blank": 28,
+                    "code": 129,
+                    "comment": 4,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\Payment.java"
+                },
+                {
+                    "blank": 41,
+                    "code": 214,
+                    "comment": 23,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\PaymentDetail.java"
+                },
+                {
+                    "blank": 13,
+                    "code": 49,
+                    "comment": 0,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\PaymentMethod.java"
+                },
+                {
+                    "blank": 23,
+                    "code": 99,
+                    "comment": 0,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\PaymentOrderItem.java"
+                },
+                {
+                    "blank": 9,
+                    "code": 17,
+                    "comment": 7,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\PaymentPipelineOptions.java"
+                },
+                {
+                    "blank": 12,
+                    "code": 48,
+                    "comment": 17,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\Payments.java"
+                },
+                {
+                    "blank": 9,
+                    "code": 44,
+                    "comment": 0,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\PlatformCreate.java"
+                },
+                {
+                    "blank": 11,
+                    "code": 39,
+                    "comment": 0,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\PlatformCreateResponse.java"
+                },
+                {
+                    "blank": 21,
+                    "code": 84,
+                    "comment": 10,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\Price.java"
+                },
+                {
+                    "blank": 21,
+                    "code": 98,
+                    "comment": 13,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\Pricing.java"
+                },
+                {
+                    "blank": 40,
+                    "code": 206,
+                    "comment": 22,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\Product.java"
+                },
+                {
+                    "blank": 35,
+                    "code": 179,
+                    "comment": 20,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\ProductDisplay.java"
+                },
+                {
+                    "blank": 29,
+                    "code": 145,
+                    "comment": 17,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\ProductInput.java"
+                },
+                {
+                    "blank": 9,
+                    "code": 49,
+                    "comment": 1,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\PropertiesSerialiser.java"
+                },
+                {
+                    "blank": 17,
+                    "code": 80,
+                    "comment": 11,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\RetailerCheckoutExperience.java"
+                },
+                {
+                    "blank": 11,
+                    "code": 51,
+                    "comment": 9,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\RetailerConfirmation.java"
+                },
+                {
+                    "blank": 14,
+                    "code": 49,
+                    "comment": 0,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\RetailerConfirmationResponse.java"
+                },
+                {
+                    "blank": 19,
+                    "code": 69,
+                    "comment": 0,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\RetailerCurrencyDeliveryOptionPriceInfo.java"
+                },
+                {
+                    "blank": 21,
+                    "code": 98,
+                    "comment": 13,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\RetailerCurrencyOrderDiscountAmount.java"
+                },
+                {
+                    "blank": 21,
+                    "code": 98,
+                    "comment": 13,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\RetailerCurrencyOveridePriceInfo.java"
+                },
+                {
+                    "blank": 17,
+                    "code": 60,
+                    "comment": 0,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\RetailerCurrencyPaymentAmount.java"
+                },
+                {
+                    "blank": 21,
+                    "code": 98,
+                    "comment": 13,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\RetailerCurrencyProductPriceInfo.java"
+                },
+                {
+                    "blank": 19,
+                    "code": 75,
+                    "comment": 0,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\RetailerDeliveryOption.java"
+                },
+                {
+                    "blank": 15,
+                    "code": 64,
+                    "comment": 10,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\RetailerPromoCode.java"
+                },
+                {
+                    "blank": 29,
+                    "code": 129,
+                    "comment": 0,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\ShippingAddress.java"
+                },
+                {
+                    "blank": 21,
+                    "code": 105,
+                    "comment": 13,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\ShopperCheckoutExperience.java"
+                },
+                {
+                    "blank": 21,
+                    "code": 98,
+                    "comment": 13,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\ShopperCurrencyOrderDiscountAmount.java"
+                },
+                {
+                    "blank": 21,
+                    "code": 98,
+                    "comment": 13,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\ShopperCurrencyOveridePriceInfo.java"
+                },
+                {
+                    "blank": 18,
+                    "code": 60,
+                    "comment": 0,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\ShopperCurrencyPaymentAmount.java"
+                },
+                {
+                    "blank": 21,
+                    "code": 98,
+                    "comment": 13,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\ShopperCurrencyProductPriceInfo.java"
+                },
+                {
+                    "blank": 21,
+                    "code": 84,
+                    "comment": 10,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\TargetValue.java"
+                },
+                {
+                    "blank": 17,
+                    "code": 64,
+                    "comment": 0,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\UpperBoundary.java"
+                },
+                {
+                    "blank": 17,
+                    "code": 80,
+                    "comment": 37,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\com\\dataflow\\sample\\Utils.java"
+                },
+                {
+                    "blank": 37,
+                    "code": 51,
+                    "comment": 521,
+                    "filename": "com.dataflow.sample\\src\\main\\java\\deviceatlas-ehcache.xml"
+                },
+                {
+                    "blank": 0,
+                    "code": 685,
+                    "comment": 0,
+                    "filename": "com.dataflow.sample\\src\\main\\resources\\order.json"
+                },
+                {
+                    "blank": 10,
+                    "code": 36,
+                    "comment": 0,
+                    "filename": "com.dataflow.sample\\src\\test\\java\\com\\dataflow\\sample\\DeserialisationTest.java"
+                },
+                {
+                    "blank": 12,
+                    "code": 48,
+                    "comment": 1,
+                    "filename": "com.dataflow.sample\\src\\test\\java\\com\\dataflow\\sample\\DeviceAtlasTest.java"
+                },
+                {
+                    "blank": 33,
+                    "code": 149,
+                    "comment": 0,
+                    "filename": "com.dataflow.sample\\src\\test\\java\\com\\dataflow\\sample\\OrderTest.java"
+                },
+                {
+                    "blank": 33,
+                    "code": 128,
+                    "comment": 7,
+                    "filename": "com.dataflow.sample\\src\\test\\java\\com\\dataflow\\sample\\UtilsTest.java"
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\App$1.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\App$2.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\App$3.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\App$4.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\App$5.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\App$6.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\App$7.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\App$FormatOrderSummaryAsTableRowFn.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\App$GroupOrdersFn.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\App$MaskOrderFn.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\App$MaskOrdersFn.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\App$OrderSummariesToTableRows.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\App$OrderSummaryFn.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\App$SerialiseMasterOrderFn.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\App.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\Attempt.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\AuthorizationDetails.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\AvailableOrderItem.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\BeforeDiscount.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\BillingAddress.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\Calculation.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\CalculationParameters.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\CalculationRates.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\Charge.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\ChargeTarget.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\Currency.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\CustomPipelineOptions.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\DeIdentification.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\DeliveryDetail.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\DeliveryDisplay.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\DeliveryInput.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\DeliveryOption.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\DeliveryOptionExtended.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\DeminimisRegion.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\DeminimisRegionRate.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\DeminimisRegionRateForDelivery.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\DeviceAtlasProperties.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\DiscountAmount.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\Display.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\DutyAndTaxDisplay.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\Error.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\EShopWorldCurrencyPaymentAmount.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\ExactValue.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\Feature.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\FixFee.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\FxRate.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\GdprAcceptance.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\InputDelivery.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\InputItem.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\MasterOrder.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\MasterPayment.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\MetadataItem.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\Order.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\OrderArticle.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\OrderChargeInfos.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\OrderConfirmationErrorInformation.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\OrderDiscount.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\OrderItem.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\OrderStatus.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\OrderSummary.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\Package.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\Payment.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\PaymentDetail.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\PaymentMethod.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\PaymentOrderItem.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\PaymentPipelineOptions.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\Payments$1.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\Payments$2.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\Payments$3.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\Payments.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\PlatformCreate.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\PlatformCreateResponse.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\Price.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\Pricing.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\Product.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\ProductDisplay.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\ProductInput.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\PropertiesSerialiser.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\RetailerCheckoutExperience.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\RetailerConfirmation.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\RetailerConfirmationResponse.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\RetailerCurrencyDeliveryOptionPriceInfo.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\RetailerCurrencyOrderDiscountAmount.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\RetailerCurrencyOveridePriceInfo.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\RetailerCurrencyPaymentAmount.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\RetailerCurrencyProductPriceInfo.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\RetailerDeliveryOption.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\RetailerPromoCode.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\ShippingAddress.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\ShopperCheckoutExperience.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\ShopperCurrencyOrderDiscountAmount.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\ShopperCurrencyOveridePriceInfo.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\ShopperCurrencyPaymentAmount.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\ShopperCurrencyProductPriceInfo.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\TargetValue.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\UpperBoundary.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\classes\\com\\dataflow\\sample\\Utils.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 37,
+                    "code": 51,
+                    "comment": 521,
+                    "filename": "com.dataflow.sample\\target\\classes\\deviceatlas-ehcache.xml"
+                },
+                {
+                    "blank": 0,
+                    "code": 15788,
+                    "comment": 0,
+                    "filename": "com.dataflow.sample\\target\\classes\\order-2.json"
+                },
+                {
+                    "blank": 0,
+                    "code": 685,
+                    "comment": 0,
+                    "filename": "com.dataflow.sample\\target\\classes\\order.json"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "com.dataflow.sample\\target\\maven-status\\maven-compiler-plugin\\compile\\default-compile\\createdFiles.lst"
+                },
+                {
+                    "blank": 0,
+                    "code": 80,
+                    "comment": 0,
+                    "filename": "com.dataflow.sample\\target\\maven-status\\maven-compiler-plugin\\compile\\default-compile\\inputFiles.lst"
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\test-classes\\com\\dataflow\\sample\\DeserialisationTest.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\test-classes\\com\\dataflow\\sample\\DeviceAtlasTest.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\test-classes\\com\\dataflow\\sample\\OrderTest.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "com.dataflow.sample\\target\\test-classes\\com\\dataflow\\sample\\UtilsTest.class",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 47,
+                    "code": 219,
+                    "comment": 3,
+                    "filename": "LICENSE"
+                },
+                {
+                    "blank": 6,
+                    "code": 7,
+                    "comment": 0,
+                    "filename": "README.md"
+                }
+            ]
+        }
+    ]
+}

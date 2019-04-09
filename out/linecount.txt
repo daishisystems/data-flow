@@ -1,0 +1,434 @@
+===============================================================================
+EXTENSION NAME : linecount
+EXTENSION VERSION : 0.1.7
+-------------------------------------------------------------------------------
+count time : 2019-04-02 11:40:48
+count workspace : c:\Users\pmooney\java\data-flow
+total files : 205
+total code lines : 28338
+total comment lines : 1777
+total blank lines : 2374
+
+.gitattributes, code is 2, comment is 0, blank is 0.
+.gitignore, code is 11, comment is 0, blank is 1.
+com.dataflow.sample\.classpath, code is 49, comment is 0, blank is 0.
+com.dataflow.sample\.factorypath, code is 109, comment is 0, blank is 0.
+com.dataflow.sample\.project, code is 23, comment is 0, blank is 0.
+com.dataflow.sample\.settings\org.eclipse.core.resources.prefs, code is 5, comment is 3, blank is 0.
+com.dataflow.sample\.settings\org.eclipse.jdt.apt.core.prefs, code is 4, comment is 0, blank is 0.
+com.dataflow.sample\.settings\org.eclipse.jdt.core.prefs, code is 7, comment is 0, blank is 0.
+com.dataflow.sample\.settings\org.eclipse.m2e.core.prefs, code is 4, comment is 0, blank is 0.
+com.dataflow.sample\mvn, code is 0, comment is 0, blank is 0.
+com.dataflow.sample\pom.xml, code is 118, comment is 3, blank is 0.
+com.dataflow.sample\src\main\java\com\dataflow\sample\App.java, code is 401, comment is 28, blank is 49.
+com.dataflow.sample\src\main\java\com\dataflow\sample\Attempt.java, code is 79, comment is 0, blank is 20.
+com.dataflow.sample\src\main\java\com\dataflow\sample\AuthorizationDetails.java, code is 99, comment is 13, blank is 20.
+com.dataflow.sample\src\main\java\com\dataflow\sample\AvailableOrderItem.java, code is 232, comment is 24, blank is 42.
+com.dataflow.sample\src\main\java\com\dataflow\sample\BeforeDiscount.java, code is 84, comment is 10, blank is 21.
+com.dataflow.sample\src\main\java\com\dataflow\sample\BillingAddress.java, code is 129, comment is 0, blank is 31.
+com.dataflow.sample\src\main\java\com\dataflow\sample\Calculation.java, code is 182, comment is 20, blank is 36.
+com.dataflow.sample\src\main\java\com\dataflow\sample\CalculationParameters.java, code is 183, comment is 21, blank is 38.
+com.dataflow.sample\src\main\java\com\dataflow\sample\CalculationRates.java, code is 148, comment is 0, blank is 34.
+com.dataflow.sample\src\main\java\com\dataflow\sample\Charge.java, code is 53, comment is 9, blank is 14.
+com.dataflow.sample\src\main\java\com\dataflow\sample\ChargeTarget.java, code is 53, comment is 9, blank is 14.
+com.dataflow.sample\src\main\java\com\dataflow\sample\Currency.java, code is 75, comment is 11, blank is 18.
+com.dataflow.sample\src\main\java\com\dataflow\sample\CustomPipelineOptions.java, code is 29, comment is 7, blank is 17.
+com.dataflow.sample\src\main\java\com\dataflow\sample\DeIdentification.java, code is 40, comment is 19, blank is 15.
+com.dataflow.sample\src\main\java\com\dataflow\sample\DeliveryDetail.java, code is 214, comment is 23, blank is 42.
+com.dataflow.sample\src\main\java\com\dataflow\sample\DeliveryDisplay.java, code is 190, comment is 21, blank is 38.
+com.dataflow.sample\src\main\java\com\dataflow\sample\DeliveryInput.java, code is 145, comment is 17, blank is 30.
+com.dataflow.sample\src\main\java\com\dataflow\sample\DeliveryOption.java, code is 53, comment is 9, blank is 14.
+com.dataflow.sample\src\main\java\com\dataflow\sample\DeliveryOptionExtended.java, code is 65, comment is 4, blank is 15.
+com.dataflow.sample\src\main\java\com\dataflow\sample\DeminimisRegion.java, code is 71, comment is 0, blank is 18.
+com.dataflow.sample\src\main\java\com\dataflow\sample\DeminimisRegionRate.java, code is 39, comment is 0, blank is 12.
+com.dataflow.sample\src\main\java\com\dataflow\sample\DeminimisRegionRateForDelivery.java, code is 39, comment is 0, blank is 13.
+com.dataflow.sample\src\main\java\com\dataflow\sample\DeviceAtlasProperties.java, code is 1666, comment is 0, blank is 338.
+com.dataflow.sample\src\main\java\com\dataflow\sample\DiscountAmount.java, code is 84, comment is 10, blank is 21.
+com.dataflow.sample\src\main\java\com\dataflow\sample\Display.java, code is 89, comment is 12, blank is 20.
+com.dataflow.sample\src\main\java\com\dataflow\sample\DutyAndTaxDisplay.java, code is 191, comment is 21, blank is 37.
+com.dataflow.sample\src\main\java\com\dataflow\sample\Error.java, code is 29, comment is 0, blank is 8.
+com.dataflow.sample\src\main\java\com\dataflow\sample\EShopWorldCurrencyPaymentAmount.java, code is 60, comment is 0, blank is 17.
+com.dataflow.sample\src\main\java\com\dataflow\sample\ExactValue.java, code is 79, comment is 5, blank is 20.
+com.dataflow.sample\src\main\java\com\dataflow\sample\Feature.java, code is 53, comment is 9, blank is 13.
+com.dataflow.sample\src\main\java\com\dataflow\sample\FixFee.java, code is 59, comment is 0, blank is 17.
+com.dataflow.sample\src\main\java\com\dataflow\sample\FxRate.java, code is 59, comment is 4, blank is 16.
+com.dataflow.sample\src\main\java\com\dataflow\sample\GdprAcceptance.java, code is 29, comment is 0, blank is 9.
+com.dataflow.sample\src\main\java\com\dataflow\sample\InputDelivery.java, code is 181, comment is 20, blank is 35.
+com.dataflow.sample\src\main\java\com\dataflow\sample\InputItem.java, code is 181, comment is 20, blank is 35.
+com.dataflow.sample\src\main\java\com\dataflow\sample\MasterOrder.java, code is 522, comment is 0, blank is 102.
+com.dataflow.sample\src\main\java\com\dataflow\sample\MasterPayment.java, code is 191, comment is 0, blank is 42.
+com.dataflow.sample\src\main\java\com\dataflow\sample\MetadataItem.java, code is 31, comment is 0, blank is 9.
+com.dataflow.sample\src\main\java\com\dataflow\sample\Order.java, code is 141, comment is 0, blank is 30.
+com.dataflow.sample\src\main\java\com\dataflow\sample\OrderArticle.java, code is 70, comment is 10, blank is 15.
+com.dataflow.sample\src\main\java\com\dataflow\sample\OrderChargeInfos.java, code is 53, comment is 9, blank is 13.
+com.dataflow.sample\src\main\java\com\dataflow\sample\OrderConfirmationErrorInformation.java, code is 19, comment is 0, blank is 5.
+com.dataflow.sample\src\main\java\com\dataflow\sample\OrderDiscount.java, code is 80, comment is 11, blank is 17.
+com.dataflow.sample\src\main\java\com\dataflow\sample\OrderItem.java, code is 232, comment is 24, blank is 42.
+com.dataflow.sample\src\main\java\com\dataflow\sample\OrderStatus.java, code is 43, comment is 0, blank is 13.
+com.dataflow.sample\src\main\java\com\dataflow\sample\OrderSummary.java, code is 330, comment is 8, blank is 60.
+com.dataflow.sample\src\main\java\com\dataflow\sample\Package.java, code is 46, comment is 8, blank is 11.
+com.dataflow.sample\src\main\java\com\dataflow\sample\Payment.java, code is 129, comment is 4, blank is 28.
+com.dataflow.sample\src\main\java\com\dataflow\sample\PaymentDetail.java, code is 214, comment is 23, blank is 41.
+com.dataflow.sample\src\main\java\com\dataflow\sample\PaymentMethod.java, code is 49, comment is 0, blank is 13.
+com.dataflow.sample\src\main\java\com\dataflow\sample\PaymentOrderItem.java, code is 99, comment is 0, blank is 23.
+com.dataflow.sample\src\main\java\com\dataflow\sample\PaymentPipelineOptions.java, code is 17, comment is 7, blank is 9.
+com.dataflow.sample\src\main\java\com\dataflow\sample\Payments.java, code is 48, comment is 17, blank is 12.
+com.dataflow.sample\src\main\java\com\dataflow\sample\PlatformCreate.java, code is 44, comment is 0, blank is 9.
+com.dataflow.sample\src\main\java\com\dataflow\sample\PlatformCreateResponse.java, code is 39, comment is 0, blank is 11.
+com.dataflow.sample\src\main\java\com\dataflow\sample\Price.java, code is 84, comment is 10, blank is 21.
+com.dataflow.sample\src\main\java\com\dataflow\sample\Pricing.java, code is 98, comment is 13, blank is 21.
+com.dataflow.sample\src\main\java\com\dataflow\sample\Product.java, code is 206, comment is 22, blank is 40.
+com.dataflow.sample\src\main\java\com\dataflow\sample\ProductDisplay.java, code is 179, comment is 20, blank is 35.
+com.dataflow.sample\src\main\java\com\dataflow\sample\ProductInput.java, code is 145, comment is 17, blank is 29.
+com.dataflow.sample\src\main\java\com\dataflow\sample\PropertiesSerialiser.java, code is 49, comment is 1, blank is 9.
+com.dataflow.sample\src\main\java\com\dataflow\sample\RetailerCheckoutExperience.java, code is 80, comment is 11, blank is 17.
+com.dataflow.sample\src\main\java\com\dataflow\sample\RetailerConfirmation.java, code is 51, comment is 9, blank is 11.
+com.dataflow.sample\src\main\java\com\dataflow\sample\RetailerConfirmationResponse.java, code is 49, comment is 0, blank is 14.
+com.dataflow.sample\src\main\java\com\dataflow\sample\RetailerCurrencyDeliveryOptionPriceInfo.java, code is 69, comment is 0, blank is 19.
+com.dataflow.sample\src\main\java\com\dataflow\sample\RetailerCurrencyOrderDiscountAmount.java, code is 98, comment is 13, blank is 21.
+com.dataflow.sample\src\main\java\com\dataflow\sample\RetailerCurrencyOveridePriceInfo.java, code is 98, comment is 13, blank is 21.
+com.dataflow.sample\src\main\java\com\dataflow\sample\RetailerCurrencyPaymentAmount.java, code is 60, comment is 0, blank is 17.
+com.dataflow.sample\src\main\java\com\dataflow\sample\RetailerCurrencyProductPriceInfo.java, code is 98, comment is 13, blank is 21.
+com.dataflow.sample\src\main\java\com\dataflow\sample\RetailerDeliveryOption.java, code is 75, comment is 0, blank is 19.
+com.dataflow.sample\src\main\java\com\dataflow\sample\RetailerPromoCode.java, code is 64, comment is 10, blank is 15.
+com.dataflow.sample\src\main\java\com\dataflow\sample\ShippingAddress.java, code is 129, comment is 0, blank is 29.
+com.dataflow.sample\src\main\java\com\dataflow\sample\ShopperCheckoutExperience.java, code is 105, comment is 13, blank is 21.
+com.dataflow.sample\src\main\java\com\dataflow\sample\ShopperCurrencyOrderDiscountAmount.java, code is 98, comment is 13, blank is 21.
+com.dataflow.sample\src\main\java\com\dataflow\sample\ShopperCurrencyOveridePriceInfo.java, code is 98, comment is 13, blank is 21.
+com.dataflow.sample\src\main\java\com\dataflow\sample\ShopperCurrencyPaymentAmount.java, code is 60, comment is 0, blank is 18.
+com.dataflow.sample\src\main\java\com\dataflow\sample\ShopperCurrencyProductPriceInfo.java, code is 98, comment is 13, blank is 21.
+com.dataflow.sample\src\main\java\com\dataflow\sample\TargetValue.java, code is 84, comment is 10, blank is 21.
+com.dataflow.sample\src\main\java\com\dataflow\sample\UpperBoundary.java, code is 64, comment is 0, blank is 17.
+com.dataflow.sample\src\main\java\com\dataflow\sample\Utils.java, code is 80, comment is 37, blank is 17.
+com.dataflow.sample\src\main\java\deviceatlas-ehcache.xml, code is 51, comment is 521, blank is 37.
+com.dataflow.sample\src\main\resources\order.json, code is 685, comment is 0, blank is 0.
+com.dataflow.sample\src\test\java\com\dataflow\sample\DeserialisationTest.java, code is 36, comment is 0, blank is 10.
+com.dataflow.sample\src\test\java\com\dataflow\sample\DeviceAtlasTest.java, code is 48, comment is 1, blank is 12.
+com.dataflow.sample\src\test\java\com\dataflow\sample\OrderTest.java, code is 149, comment is 0, blank is 33.
+com.dataflow.sample\src\test\java\com\dataflow\sample\UtilsTest.java, code is 128, comment is 7, blank is 33.
+com.dataflow.sample\target\classes\com\dataflow\sample\App$1.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\App$2.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\App$3.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\App$4.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\App$5.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\App$6.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\App$7.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\App$FormatOrderSummaryAsTableRowFn.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\App$GroupOrdersFn.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\App$MaskOrderFn.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\App$MaskOrdersFn.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\App$OrderSummariesToTableRows.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\App$OrderSummaryFn.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\App$SerialiseMasterOrderFn.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\App.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\Attempt.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\AuthorizationDetails.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\AvailableOrderItem.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\BeforeDiscount.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\BillingAddress.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\Calculation.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\CalculationParameters.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\CalculationRates.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\Charge.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\ChargeTarget.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\Currency.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\CustomPipelineOptions.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\DeIdentification.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\DeliveryDetail.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\DeliveryDisplay.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\DeliveryInput.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\DeliveryOption.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\DeliveryOptionExtended.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\DeminimisRegion.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\DeminimisRegionRate.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\DeminimisRegionRateForDelivery.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\DeviceAtlasProperties.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\DiscountAmount.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\Display.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\DutyAndTaxDisplay.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\Error.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\EShopWorldCurrencyPaymentAmount.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\ExactValue.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\Feature.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\FixFee.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\FxRate.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\GdprAcceptance.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\InputDelivery.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\InputItem.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\MasterOrder.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\MasterPayment.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\MetadataItem.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\Order.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\OrderArticle.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\OrderChargeInfos.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\OrderConfirmationErrorInformation.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\OrderDiscount.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\OrderItem.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\OrderStatus.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\OrderSummary.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\Package.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\Payment.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\PaymentDetail.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\PaymentMethod.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\PaymentOrderItem.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\PaymentPipelineOptions.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\Payments$1.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\Payments$2.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\Payments$3.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\Payments.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\PlatformCreate.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\PlatformCreateResponse.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\Price.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\Pricing.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\Product.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\ProductDisplay.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\ProductInput.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\PropertiesSerialiser.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\RetailerCheckoutExperience.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\RetailerConfirmation.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\RetailerConfirmationResponse.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\RetailerCurrencyDeliveryOptionPriceInfo.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\RetailerCurrencyOrderDiscountAmount.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\RetailerCurrencyOveridePriceInfo.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\RetailerCurrencyPaymentAmount.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\RetailerCurrencyProductPriceInfo.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\RetailerDeliveryOption.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\RetailerPromoCode.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\ShippingAddress.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\ShopperCheckoutExperience.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\ShopperCurrencyOrderDiscountAmount.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\ShopperCurrencyOveridePriceInfo.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\ShopperCurrencyPaymentAmount.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\ShopperCurrencyProductPriceInfo.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\TargetValue.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\UpperBoundary.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\Utils.class, it is a binary file.
+com.dataflow.sample\target\classes\deviceatlas-ehcache.xml, code is 51, comment is 521, blank is 37.
+com.dataflow.sample\target\classes\order-2.json, code is 15788, comment is 0, blank is 0.
+com.dataflow.sample\target\classes\order.json, code is 685, comment is 0, blank is 0.
+com.dataflow.sample\target\maven-status\maven-compiler-plugin\compile\default-compile\createdFiles.lst, code is 0, comment is 0, blank is 0.
+com.dataflow.sample\target\maven-status\maven-compiler-plugin\compile\default-compile\inputFiles.lst, code is 80, comment is 0, blank is 0.
+com.dataflow.sample\target\test-classes\com\dataflow\sample\DeserialisationTest.class, it is a binary file.
+com.dataflow.sample\target\test-classes\com\dataflow\sample\DeviceAtlasTest.class, it is a binary file.
+com.dataflow.sample\target\test-classes\com\dataflow\sample\OrderTest.class, it is a binary file.
+com.dataflow.sample\target\test-classes\com\dataflow\sample\UtilsTest.class, it is a binary file.
+LICENSE, code is 219, comment is 3, blank is 47.
+README.md, code is 7, comment is 0, blank is 6.
+===============================================================================
+===============================================================================
+EXTENSION NAME : linecount
+EXTENSION VERSION : 0.1.7
+-------------------------------------------------------------------------------
+count time : 2019-04-02 11:41:11
+count workspace : c:\Users\pmooney\java\data-flow
+total files : 205
+total code lines : 28338
+total comment lines : 1777
+total blank lines : 2374
+
+.gitattributes, code is 2, comment is 0, blank is 0.
+.gitignore, code is 11, comment is 0, blank is 1.
+com.dataflow.sample\.classpath, code is 49, comment is 0, blank is 0.
+com.dataflow.sample\.factorypath, code is 109, comment is 0, blank is 0.
+com.dataflow.sample\.project, code is 23, comment is 0, blank is 0.
+com.dataflow.sample\.settings\org.eclipse.core.resources.prefs, code is 5, comment is 3, blank is 0.
+com.dataflow.sample\.settings\org.eclipse.jdt.apt.core.prefs, code is 4, comment is 0, blank is 0.
+com.dataflow.sample\.settings\org.eclipse.jdt.core.prefs, code is 7, comment is 0, blank is 0.
+com.dataflow.sample\.settings\org.eclipse.m2e.core.prefs, code is 4, comment is 0, blank is 0.
+com.dataflow.sample\mvn, code is 0, comment is 0, blank is 0.
+com.dataflow.sample\pom.xml, code is 118, comment is 3, blank is 0.
+com.dataflow.sample\src\main\java\com\dataflow\sample\App.java, code is 401, comment is 28, blank is 49.
+com.dataflow.sample\src\main\java\com\dataflow\sample\Attempt.java, code is 79, comment is 0, blank is 20.
+com.dataflow.sample\src\main\java\com\dataflow\sample\AuthorizationDetails.java, code is 99, comment is 13, blank is 20.
+com.dataflow.sample\src\main\java\com\dataflow\sample\AvailableOrderItem.java, code is 232, comment is 24, blank is 42.
+com.dataflow.sample\src\main\java\com\dataflow\sample\BeforeDiscount.java, code is 84, comment is 10, blank is 21.
+com.dataflow.sample\src\main\java\com\dataflow\sample\BillingAddress.java, code is 129, comment is 0, blank is 31.
+com.dataflow.sample\src\main\java\com\dataflow\sample\Calculation.java, code is 182, comment is 20, blank is 36.
+com.dataflow.sample\src\main\java\com\dataflow\sample\CalculationParameters.java, code is 183, comment is 21, blank is 38.
+com.dataflow.sample\src\main\java\com\dataflow\sample\CalculationRates.java, code is 148, comment is 0, blank is 34.
+com.dataflow.sample\src\main\java\com\dataflow\sample\Charge.java, code is 53, comment is 9, blank is 14.
+com.dataflow.sample\src\main\java\com\dataflow\sample\ChargeTarget.java, code is 53, comment is 9, blank is 14.
+com.dataflow.sample\src\main\java\com\dataflow\sample\Currency.java, code is 75, comment is 11, blank is 18.
+com.dataflow.sample\src\main\java\com\dataflow\sample\CustomPipelineOptions.java, code is 29, comment is 7, blank is 17.
+com.dataflow.sample\src\main\java\com\dataflow\sample\DeIdentification.java, code is 40, comment is 19, blank is 15.
+com.dataflow.sample\src\main\java\com\dataflow\sample\DeliveryDetail.java, code is 214, comment is 23, blank is 42.
+com.dataflow.sample\src\main\java\com\dataflow\sample\DeliveryDisplay.java, code is 190, comment is 21, blank is 38.
+com.dataflow.sample\src\main\java\com\dataflow\sample\DeliveryInput.java, code is 145, comment is 17, blank is 30.
+com.dataflow.sample\src\main\java\com\dataflow\sample\DeliveryOption.java, code is 53, comment is 9, blank is 14.
+com.dataflow.sample\src\main\java\com\dataflow\sample\DeliveryOptionExtended.java, code is 65, comment is 4, blank is 15.
+com.dataflow.sample\src\main\java\com\dataflow\sample\DeminimisRegion.java, code is 71, comment is 0, blank is 18.
+com.dataflow.sample\src\main\java\com\dataflow\sample\DeminimisRegionRate.java, code is 39, comment is 0, blank is 12.
+com.dataflow.sample\src\main\java\com\dataflow\sample\DeminimisRegionRateForDelivery.java, code is 39, comment is 0, blank is 13.
+com.dataflow.sample\src\main\java\com\dataflow\sample\DeviceAtlasProperties.java, code is 1666, comment is 0, blank is 338.
+com.dataflow.sample\src\main\java\com\dataflow\sample\DiscountAmount.java, code is 84, comment is 10, blank is 21.
+com.dataflow.sample\src\main\java\com\dataflow\sample\Display.java, code is 89, comment is 12, blank is 20.
+com.dataflow.sample\src\main\java\com\dataflow\sample\DutyAndTaxDisplay.java, code is 191, comment is 21, blank is 37.
+com.dataflow.sample\src\main\java\com\dataflow\sample\Error.java, code is 29, comment is 0, blank is 8.
+com.dataflow.sample\src\main\java\com\dataflow\sample\EShopWorldCurrencyPaymentAmount.java, code is 60, comment is 0, blank is 17.
+com.dataflow.sample\src\main\java\com\dataflow\sample\ExactValue.java, code is 79, comment is 5, blank is 20.
+com.dataflow.sample\src\main\java\com\dataflow\sample\Feature.java, code is 53, comment is 9, blank is 13.
+com.dataflow.sample\src\main\java\com\dataflow\sample\FixFee.java, code is 59, comment is 0, blank is 17.
+com.dataflow.sample\src\main\java\com\dataflow\sample\FxRate.java, code is 59, comment is 4, blank is 16.
+com.dataflow.sample\src\main\java\com\dataflow\sample\GdprAcceptance.java, code is 29, comment is 0, blank is 9.
+com.dataflow.sample\src\main\java\com\dataflow\sample\InputDelivery.java, code is 181, comment is 20, blank is 35.
+com.dataflow.sample\src\main\java\com\dataflow\sample\InputItem.java, code is 181, comment is 20, blank is 35.
+com.dataflow.sample\src\main\java\com\dataflow\sample\MasterOrder.java, code is 522, comment is 0, blank is 102.
+com.dataflow.sample\src\main\java\com\dataflow\sample\MasterPayment.java, code is 191, comment is 0, blank is 42.
+com.dataflow.sample\src\main\java\com\dataflow\sample\MetadataItem.java, code is 31, comment is 0, blank is 9.
+com.dataflow.sample\src\main\java\com\dataflow\sample\Order.java, code is 141, comment is 0, blank is 30.
+com.dataflow.sample\src\main\java\com\dataflow\sample\OrderArticle.java, code is 70, comment is 10, blank is 15.
+com.dataflow.sample\src\main\java\com\dataflow\sample\OrderChargeInfos.java, code is 53, comment is 9, blank is 13.
+com.dataflow.sample\src\main\java\com\dataflow\sample\OrderConfirmationErrorInformation.java, code is 19, comment is 0, blank is 5.
+com.dataflow.sample\src\main\java\com\dataflow\sample\OrderDiscount.java, code is 80, comment is 11, blank is 17.
+com.dataflow.sample\src\main\java\com\dataflow\sample\OrderItem.java, code is 232, comment is 24, blank is 42.
+com.dataflow.sample\src\main\java\com\dataflow\sample\OrderStatus.java, code is 43, comment is 0, blank is 13.
+com.dataflow.sample\src\main\java\com\dataflow\sample\OrderSummary.java, code is 330, comment is 8, blank is 60.
+com.dataflow.sample\src\main\java\com\dataflow\sample\Package.java, code is 46, comment is 8, blank is 11.
+com.dataflow.sample\src\main\java\com\dataflow\sample\Payment.java, code is 129, comment is 4, blank is 28.
+com.dataflow.sample\src\main\java\com\dataflow\sample\PaymentDetail.java, code is 214, comment is 23, blank is 41.
+com.dataflow.sample\src\main\java\com\dataflow\sample\PaymentMethod.java, code is 49, comment is 0, blank is 13.
+com.dataflow.sample\src\main\java\com\dataflow\sample\PaymentOrderItem.java, code is 99, comment is 0, blank is 23.
+com.dataflow.sample\src\main\java\com\dataflow\sample\PaymentPipelineOptions.java, code is 17, comment is 7, blank is 9.
+com.dataflow.sample\src\main\java\com\dataflow\sample\Payments.java, code is 48, comment is 17, blank is 12.
+com.dataflow.sample\src\main\java\com\dataflow\sample\PlatformCreate.java, code is 44, comment is 0, blank is 9.
+com.dataflow.sample\src\main\java\com\dataflow\sample\PlatformCreateResponse.java, code is 39, comment is 0, blank is 11.
+com.dataflow.sample\src\main\java\com\dataflow\sample\Price.java, code is 84, comment is 10, blank is 21.
+com.dataflow.sample\src\main\java\com\dataflow\sample\Pricing.java, code is 98, comment is 13, blank is 21.
+com.dataflow.sample\src\main\java\com\dataflow\sample\Product.java, code is 206, comment is 22, blank is 40.
+com.dataflow.sample\src\main\java\com\dataflow\sample\ProductDisplay.java, code is 179, comment is 20, blank is 35.
+com.dataflow.sample\src\main\java\com\dataflow\sample\ProductInput.java, code is 145, comment is 17, blank is 29.
+com.dataflow.sample\src\main\java\com\dataflow\sample\PropertiesSerialiser.java, code is 49, comment is 1, blank is 9.
+com.dataflow.sample\src\main\java\com\dataflow\sample\RetailerCheckoutExperience.java, code is 80, comment is 11, blank is 17.
+com.dataflow.sample\src\main\java\com\dataflow\sample\RetailerConfirmation.java, code is 51, comment is 9, blank is 11.
+com.dataflow.sample\src\main\java\com\dataflow\sample\RetailerConfirmationResponse.java, code is 49, comment is 0, blank is 14.
+com.dataflow.sample\src\main\java\com\dataflow\sample\RetailerCurrencyDeliveryOptionPriceInfo.java, code is 69, comment is 0, blank is 19.
+com.dataflow.sample\src\main\java\com\dataflow\sample\RetailerCurrencyOrderDiscountAmount.java, code is 98, comment is 13, blank is 21.
+com.dataflow.sample\src\main\java\com\dataflow\sample\RetailerCurrencyOveridePriceInfo.java, code is 98, comment is 13, blank is 21.
+com.dataflow.sample\src\main\java\com\dataflow\sample\RetailerCurrencyPaymentAmount.java, code is 60, comment is 0, blank is 17.
+com.dataflow.sample\src\main\java\com\dataflow\sample\RetailerCurrencyProductPriceInfo.java, code is 98, comment is 13, blank is 21.
+com.dataflow.sample\src\main\java\com\dataflow\sample\RetailerDeliveryOption.java, code is 75, comment is 0, blank is 19.
+com.dataflow.sample\src\main\java\com\dataflow\sample\RetailerPromoCode.java, code is 64, comment is 10, blank is 15.
+com.dataflow.sample\src\main\java\com\dataflow\sample\ShippingAddress.java, code is 129, comment is 0, blank is 29.
+com.dataflow.sample\src\main\java\com\dataflow\sample\ShopperCheckoutExperience.java, code is 105, comment is 13, blank is 21.
+com.dataflow.sample\src\main\java\com\dataflow\sample\ShopperCurrencyOrderDiscountAmount.java, code is 98, comment is 13, blank is 21.
+com.dataflow.sample\src\main\java\com\dataflow\sample\ShopperCurrencyOveridePriceInfo.java, code is 98, comment is 13, blank is 21.
+com.dataflow.sample\src\main\java\com\dataflow\sample\ShopperCurrencyPaymentAmount.java, code is 60, comment is 0, blank is 18.
+com.dataflow.sample\src\main\java\com\dataflow\sample\ShopperCurrencyProductPriceInfo.java, code is 98, comment is 13, blank is 21.
+com.dataflow.sample\src\main\java\com\dataflow\sample\TargetValue.java, code is 84, comment is 10, blank is 21.
+com.dataflow.sample\src\main\java\com\dataflow\sample\UpperBoundary.java, code is 64, comment is 0, blank is 17.
+com.dataflow.sample\src\main\java\com\dataflow\sample\Utils.java, code is 80, comment is 37, blank is 17.
+com.dataflow.sample\src\main\java\deviceatlas-ehcache.xml, code is 51, comment is 521, blank is 37.
+com.dataflow.sample\src\main\resources\order.json, code is 685, comment is 0, blank is 0.
+com.dataflow.sample\src\test\java\com\dataflow\sample\DeserialisationTest.java, code is 36, comment is 0, blank is 10.
+com.dataflow.sample\src\test\java\com\dataflow\sample\DeviceAtlasTest.java, code is 48, comment is 1, blank is 12.
+com.dataflow.sample\src\test\java\com\dataflow\sample\OrderTest.java, code is 149, comment is 0, blank is 33.
+com.dataflow.sample\src\test\java\com\dataflow\sample\UtilsTest.java, code is 128, comment is 7, blank is 33.
+com.dataflow.sample\target\classes\com\dataflow\sample\App$1.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\App$2.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\App$3.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\App$4.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\App$5.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\App$6.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\App$7.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\App$FormatOrderSummaryAsTableRowFn.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\App$GroupOrdersFn.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\App$MaskOrderFn.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\App$MaskOrdersFn.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\App$OrderSummariesToTableRows.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\App$OrderSummaryFn.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\App$SerialiseMasterOrderFn.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\App.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\Attempt.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\AuthorizationDetails.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\AvailableOrderItem.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\BeforeDiscount.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\BillingAddress.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\Calculation.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\CalculationParameters.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\CalculationRates.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\Charge.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\ChargeTarget.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\Currency.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\CustomPipelineOptions.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\DeIdentification.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\DeliveryDetail.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\DeliveryDisplay.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\DeliveryInput.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\DeliveryOption.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\DeliveryOptionExtended.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\DeminimisRegion.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\DeminimisRegionRate.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\DeminimisRegionRateForDelivery.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\DeviceAtlasProperties.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\DiscountAmount.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\Display.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\DutyAndTaxDisplay.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\Error.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\EShopWorldCurrencyPaymentAmount.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\ExactValue.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\Feature.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\FixFee.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\FxRate.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\GdprAcceptance.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\InputDelivery.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\InputItem.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\MasterOrder.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\MasterPayment.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\MetadataItem.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\Order.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\OrderArticle.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\OrderChargeInfos.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\OrderConfirmationErrorInformation.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\OrderDiscount.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\OrderItem.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\OrderStatus.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\OrderSummary.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\Package.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\Payment.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\PaymentDetail.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\PaymentMethod.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\PaymentOrderItem.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\PaymentPipelineOptions.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\Payments$1.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\Payments$2.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\Payments$3.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\Payments.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\PlatformCreate.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\PlatformCreateResponse.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\Price.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\Pricing.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\Product.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\ProductDisplay.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\ProductInput.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\PropertiesSerialiser.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\RetailerCheckoutExperience.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\RetailerConfirmation.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\RetailerConfirmationResponse.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\RetailerCurrencyDeliveryOptionPriceInfo.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\RetailerCurrencyOrderDiscountAmount.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\RetailerCurrencyOveridePriceInfo.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\RetailerCurrencyPaymentAmount.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\RetailerCurrencyProductPriceInfo.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\RetailerDeliveryOption.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\RetailerPromoCode.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\ShippingAddress.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\ShopperCheckoutExperience.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\ShopperCurrencyOrderDiscountAmount.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\ShopperCurrencyOveridePriceInfo.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\ShopperCurrencyPaymentAmount.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\ShopperCurrencyProductPriceInfo.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\TargetValue.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\UpperBoundary.class, it is a binary file.
+com.dataflow.sample\target\classes\com\dataflow\sample\Utils.class, it is a binary file.
+com.dataflow.sample\target\classes\deviceatlas-ehcache.xml, code is 51, comment is 521, blank is 37.
+com.dataflow.sample\target\classes\order-2.json, code is 15788, comment is 0, blank is 0.
+com.dataflow.sample\target\classes\order.json, code is 685, comment is 0, blank is 0.
+com.dataflow.sample\target\maven-status\maven-compiler-plugin\compile\default-compile\createdFiles.lst, code is 0, comment is 0, blank is 0.
+com.dataflow.sample\target\maven-status\maven-compiler-plugin\compile\default-compile\inputFiles.lst, code is 80, comment is 0, blank is 0.
+com.dataflow.sample\target\test-classes\com\dataflow\sample\DeserialisationTest.class, it is a binary file.
+com.dataflow.sample\target\test-classes\com\dataflow\sample\DeviceAtlasTest.class, it is a binary file.
+com.dataflow.sample\target\test-classes\com\dataflow\sample\OrderTest.class, it is a binary file.
+com.dataflow.sample\target\test-classes\com\dataflow\sample\UtilsTest.class, it is a binary file.
+LICENSE, code is 219, comment is 3, blank is 47.
+README.md, code is 7, comment is 0, blank is 6.
+===============================================================================

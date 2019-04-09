@@ -140,7 +140,7 @@ public class App {
                     public void processElement(ProcessContext c) {
                         try {
                             MasterOrder masterOrder = c.element().getValue();
-                            Result result = client.getResultByUserAgent(masterOrder.getUserAgent());
+                            Result result = client.getResult(masterOrder.getHttpHeaders());
                             Properties properties = result.getProperties();
                             String serialised = mapper.writeValueAsString(properties);
                             DeviceAtlasProperties deviceAtlasProperties = mapper.readValue(serialised,
@@ -384,20 +384,22 @@ public class App {
             List<MasterOrder> sortedOrders = OrderSummary.sortOrders(c.element());
             OrderSummary orderSummary = OrderSummary.orderSummary(sortedOrders, COMPLETE_EVENT_NAME);
 
-            Result result = client.getResultByUserAgent(orderSummary.getUserAgent());
-            Properties properties = result.getProperties();
+            if (sortedOrders.size() > 0) {
+                Result result = client.getResult(sortedOrders.get(0).getHttpHeaders());
+                Properties properties = result.getProperties(); // todo: cache original result
 
-            if (properties.containsKey("primaryHardwareType")) {
-                orderSummary.setPrimaryHardwareType(properties.get("primaryHardwareType").asString());
-            }
-            if (properties.containsKey("isRobot")) {
-                orderSummary.setIsRobot(properties.get("isRobot").asBoolean());
-            }
-            if (properties.containsKey("browserName")) {
-                orderSummary.setBrowserName(properties.get("browserName").asString());
-            }
-            if (properties.containsKey("osName")) {
-                orderSummary.setOsName(properties.get("osName").asString());
+                if (properties.containsKey("primaryHardwareType")) {
+                    orderSummary.setPrimaryHardwareType(properties.get("primaryHardwareType").asString());
+                }
+                if (properties.containsKey("isRobot")) {
+                    orderSummary.setIsRobot(properties.get("isRobot").asBoolean());
+                }
+                if (properties.containsKey("browserName")) {
+                    orderSummary.setBrowserName(properties.get("browserName").asString());
+                }
+                if (properties.containsKey("osName")) {
+                    orderSummary.setOsName(properties.get("osName").asString());
+                }
             }
             c.output(orderSummary);
         }
