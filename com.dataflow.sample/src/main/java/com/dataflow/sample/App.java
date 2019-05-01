@@ -27,6 +27,7 @@ import com.deviceatlas.cloud.deviceidentification.cacheprovider.EhCacheCacheProv
 import com.deviceatlas.cloud.deviceidentification.client.Client;
 import com.deviceatlas.cloud.deviceidentification.client.Properties;
 import com.deviceatlas.cloud.deviceidentification.client.Result;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.datatype.joda.JodaModule;
@@ -88,6 +89,7 @@ public class App {
         module.addSerializer(Properties.class, new PropertiesSerialiser());
         mapper.registerModule(module);
         mapper.registerModule(new JodaModule());
+        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         return mapper;
     }
 
