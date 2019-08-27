@@ -6,11 +6,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
 import org.apache.beam.sdk.coders.DefaultCoder;
 import org.apache.beam.sdk.coders.SerializableCoder;
 
@@ -49,10 +51,39 @@ public class PaymentDetail implements Serializable {
     private String telephone;
     @JsonProperty("PoBox")
     private String poBox;
+    @JsonProperty("UniqueId")
+    @JsonIgnore
+    private String uniqueId;
+    @JsonProperty("IsSelected")
+    @JsonIgnore
+    private Boolean isSelected;
+
+    @JsonProperty("IsSelected")
+    @JsonIgnore
+    public Boolean getIsSelected() {
+        return this.isSelected;
+    }
+
+    @JsonProperty("IsSelected")
+    @JsonIgnore
+    public void setIsSelected(Boolean isSelected) {
+        this.isSelected = isSelected;
+    }
+
+    @JsonProperty("UniqueId")
+    @JsonIgnore
+    public String getUniqueId() {
+        return this.uniqueId;
+    }
+
+    @JsonProperty("UniqueId")
+    @JsonIgnore
+    public void setUniqueId(String uniqueId) {
+        this.uniqueId = uniqueId;
+    }
+
     @JsonProperty("MetadataItems")
     private List<MetadataItem> metadataItems = new ArrayList<MetadataItem>();
-    @JsonIgnore
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
     private final static long serialVersionUID = 7418609063016625547L;
 
     /**

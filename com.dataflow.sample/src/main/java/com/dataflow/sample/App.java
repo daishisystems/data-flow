@@ -27,7 +27,9 @@ import com.deviceatlas.cloud.deviceidentification.cacheprovider.EhCacheCacheProv
 import com.deviceatlas.cloud.deviceidentification.client.Client;
 import com.deviceatlas.cloud.deviceidentification.client.Properties;
 import com.deviceatlas.cloud.deviceidentification.client.Result;
+import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.datatype.joda.JodaModule;
@@ -51,8 +53,6 @@ import org.apache.beam.sdk.values.PCollection;
 import org.apache.beam.sdk.values.PCollectionTuple;
 import org.apache.beam.sdk.values.TupleTag;
 import org.apache.beam.sdk.values.TupleTagList;
-import org.codehaus.jackson.JsonParseException;
-import org.codehaus.jackson.map.JsonMappingException;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.Duration;
@@ -401,7 +401,7 @@ public class App {
                 }
                 if (properties.containsKey("osName")) {
                     orderSummary.setOsName(properties.get("osName").asString());
-                }
+                }                
             }
             c.output(orderSummary);
         }
@@ -425,7 +425,10 @@ public class App {
         @ProcessElement
         public void processElement(ProcessContext c) throws JsonParseException, JsonMappingException, IOException {
             MasterOrder masterOrder = c.element();
-            c.output(mapper.writeValueAsString(masterOrder));
+            masterOrder.setHttpHeaders(null);
+            String payload = mapper.writeValueAsString(masterOrder);
+            LOG.info(payload);
+            c.output(payload);
         }
     }
 

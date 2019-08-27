@@ -39,8 +39,6 @@ public class DeliveryInput implements Serializable {
     private Double otherRate;
     @JsonProperty("MatchInputPrice")
     private Boolean matchInputPrice;
-    @JsonIgnore
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
     private final static long serialVersionUID = 5498438466502887917L;
 
     /**

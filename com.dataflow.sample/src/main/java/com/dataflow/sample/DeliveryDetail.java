@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -52,9 +53,22 @@ public class DeliveryDetail implements Serializable {
     private String poBox;
     @JsonProperty("MetadataItems")
     private List<MetadataItem> metadataItems = new ArrayList<MetadataItem>();
-    @JsonIgnore
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
     private final static long serialVersionUID = -6667160257748742367L;
+    @JsonProperty("IsSelected")
+    @JsonIgnore
+    private Boolean isSelected;
+
+    @JsonProperty("IsSelected")
+    @JsonIgnore
+    public Boolean getIsSelected() {
+        return this.isSelected;
+    }
+
+    @JsonProperty("IsSelected")
+    @JsonIgnore
+    public void setIsSelected(Boolean isSelected) {
+        this.isSelected = isSelected;
+    }
 
     /**
      * No args constructor for use in serialization

@@ -1,4 +1,4 @@
-
+    
 package com.dataflow.sample;
 
 import java.io.Serializable;
@@ -112,6 +112,83 @@ public class MasterOrder implements Serializable {
     private String productDataCountryIso;
     @JsonProperty("httpHeaders")
     private HashMap<String, String> httpHeaders;
+    @JsonProperty("CreatedTimeUtc")
+    @JsonIgnore
+    private String createdTimeUtc;
+    @JsonProperty("Version")
+    @JsonIgnore
+    private String version;
+    @JsonProperty("HasPriceMultiplier")
+    @JsonIgnore
+    private Boolean hasPriceMultiplier;
+
+    @JsonProperty("HasPriceMultiplier")
+    @JsonIgnore
+    public Boolean getHasPriceMultiplier() {
+        return this.hasPriceMultiplier;
+    }
+
+    @JsonProperty("HasPriceMultiplier")
+    @JsonIgnore
+    public void setHasPriceMultiplier(Boolean hasPriceMultiplier) {
+        this.hasPriceMultiplier = hasPriceMultiplier;
+    }
+
+    @JsonProperty("Version")
+    @JsonIgnore
+    public String getVersion() {
+        return this.version;
+    }
+
+    @JsonProperty("Version")
+    @JsonIgnore
+    public void setVersion(String version) {
+        this.version = version;
+    }
+
+    @JsonProperty("CreatedTimeUtc")
+    @JsonIgnore
+    public String getCreatedTimeUtc() {
+        return this.createdTimeUtc;
+    }
+
+    @JsonProperty("CreatedTimeUtc")
+    @JsonIgnore
+    public void setCreatedTimeUtc(String createdTimeUtc) {
+        this.createdTimeUtc = createdTimeUtc;
+    }
+
+    @JsonProperty("UniqueId")
+    @JsonIgnore
+    private String uniqueId;
+
+    @JsonProperty("UniqueId")
+    @JsonIgnore
+    public String getUniqueId() {
+        return this.uniqueId;
+    }
+
+    @JsonProperty("UniqueId")
+    @JsonIgnore
+    public void setUniqueId(String uniqueId) {
+        this.uniqueId = uniqueId;
+    }
+
+    @JsonProperty("IsSelected")
+    @JsonIgnore
+    private Boolean isSelected;
+
+    @JsonProperty("IsSelected")
+    @JsonIgnore
+    public Boolean getIsSelected() {
+        return this.isSelected;
+    }
+
+    @JsonProperty("IsSelected")
+    @JsonIgnore
+    public void isIsSelected(Boolean isSelected) {
+        this.isSelected = isSelected;
+    }
 
     private final static long serialVersionUID = 8817357657140713368L;
 
@@ -597,7 +674,6 @@ public class MasterOrder implements Serializable {
         this.productDataCountryIso = productDataCountryIso;
     }
 
-    @JsonIgnore
     @JsonProperty("httpHeaders")
     public HashMap<String, String> getHttpHeaders() {
         return this.httpHeaders;

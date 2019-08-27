@@ -2,6 +2,7 @@
 package com.dataflow.sample;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -48,9 +49,22 @@ public class CalculationParameters implements Serializable {
     private Double shopperToRetailerRate;
     @JsonProperty("DeminimisRegionToUse")
     private DeminimisRegion deminimisRegionToUse;
-
+    @JsonProperty("EstimatedPricingMultiplier")
     @JsonIgnore
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+    private BigDecimal estimatedPricingMultiplier;
+
+    @JsonProperty("EstimatedPricingMultiplier")
+    @JsonIgnore
+    public BigDecimal getEstimatedPricingMultiplier() {
+        return this.estimatedPricingMultiplier;
+    }
+
+    @JsonProperty("EstimatedPricingMultiplier")
+    @JsonIgnore
+    public void setEstimatedPricingMultiplier(BigDecimal estimatedPricingMultiplier) {
+        this.estimatedPricingMultiplier = estimatedPricingMultiplier;
+    }
+
     private final static long serialVersionUID = -5266451718458184736L;
 
     /**

@@ -4,6 +4,7 @@ package com.dataflow.sample;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
+
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -21,9 +22,22 @@ public class Charge implements Serializable {
     private String name;
     @JsonProperty("ExactValue")
     private ExactValue exactValue;
-    @JsonIgnore
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
     private final static long serialVersionUID = 353034813858604939L;
+    @JsonProperty("IsCalculatedCharge")
+    @JsonIgnore
+    private Boolean isCalculatedCharge;
+
+    @JsonProperty("IsCalculatedCharge")
+    @JsonIgnore
+    public Boolean getIsCalculatedCharge() {
+        return this.isCalculatedCharge;
+    }
+
+    @JsonProperty("IsCalculatedCharge")
+    @JsonIgnore
+    public void isIsCalculatedCharge(Boolean isCalculatedCharge) {
+        this.isCalculatedCharge = isCalculatedCharge;
+    }
 
     /**
      * No args constructor for use in serialization
@@ -61,16 +75,5 @@ public class Charge implements Serializable {
     @JsonProperty("ExactValue")
     public void setExactValue(ExactValue exactValue) {
         this.exactValue = exactValue;
-    }
-
-    @JsonAnyGetter
-    public Map<String, Object> getAdditionalProperties() {
-        return this.additionalProperties;
-    }
-
-    @JsonAnySetter
-    public void setAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
-    }
-
+    }    
 }
