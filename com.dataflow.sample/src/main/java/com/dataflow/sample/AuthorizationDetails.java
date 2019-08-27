@@ -1,11 +1,7 @@
 package com.dataflow.sample;
 
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
-import com.fasterxml.jackson.annotation.JsonAnyGetter;
-import com.fasterxml.jackson.annotation.JsonAnySetter;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
@@ -29,8 +25,6 @@ public class AuthorizationDetails implements Serializable {
     private String paymentBrand;
     @JsonProperty("SettleAfterUtc")
     private String settleAfterUtc;
-    @JsonIgnore
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
     private final static long serialVersionUID = 4586287568016047030L;
 
     /**
@@ -118,15 +112,5 @@ public class AuthorizationDetails implements Serializable {
     @JsonProperty("SettleAfterUtc")
     public void setSettleAfterUtc(String settleAfterUtc) {
         this.settleAfterUtc = settleAfterUtc;
-    }
-
-    @JsonAnyGetter
-    public Map<String, Object> getAdditionalProperties() {
-        return this.additionalProperties;
-    }
-
-    @JsonAnySetter
-    public void setAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
     }
 }

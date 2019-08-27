@@ -2,13 +2,10 @@
 package com.dataflow.sample;
 
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
-import com.fasterxml.jackson.annotation.JsonAnyGetter;
-import com.fasterxml.jackson.annotation.JsonAnySetter;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
 import org.apache.beam.sdk.coders.DefaultCoder;
 import org.apache.beam.sdk.coders.SerializableCoder;
 
@@ -44,8 +41,6 @@ public class ProductDisplay implements Serializable {
     private String defaultDisplayText;
     @JsonProperty("DisplayTextKey")
     private String displayTextKey;
-    @JsonIgnore
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
     private final static long serialVersionUID = -6594707239095342458L;
 
     /**
@@ -220,15 +215,4 @@ public class ProductDisplay implements Serializable {
     public void setDisplayTextKey(String displayTextKey) {
         this.displayTextKey = displayTextKey;
     }
-
-    @JsonAnyGetter
-    public Map<String, Object> getAdditionalProperties() {
-        return this.additionalProperties;
-    }
-
-    @JsonAnySetter
-    public void setAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
-    }
-
 }

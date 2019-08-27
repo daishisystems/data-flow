@@ -2,11 +2,7 @@
 package com.dataflow.sample;
 
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
-import com.fasterxml.jackson.annotation.JsonAnyGetter;
-import com.fasterxml.jackson.annotation.JsonAnySetter;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
@@ -46,8 +42,6 @@ public class Calculation implements Serializable {
     private Integer pricingGroupId;
     @JsonProperty("CustomsCalculationType")
     private String customsCalculationType;
-    @JsonIgnore
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
     private final static long serialVersionUID = -7006935580647199399L;
 
     /**
@@ -223,16 +217,6 @@ public class Calculation implements Serializable {
     @JsonProperty("CustomsCalculationType")
     public void setCustomsCalculationType(String customsCalculationType) {
         this.customsCalculationType = customsCalculationType;
-    }
-
-    @JsonAnyGetter
-    public Map<String, Object> getAdditionalProperties() {
-        return this.additionalProperties;
-    }
-
-    @JsonAnySetter
-    public void setAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
     }
 
 }

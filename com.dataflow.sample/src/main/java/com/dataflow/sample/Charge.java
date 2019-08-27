@@ -2,11 +2,7 @@
 package com.dataflow.sample;
 
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
 
-import com.fasterxml.jackson.annotation.JsonAnyGetter;
-import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -75,5 +71,5 @@ public class Charge implements Serializable {
     @JsonProperty("ExactValue")
     public void setExactValue(ExactValue exactValue) {
         this.exactValue = exactValue;
-    }    
+    }
 }

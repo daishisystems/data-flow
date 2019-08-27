@@ -2,12 +2,7 @@
 package com.dataflow.sample;
 
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
 
-import com.fasterxml.jackson.annotation.JsonAnyGetter;
-import com.fasterxml.jackson.annotation.JsonAnySetter;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
@@ -28,8 +23,6 @@ public class DiscountAmount implements Serializable {
     private Boolean isZero;
     @JsonProperty("IsNotZero")
     private Boolean isNotZero;
-    @JsonIgnore
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
     private final static long serialVersionUID = 7240839411364606049L;
 
     /**
@@ -101,15 +94,4 @@ public class DiscountAmount implements Serializable {
     public void setIsNotZero(Boolean isNotZero) {
         this.isNotZero = isNotZero;
     }
-
-    @JsonAnyGetter
-    public Map<String, Object> getAdditionalProperties() {
-        return this.additionalProperties;
-    }
-
-    @JsonAnySetter
-    public void setAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
-    }
-
 }

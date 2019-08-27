@@ -401,7 +401,7 @@ public class App {
                 }
                 if (properties.containsKey("osName")) {
                     orderSummary.setOsName(properties.get("osName").asString());
-                }                
+                }
             }
             c.output(orderSummary);
         }

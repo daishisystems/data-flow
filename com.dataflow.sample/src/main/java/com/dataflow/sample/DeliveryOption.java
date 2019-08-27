@@ -2,11 +2,7 @@
 package com.dataflow.sample;
 
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
-import com.fasterxml.jackson.annotation.JsonAnyGetter;
-import com.fasterxml.jackson.annotation.JsonAnySetter;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
@@ -21,8 +17,6 @@ public class DeliveryOption implements Serializable {
     private Integer option;
     @JsonProperty("IsExpressDelivery")
     private Boolean isExpressDelivery;
-    @JsonIgnore
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
     private final static long serialVersionUID = -1523273077646781560L;
 
     /**
@@ -62,15 +56,4 @@ public class DeliveryOption implements Serializable {
     public void setIsExpressDelivery(Boolean isExpressDelivery) {
         this.isExpressDelivery = isExpressDelivery;
     }
-
-    @JsonAnyGetter
-    public Map<String, Object> getAdditionalProperties() {
-        return this.additionalProperties;
-    }
-
-    @JsonAnySetter
-    public void setAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
-    }
-
 }

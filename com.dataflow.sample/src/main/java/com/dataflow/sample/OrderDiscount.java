@@ -2,13 +2,10 @@
 package com.dataflow.sample;
 
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
-import com.fasterxml.jackson.annotation.JsonAnyGetter;
-import com.fasterxml.jackson.annotation.JsonAnySetter;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
 import org.apache.beam.sdk.coders.DefaultCoder;
 import org.apache.beam.sdk.coders.SerializableCoder;
 
@@ -25,8 +22,6 @@ public class OrderDiscount implements Serializable {
     private RetailerCurrencyOrderDiscountAmount retailerCurrencyOrderDiscountAmount;
     @JsonProperty("ShopperCurrencyOrderDiscountAmount")
     private ShopperCurrencyOrderDiscountAmount shopperCurrencyOrderDiscountAmount;
-    @JsonIgnore
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
     private final static long serialVersionUID = -4941659762032320877L;
 
     /**
@@ -94,15 +89,4 @@ public class OrderDiscount implements Serializable {
             ShopperCurrencyOrderDiscountAmount shopperCurrencyOrderDiscountAmount) {
         this.shopperCurrencyOrderDiscountAmount = shopperCurrencyOrderDiscountAmount;
     }
-
-    @JsonAnyGetter
-    public Map<String, Object> getAdditionalProperties() {
-        return this.additionalProperties;
-    }
-
-    @JsonAnySetter
-    public void setAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
-    }
-
 }
