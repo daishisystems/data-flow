@@ -142,6 +142,12 @@ public class App {
                     public void processElement(ProcessContext c) {
                         try {
                             MasterOrder masterOrder = c.element().getValue();
+                            if (masterOrder.getHttpHeaders() != null) {
+                                LOG.info("HTTP headers are present");
+                            } else {
+                                LOG.warn("HTTP headers are not present");
+                            }
+
                             Result result = client.getResult(masterOrder.getHttpHeaders());
                             Properties properties = result.getProperties();
                             String serialised = mapper.writeValueAsString(properties);
@@ -387,20 +393,24 @@ public class App {
             OrderSummary orderSummary = OrderSummary.orderSummary(sortedOrders, COMPLETE_EVENT_NAME);
 
             if (sortedOrders.size() > 0) {
-                Result result = client.getResult(sortedOrders.get(0).getHttpHeaders());
-                Properties properties = result.getProperties(); // todo: cache original result
+                try {
+                    Result result = client.getResult(sortedOrders.get(0).getHttpHeaders());
+                    Properties properties = result.getProperties(); // todo: cache original result
 
-                if (properties.containsKey("primaryHardwareType")) {
-                    orderSummary.setPrimaryHardwareType(properties.get("primaryHardwareType").asString());
-                }
-                if (properties.containsKey("isRobot")) {
-                    orderSummary.setIsRobot(properties.get("isRobot").asBoolean());
-                }
-                if (properties.containsKey("browserName")) {
-                    orderSummary.setBrowserName(properties.get("browserName").asString());
-                }
-                if (properties.containsKey("osName")) {
-                    orderSummary.setOsName(properties.get("osName").asString());
+                    if (properties.containsKey("primaryHardwareType")) {
+                        orderSummary.setPrimaryHardwareType(properties.get("primaryHardwareType").asString());
+                    }
+                    if (properties.containsKey("isRobot")) {
+                        orderSummary.setIsRobot(properties.get("isRobot").asBoolean());
+                    }
+                    if (properties.containsKey("browserName")) {
+                        orderSummary.setBrowserName(properties.get("browserName").asString());
+                    }
+                    if (properties.containsKey("osName")) {
+                        orderSummary.setOsName(properties.get("osName").asString());
+                    }
+                } catch (Exception e) {
+                    LOG.warn("Unable to get DeviceAtlas properties: " + e.getMessage());
                 }
             }
             c.output(orderSummary);
@@ -427,7 +437,6 @@ public class App {
             MasterOrder masterOrder = c.element();
             masterOrder.setHttpHeaders(null);
             String payload = mapper.writeValueAsString(masterOrder);
-            LOG.info(payload);
             c.output(payload);
         }
     }
