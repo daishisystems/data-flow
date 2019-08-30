@@ -1,62 +1,67 @@
+
 package com.dataflow.sample;
 
 import java.io.Serializable;
+import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-import org.apache.beam.sdk.coders.DefaultCoder;
-import org.apache.beam.sdk.coders.SerializableCoder;
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
+import org.apache.commons.lang.builder.ToStringBuilder;
 
-@DefaultCoder(SerializableCoder.class)
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonPropertyOrder({ "id", "paymentMethods" })
 public class PaymentMethod implements Serializable {
-    @JsonProperty("PaymentMethodId")
-    private String paymentMethodId;
-    @JsonProperty("PaymentMethodCode")
-    private Integer paymentMethodCode;
-    @JsonProperty("PaymentProcessorCode")
-    private Integer paymentProcessorCode;
-    @JsonProperty("Integration")
-    private Integer integration;
-    private final static long serialVersionUID = -1675908445828901137L;
 
-    @JsonProperty("PaymentMethodId")
-    public String getPaymentMethodId() {
-        return paymentMethodId;
+    @JsonProperty("id")
+    private String id;
+    @JsonProperty("paymentMethods")
+    private List<PaymentMethod_> paymentMethods = null;
+    private final static long serialVersionUID = 6144770255368499733L;
+
+    @JsonProperty("id")
+    public String getId() {
+        return id;
     }
 
-    @JsonProperty("PaymentMethodId")
-    public void setPaymentMethodId(String paymentMethodId) {
-        this.paymentMethodId = paymentMethodId;
+    @JsonProperty("id")
+    public void setId(String id) {
+        this.id = id;
     }
 
-    @JsonProperty("PaymentMethodCode")
-    public Integer getPaymentMethodCode() {
-        return paymentMethodCode;
+    @JsonProperty("paymentMethods")
+    public List<PaymentMethod_> getPaymentMethods() {
+        return paymentMethods;
     }
 
-    @JsonProperty("PaymentMethodCode")
-    public void setPaymentMethodCode(Integer paymentMethodCode) {
-        this.paymentMethodCode = paymentMethodCode;
+    @JsonProperty("paymentMethods")
+    public void setPaymentMethods(List<PaymentMethod_> paymentMethods) {
+        this.paymentMethods = paymentMethods;
     }
 
-    @JsonProperty("PaymentProcessorCode")
-    public Integer getPaymentProcessorCode() {
-        return paymentProcessorCode;
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this).append("id", id).append("paymentMethods", paymentMethods).toString();
     }
 
-    @JsonProperty("PaymentProcessorCode")
-    public void setPaymentProcessorCode(Integer paymentProcessorCode) {
-        this.paymentProcessorCode = paymentProcessorCode;
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder().append(id).append(paymentMethods).toHashCode();
     }
 
-    @JsonProperty("Integration")
-    public Integer getIntegration() {
-        return integration;
-    }
-
-    @JsonProperty("Integration")
-    public void setIntegration(Integer integration) {
-        this.integration = integration;
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+        if ((other instanceof PaymentMethod) == false) {
+            return false;
+        }
+        PaymentMethod rhs = ((PaymentMethod) other);
+        return new EqualsBuilder().append(id, rhs.id).append(paymentMethods, rhs.paymentMethods).isEquals();
     }
 
 }

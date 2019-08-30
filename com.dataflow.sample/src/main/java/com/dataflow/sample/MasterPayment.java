@@ -1,75 +1,33 @@
-
 package com.dataflow.sample;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-import org.apache.beam.sdk.coders.DefaultCoder;
-import org.apache.beam.sdk.coders.SerializableCoder;
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
+import org.apache.commons.lang.builder.ToStringBuilder;
 
-@DefaultCoder(SerializableCoder.class)
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonPropertyOrder({ "id", "paymentProfileId", "orderRef", "paymentResultUrl", "authorizationUrl",
+        "postAuthHandoverUrl" })
 public class MasterPayment implements Serializable {
 
-    @JsonProperty("State")
-    private Integer state;
-    @JsonProperty("PaymentProfileId")
-    private String paymentProfileId;
     @JsonProperty("id")
     private String id;
-    @JsonProperty("Order")
-    private Order order;
-    @JsonProperty("PaymentResultUrl")
+    @JsonProperty("paymentProfileId")
+    private String paymentProfileId;
+    @JsonProperty("orderRef")
+    private String orderRef;
+    @JsonProperty("paymentResultUrl")
     private String paymentResultUrl;
-    @JsonProperty("AuthorizationUrl")
+    @JsonProperty("authorizationUrl")
     private String authorizationUrl;
-    @JsonProperty("PostAuthHandoverUrl")
+    @JsonProperty("postAuthHandoverUrl")
     private String postAuthHandoverUrl;
-    @JsonProperty("CreatedDateTime")
-    private String createdDateTime;
-    @JsonProperty("PaymentMethods")
-    private List<PaymentMethod> paymentMethods = new ArrayList<PaymentMethod>();
-    @JsonProperty("UpdatedDateTime")
-    private String updatedDateTime;
-    @JsonProperty("SentToPaymentsLegacy")
-    private Boolean sentToPaymentsLegacy;
-    @JsonProperty("Attempts")
-    private List<Attempt> attempts = new ArrayList<Attempt>();
-    @JsonProperty("brandCode")
-    private String brandCode;
-    @JsonProperty("eventName")
-    private String eventName;
-    @JsonProperty("correlationId")
-    private String correlationId;
-    @JsonProperty("userAgent")
-    private String userAgent;
-    @JsonProperty("queryString")
-    private String queryString;
-    @JsonProperty("created")
-    private String created;
-    private final static long serialVersionUID = -7776501539637318262L;
-
-    @JsonProperty("State")
-    public Integer getState() {
-        return state;
-    }
-
-    @JsonProperty("State")
-    public void setState(Integer state) {
-        this.state = state;
-    }
-
-    @JsonProperty("PaymentProfileId")
-    public String getPaymentProfileId() {
-        return paymentProfileId;
-    }
-
-    @JsonProperty("PaymentProfileId")
-    public void setPaymentProfileId(String paymentProfileId) {
-        this.paymentProfileId = paymentProfileId;
-    }
+    private final static long serialVersionUID = 6130777216195902623L;
 
     @JsonProperty("id")
     public String getId() {
@@ -81,153 +39,82 @@ public class MasterPayment implements Serializable {
         this.id = id;
     }
 
-    @JsonProperty("Order")
-    public Order getOrder() {
-        return order;
+    @JsonProperty("paymentProfileId")
+    public String getPaymentProfileId() {
+        return paymentProfileId;
     }
 
-    @JsonProperty("Order")
-    public void setOrder(Order order) {
-        this.order = order;
+    @JsonProperty("paymentProfileId")
+    public void setPaymentProfileId(String paymentProfileId) {
+        this.paymentProfileId = paymentProfileId;
     }
 
-    @JsonProperty("PaymentResultUrl")
+    @JsonProperty("orderRef")
+    public String getOrderRef() {
+        return orderRef;
+    }
+
+    @JsonProperty("orderRef")
+    public void setOrderRef(String orderRef) {
+        this.orderRef = orderRef;
+    }
+
+    @JsonProperty("paymentResultUrl")
     public String getPaymentResultUrl() {
         return paymentResultUrl;
     }
 
-    @JsonProperty("PaymentResultUrl")
+    @JsonProperty("paymentResultUrl")
     public void setPaymentResultUrl(String paymentResultUrl) {
         this.paymentResultUrl = paymentResultUrl;
     }
 
-    @JsonProperty("AuthorizationUrl")
+    @JsonProperty("authorizationUrl")
     public String getAuthorizationUrl() {
         return authorizationUrl;
     }
 
-    @JsonProperty("AuthorizationUrl")
+    @JsonProperty("authorizationUrl")
     public void setAuthorizationUrl(String authorizationUrl) {
         this.authorizationUrl = authorizationUrl;
     }
 
-    @JsonProperty("PostAuthHandoverUrl")
+    @JsonProperty("postAuthHandoverUrl")
     public String getPostAuthHandoverUrl() {
         return postAuthHandoverUrl;
     }
 
-    @JsonProperty("PostAuthHandoverUrl")
+    @JsonProperty("postAuthHandoverUrl")
     public void setPostAuthHandoverUrl(String postAuthHandoverUrl) {
         this.postAuthHandoverUrl = postAuthHandoverUrl;
     }
 
-    @JsonProperty("CreatedDateTime")
-    public String getCreatedDateTime() {
-        return createdDateTime;
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this).append("id", id).append("paymentProfileId", paymentProfileId)
+                .append("orderRef", orderRef).append("paymentResultUrl", paymentResultUrl)
+                .append("authorizationUrl", authorizationUrl).append("postAuthHandoverUrl", postAuthHandoverUrl)
+                .toString();
     }
 
-    @JsonProperty("CreatedDateTime")
-    public void setCreatedDateTime(String createdDateTime) {
-        this.createdDateTime = createdDateTime;
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder().append(id).append(postAuthHandoverUrl).append(authorizationUrl)
+                .append(paymentProfileId).append(orderRef).append(paymentResultUrl).toHashCode();
     }
 
-    @JsonProperty("PaymentMethods")
-    public List<PaymentMethod> getPaymentMethods() {
-        return paymentMethods;
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+        if ((other instanceof MasterPayment) == false) {
+            return false;
+        }
+        MasterPayment rhs = ((MasterPayment) other);
+        return new EqualsBuilder().append(id, rhs.id).append(postAuthHandoverUrl, rhs.postAuthHandoverUrl)
+                .append(authorizationUrl, rhs.authorizationUrl).append(paymentProfileId, rhs.paymentProfileId)
+                .append(orderRef, rhs.orderRef).append(paymentResultUrl, rhs.paymentResultUrl).isEquals();
     }
 
-    @JsonProperty("PaymentMethods")
-    public void setPaymentMethods(List<PaymentMethod> paymentMethods) {
-        this.paymentMethods = paymentMethods;
-    }
-
-    @JsonProperty("UpdatedDateTime")
-    public String getUpdatedDateTime() {
-        return updatedDateTime;
-    }
-
-    @JsonProperty("UpdatedDateTime")
-    public void setUpdatedDateTime(String updatedDateTime) {
-        this.updatedDateTime = updatedDateTime;
-    }
-
-    @JsonProperty("SentToPaymentsLegacy")
-    public Boolean getSentToPaymentsLegacy() {
-        return sentToPaymentsLegacy;
-    }
-
-    @JsonProperty("SentToPaymentsLegacy")
-    public void setSentToPaymentsLegacy(Boolean sentToPaymentsLegacy) {
-        this.sentToPaymentsLegacy = sentToPaymentsLegacy;
-    }
-
-    @JsonProperty("Attempts")
-    public List<Attempt> getAttempts() {
-        return attempts;
-    }
-
-    @JsonProperty("Attempts")
-    public void setAttempts(List<Attempt> attempts) {
-        this.attempts = attempts;
-    }
-
-    @JsonProperty("brandCode")
-    public String getBrandCode() {
-        return brandCode;
-    }
-
-    @JsonProperty("brandCode")
-    public void setBrandCode(String brandCode) {
-        this.brandCode = brandCode;
-    }
-
-    @JsonProperty("eventName")
-    public String getEventName() {
-        return eventName;
-    }
-
-    @JsonProperty("eventName")
-    public void setEventName(String eventName) {
-        this.eventName = eventName;
-    }
-
-    @JsonProperty("correlationId")
-    public String getCorrelationId() {
-        return correlationId;
-    }
-
-    @JsonProperty("correlationId")
-    public void setCorrelationId(String correlationId) {
-        this.correlationId = correlationId;
-    }
-
-    @JsonProperty("userAgent")
-    public String getUserAgent() {
-        return userAgent;
-    }
-
-    @JsonProperty("userAgent")
-    public void setUserAgent(String userAgent) {
-        this.userAgent = userAgent;
-    }
-
-    @JsonProperty("queryString")
-    public String getQueryString() {
-        return queryString;
-    }
-
-    @JsonProperty("queryString")
-    public void setQueryString(String queryString) {
-        this.queryString = queryString;
-    }
-
-    @JsonProperty("created")
-    public String getCreated() {
-        return created;
-    }
-
-    @JsonProperty("created")
-    public void setCreated(String created) {
-        this.created = created;
-    }
 }
