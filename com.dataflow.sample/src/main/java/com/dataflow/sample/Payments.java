@@ -58,10 +58,30 @@ public class Payments {
                     public void processElement(ProcessContext c) {
                         try {
                             mapper.readValue(c.element(), MasterPayment.class);
+                            LOG.info("Data is a MasterPayment");
                             c.output(c.element());
-                        } catch (Exception e) {
-                            LOG.error(e.getMessage());
-                            c.output(invalidPaymentsTupleTag, c.element());
+                        } catch (Exception e0) {
+                            try {
+                                mapper.readValue(c.element(), PaymentOrder.class);
+                                LOG.info("Data is a PaymentOrder");
+                                c.output(c.element());
+                            } catch (Exception e1) {
+                                try {
+                                    mapper.readValue(c.element(), PaymentMethod.class);
+                                    LOG.info("Data is a PaymentMethod");
+                                    c.output(c.element());
+                                } catch (Exception e2) {
+                                    try {
+                                        mapper.readValue(c.element(), PaymentAttempt.class);
+                                        LOG.info("Data is a PaymentAttempt");
+                                        c.output(c.element());
+                                    } catch (Exception e3) {
+                                        LOG.error("Unsupported data type. " + e3.getMessage());
+                                        c.output(invalidPaymentsTupleTag, c.element());
+                                    }
+                                }
+                            }
+
                         }
                     }
                 }).withOutputTags(validPaymentsTupleTag, TupleTagList.of(invalidPaymentsTupleTag)));
