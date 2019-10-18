@@ -30,4 +30,8 @@ public interface PaymentPipelineOptions extends PipelineOptions {
     String getArchiveTopic();
 
     void setArchiveTopic(String archiveTopic);
+
+    String getPaymentsTableName();
+
+    void setPaymentsTableName(String paymentsTableName);
 }

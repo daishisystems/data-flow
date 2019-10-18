@@ -28,6 +28,18 @@ public class MasterPayment implements Serializable {
     @JsonProperty("postAuthHandoverUrl")
     private String postAuthHandoverUrl;
     private final static long serialVersionUID = 6130777216195902623L;
+    @JsonProperty("created")
+    private Long created;
+
+    @JsonProperty("created")
+    public Long getCreated() {
+        return this.created;
+    }
+
+    @JsonProperty("created")
+    public void setCreated(Long created) {
+        this.created = created;
+    }
 
     @JsonProperty("id")
     public String getId() {
