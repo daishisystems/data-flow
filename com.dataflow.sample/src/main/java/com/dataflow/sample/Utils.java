@@ -7,6 +7,9 @@ import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.List;
 
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
+
 public class Utils {
     final private static int POWER_OF = 10;
     final private static int NUM_DECIMAL_PLACES = 2;
@@ -128,6 +131,14 @@ public class Utils {
             return false;
         }
         return Character.isDigit(input.charAt(0));
+    }
+
+    public static String convertUnixDate(String unixDate) {
+
+        if (unixDate == null || unixDate.isEmpty()) {
+            return "1970-01-01T00:00:00+01:00";
+        }
+        return new DateTime(Long.parseLong(unixDate.substring(0, 13))).toString();
     }
 
 }

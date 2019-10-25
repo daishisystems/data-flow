@@ -129,6 +129,13 @@ public class UtilsTest {
         assertTrue(startsWithDigit);
     }
 
+    @Test
+    public void unixDateIsConverted() {
+
+        String convertedUnixDate = Utils.convertUnixDate("1572030581776000000");
+        assertTrue(true);
+    }
+
     /**
      * Sorts an iterable collection of orders by created-date.
      * 
