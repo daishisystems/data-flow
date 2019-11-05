@@ -123,6 +123,12 @@ public class App {
                     public void processElement(ProcessContext c) {
                         try {
                             MasterOrder masterOrder = mapper.readValue(c.element(), MasterOrder.class);
+                            if (masterOrder.getHttpHeaders() != null) {
+                                LOG.info("HTTP headers are present");
+                            } else {
+                                LOG.warn("HTTP headers are not present");
+                                LOG.error(c.element());
+                            }
                             c.output(KV.of(masterOrder.getCorrelationId(), masterOrder)); // FIXME: Obfuscate here if
                                                                                           // !complete
                         } catch (Exception e) {
@@ -450,7 +456,19 @@ public class App {
             OrderSummary orderSummary = c.element();
 
             tableRow.set("OrderNumber", orderSummary.getNumber());
-            tableRow.set("CorrelationId", orderSummary.getCorrelationId());
+
+            if (!orderSummary.getComplete()) {
+                if (orderSummary.getCorrelationId() != null && !orderSummary.getCorrelationId().isEmpty()) {
+                    String sha256hex = Hashing.sha256()
+                            .hashString(orderSummary.getCorrelationId(), StandardCharsets.UTF_8).toString();
+                    tableRow.set("CorrelationId", sha256hex);
+                } else {
+                    tableRow.set("CorrelationId", orderSummary.getCorrelationId());
+                }
+            } else {
+                tableRow.set("CorrelationId", orderSummary.getCorrelationId());
+            }
+
             tableRow.set("MinTimeDelay", orderSummary.getMinTimeDelay());
             tableRow.set("AvgTimeDelay", orderSummary.getAvgTimedelay());
             tableRow.set("MaxTimeDelay", orderSummary.getMaxTimeDelay());

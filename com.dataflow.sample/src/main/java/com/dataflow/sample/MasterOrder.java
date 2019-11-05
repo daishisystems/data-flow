@@ -110,7 +110,7 @@ public class MasterOrder implements Serializable {
     private Boolean productDataRetrievedAndInstalled;
     @JsonProperty("ProductDataCountryIso")
     private String productDataCountryIso;
-    @JsonProperty("HttpHeaders")
+    @JsonProperty("httpHeaders")
     private HashMap<String, String> httpHeaders;
     @JsonProperty("CreatedTimeUtc")
     @JsonIgnore
@@ -674,12 +674,12 @@ public class MasterOrder implements Serializable {
         this.productDataCountryIso = productDataCountryIso;
     }
 
-    @JsonProperty("HttpHeaders")
+    @JsonProperty("httpHeaders")
     public HashMap<String, String> getHttpHeaders() {
         return this.httpHeaders;
     }
 
-    @JsonProperty("HttpHeaders")
+    @JsonProperty("httpHeaders")
     public void setHttpHeaders(HashMap<String, String> httpHeaders) {
         this.httpHeaders = httpHeaders;
     }
