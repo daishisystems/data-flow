@@ -36,6 +36,19 @@ public class PaymentOrder implements Serializable {
     private PaymentBillingAddress paymentBillingAddress;
     @JsonProperty("orderItems")
     private List<PaymentOrderItem> orderItems = null;
+    @JsonProperty("created")
+    private Long created;
+
+    @JsonProperty("created")
+    public Long getCreated() {
+        return this.created;
+    }
+
+    @JsonProperty("created")
+    public void setCreated(Long created) {
+        this.created = created;
+    }
+
     private final static long serialVersionUID = 7787293727188329470L;
 
     @JsonProperty("id")
