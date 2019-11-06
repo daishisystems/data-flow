@@ -2,8 +2,6 @@
 package com.dataflow.sample;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -13,7 +11,7 @@ import org.apache.beam.sdk.coders.DefaultCoder;
 import org.apache.beam.sdk.coders.SerializableCoder;
 
 @JsonPropertyOrder({ "Id", "ContactDetailsNickName", "Address1", "Address2", "Address3", "City", "PostalCode", "Region",
-        "Country", "Email", "FirstName", "LastName", "Gender", "Telephone", "PoBox", "MetadataItems" })
+        "Country", "Email", "FirstName", "LastName", "Gender", "Telephone", "PoBox" })
 @DefaultCoder(SerializableCoder.class)
 public class PaymentDetail implements Serializable {
 
@@ -78,8 +76,6 @@ public class PaymentDetail implements Serializable {
         this.uniqueId = uniqueId;
     }
 
-    @JsonProperty("MetadataItems")
-    private List<MetadataItem> metadataItems = new ArrayList<MetadataItem>();
     private final static long serialVersionUID = 7418609063016625547L;
 
     /**
@@ -101,7 +97,6 @@ public class PaymentDetail implements Serializable {
      * @param country
      * @param id
      * @param postalCode
-     * @param metadataItems
      * @param email
      * @param poBox
      * @param gender
@@ -110,7 +105,7 @@ public class PaymentDetail implements Serializable {
      */
     public PaymentDetail(Integer id, String contactDetailsNickName, String address1, String address2, String address3,
             String city, String postalCode, String region, String country, String email, String firstName,
-            String lastName, Integer gender, String telephone, String poBox, List<MetadataItem> metadataItems) {
+            String lastName, Integer gender, String telephone, String poBox) {
         super();
         this.id = id;
         this.contactDetailsNickName = contactDetailsNickName;
@@ -127,7 +122,6 @@ public class PaymentDetail implements Serializable {
         this.gender = gender;
         this.telephone = telephone;
         this.poBox = poBox;
-        this.metadataItems = metadataItems;
     }
 
     @JsonProperty("Id")
@@ -278,17 +272,5 @@ public class PaymentDetail implements Serializable {
     @JsonProperty("PoBox")
     public void setPoBox(String poBox) {
         this.poBox = poBox;
-    }
-
-    @JsonProperty("MetadataItems")
-    public List<MetadataItem> getMetadataItems() {
-        return metadataItems;
-    }
-
-    @JsonProperty("MetadataItems")
-    public void setMetadataItems(List<MetadataItem> metadataItems) {
-        if (metadataItems != null) {
-            this.metadataItems = metadataItems;
-        }
     }
 }

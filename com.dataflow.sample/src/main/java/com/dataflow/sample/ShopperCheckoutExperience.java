@@ -2,8 +2,6 @@
 package com.dataflow.sample;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -12,7 +10,7 @@ import org.apache.beam.sdk.coders.DefaultCoder;
 import org.apache.beam.sdk.coders.SerializableCoder;
 
 @JsonPropertyOrder({ "UseDeliveryContactDetailsForPaymentContactDetails", "EmailMarketingOptIn", "RegisteredProfileId",
-        "ShopperCultureLanguageIso", "ExpressPaymentMethod", "MetadataItems" })
+        "ShopperCultureLanguageIso", "ExpressPaymentMethod" })
 @DefaultCoder(SerializableCoder.class)
 public class ShopperCheckoutExperience implements Serializable {
 
@@ -26,8 +24,6 @@ public class ShopperCheckoutExperience implements Serializable {
     private String shopperCultureLanguageIso;
     @JsonProperty("ExpressPaymentMethod")
     private String expressPaymentMethod;
-    @JsonProperty("MetadataItems")
-    private List<MetadataItem> metadataItems = new ArrayList<MetadataItem>();
     private final static long serialVersionUID = 1502372606493616422L;
 
     /**
@@ -42,20 +38,18 @@ public class ShopperCheckoutExperience implements Serializable {
      * @param useDeliveryContactDetailsForPaymentContactDetails
      * @param expressPaymentMethod
      * @param emailMarketingOptIn
-     * @param metadataItems
      * @param shopperCultureLanguageIso
      * @param registeredProfileId
      */
     public ShopperCheckoutExperience(Boolean useDeliveryContactDetailsForPaymentContactDetails,
             Boolean emailMarketingOptIn, String registeredProfileId, String shopperCultureLanguageIso,
-            String expressPaymentMethod, List<MetadataItem> metadataItems) {
+            String expressPaymentMethod) {
         super();
         this.useDeliveryContactDetailsForPaymentContactDetails = useDeliveryContactDetailsForPaymentContactDetails;
         this.emailMarketingOptIn = emailMarketingOptIn;
         this.registeredProfileId = registeredProfileId;
         this.shopperCultureLanguageIso = shopperCultureLanguageIso;
         this.expressPaymentMethod = expressPaymentMethod;
-        this.metadataItems = metadataItems;
     }
 
     @JsonProperty("UseDeliveryContactDetailsForPaymentContactDetails")
@@ -107,17 +101,5 @@ public class ShopperCheckoutExperience implements Serializable {
     @JsonProperty("ExpressPaymentMethod")
     public void setExpressPaymentMethod(String expressPaymentMethod) {
         this.expressPaymentMethod = expressPaymentMethod;
-    }
-
-    @JsonProperty("MetadataItems")
-    public List<MetadataItem> getMetadataItems() {
-        return metadataItems;
-    }
-
-    @JsonProperty("MetadataItems")
-    public void setMetadataItems(List<MetadataItem> metadataItems) {
-        if (metadataItems != null) {
-            this.metadataItems = metadataItems;
-        }
     }
 }

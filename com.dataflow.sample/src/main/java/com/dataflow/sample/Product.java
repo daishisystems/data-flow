@@ -2,8 +2,6 @@
 package com.dataflow.sample;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -13,7 +11,7 @@ import org.apache.beam.sdk.coders.SerializableCoder;
 
 @JsonPropertyOrder({ "ProductCode", "Upc", "Title", "Description", "RetailerCurrencyProductPriceInfo",
         "ShopperCurrencyProductPriceInfo", "ImageUrl", "Color", "Size", "IsRestrictedForCountry", "OverridePrice",
-        "Dimension5", "Dimension6", "IsNonStandardCatalogItem", "MetadataItems" })
+        "Dimension5", "Dimension6", "IsNonStandardCatalogItem" })
 @DefaultCoder(SerializableCoder.class)
 public class Product implements Serializable {
 
@@ -45,8 +43,6 @@ public class Product implements Serializable {
     private String dimension6;
     @JsonProperty("IsNonStandardCatalogItem")
     private Boolean isNonStandardCatalogItem;
-    @JsonProperty("MetadataItems")
-    private List<MetadataItem> metadataItems = new ArrayList<MetadataItem>();
     private final static long serialVersionUID = -3581130492050196380L;
 
     /**
@@ -67,7 +63,6 @@ public class Product implements Serializable {
      * @param upc
      * @param size
      * @param title
-     * @param metadataItems
      * @param color
      * @param description
      * @param isRestrictedForCountry
@@ -78,7 +73,7 @@ public class Product implements Serializable {
             RetailerCurrencyProductPriceInfo retailerCurrencyProductPriceInfo,
             ShopperCurrencyProductPriceInfo shopperCurrencyProductPriceInfo, String imageUrl, String color, String size,
             Boolean isRestrictedForCountry, Boolean overridePrice, String dimension5, String dimension6,
-            Boolean isNonStandardCatalogItem, List<MetadataItem> metadataItems) {
+            Boolean isNonStandardCatalogItem) {
         super();
         this.productCode = productCode;
         this.upc = upc;
@@ -94,7 +89,6 @@ public class Product implements Serializable {
         this.dimension5 = dimension5;
         this.dimension6 = dimension6;
         this.isNonStandardCatalogItem = isNonStandardCatalogItem;
-        this.metadataItems = metadataItems;
     }
 
     @JsonProperty("ProductCode")
@@ -235,17 +229,5 @@ public class Product implements Serializable {
     @JsonProperty("IsNonStandardCatalogItem")
     public void setIsNonStandardCatalogItem(Boolean isNonStandardCatalogItem) {
         this.isNonStandardCatalogItem = isNonStandardCatalogItem;
-    }
-
-    @JsonProperty("MetadataItems")
-    public List<MetadataItem> getMetadataItems() {
-        return metadataItems;
-    }
-
-    @JsonProperty("MetadataItems")
-    public void setMetadataItems(List<MetadataItem> metadataItems) {
-        if (metadataItems != null) {
-            this.metadataItems = metadataItems;
-        }
     }
 }

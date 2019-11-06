@@ -2,9 +2,9 @@
 package com.dataflow.sample;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import org.apache.beam.sdk.coders.DefaultCoder;
 import org.apache.beam.sdk.coders.SerializableCoder;
 
@@ -19,8 +19,6 @@ public class DeliveryOptionExtended implements Serializable {
     private RetailerCurrencyOveridePriceInfo retailerCurrencyOveridePriceInfo;
     @JsonProperty("ShopperCurrencyOveridePriceInfo")
     private ShopperCurrencyOveridePriceInfo shopperCurrencyOveridePriceInfo;
-    @JsonProperty("MetadataItems")
-    private List<MetadataItem> metadataItems = new ArrayList<MetadataItem>();
     private final static long serialVersionUID = 7878917612146746769L;
 
     /**
@@ -68,17 +66,5 @@ public class DeliveryOptionExtended implements Serializable {
     @JsonProperty("ShopperCurrencyOveridePriceInfo")
     public void setShopperCurrencyOveridePriceInfo(ShopperCurrencyOveridePriceInfo shopperCurrencyOveridePriceInfo) {
         this.shopperCurrencyOveridePriceInfo = shopperCurrencyOveridePriceInfo;
-    }
-
-    @JsonProperty("MetadataItems")
-    public List<MetadataItem> getMetadataItems() {
-        return metadataItems;
-    }
-
-    @JsonProperty("MetadataItems")
-    public void setMetadataItems(List<MetadataItem> metadataItems) {
-        if (metadataItems != null) {
-            this.metadataItems = metadataItems;
-        }
     }
 }

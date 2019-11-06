@@ -13,7 +13,7 @@ import org.apache.beam.sdk.coders.SerializableCoder;
 
 @JsonPropertyOrder({ "OrderArticles", "Available", "CalculationRates", "VatRate", "DutyRate", "Weight", "WeightUnit",
         "CountryOfOriginIso", "HsCode", "EstimatedDeliveryDate", "Quantity", "Product", "LineItemId", "CartGrouping",
-        "MetadataItems", "IsCountryDefault", "ChargeTargets" })
+        "IsCountryDefault", "ChargeTargets" })
 @DefaultCoder(SerializableCoder.class)
 public class AvailableOrderItem implements Serializable {
     @JsonProperty("OrderArticles")
@@ -43,9 +43,7 @@ public class AvailableOrderItem implements Serializable {
     @JsonProperty("LineItemId")
     private String lineItemId;
     @JsonProperty("CartGrouping")
-    private String cartGrouping;
-    @JsonProperty("MetadataItems")
-    private List<MetadataItem> metadataItems = new ArrayList<MetadataItem>();
+    private String cartGrouping;    
     @JsonProperty("IsCountryDefault")
     private Boolean isCountryDefault;
     @JsonProperty("ChargeTargets")
@@ -71,8 +69,7 @@ public class AvailableOrderItem implements Serializable {
      * @param vatRate
      * @param chargeTargets
      * @param product
-     * @param cartGrouping
-     * @param metadataItems
+     * @param cartGrouping     
      * @param countryOfOriginIso
      * @param quantity
      * @param calculationRates
@@ -82,7 +79,7 @@ public class AvailableOrderItem implements Serializable {
     public AvailableOrderItem(List<OrderArticle> orderArticles, Boolean available, CalculationRates calculationRates,
             Double vatRate, Double dutyRate, Double weight, Integer weightUnit, String countryOfOriginIso,
             String hsCode, String estimatedDeliveryDate, Integer quantity, Product product, String lineItemId,
-            String cartGrouping, List<MetadataItem> metadataItems, Boolean isCountryDefault,
+            String cartGrouping, Boolean isCountryDefault,
             List<ChargeTarget> chargeTargets) {
         super();
         this.orderArticles = orderArticles;
@@ -98,8 +95,7 @@ public class AvailableOrderItem implements Serializable {
         this.quantity = quantity;
         this.product = product;
         this.lineItemId = lineItemId;
-        this.cartGrouping = cartGrouping;
-        this.metadataItems = metadataItems;
+        this.cartGrouping = cartGrouping;        
         this.isCountryDefault = isCountryDefault;
         this.chargeTargets = chargeTargets;
     }
@@ -244,19 +240,7 @@ public class AvailableOrderItem implements Serializable {
     @JsonProperty("CartGrouping")
     public void setCartGrouping(String cartGrouping) {
         this.cartGrouping = cartGrouping;
-    }
-
-    @JsonProperty("MetadataItems")
-    public List<MetadataItem> getMetadataItems() {
-        return metadataItems;
-    }
-
-    @JsonProperty("MetadataItems")
-    public void setMetadataItems(List<MetadataItem> metadataItems) {
-        if (metadataItems != null) {
-            this.metadataItems = metadataItems;
-        }
-    }
+    }    
 
     @JsonProperty("IsCountryDefault")
     public Boolean getIsCountryDefault() {

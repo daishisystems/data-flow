@@ -1,9 +1,9 @@
 package com.dataflow.sample;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import org.apache.beam.sdk.coders.DefaultCoder;
 import org.apache.beam.sdk.coders.SerializableCoder;
 
@@ -75,20 +75,5 @@ public class RetailerDeliveryOption implements Serializable {
     public void setShoppercurrencydeliveryoptionpriceinfo(
             RetailerCurrencyDeliveryOptionPriceInfo shopperCurrencyDeliveryOptionPriceInfo) {
         this.shopperCurrencyDeliveryOptionPriceInfo = shopperCurrencyDeliveryOptionPriceInfo;
-    }
-
-    @JsonProperty("MetadataItems")
-    private List<MetadataItem> metadataItems = new ArrayList<MetadataItem>();
-
-    @JsonProperty("MetadataItems")
-    public List<MetadataItem> getMetadataitems() {
-        return this.metadataItems;
-    }
-
-    @JsonProperty("MetadataItems")
-    public void setMetadataitems(List<MetadataItem> metadataItems) {
-        if (metadataItems != null) {
-            this.metadataItems = metadataItems;
-        }
     }
 }

@@ -34,4 +34,12 @@ public interface PaymentPipelineOptions extends PipelineOptions {
     String getPaymentsTableName();
 
     void setPaymentsTableName(String paymentsTableName);
+
+    String getPaymentOrdersTableName();
+
+    void setPaymentOrdersTableName(String paymentOrdersTableName);
+
+    String getPaymentAttempts2TableName();
+
+    void setPaymentAttempts2TableName(String paymentAttempts2TableName);
 }

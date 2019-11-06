@@ -128,7 +128,7 @@ public class PaymentOrderItem implements Serializable {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).append("PaymentOrderItemId", PaymentOrderItemId).append("name", name)
+        return new ToStringBuilder(this).append("PaymentOrderItemId", paymentOrderItemId).append("name", name)
                 .append("description", description).append("sequenceNumber", sequenceNumber)
                 .append("quantity", quantity).append("productCode", productCode)
                 .append("unitPriceExCharges", unitPriceExCharges).append("unitShippingCharge", unitShippingCharge)
@@ -138,7 +138,7 @@ public class PaymentOrderItem implements Serializable {
     @Override
     public int hashCode() {
         return new HashCodeBuilder().append(unitTaxCharge).append(unitPriceExCharges).append(productCode)
-                .append(PaymentOrderItemId).append(description).append(name).append(quantity).append(unitShippingCharge)
+                .append(paymentOrderItemId).append(name).append(quantity).append(unitShippingCharge)
                 .append(sequenceNumber).toHashCode();
     }
 
@@ -153,7 +153,7 @@ public class PaymentOrderItem implements Serializable {
         PaymentOrderItem rhs = ((PaymentOrderItem) other);
         return new EqualsBuilder().append(unitTaxCharge, rhs.unitTaxCharge)
                 .append(unitPriceExCharges, rhs.unitPriceExCharges).append(productCode, rhs.productCode)
-                .append(PaymentOrderItemId, rhs.PaymentOrderItemId).append(description, rhs.description)
+                .append(paymentOrderItemId, rhs.paymentOrderItemId).append(description, rhs.description)
                 .append(name, rhs.name).append(quantity, rhs.quantity)
                 .append(unitShippingCharge, rhs.unitShippingCharge).append(sequenceNumber, rhs.sequenceNumber)
                 .isEquals();
