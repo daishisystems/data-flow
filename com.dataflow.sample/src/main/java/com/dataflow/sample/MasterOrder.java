@@ -121,6 +121,17 @@ public class MasterOrder implements Serializable {
     @JsonProperty("HasPriceMultiplier")
     @JsonIgnore
     private Boolean hasPriceMultiplier;
+    private String timestamp;
+
+    @JsonProperty("timestamp")
+    public String getTimestamp() {
+        return this.timestamp;
+    }
+
+    @JsonProperty("timestamp")
+    public void setTimestamp(String timestamp) {
+        this.timestamp = timestamp;
+    }
 
     @JsonProperty("HasPriceMultiplier")
     @JsonIgnore
@@ -694,7 +705,15 @@ public class MasterOrder implements Serializable {
             return true;
 
         MasterOrder other = (MasterOrder) obj;
-        return this.orderCode.equals(other.getOrderCode()) && this.correlationId.equals(other.getCorrelationId())
+
+        String orderCode;
+        if (this.orderCode != null) {
+            orderCode = this.orderCode;
+        } else {
+            orderCode = "";
+        }
+
+        return orderCode.equals(other.getOrderCode()) && this.correlationId.equals(other.getCorrelationId())
                 && this.created.equals(other.getCreated()) && this.eventName.equals(other.getEventName());
     }
 }
