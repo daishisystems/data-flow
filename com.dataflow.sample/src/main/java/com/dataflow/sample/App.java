@@ -440,9 +440,12 @@ public class App {
 
         @ProcessElement
         public void processElement(ProcessContext c) throws JsonParseException, JsonMappingException, IOException {
-            MasterOrder masterOrder = c.element();
+
+            String copy = mapper.writeValueAsString(c.element());
+            MasterOrder masterOrder = mapper.readValue(copy, MasterOrder.class);
+
             String timestamp = new DateTime(masterOrder.getCreated()).toString();
-            masterOrder.setTimestamp(timestamp.substring(0, timestamp.length() - 1));            
+            masterOrder.setTimestamp(timestamp.substring(0, timestamp.length() - 1));
             masterOrder.setHttpHeaders(null);
             String payload = mapper.writeValueAsString(masterOrder);
             c.output(payload);
