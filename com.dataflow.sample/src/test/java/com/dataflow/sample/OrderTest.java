@@ -51,6 +51,7 @@ public class OrderTest {
         final String order2EventName = "ORDER2";
         final String order3EventName = "ORDER3";
         final String orderCompleteIdentifier = "ORDER3";
+        final String orderCompleteIdentifierOther = "ORDER4";
 
         MasterOrder order1 = new MasterOrder();
         order1.setCreated((long) 1539093918);
@@ -67,7 +68,8 @@ public class OrderTest {
         orders.add(order2);
         orders.add(order3);
 
-        OrderSummary orderSummary = OrderSummary.orderSummary(orders, orderCompleteIdentifier);
+        OrderSummary orderSummary = OrderSummary.orderSummary(orders, orderCompleteIdentifier,
+                orderCompleteIdentifierOther);
         assertTrue(orderSummary.getMinTimeDelay() == 12);
         assertTrue(orderSummary.getAvgTimedelay() == 20);
         assertTrue(orderSummary.getMaxTimeDelay() == 29);
@@ -83,6 +85,7 @@ public class OrderTest {
     @Test
     public void ChargesItemsAndCountryCodeAreCalculated() throws JsonParseException, JsonMappingException, IOException {
         final String orderCompleteIdentifier = "COMPLETE";
+        final String orderCompleteIdentifierOther = "COMPLETEOTHER";
 
         String json1 = getFile("order.json");
         ObjectMapper mapper = new ObjectMapper();
@@ -95,7 +98,8 @@ public class OrderTest {
         List<MasterOrder> masterOrders = new ArrayList<>();
         masterOrders.add(masterOrder1);
         masterOrders.add(masterOrder2);
-        OrderSummary orderSummary = OrderSummary.orderSummary(masterOrders, orderCompleteIdentifier);
+        OrderSummary orderSummary = OrderSummary.orderSummary(masterOrders, orderCompleteIdentifier,
+                orderCompleteIdentifierOther);
 
         BigDecimal expected = new BigDecimal("433.61");
         assertEquals(expected, orderSummary.getOrderValue());
@@ -118,6 +122,30 @@ public class OrderTest {
         masterOrders.add(masterOrder3);
 
         boolean orderIsComplete = OrderSummary.orderIsComplete(masterOrders, orderCompleteEventName);
+        assertTrue(orderIsComplete);
+    }
+
+    @Test
+    public void orderIsCompleteWithMultipleEventNames() {
+        final String orderCompleteEventName = "COMPLETE";
+        final String orderCompleteEventName1 = "COMPLETE1";
+
+        MasterOrder masterOrder1 = new MasterOrder();
+        masterOrder1.setEventName("EVENT1");
+        MasterOrder masterOrder2 = new MasterOrder();
+        masterOrder2.setEventName("EVENT2");
+        MasterOrder masterOrder3 = new MasterOrder();
+        masterOrder3.setEventName("COMPLETE1");
+
+        List<MasterOrder> masterOrders = new ArrayList<>();
+        masterOrders.add(masterOrder1);
+        masterOrders.add(masterOrder2);
+        masterOrders.add(masterOrder3);
+
+        boolean orderIsComplete = OrderSummary.orderIsComplete(masterOrders, orderCompleteEventName);
+        if (!orderIsComplete) {
+            orderIsComplete = OrderSummary.orderIsComplete(masterOrders, orderCompleteEventName1);
+        }
         assertTrue(orderIsComplete);
     }
 

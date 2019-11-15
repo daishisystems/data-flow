@@ -302,7 +302,8 @@ public class OrderSummary implements Serializable {
     }
 
     // FIXME: Group and sort multiple orders per session
-    public static OrderSummary orderSummary(List<MasterOrder> orders, String orderCompleteIdentifier) {
+    public static OrderSummary orderSummary(List<MasterOrder> orders, String orderCompleteIdentifier,
+            String orderCompleteIdentifierOther) {
         Iterator<MasterOrder> iterator = orders.iterator();
         OrderSummary orderSummary = new OrderSummary();
         if (!iterator.hasNext()) {
@@ -353,7 +354,8 @@ public class OrderSummary implements Serializable {
                 orderSummary.setMinFirstEventName(previous.getEventName());
                 orderSummary.setMinSecondEventName(current.getEventName());
             }
-            if (current.getEventName().equals(orderCompleteIdentifier)) {
+            if (current.getEventName().equals(orderCompleteIdentifier)
+                    || current.getEventName().equals(orderCompleteIdentifierOther)) {
                 orderSummary.setComplete(true);
             }
             previous = current;

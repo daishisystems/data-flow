@@ -192,12 +192,16 @@ public class App {
                 ParDo.of(new DoFn<KV<String, Iterable<MasterOrder>>, MasterOrder>() {
                     private static final long serialVersionUID = -4644201311299503730L;
                     final String COMPLETE_EVENT_NAME = "CompleteOrder";
+                    final String COMPLETE_EVENT_NAME_OTHER = "Order Status Confirmed";
 
                     @ProcessElement
                     public void processElement(ProcessContext c) throws Exception {
                         Iterable<MasterOrder> iterableOrders = c.element().getValue();
                         List<MasterOrder> orders = OrderSummary.sortOrders(iterableOrders);
                         boolean orderIsComplete = OrderSummary.orderIsComplete(orders, COMPLETE_EVENT_NAME);
+                        if (!orderIsComplete) {
+                            orderIsComplete = OrderSummary.orderIsComplete(orders, COMPLETE_EVENT_NAME_OTHER);
+                        }
                         if (orderIsComplete) {
                             for (MasterOrder masterOrder : orders) {
                                 c.output(completeOrdersTag, masterOrder);
@@ -392,11 +396,13 @@ public class App {
     static class OrderSummaryFn extends DoFn<List<MasterOrder>, OrderSummary> {
         private static final long serialVersionUID = -3067528732035106582L;
         final String COMPLETE_EVENT_NAME = "CompleteOrder";
+        final String COMPLETE_EVENT_NAME_OTHER = "Order Status Confirmed";
 
         @ProcessElement
         public void processElement(ProcessContext c) throws Exception {
             List<MasterOrder> sortedOrders = OrderSummary.sortOrders(c.element());
-            OrderSummary orderSummary = OrderSummary.orderSummary(sortedOrders, COMPLETE_EVENT_NAME);
+            OrderSummary orderSummary = OrderSummary.orderSummary(sortedOrders, COMPLETE_EVENT_NAME,
+                    COMPLETE_EVENT_NAME_OTHER);
 
             if (sortedOrders.size() > 0) {
                 try {
